@@ -1,0 +1,20 @@
+<manifest package="me.zhouzhuo810.magpiex"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        tools:targetApi="p">
+        <activity
+            android:name=".ui.act.CopyUrlActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
+            />
+
+        <activity android:name="com.tencent.mm.ui.tools.ShareImgUI"/>
+        <activity android:name="com.tencent.mobileqq.activity.JumpActivity"/>
+    </application>
+</manifest>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <me.zhouzhuo810.magpiex.ui.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_title_height"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
+        app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
+        app:ttb_showLeftImg="true"
+        app:ttb_showLeftLayout="true"
+        app:ttb_showLeftMarkView="false"
+        app:ttb_showLeftText="false"
+        app:ttb_showRightImg="true"
+        app:ttb_showRightLayout="true"
+        app:ttb_showRightMarkView="false"
+        app:ttb_showRightText="false"
+        app:ttb_textSizeTitle="@dimen/base_title_text_size"
+        app:ttb_titleText="@string/spinner_text" />
+
+    <Spinner
+        android:id="@+id/sp_test_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:background="@drawable/gray_border_shape_bg"
+        android:gravity="center_vertical"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown" />
+
+    <Spinner
+        android:id="@+id/sp_test_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:gravity="center_vertical"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.SimpleSpinner
+        android:id="@+id/sp_custom_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.SimpleSpinner
+        android:id="@+id/sp_custom_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:overlapAnchor="false"
+        android:spinnerMode="dialog" />
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_title_height">130px</dimen>
+    <dimen name="base_title_text_size">50px</dimen>
+    <dimen name="base_title_icon_size">60px</dimen>
+    <dimen name="base_tab_text_size">36px</dimen>
+    <dimen name="base_tab_icon_size">70px</dimen>
+    <dimen name="base_tab_text_top_margin">6px</dimen>
+    <dimen name="base_dialog_title_height">140px</dimen>
+    <dimen name="base_dialog_title_text_size">40px</dimen>
+    <dimen name="base_dialog_item_height">130px</dimen>
+    <dimen name="base_indicator_text_size_normal">46px</dimen>
+    <dimen name="base_indicator_text_size_select">46px</dimen>
+    <dimen name="base_indicator_icon_size">70px</dimen>
+    <dimen name="base_indicator_underline_height">4px</dimen>
+    <dimen name="base_indicator_height">130px</dimen>
+</resources>

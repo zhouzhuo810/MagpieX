@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Magpie</string>
+    <string name="search_text">Search</string>
+    <string name="language_setting">Language Settings</string>
+    <string name="dialog_text">Dialog</string>
+    <string name="list_dialog_text">List Dialog</string>
+    <string name="two_btn_dialog">Two Button Dialog</string>
+    <string name="horizontal_pro_dialog">Horizontal Progress Dialog</string>
+    <string name="loading_dialog">Loading Dialog</string>
+    <string name="bottom_sheet_dialog">Bottom Sheet Dialog</string>
+    <string name="loading_text">Loading…</string>
+    <string name="check_update_text">Install the new version now？</string>
+    <string name="please_input_text">Please input…</string>
+    <string name="two_btn_edit_dialog">Two Button Edit Dialog</string>
+    <string name="updating_text">Downloading…</string>
+    <string name="title_text_1">TitleBar</string>
+    <string name="title_text_2">TitleBar</string>
+    <string name="title_text_3">TitleBar</string>
+    <string name="title_text_4">TitleBar</string>
+    <string name="title_text_5">TitleBar</string>
+    <string name="more_text">More</string>
+    <string name="back_text">Back</string>
+    <string name="dowload_start_text">Start Download</string>
+    <string name="download_text">File Download</string>
+    <string name="pager_text">Pager Indicator</string>
+    <string name="tab_text">Bottom TabBar</string>
+    <string name="notice_tools">Notice Utils</string>
+    <string name="tools_text">Tools</string>
+    <string name="spinner_text">Spinner</string>
+    <string-array name="language">
+        <item>Simple Chinese</item>
+        <item>Traditional Chinese</item>
+        <item>English</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string-array name="list_test_data">
+        <item>Test content 1</item>
+        <item>Test content 2</item>
+        <item>Test content 3</item>
+        <item>Test content 4</item>
+        <item>Test content 5</item>
+        <item>Test content 6</item>
+    </string-array>
+    <string-array name="bottom_sheet_test_data">
+        <item>Test content 1</item>
+        <item>Test content 2</item>
+        <item>Test content 3</item>
+    </string-array>
+</resources>

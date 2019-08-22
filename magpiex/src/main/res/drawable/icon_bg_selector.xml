@@ -1,0 +1,9 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/colorTransparent" android:state_pressed="false"/>
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <corners android:radius="200dp"/>
+            <solid android:color="@color/colorBlack10"/>
+        </shape>
+    </item>
+</selector>

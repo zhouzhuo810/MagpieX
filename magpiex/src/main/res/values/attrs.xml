@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBar">
+        <attr name="ttb_showLeftLayout" format="boolean"/>
+        <attr name="ttb_showTitle" format="boolean"/>
+        <attr name="ttb_showRightLayout" format="boolean"/>
+        <attr name="ttb_showLeftImg" format="boolean"/>
+        <attr name="ttb_showLeftText" format="boolean"/>
+        <attr name="ttb_showLeftMarkView" format="boolean"/>
+        <attr name="ttb_showRightImg" format="boolean"/>
+        <attr name="ttb_showRightText" format="boolean"/>
+        <attr name="ttb_showRightMarkView" format="boolean"/>
+        <attr name="ttb_leftImg" format="reference"/>
+        <attr name="ttb_leftText" format="string|reference"/>
+        <attr name="ttb_titleText" format="string|reference"/>
+        <attr name="ttb_rightImg" format="reference"/>
+        <attr name="ttb_rightText" format="string|reference"/>
+        <attr name="ttb_iconSize" format="dimension|reference"/>
+        <attr name="ttb_textSizeTitle" format="dimension|reference"/>
+        <attr name="ttb_textSizeTwoSide" format="dimension|reference"/>
+        <attr name="ttb_textColorAll" format="color|reference"/>
+        <attr name="ttb_titleGravity" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="left" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MarkView">
+        <attr name="mv_textSize" format="dimension|reference"/>
+        <attr name="mv_textColor" format="color|reference"/>
+        <attr name="mv_markNumber" format="integer"/>
+        <attr name="mv_maxMarkNumber" format="integer"/>
+        <attr name="mv_bgShape" format="enum">
+            <enum name="oval" value="0"/>
+            <enum name="rect" value="1"/>
+            <enum name="point" value="2"/>
+        </attr>
+        <attr name="mv_bgColor" format="color|reference"/>
+        <attr name="mv_point_size" format="dimension|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TabBar">
+        <attr name="tb_showMarkView" format="boolean"/>
+        <attr name="tb_tabCount" format="enum">
+            <enum name="ONE" value="1"/>
+            <enum name="TWO" value="2"/>
+            <enum name="THREE" value="3"/>
+            <enum name="FOUR" value="4"/>
+            <enum name="FIVE" value="5"/>
+        </attr>
+        <attr name="tb_tabNames" format="reference"/>
+        <attr name="tb_showImg" format="boolean"/>
+        <attr name="tb_showText" format="boolean"/>
+        <attr name="tb_showUnderline" format="boolean"/>
+        <attr name="tb_autoIconColor" format="boolean"/>
+        <attr name="tb_textSize" format="dimension|reference"/>
+        <attr name="tb_imageSize" format="dimension|reference"/>
+        <attr name="tb_textTopMargin" format="dimension|reference"/>
+        <attr name="tb_markTextSize" format="dimension|reference"/>
+        <attr name="tb_markPointSize" format="dimension|reference"/>
+        <attr name="tb_markTextColor" format="color|reference"/>
+        <attr name="tb_markBgColor" format="color|reference"/>
+        <attr name="tb_textColorNormal" format="color|reference"/>
+        <attr name="tb_textColorPress" format="color|reference"/>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="Indicator">
+        <attr name="i_indicator_type" format="enum">
+            <enum name="round_point" value="0"/>
+            <enum name="tab_with_text" value="1"/>
+            <enum name="tab_with_icon" value="2"/>
+            <enum name="tab_with_icon_and_text" value="3"/>
+        </attr>
+
+        <!--for tab-->
+        <attr name="i_selectTabTextSize" format="dimension|reference"/>
+        <attr name="i_selectTabTextColor" format="color|reference"/>
+        <attr name="i_normalTabTextSize" format="dimension|reference"/>
+        <attr name="i_normalTabTextColor" format="color|reference"/>
+        <attr name="i_normalTabBg" format="reference"/>
+        <attr name="i_selectTabBg" format="reference"/>
+        <attr name="i_showGapLine" format="boolean"/>
+        <attr name="i_gapLineWidth" format="dimension|reference"/>
+        <attr name="i_gapLineColor" format="color|reference"/>
+        <attr name="i_gapLinePadding" format="dimension|reference"/>
+        <attr name="i_showUnderline" format="boolean"/>
+        <attr name="i_shouldTabExpand" format="boolean"/>
+        <attr name="i_underlineColor" format="color|reference"/>
+        <attr name="i_underlineHeight" format="dimension|reference"/>
+        <attr name="i_underlinePadding" format="dimension|reference"/>
+        <attr name="i_tabPadding" format="dimension|reference"/>
+        <attr name="i_tabIconSize" format="dimension|reference"/>
+
+        <!--for tab with text and icon-->
+        <attr name="i_tabOrientation" format="enum">
+            <enum name="vertical" value="0"/>
+            <enum name="horizontal" value="1"/>
+        </attr>
+        <attr name="i_tabIconTextMargin" format="dimension|reference"/>
+        <attr name="i_tabIsHorizontalHideIcon" format="boolean"/>
+
+        <!--for point-->
+        <attr name="i_selectPointSize" format="dimension|reference"/>
+        <attr name="i_normalPointSize" format="dimension|reference"/>
+        <attr name="i_selectPointColor" format="color|reference"/>
+        <attr name="i_normalPointColor" format="color|reference"/>
+        <attr name="i_pointSpacing" format="dimension|reference"/>
+
+        <attr name="i_isNeedScaleInPx" format="boolean"/>
+
+    </declare-styleable>
+
+
+</resources>

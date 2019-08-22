@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //v7
+    api 'androidx.appcompat:appcompat:1.0.2'
+    //RecyclerView
+    api 'androidx.recyclerview:recyclerview:1.0.0'
+    //BaseRecyclerViewAdapterHelper
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
+    //EventBus
+    api 'org.greenrobot:eventbus:3.1.1'
+    //Glide
+    api 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    //RxJava2
+    api "io.reactivex.rxjava2:rxjava:2.2.8"
+    //RxAndroid2
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    //Retrofit2
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    //Retrofit2+RxJava2
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //Retrofit2+Gson
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //OkHttp打印请求数据
+    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //OkHttp进度监听progressmanager
+    api 'me.jessyan:progressmanager:1.5.0'
+    //AndPermission
+    api 'com.yanzhenjie.permission:x:2.0.1'
+    //ToastUtils
+    api 'com.hjq:toast:8.0'
+}

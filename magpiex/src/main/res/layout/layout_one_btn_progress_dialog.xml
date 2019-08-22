@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dialog_title_height"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="60px"
+        android:paddingRight="60px"
+        android:textColor="@color/colorBaseDialogTitleTextColor"
+        android:textSize="@dimen/base_dialog_title_text_size"
+        android:textStyle="bold"
+        tools:text="标题" />
+
+    <View
+        android:id="@+id/line_item"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorBlack10" />
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dialog_title_height"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="60px"
+        android:paddingRight="60px"
+        android:textColor="@color/colorBaseDialogTitleTextColor"
+        android:textSize="@dimen/base_dialog_title_text_size"
+        tools:text="消息" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:max="100" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorBlack10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base_dialog_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/item_bg_selector"
+            android:gravity="center"
+            android:textColor="@color/colorBaseDialogTitleTextColor"
+            android:textSize="@dimen/base_dialog_title_text_size"
+            android:visibility="gone"
+            tools:text="取消" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="@dimen/base_dialog_item_height"
+            android:background="@color/colorBlack10"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base_dialog_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/item_bg_selector"
+            android:gravity="center"
+            android:textColor="@color/colorBaseDialogTitleTextColor"
+            android:textSize="@dimen/base_dialog_title_text_size"
+            tools:text="确定" />
+    </LinearLayout>
+</LinearLayout>

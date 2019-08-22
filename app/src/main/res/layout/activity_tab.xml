@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fgm_container"
+        android:layout_width="match_parent"
+        android:background="@color/colorWhite"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#7f7f7f7f" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.TabBar
+        android:id="@+id/tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_imageSize="@dimen/base_tab_icon_size"
+        app:tb_showImg="true"
+        app:tb_showMarkView="false"
+        app:tb_showText="true"
+        app:tb_showUnderline="false"
+        app:tb_tabCount="FOUR"
+        app:tb_tabNames="@array/tab_names"
+        app:tb_textColorNormal="@color/colorBlack30"
+        app:tb_textColorPress="@color/colorPrimary"
+        app:tb_textSize="@dimen/base_tab_text_size"
+        app:tb_textTopMargin="@dimen/base_tab_text_top_margin" />
+</LinearLayout>

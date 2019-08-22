@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Magpie</string>
+    <string name="search_text">搜索</string>
+    <string name="language_setting">语言设定</string>
+    <string name="dialog_text">对话框</string>
+    <string name="list_dialog_text">列表对话框</string>
+    <string name="two_btn_dialog">两个按钮普通对话框</string>
+    <string name="horizontal_pro_dialog">水平进度对话框</string>
+    <string name="loading_dialog">加载圆圈对话框</string>
+    <string name="bottom_sheet_dialog">底部弹出列表对话框</string>
+    <string name="loading_text">加载中...</string>
+    <string name="check_update_text">检查到新版本现在安装么？检查到新版本现在安装么</string>
+    <string name="please_input_text">请输入</string>
+    <string name="two_btn_edit_dialog">两个按钮输入对话框</string>
+    <string name="updating_text">正在下载，下载进度：</string>
+    <string name="title_text_1">标题栏</string>
+    <string name="title_text_2">标题栏2</string>
+    <string name="title_text_3">标题栏3</string>
+    <string name="title_text_4">标题栏4</string>
+    <string name="title_text_5">标题栏5</string>
+    <string name="more_text">更多</string>
+    <string name="back_text">返回</string>
+    <string name="dowload_start_text">开始下载</string>
+    <string name="download_text">文件下载</string>
+    <string name="pager_text">Pager指示器</string>
+    <string name="tab_text">底部导航</string>
+    <string name="notice_tools">通知工具</string>
+    <string name="tools_text">工具</string>
+    <string name="spinner_text">下拉框</string>
+    <string-array name="language">
+        <item>简体中文</item>
+        <item>繁体中文</item>
+        <item>英语</item>
+        <item>越南文</item>
+    </string-array>
+    <string-array name="list_test_data">
+        <item>测试内容1</item>
+        <item>测试内容2</item>
+        <item>测试内容3</item>
+        <item>测试内容4</item>
+        <item>测试内容5</item>
+        <item>测试内容6</item>
+    </string-array>
+    <string-array name="bottom_sheet_test_data">
+        <item>测试内容1</item>
+        <item>测试内容2</item>
+        <item>测试内容3</item>
+    </string-array>
+    <string-array name="tab_names">
+        <item>微信</item>
+        <item>通讯录</item>
+        <item>发现</item>
+        <item>我</item>
+    </string-array>
+</resources>

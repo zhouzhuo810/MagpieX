@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Magpie</string>
+    <string name="search_text">Tìm kiếm</string>
+    <string name="language_setting">Cài đặt ngôn ngữ</string>
+    <string name="dialog_text">hộp thoại</string>
+    <string name="list_dialog_text">Hộp danh sách</string>
+    <string name="two_btn_dialog">Hai nút hộp thoại</string>
+    <string name="horizontal_pro_dialog">Tiến độ ngang hộp</string>
+    <string name="loading_dialog">Hộp thoại tải</string>
+    <string name="bottom_sheet_dialog">Hộp thoại dưới</string>
+    <string name="loading_text">Tải trong…</string>
+    <string name="check_update_text">Bạn có muốn cài đặt phiên bản mới?</string>
+    <string name="please_input_text">Vui lòng nhập…</string>
+    <string name="two_btn_edit_dialog">Hai nút đầu vào hộp</string>
+    <string name="updating_text">Trong việc tải xuống…</string>
+    <string name="title_text_1">Thanh tiêu đề</string>
+    <string name="title_text_2">Thanh tiêu đề</string>
+    <string name="title_text_3">Thanh tiêu đề</string>
+    <string name="title_text_4">Thanh tiêu đề</string>
+    <string name="title_text_5">Thanh tiêu đề</string>
+    <string name="more_text">Nhiều hơn</string>
+    <string name="back_text">Quay trở lại</string>
+    <string name="dowload_start_text">Bắt đầu tải về</string>
+    <string name="download_text">Tải tệp xuống</string>
+    <string name="pager_text">Chỉ số</string>
+    <string name="tab_text">Dưới cùng danh mục</string>
+    <string name="notice_tools">Công cụ thông báo</string>
+    <string name="tools_text">dụng cụ</string>
+    <string name="spinner_text">Thả xuống danh sách</string>
+    <string-array name="language">
+        <item>Tiếng Trung giản thể</item>
+        <item>Trung Quốc truyền thống</item>
+        <item>Tiếng Anh</item>
+        <item>Việt Nam</item>
+    </string-array>
+    <string-array name="list_test_data">
+        <item>Nội dung thử nghiệm 1</item>
+        <item>Nội dung thử nghiệm 2</item>
+        <item>Nội dung thử nghiệm 3</item>
+        <item>Nội dung thử nghiệm 4</item>
+        <item>Nội dung thử nghiệm 5</item>
+        <item>Nội dung thử nghiệm 6</item>
+    </string-array>
+    <string-array name="bottom_sheet_test_data">
+        <item>Nội dung thử nghiệm 1</item>
+        <item>Nội dung thử nghiệm 2</item>
+        <item>Nội dung thử nghiệm 3</item>
+    </string-array>
+</resources>

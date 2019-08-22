@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <me.zhouzhuo810.magpiex.ui.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_title_height"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
+        app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
+        app:ttb_showLeftImg="false"
+        app:ttb_showLeftLayout="false"
+        app:ttb_showLeftMarkView="false"
+        app:ttb_showLeftText="false"
+        app:ttb_showRightImg="true"
+        app:ttb_showRightLayout="true"
+        app:ttb_showRightMarkView="false"
+        app:ttb_showRightText="false"
+        app:ttb_textSizeTitle="@dimen/base_title_text_size"
+        app:ttb_titleText="@string/app_name" />
+
+    <Button
+        android:id="@+id/btn_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/language_setting"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+
+    <Button
+        android:id="@+id/btn_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/dialog_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+
+    <Button
+        android:id="@+id/btn_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/title_text_1"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+
+    <Button
+        android:id="@+id/btn_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/download_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/pager_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/tab_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_tools"
+        android:layout_width="540px"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/tools_text"
+        android:background="@color/colorBlack80"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/spinner_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20px"
+        android:paddingRight="20px">
+
+        <EditText
+            android:id="@+id/et_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorAccent"
+            android:textSize="40px" />
+
+        <Button
+            android:id="@+id/btn_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="@string/search_text"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="40px" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+</LinearLayout>

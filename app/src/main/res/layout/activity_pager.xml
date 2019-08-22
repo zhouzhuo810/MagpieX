@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:i_indicator_type="tab_with_icon_and_text"
+        app:i_isNeedScaleInPx="true"
+        app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i_selectTabTextColor="@color/colorPrimary"
+        app:i_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i_shouldTabExpand="false"
+        app:i_showUnderline="true"
+        app:i_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i_showGapLine="true"
+        app:i_gapLineColor="@color/colorBlack40"
+        app:i_gapLineWidth="2px"
+        app:i_gapLinePadding="10px"
+        app:i_underlinePadding="0px"
+        app:i_underlineColor="@color/colorPrimary"
+        app:i_underlineHeight="@dimen/base_indicator_underline_height" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator
+        android:id="@+id/indicator2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i_indicator_type="tab_with_icon"
+        app:i_isNeedScaleInPx="true"
+        app:i_shouldTabExpand="false"
+        app:i_showUnderline="true"
+        app:i_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i_underlineColor="@color/colorPrimary"
+        app:i_underlineHeight="@dimen/base_indicator_underline_height" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator
+        android:id="@+id/indicator3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i_indicator_type="tab_with_text"
+        app:i_isNeedScaleInPx="true"
+        app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i_selectTabTextColor="@color/colorPrimary"
+        app:i_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i_shouldTabExpand="false"
+        app:i_showUnderline="true"
+        app:i_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i_underlineColor="@color/colorPrimary"
+        app:i_underlineHeight="@dimen/base_indicator_underline_height" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator
+        android:id="@+id/indicator4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i_indicator_type="tab_with_text"
+        app:i_isNeedScaleInPx="true"
+        app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i_selectTabTextColor="@color/colorPrimary"
+        app:i_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i_shouldTabExpand="false"
+        app:i_showUnderline="false" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator
+        android:id="@+id/indicator5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i_indicator_type="tab_with_text"
+        app:i_isNeedScaleInPx="true"
+        app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i_selectTabTextColor="@color/colorPrimary"
+        app:i_selectTabTextSize="50px"
+        app:i_shouldTabExpand="false"
+        app:i_showUnderline="false" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

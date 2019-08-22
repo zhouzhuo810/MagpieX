@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <me.zhouzhuo810.magpiex.ui.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_title_height"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
+        app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
+        app:ttb_showLeftImg="true"
+        app:ttb_showLeftLayout="true"
+        app:ttb_showLeftMarkView="false"
+        app:ttb_showLeftText="false"
+        app:ttb_showRightImg="true"
+        app:ttb_showRightLayout="true"
+        app:ttb_showRightMarkView="false"
+        app:ttb_showRightText="false"
+        app:ttb_textSizeTitle="@dimen/base_title_text_size"
+        app:ttb_titleText="@string/tools_text" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="noticeTools"
+                android:text="@string/notice_tools"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
