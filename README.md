@@ -22,72 +22,43 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.MagpieX:magpiex:1.0.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.0'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'com.android.support:appcompat-v7:28.0.0'
+    api 'androidx.appcompat:appcompat:1.0.2'
     //RecyclerView
-    api 'com.android.support:recyclerview-v7:28.0.0'
+    api 'androidx.recyclerview:recyclerview:1.0.0'
     //BaseRecyclerViewAdapterHelper
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //Glide
     api 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.2"
+    api "io.reactivex.rxjava2:rxjava:2.2.8"
     //RxAndroid2
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //Retrofit2
-    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
     //Retrofit2+RxJava2
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     //Retrofit2+Gson
-    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
     //OkHttp打印请求数据
     api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
-    api 'com.yanzhenjie:permission:2.0.0-rc12'
+    api 'com.yanzhenjie.permission:x:2.0.1'
     //ToastUtils
     api 'com.hjq:toast:8.0'
 
 ```
 
-
-> For Phone And Pad (AndroidX) .
-
-
-> For Android TV(Support).
-
-```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.6'
-```
-
-If you use this. That means you added dependencies below:
-```
-    //v7
-    api 'com.android.support:appcompat-v7:28.0.0'
-    //RecyclerView
-    api 'com.android.support:recyclerview-v7:28.0.0'
-    //EventBus
-    api 'org.greenrobot:eventbus:3.1.1'
-    //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.2"
-    //RxAndroid2
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    //zz-horizontal-progressbar
-    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.1.0'
-    //AndPermission
-    api 'com.yanzhenjie:permission:2.0.0-rc12'
-    //ToastUtils
-    api 'com.hjq:toast:8.0'
-```
 
 #### Screen Adapter
 
