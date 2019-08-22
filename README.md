@@ -2,7 +2,8 @@
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![MinSdk](https://img.shields.io/badge/MinSDK-17-orange.svg)](https://android-arsenal.com/api?level=17)
 
-# Magpie
+# MagpieX
+
  A powerful Android Develop Framework.
 
 
