@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.0.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -304,6 +304,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.0.1 (Published)
+
+- 2019/9/6 TabBar添加setTabNames方法
 
 > 1.0.0 (Published)
 
