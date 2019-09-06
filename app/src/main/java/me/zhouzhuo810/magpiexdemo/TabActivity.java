@@ -2,11 +2,14 @@ package me.zhouzhuo810.magpiexdemo;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;
 import me.zhouzhuo810.magpiex.ui.widget.TabBar;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiexdemo.fgm.TestFragmentFour;
 import me.zhouzhuo810.magpiexdemo.fgm.TestFragmentOne;
 import me.zhouzhuo810.magpiexdemo.fgm.TestFragmentThree;
@@ -100,5 +103,12 @@ public class TabActivity extends BaseActivity {
         
         //这个要在设置setOnTabBarClickListener监听之后调用才会触发onTabClick方法
         tabBar.setSelection(0);
+        
+        findViewById(R.id.tv_change_names).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tabBar.setTabNames(SimpleUtil.getStringArray(R.array.tab_names2));
+            }
+        });
     }
 }

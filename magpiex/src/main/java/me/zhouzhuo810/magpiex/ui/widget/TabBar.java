@@ -278,6 +278,84 @@ public class TabBar extends LinearLayout {
         return position;
     }
 
+    
+    public TabBar setTabNames(String... tabNames) {
+        if (tabNames.length == 0) {
+            return this;
+        }
+        this.tabCount = tabNames.length;
+        for (int i = 0; i < tabNames.length; i++) {
+            switch (tabCount) {
+                case 1:
+                    if (i == 0) {
+                        tv0.setText(tabNames[0]);
+                    }
+                    setVisible(ll1, false);
+                    setVisible(ll2, false);
+                    setVisible(ll3, false);
+                    setVisible(ll4, false);
+                    break;
+                case 2:
+                    if (i == 0) {
+                        tv0.setText(tabNames[0]);
+                    }
+                    if (i == 1) {
+                        tv1.setText(tabNames[1]);
+                    }
+                    setVisible(ll2, false);
+                    setVisible(ll3, false);
+                    setVisible(ll4, false);
+                    break;
+                case 3:
+                    if (i == 0) {
+                        tv0.setText(tabNames[0]);
+                    }
+                    if (i == 1) {
+                        tv1.setText(tabNames[1]);
+                    }
+                    if (i == 2) {
+                        tv2.setText(tabNames[2]);
+                    }
+                    setVisible(ll3, false);
+                    setVisible(ll4, false);
+                    break;
+                case 4:
+                    if (i == 0) {
+                        tv0.setText(tabNames[0]);
+                    }
+                    if (i == 1) {
+                        tv1.setText(tabNames[1]);
+                    }
+                    if (i == 2) {
+                        tv2.setText(tabNames[2]);
+                    }
+                    if (i == 3) {
+                        tv3.setText(tabNames[3]);
+                    }
+                    setVisible(ll4, false);
+                    break;
+                case 5:
+                    if (i == 0) {
+                        tv0.setText(tabNames[0]);
+                    }
+                    if (i == 1) {
+                        tv1.setText(tabNames[1]);
+                    }
+                    if (i == 2) {
+                        tv2.setText(tabNames[2]);
+                    }
+                    if (i == 3) {
+                        tv3.setText(tabNames[3]);
+                    }
+                    if (i == 4) {
+                        tv4.setText(tabNames[4]);
+                    }
+                    break;
+            }
+        }
+        return this;
+    }
+    
     /**
      * Set the icon resource id when tab is pressed.
      *
