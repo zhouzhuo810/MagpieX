@@ -914,11 +914,14 @@ public class TabBar extends LinearLayout {
         return tv4;
     }
     
-    public void setTextColorPress(int textColorPress) {
+    public TabBar setTextColorPress(int textColorPress) {
         this.textColorPress = textColorPress;
+        return this;
     }
     
-    public void setTextColorNormal(int textColorNormal) {
+    public TabBar setTextColorNormal(int textColorNormal) {
         this.textColorNormal = textColorNormal;
+        return this;
     }
+    
 }
