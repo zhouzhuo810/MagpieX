@@ -112,5 +112,14 @@
 
     </declare-styleable>
 
+    <attr name="x_item_text_color" format="color"/>
+    <attr name="x_item_bg_color" format="color"/>
+    <attr name="x_item_bg_color_21" format="color"/>
+    <attr name="x_dialog_title_bg_color" format="color"/>
+    <attr name="x_dialog_content_bg_color" format="color"/>
+    <attr name="x_dialog_title_text_color" format="color"/>
+    <attr name="x_dialog_content_text_color" format="color"/>
+    <attr name="x_dialog_btn_text_color" format="color"/>
+    <attr name="x_dialog_btn_bg_color" format="color"/>
 
 </resources>

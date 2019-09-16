@@ -26,7 +26,7 @@ public class MyApplication extends BaseApplication {
         instance = this;
         
         NoticeUtil.initNoticeChannel("1", getString(R.string.app_name), "Magpie通知渠道", 0, true);
-        
+    
         //Crash Handler
         //        initCrash();
     }

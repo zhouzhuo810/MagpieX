@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.0.2'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -58,7 +58,6 @@ If you use this. That means you added dependencies below:
     api 'com.hjq:toast:8.0'
 
 ```
-
 
 #### Screen Adapter
 
@@ -155,6 +154,14 @@ public class MyApplication extends Application {
     }
 
 }
+```
+
+- You must use The `MagpieTheme` Or `MagpieTheme.NoActionBar` Theme.
+
+```xml
+<style name="AppTheme" parent="MagpieTheme.NoActionBar">
+    ...
+</style>    
 ```
 
 - ok, Just use `px` unit in your layout.
@@ -304,6 +311,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.0.3 (Published)
+
+- 2019/9/16 支持夜间模式颜色；
 
 > 1.0.2 (Published)
 

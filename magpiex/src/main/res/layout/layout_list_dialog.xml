@@ -15,7 +15,8 @@
         android:maxLines="1"
         android:paddingLeft="60px"
         android:paddingRight="60px"
-        android:textColor="@color/colorBaseDialogTitleTextColor"
+        android:background="?attr/x_dialog_title_bg_color"
+        android:textColor="?attr/x_dialog_title_text_color"
         android:textSize="@dimen/base_dialog_title_text_size"
         android:textStyle="bold"
         tools:text="标题" />

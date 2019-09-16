@@ -5,5 +5,5 @@
     <stroke
         android:width="1px"
         android:color="#eee" />
-    <solid android:color="@color/colorWhite" />
+    <solid android:color="?attr/x_dialog_content_bg_color" />
 </shape>

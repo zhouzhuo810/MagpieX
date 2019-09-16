@@ -15,7 +15,8 @@
         android:maxLines="1"
         android:paddingLeft="60px"
         android:paddingRight="60px"
-        android:textColor="@color/colorBaseDialogTitleTextColor"
+        android:background="?attr/x_dialog_title_bg_color"
+        android:textColor="?attr/x_dialog_title_text_color"
         android:textSize="@dimen/base_dialog_title_text_size"
         android:textStyle="bold"
         tools:text="标题" />
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="60px"
-        android:textColor="@color/colorBaseDialogTitleTextColor"
+        android:textColor="?attr/x_dialog_content_text_color"
         android:textSize="@dimen/base_dialog_title_text_size"
         tools:text="消息" />
 
@@ -53,7 +54,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/item_bg_selector"
-            android:textColor="@color/colorBaseDialogTitleTextColor"
+            android:textColor="?attr/x_dialog_btn_bg_color"
             android:textSize="@dimen/base_dialog_title_text_size"
             tools:text="取消" />
 
@@ -69,7 +70,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/item_bg_selector"
-            android:textColor="@color/colorBaseDialogTitleTextColor"
+            android:textColor="?attr/x_dialog_btn_bg_color"
             android:textSize="@dimen/base_dialog_title_text_size"
             tools:text="确定" />
     </LinearLayout>
