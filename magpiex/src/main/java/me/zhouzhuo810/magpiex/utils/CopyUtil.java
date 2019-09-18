@@ -16,7 +16,7 @@ public class CopyUtil {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static boolean copyPlainText(CharSequence label, String text) {
+    public static boolean copyPlainText(CharSequence label, CharSequence text) {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return false;
@@ -35,10 +35,12 @@ public class CopyUtil {
             return null;
         }
         try {
-            return cm.getPrimaryClip().getItemAt(0).getText();
-        } catch (Exception e) {
-            return null;
+            if (cm.getPrimaryClip() != null) {
+                return cm.getPrimaryClip().getItemAt(0).getText();
+            }
+        } catch (Exception ignored) {
         }
+        return null;
     }
 
     public static boolean copyUrl(CharSequence label, String url) {
