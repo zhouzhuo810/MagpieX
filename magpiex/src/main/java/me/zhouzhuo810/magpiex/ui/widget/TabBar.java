@@ -2,8 +2,6 @@ package me.zhouzhuo810.magpiex.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.annotation.IntDef;
-import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,6 +13,8 @@ import android.widget.TextView;
 
 import java.lang.annotation.Retention;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.RequiresApi;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.ColorUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;

@@ -1,9 +1,8 @@
 package me.zhouzhuo810.magpiex.utils;
 
-import androidx.annotation.NonNull;
-
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

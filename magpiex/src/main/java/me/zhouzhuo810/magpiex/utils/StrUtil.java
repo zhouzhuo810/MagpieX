@@ -1,10 +1,10 @@
 package me.zhouzhuo810.magpiex.utils;
 
-import androidx.annotation.NonNull;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class StrUtil {
 

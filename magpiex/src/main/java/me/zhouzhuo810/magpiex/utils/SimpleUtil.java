@@ -3,12 +3,13 @@ package me.zhouzhuo810.magpiex.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
-import androidx.annotation.ArrayRes;
-import androidx.annotation.ColorRes;
-import androidx.annotation.StringRes;
 import android.view.View;
 
 import java.text.DecimalFormat;
+
+import androidx.annotation.ArrayRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.StringRes;
 
 /**
  * 常用方法简化

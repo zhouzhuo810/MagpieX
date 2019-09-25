@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,9 +15,13 @@ import android.widget.ImageView;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.disposables.Disposable;
+import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.act.IBaseActivity;
 import me.zhouzhuo810.magpiex.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
@@ -29,7 +30,6 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
-import me.zhouzhuo810.magpiex.R;
 
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";

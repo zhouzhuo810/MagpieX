@@ -4,12 +4,13 @@ import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.os.Build;
-import androidx.annotation.ColorRes;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
+
+import androidx.annotation.ColorRes;
 
 public class ViewUtil {
     private static final String METHOD_GET_MAX_WIDTH = "getMaxWidth";

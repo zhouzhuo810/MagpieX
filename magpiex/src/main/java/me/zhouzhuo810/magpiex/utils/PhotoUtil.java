@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import androidx.annotation.RequiresPermission;
 
 import java.io.File;
 
+import androidx.annotation.RequiresPermission;
 import androidx.core.content.FileProvider;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;

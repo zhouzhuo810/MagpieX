@@ -1,9 +1,9 @@
 package me.zhouzhuo810.magpiex.cons;
 
-import androidx.annotation.IntDef;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 public final class Cons {
     //    public static final String

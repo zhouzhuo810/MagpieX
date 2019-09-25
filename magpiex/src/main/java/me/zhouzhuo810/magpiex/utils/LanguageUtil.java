@@ -6,8 +6,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
-import androidx.annotation.IntDef;
-import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
@@ -17,6 +15,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.RequiresApi;
 import me.zhouzhuo810.magpiex.cons.Cons;
 
 public class LanguageUtil {

@@ -2,12 +2,13 @@ package me.zhouzhuo810.magpiex.utils;
 
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
-import androidx.annotation.ColorInt;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
 
 public class ColorUtil {
 

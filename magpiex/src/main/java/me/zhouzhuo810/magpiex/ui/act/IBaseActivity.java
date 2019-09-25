@@ -5,10 +5,6 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.Nullable;
-
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +12,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpiex.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;

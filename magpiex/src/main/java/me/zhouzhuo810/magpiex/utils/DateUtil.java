@@ -1,7 +1,5 @@
 package me.zhouzhuo810.magpiex.utils;
 
-import androidx.annotation.NonNull;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import me.zhouzhuo810.magpiex.cons.Cons;
 
 public class DateUtil {
