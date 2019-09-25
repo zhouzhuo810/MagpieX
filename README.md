@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.0.4'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -311,6 +311,11 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.0.5 (Published)
+
+- 2019/9/25 加入一个按钮普通对话框；
+- 2019/9/25 对话框支持横屏模式；
 
 > 1.0.4 (Published)
 

@@ -28,6 +28,7 @@
     <string name="notice_tools">Công cụ thông báo</string>
     <string name="tools_text">dụng cụ</string>
     <string name="spinner_text">Thả xuống danh sách</string>
+    <string name="one_btn_dialog">一个按钮普通对话框</string>
     <string-array name="language">
         <item>Tiếng Trung giản thể</item>
         <item>Trung Quốc truyền thống</item>

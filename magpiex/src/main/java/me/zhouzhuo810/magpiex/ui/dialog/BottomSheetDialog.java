@@ -2,11 +2,6 @@ package me.zhouzhuo810.magpiex.ui.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -18,6 +13,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.R;
@@ -27,18 +26,19 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 
 
 public class BottomSheetDialog extends DialogFragment {
-
+    
     private List<String> items;
     private OnItemClick onItemClick;
     private boolean alignLeft;
+    private boolean landscape;
     private String title;
     private DialogInterface.OnDismissListener dismissListener;
     private ListDialogAdapter adapter;
-
+    
     public interface OnItemClick {
         void onItemClick(int position, String item);
     }
-
+    
     /**
      * 设置对话框关闭监听
      *
@@ -49,7 +49,8 @@ public class BottomSheetDialog extends DialogFragment {
         this.dismissListener = dismissListener;
         return this;
     }
-
+    
+    
     /**
      * 设置点击事件
      *
@@ -60,7 +61,7 @@ public class BottomSheetDialog extends DialogFragment {
         this.onItemClick = onItemClick;
         return this;
     }
-
+    
     /**
      * 设置标题
      *
@@ -71,7 +72,26 @@ public class BottomSheetDialog extends DialogFragment {
         this.title = title;
         return this;
     }
-
+    
+    /**
+     * 是否横屏显示
+     *
+     * @param landscape 是否
+     * @return 自己
+     */
+    public BottomSheetDialog setLandscape(boolean landscape) {
+        this.landscape = landscape;
+        if (adapter != null) {
+            adapter.setLandscape(landscape);
+            adapter.notifyDataSetChanged();
+        }
+        return this;
+    }
+    
+    public boolean isLandscape() {
+        return landscape;
+    }
+    
     /**
      * 设置左对齐
      *
@@ -86,7 +106,7 @@ public class BottomSheetDialog extends DialogFragment {
         }
         return this;
     }
-
+    
     /**
      * 设置数据
      *
@@ -100,12 +120,12 @@ public class BottomSheetDialog extends DialogFragment {
         }
         return this;
     }
-
-
+    
+    
     public ListDialogAdapter getAdapter() {
         return adapter;
     }
-
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -118,7 +138,7 @@ public class BottomSheetDialog extends DialogFragment {
             getDialog().getWindow().setLayout(dm.widthPixels, getDialog().getWindow().getAttributes().height);
         }
     }
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -129,14 +149,14 @@ public class BottomSheetDialog extends DialogFragment {
             getDialog().getWindow().setWindowAnimations(R.style.BottomSheetDialog);
             getDialog().getWindow().setGravity(Gravity.BOTTOM);
         }
-        View rootView = inflater.inflate(R.layout.layout_bottom_sheet_dialog, container, false);
+        View rootView = inflater.inflate(landscape ? R.layout.layout_bottom_sheet_dialog_land : R.layout.layout_bottom_sheet_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         View line = rootView.findViewById(R.id.line_item);
         RecyclerView rv = rootView.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setHasFixedSize(true);
-        adapter = new ListDialogAdapter(getActivity(), items);
+        adapter = new ListDialogAdapter(getActivity(), items, landscape);
         if (TextUtils.isEmpty(title)) {
             line.setVisibility(View.GONE);
             tvTitle.setVisibility(View.GONE);
@@ -159,8 +179,8 @@ public class BottomSheetDialog extends DialogFragment {
         rv.setAdapter(adapter);
         return rootView;
     }
-
-
+    
+    
     @Override
     public void show(FragmentManager manager, String tag) {
         try {
@@ -169,8 +189,8 @@ public class BottomSheetDialog extends DialogFragment {
             e.printStackTrace();
         }
     }
-
-
+    
+    
     /**
      * 注意,不要用super.dismiss(),bug 同上show()
      * super.onDismiss就没问题
@@ -180,7 +200,7 @@ public class BottomSheetDialog extends DialogFragment {
             super.dismissAllowingStateLoss();
         }
     }
-
+    
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);

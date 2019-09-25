@@ -28,6 +28,7 @@
     <string name="notice_tools">Notice Utils</string>
     <string name="tools_text">Tools</string>
     <string name="spinner_text">Spinner</string>
+    <string name="one_btn_dialog">一个按钮普通对话框</string>
     <string-array name="language">
         <item>Simple Chinese</item>
         <item>Traditional Chinese</item>

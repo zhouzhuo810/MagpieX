@@ -13,6 +13,7 @@ import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
 public class ListDialogAdapter extends RvBaseAdapter<String> {
 
     private boolean alignLeft;
+    private boolean landscape;
 
     public boolean isAlignLeft() {
         return alignLeft;
@@ -21,15 +22,23 @@ public class ListDialogAdapter extends RvBaseAdapter<String> {
     public void setAlignLeft(boolean alignLeft) {
         this.alignLeft = alignLeft;
     }
-
-
-    public ListDialogAdapter(Context context, List<String> data) {
+    
+    public boolean isLandscape() {
+        return landscape;
+    }
+    
+    public void setLandscape(boolean landscape) {
+        this.landscape = landscape;
+    }
+    
+    public ListDialogAdapter(Context context, List<String> data, boolean landscape) {
         super(context, data);
+        this.landscape = landscape;
     }
 
     @Override
     protected int getLayoutId(int viewType) {
-        return R.layout.item_lv_dialog;
+        return landscape ? R.layout.item_lv_dialog_land : R.layout.item_lv_dialog;
     }
 
     @Override

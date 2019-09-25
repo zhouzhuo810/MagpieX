@@ -14,4 +14,8 @@
     <dimen name="base_indicator_icon_size">70px</dimen>
     <dimen name="base_indicator_underline_height">4px</dimen>
     <dimen name="base_indicator_height">130px</dimen>
+
+    <dimen name="base_dialog_title_text_size_land">21px</dimen>
+    <dimen name="base_dialog_title_height_land">70px</dimen>
+    <dimen name="base_dialog_item_height_land">65px</dimen>
 </resources>

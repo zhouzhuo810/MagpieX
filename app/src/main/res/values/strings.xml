@@ -27,6 +27,7 @@
     <string name="notice_tools">通知工具</string>
     <string name="tools_text">工具</string>
     <string name="spinner_text">下拉框</string>
+    <string name="one_btn_dialog">一个按钮普通对话框</string>
     <string-array name="language">
         <item>简体中文</item>
         <item>繁体中文</item>

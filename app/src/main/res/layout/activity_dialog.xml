@@ -46,6 +46,15 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="oneBtnTextDialog"
+                android:text="@string/one_btn_dialog"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="twoBtnTextDialog"
                 android:text="@string/two_btn_dialog"
                 android:textAllCaps="false"

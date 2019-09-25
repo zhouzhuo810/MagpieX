@@ -2,10 +2,6 @@ package me.zhouzhuo810.magpiex.ui.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -15,6 +11,10 @@ import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 
@@ -25,6 +25,7 @@ public class OneBtnProgressDialog extends DialogFragment {
 
     private DialogInterface.OnDismissListener dismissListener;
     private OnProgressListener onProgressListener;
+    private boolean landscape;
     private String title;
     private String msg;
     private String btnText;
@@ -50,7 +51,24 @@ public class OneBtnProgressDialog extends DialogFragment {
         this.onProgressListener = onProgressListener;
         return this;
     }
-
+    
+    /**
+     * 是否横屏显示
+     *
+     * @param landscape 是否
+     * @return 自己
+     */
+    public OneBtnProgressDialog setLandscape(boolean landscape) {
+        this.landscape = landscape;
+        return this;
+    }
+    
+    public boolean isLandscape() {
+        return landscape;
+    }
+    
+    
+    
     /**
      * 设置按钮文字
      *
@@ -93,7 +111,11 @@ public class OneBtnProgressDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         if (getDialog().getWindow() != null) {
-            getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            if (landscape) {
+                getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
+            } else {
+                getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            }
         }
     }
 
@@ -102,7 +124,7 @@ public class OneBtnProgressDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(R.layout.layout_one_btn_progress_dialog, container, false);
+        View rootView = inflater.inflate(landscape ? R.layout.layout_one_btn_progress_dialog_land : R.layout.layout_one_btn_progress_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
         ProgressBar pb = rootView.findViewById(R.id.pb);
         final TextView tvOk = rootView.findViewById(R.id.tv_right);

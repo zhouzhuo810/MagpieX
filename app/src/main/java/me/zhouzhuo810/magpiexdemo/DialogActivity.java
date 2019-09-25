@@ -80,10 +80,10 @@ public class DialogActivity extends BaseActivity {
     
     public void listDialog(View v) {
         String[] items = getResources().getStringArray(R.array.list_test_data);
-        showListDialog(getString(R.string.app_name), items, true, false, new ListDialog.OnItemClick() {
+        showListDialog(getString(R.string.app_name), items, true, false, true,  new ListDialog.OnItemClick() {
             @Override
             public void onItemClick(int position, String item) {
-                ToastUtil.showShortToast("position = " + position + ", content = " + item);
+                ToastUtil.showToast("position = " + position + ", content = " + item);
             }
         });
     }
@@ -93,38 +93,47 @@ public class DialogActivity extends BaseActivity {
 /*        showTwoBtnTextDialog(getString(R.string.app_name), getString(R.string.check_update_text), true, new TwoBtnTextDialog.OnTwoBtnTextClick() {
             @Override
             public void onLeftClick(TextView v) {
-                ToastUtil.showShortToast(v.getText().toString().trim());
+                ToastUtil.showToast(v.getText().toString().trim());
             }
             
             @Override
             public void onRightClick(TextView v) {
-                ToastUtil.showShortToast(v.getText().toString().trim());
+                ToastUtil.showToast(v.getText().toString().trim());
             }
         });*/
-        showTwoBtnTextDialog(getString(R.string.app_name), getString(R.string.check_update_text), true, true, new TwoBtnTextDialog.OnTwoBtnTextClick() {
+        showTwoBtnTextDialog(getString(R.string.app_name), getString(R.string.check_update_text), true, true, true, new TwoBtnTextDialog.OnTwoBtnTextClick() {
             @Override
             public void onLeftClick(TextView v) {
-                ToastUtil.showShortToast(v.getText().toString().trim());
+                ToastUtil.showToast(v.getText().toString().trim());
             }
             
             @Override
             public void onRightClick(TextView v) {
-                ToastUtil.showShortToast(v.getText().toString().trim());
+                ToastUtil.showToast(v.getText().toString().trim());
+            }
+        });
+    }
+    
+    public void oneBtnTextDialog(View v) {
+        showOneBtnTextDialog(getString(R.string.app_name), getString(R.string.check_update_text), getString(R.string.magpie_ok_text), true, true, new TwoBtnTextDialog.OnOneBtnTextClick() {
+            @Override
+            public void onBtnClick(TextView v) {
+                ToastUtil.showToast("ok");
             }
         });
     }
     
     public void twoBtnEditDialog(View v) {
         //        showTwoBtnEditDialog(getString(R.string.app_name), null, getString(R.string.please_input_text), false, null, new TwoBtnEditDialog.OnTwoBtnEditClick() {
-        showTwoBtnEditDialog(getString(R.string.app_name), null, getString(R.string.please_input_text), InputType.TYPE_CLASS_NUMBER, false, null, new TwoBtnEditDialog.OnTwoBtnEditClick() {
+        showTwoBtnEditDialog(getString(R.string.app_name), null, getString(R.string.please_input_text), InputType.TYPE_CLASS_NUMBER, true, true, null, new TwoBtnEditDialog.OnTwoBtnEditClick() {
             @Override
             public void onLeftClick(String etContent) {
-                ToastUtil.showShortToast(etContent);
+                ToastUtil.showToast(etContent);
             }
             
             @Override
             public void onRightClick(String etContent) {
-                ToastUtil.showShortToast(etContent);
+                ToastUtil.showToast(etContent);
             }
         });
     }
@@ -133,7 +142,7 @@ public class DialogActivity extends BaseActivity {
         final Disposable[] subscribe = new Disposable[1];
         
         showOneBtnProgressDialog(getString(R.string.app_name), getString(R.string.updating_text) + "0%",
-            getString(R.string.magpie_cancel_text), false,
+            getString(R.string.magpie_cancel_text), false, true,
             new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
@@ -172,7 +181,7 @@ public class DialogActivity extends BaseActivity {
                 
                 @Override
                 public void onBtnClick() {
-                    ToastUtil.showShortToast("btn clicked");
+                    ToastUtil.showToast("btn clicked");
                 }
             });
     }
@@ -180,7 +189,7 @@ public class DialogActivity extends BaseActivity {
     public void loadingDialog(View v) {
         //        showLoadingDialog(getString(R.string.app_name), getString(R.string.loading_text), false, true);
         //        showLoadingDialog(getString(R.string.loading_text));
-        showLoadingDialog(null, getString(R.string.loading_text), false, false);
+        showLoadingDialog(null, getString(R.string.loading_text), false, true, true);
         
         RxHelper.countDown(5, new Consumer<Long>() {
             @Override
@@ -199,15 +208,15 @@ public class DialogActivity extends BaseActivity {
     
     public void bottomSheetDialog(View v) {
         String[] items = getResources().getStringArray(R.array.bottom_sheet_test_data);
-        showBottomSheet(getString(R.string.app_name), items, true, true, new DialogInterface.OnDismissListener() {
+        showBottomSheet(getString(R.string.app_name), items, true, true, true,  new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                ToastUtil.showShortToast("dialog canceled");
+                ToastUtil.showToast("dialog canceled");
             }
         }, new BottomSheetDialog.OnItemClick() {
             @Override
             public void onItemClick(int position, String item) {
-                ToastUtil.showShortToast("position = " + position + ", content = " + item);
+                ToastUtil.showToast("position = " + position + ", content = " + item);
             }
         });
     }

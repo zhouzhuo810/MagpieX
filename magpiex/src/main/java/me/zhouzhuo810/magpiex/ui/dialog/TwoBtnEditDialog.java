@@ -3,10 +3,6 @@ package me.zhouzhuo810.magpiex.ui.dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -19,6 +15,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.KeyboardUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
@@ -31,6 +31,7 @@ public class TwoBtnEditDialog extends DialogFragment {
     private int inputType = -1;
     private DialogInterface.OnDismissListener dismissListener;
     private OnTwoBtnEditClick onTwoBtnClick;
+    private boolean landscape;
     private String title;
     private String hint;
     private String msg;
@@ -60,6 +61,23 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.inputType = type;
         return this;
     }
+    
+    
+    /**
+     * 是否横屏显示
+     *
+     * @param landscape 是否
+     * @return 自己
+     */
+    public TwoBtnEditDialog setLandscape(boolean landscape) {
+        this.landscape = landscape;
+        return this;
+    }
+    
+    public boolean isLandscape() {
+        return landscape;
+    }
+    
     
     /**
      * 设置对话框关闭监听
@@ -147,7 +165,11 @@ public class TwoBtnEditDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         if (getDialog().getWindow() != null) {
-            getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            if (landscape) {
+                getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
+            } else {
+                getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            }
         }
     }
     
@@ -156,7 +178,7 @@ public class TwoBtnEditDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        rootView = inflater.inflate(R.layout.layout_two_btn_edit_dialog, container, false);
+        rootView = inflater.inflate(landscape ? R.layout.layout_two_btn_edit_dialog_land : R.layout.layout_two_btn_edit_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
         final TextView tvLeft = rootView.findViewById(R.id.tv_left);
         final TextView tvRight = rootView.findViewById(R.id.tv_right);
@@ -224,9 +246,9 @@ public class TwoBtnEditDialog extends DialogFragment {
             tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setText(title);
         }
+        
         return rootView;
     }
-    
     
     @Override
     public void show(FragmentManager manager, String tag) {
@@ -240,7 +262,7 @@ public class TwoBtnEditDialog extends DialogFragment {
             public void run() {
                 if (rootView != null) {
                     EditText etMsg = rootView.findViewById(R.id.et_msg);
-                    KeyboardUtil.showSoftInput(etMsg);
+                    KeyboardUtil.showSoftInput2(etMsg);
                 }
             }
         }, 300);
