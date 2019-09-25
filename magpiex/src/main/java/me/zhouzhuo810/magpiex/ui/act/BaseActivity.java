@@ -211,8 +211,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, boolean landscape) {
-        showLoadingDialog(title, msg, cancelable, iosStyle, landscape, null);
+    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener) {
+        showLoadingDialog(title, msg, cancelable, false, listener);
     }
     
     @Override
@@ -227,16 +227,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
-        showLoadingDialog(title, msg, cancelable, iosStyle, false, onDismissListener);
-    }
-    
-    @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener) {
-        showLoadingDialog(title, msg, cancelable, false, null);
-    }
-    
-    @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, boolean landscape, DialogInterface.OnDismissListener onDismissListener) {
         if (loadingDialog != null && loadingDialog.isLoading()) {
             loadingDialog.setCancelable(cancelable);
             loadingDialog.setTitle(title)
@@ -249,7 +239,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             loadingDialog = new LoadingDialog();
             loadingDialog.setTitle(title)
                 .setMsg(msg)
-                .setLandscape(landscape)
+                .setLandscape(isLandscapeDialog())
                 .setIosStyle(iosStyle)
                 .setOnDismissListener(onDismissListener)
                 .setCancelable(cancelable);
@@ -284,16 +274,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, boolean landscape, OneBtnProgressDialog.OnProgressListener onProgressListener) {
-        showOneBtnProgressDialog(title, msg, getString(R.string.magpie_ok_text), false, landscape, null, onProgressListener);
-    }
-    
-    @Override
-    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
-        showOneBtnProgressDialog(title, msg, getString(R.string.magpie_ok_text), cancelable, landscape, onDismissListener, onProgressListener);
-    }
-    
-    @Override
     public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         showOneBtnProgressDialog(title, msg, false, onDismissListener, onProgressListener);
     }
@@ -305,16 +285,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
-        showOneBtnProgressDialog(title, msg, btnString, cancelable, false, onDismissListener, onProgressListener);
-    }
-    
-    @Override
-    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         progressDialog = new OneBtnProgressDialog();
         progressDialog.setTitle(title)
             .setMsg(msg)
             .setBtnText(btnString)
-            .setLandscape(landscape)
+            .setLandscape(isLandscapeDialog())
             .setOnDismissListener(onDismissListener)
             .setProgressListener(onProgressListener)
             .setCancelable(cancelable);
@@ -330,30 +305,20 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showOneBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
-        showOneBtnTextDialog(title, msg, getString(R.string.magpie_ok_text), true, false, null, onOneBtnTextClick);
+        showOneBtnTextDialog(title, msg, getString(R.string.magpie_ok_text), true, null, onOneBtnTextClick);
     }
     
     @Override
     public void showOneBtnTextDialog(String title, String msg, String btnText, boolean cancelable, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
-        showOneBtnTextDialog(title, msg, btnText, cancelable, false, null, onOneBtnTextClick);
-    }
-    
-    @Override
-    public void showOneBtnTextDialog(String title, String msg, String btnText, boolean cancelable, boolean landscape, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
-        showOneBtnTextDialog(title, msg, btnText, cancelable, landscape, null, onOneBtnTextClick);
+        showOneBtnTextDialog(title, msg, btnText, cancelable, null, onOneBtnTextClick);
     }
     
     @Override
     public void showOneBtnTextDialog(String title, String msg, String btnText, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
-        showOneBtnTextDialog(title, msg, btnText, cancelable, false, onDismissListener, onOneBtnTextClick);
-    }
-    
-    @Override
-    public void showOneBtnTextDialog(String title, String msg, String btnText, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
         oneBtnTextDialog = new TwoBtnTextDialog();
         oneBtnTextDialog.setTitle(title)
             .setMsg(msg)
-            .setLandscape(landscape)
+            .setLandscape(isLandscapeDialog())
             .setOneBtn(true)
             .setLeftText(btnText)
             .setOnDismissListener(onDismissListener)
@@ -385,16 +350,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, boolean landscape, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, true, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, landscape, null, onTwoBtnClick);
-    }
-    
-    @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, true, leftBtnString, rightBtnString, cancelable, false, onDismissListener, onTwoBtnClick);
-    }
-    
-    @Override
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         showTwoBtnTextDialog(title, msg, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
     }
@@ -409,17 +364,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, true, leftBtnString, rightBtnString, cancelable, landscape, onDismissListener, onTwoBtnClick);
-    }
-    
-    @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, String leftBtnString, String rightBtnString, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         hideTwoBtnTextDialog();
         twoBtnTextDialog = new TwoBtnTextDialog();
         twoBtnTextDialog.setTitle(title)
             .setMsg(msg)
-            .setLandscape(landscape)
+            .setLandscape(isLandscapeDialog())
             .setLeftText(leftBtnString)
             .setRightText(rightBtnString)
             .setGravity(msgCenter ? Gravity.CENTER : Gravity.CENTER_VERTICAL | Gravity.START)
@@ -452,38 +402,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, inputType, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, landscape, onDismissListener, onTwoBtnEditClick);
-    }
-    
-    @Override
     public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
     }
-    
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, boolean landscape, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, landscape, null, onTwoBtnEditClick);
-    }
-    
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, landscape, onDismissListener, onTwoBtnEditClick);
-    }
-    
     @Override
     public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, inputType, leftBtnString, rightBtnString, cancelable, false, onDismissListener, onTwoBtnEditClick);
-    }
-    
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         hideTwoBtnEditDialog();
         twoBtnEditDialog = new TwoBtnEditDialog();
         twoBtnEditDialog.setTitle(title)
             .setMsg(msg)
             .setHint(hint)
-            .setLandscape(landscape)
+            .setLandscape(isLandscapeDialog())
             .setInputType(inputType)
             .setLeftText(leftBtnString)
             .setRightText(rightBtnString)
@@ -531,29 +460,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showListDialog(String[] items, boolean cancelable, boolean landscape, ListDialog.OnItemClick onItemClick) {
-        showListDialog(null, CollectionUtil.stringToList(items), false, cancelable, landscape, null, onItemClick);
-    }
-    
-    @Override
-    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, boolean landscape, ListDialog.OnItemClick onItemClick) {
-        showListDialog(title, CollectionUtil.stringToList(items), alignLeft, cancelable, landscape, null, onItemClick);
-    }
-    
-    @Override
     public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
-        showListDialog(title, items, alignLeft, cancelable, false, onDismissListener, onItemClick);
-    }
-    
-    @Override
-    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
         hideListDialog();
         listDialog = new ListDialog();
         listDialog
             .setOnItemClick(onItemClick)
             .setOnDismissListener(onDismissListener)
             .setAlignLeft(alignLeft)
-            .setLandscape(landscape)
+            .setLandscape(isLandscapeDialog())
             .setTitle(title)
             .setItems(items)
             .setCancelable(cancelable);
@@ -593,27 +507,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, boolean landscape, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, items, alignLeft, cancelable, landscape, null, onItemClick);
-    }
-    
-    @Override
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, boolean landscape, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, landscape, null, onItemClick);
-    }
-    
-    @Override
     public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, items, alignLeft, cancelable, false, onDismissListener, onItemClick);
-    }
-    
-    @Override
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, landscape, onDismissListener, onItemClick);
-    }
-    
-    @Override
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, boolean landscape, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
         hideBottomSheet();
         bsDialog = new BottomSheetDialog();
         bsDialog
@@ -621,7 +515,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             .setOnItemClick(onItemClick)
             .setOnDismissListener(onDismissListener)
             .setItems(items)
-            .setLandscape(landscape)
+            .setLandscape(isLandscapeDialog())
             .setAlignLeft(alignLeft);
         bsDialog.setCancelable(cancelable);
         bsDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
@@ -894,5 +788,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+    }
+    
+    @Override
+    public boolean isLandscapeDialog() {
+        return false;
     }
 }
