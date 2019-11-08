@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.6"
+        versionCode 8
+        versionName "1.7"
     }
 
     buildTypes {
@@ -76,7 +76,7 @@ dependencies {
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
-    api 'com.yanzhenjie.permission:x:2.0.1'
+    api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
     api 'com.hjq:toast:8.0'
 }

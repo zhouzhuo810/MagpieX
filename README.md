@@ -22,13 +22,13 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.0.6'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.7'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'androidx.appcompat:appcompat:1.0.2'
+    api 'androidx.appcompat:appcompat:1.1.0'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.0.0'
     //BaseRecyclerViewAdapterHelper
@@ -53,7 +53,7 @@ If you use this. That means you added dependencies below:
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
-    api 'com.yanzhenjie.permission:x:2.0.1'
+    api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
     api 'com.hjq:toast:8.0'
 
