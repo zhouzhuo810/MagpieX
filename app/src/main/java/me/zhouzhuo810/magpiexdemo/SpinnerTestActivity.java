@@ -2,23 +2,33 @@ package me.zhouzhuo810.magpiexdemo;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;
 import me.zhouzhuo810.magpiex.ui.adapter.LvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.MarkView;
 import me.zhouzhuo810.magpiex.ui.widget.SimpleSpinner;
+import me.zhouzhuo810.magpiex.ui.widget.SimpleStringSpinner;
 import me.zhouzhuo810.magpiex.ui.widget.TitleBar;
+import me.zhouzhuo810.magpiex.utils.ToastUtil;
+import me.zhouzhuo810.magpiexdemo.api.entity.SimpleSpinnerEntity;
 
 public class SpinnerTestActivity extends BaseActivity {
 
     private TitleBar titleBar;
     private Spinner spTest1;
     private Spinner spTest2;
-    private SimpleSpinner spCustom1;
-    private SimpleSpinner spCustom2;
+    private SimpleStringSpinner spCustom1;
+    private SimpleStringSpinner spCustom2;
+    private SimpleSpinner<SimpleSpinnerEntity> spCustom3;
 
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -37,6 +47,7 @@ public class SpinnerTestActivity extends BaseActivity {
         spTest2 = findViewById(R.id.sp_test_2);
         spCustom1 = findViewById(R.id.sp_custom_1);
         spCustom2 = findViewById(R.id.sp_custom_2);
+        spCustom3 = findViewById(R.id.sp_custom_3);
     }
 
     @Override
@@ -58,6 +69,8 @@ public class SpinnerTestActivity extends BaseActivity {
         spTest2.setAdapter(adapter);
         spTest2.setSelection(0);
 
+        
+        
         spCustom1.setLayoutId(R.layout.spinner_item)
                 .setDropdownLayoutId(R.layout.spinner_item)
                 .setTextViewId(R.id.tv_sp_content)
@@ -66,6 +79,26 @@ public class SpinnerTestActivity extends BaseActivity {
                 .setDropdownLayoutId(R.layout.spinner_item)
                 .setTextViewId(R.id.tv_sp_content)
                 .setItems(workFraq);
+        
+        List<SimpleSpinnerEntity> list = new ArrayList<>();
+        list.add(new SimpleSpinnerEntity("1", "test1"));
+        list.add(new SimpleSpinnerEntity("2", "test2"));
+        list.add(new SimpleSpinnerEntity("3", "test3"));
+        spCustom3.setLayoutId(R.layout.spinner_item)
+                .setDropdownLayoutId(R.layout.spinner_item)
+                .setTextViewId(R.id.tv_sp_content)
+                .setOnSimpleSpinnerItemSelectedListener(new SimpleSpinner.OnSimpleSpinnerItemSelectedListener<SimpleSpinnerEntity>() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id, SimpleSpinnerEntity data) {
+                        ToastUtil.showToast(data.getSpItemName());
+                    }
+    
+                    @Override
+                    public void onNothingSelected(AdapterView parent) {
+        
+                    }
+                })
+                .setItems(list);
     }
 
     @Override

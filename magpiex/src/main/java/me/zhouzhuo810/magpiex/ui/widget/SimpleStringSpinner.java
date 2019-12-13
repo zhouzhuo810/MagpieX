@@ -11,58 +11,57 @@ import java.util.List;
 
 import androidx.appcompat.widget.AppCompatSpinner;
 import me.zhouzhuo810.magpiex.ui.adapter.LvBaseAdapter;
-import me.zhouzhuo810.magpiex.ui.widget.intef.ISpinnerData;
 
-public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
+public class SimpleStringSpinner extends AppCompatSpinner {
     
     private int mLayoutId;
     private int mDropdownLayoutId;
     private int mTextViewId;
     
-    private List<T> items;
-    private OnSimpleSpinnerItemSelectedListener<T> mOnSimpleSpinnerItemSelectedListener;
+    private List<String> items;
+    private OnSimpleStringSpinnerItemSelectedListener mOnSimpleSpinnerItemSelectedListener;
     
-    public SimpleSpinner(Context context) {
+    public SimpleStringSpinner(Context context) {
         super(context);
     }
     
-    public SimpleSpinner(Context context, int mode) {
+    public SimpleStringSpinner(Context context, int mode) {
         super(context, mode);
     }
     
-    public SimpleSpinner(Context context, AttributeSet attrs) {
+    public SimpleStringSpinner(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
     
-    public SimpleSpinner(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SimpleStringSpinner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     
-    public SimpleSpinner(Context context, AttributeSet attrs, int defStyleAttr, int mode) {
+    public SimpleStringSpinner(Context context, AttributeSet attrs, int defStyleAttr, int mode) {
         super(context, attrs, defStyleAttr, mode);
     }
     
-    public SimpleSpinner(Context context, AttributeSet attrs, int defStyleAttr, int mode, Resources.Theme popupTheme) {
+    public SimpleStringSpinner(Context context, AttributeSet attrs, int defStyleAttr, int mode, Resources.Theme popupTheme) {
         super(context, attrs, defStyleAttr, mode, popupTheme);
     }
     
-    public SimpleSpinner<T> setLayoutId(int mLayoutId) {
+    public SimpleStringSpinner setLayoutId(int mLayoutId) {
         this.mLayoutId = mLayoutId;
         return this;
     }
     
-    public SimpleSpinner<T> setDropdownLayoutId(int mDropdownLayoutId) {
+    public SimpleStringSpinner setDropdownLayoutId(int mDropdownLayoutId) {
         this.mDropdownLayoutId = mDropdownLayoutId;
         return this;
     }
     
-    public SimpleSpinner<T> setTextViewId(int mTextViewId) {
+    public SimpleStringSpinner setTextViewId(int mTextViewId) {
         this.mTextViewId = mTextViewId;
         return this;
     }
     
     
-    public SimpleSpinner<T> setOnSimpleSpinnerItemSelectedListener(OnSimpleSpinnerItemSelectedListener<T> onSimpleSpinnerItemSelectedListener) {
+    public SimpleStringSpinner setOnSimpleStringSpinnerItemSelectedListener(OnSimpleStringSpinnerItemSelectedListener<String> onSimpleSpinnerItemSelectedListener) {
         mOnSimpleSpinnerItemSelectedListener = onSimpleSpinnerItemSelectedListener;
         if (mOnSimpleSpinnerItemSelectedListener != null) {
             setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -84,7 +83,7 @@ public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
         return this;
     }
     
-    public interface OnSimpleSpinnerItemSelectedListener<T> {
+    public interface OnSimpleStringSpinnerItemSelectedListener<T> {
         
         void onItemSelected(AdapterView<?> parent, View view, int position, long id, T data);
         
@@ -94,9 +93,9 @@ public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
     /**
      * 设置数据
      */
-    public void setItems(List<T> items) {
+    public void setItems(List<String> items) {
         this.items = items;
-        SimpleSpinnerAdapter<T> adapter = new SimpleSpinnerAdapter<>(getContext(), this.items);
+        SimpleSpinnerAdapter adapter = new SimpleSpinnerAdapter(getContext(), this.items);
         adapter.setDropdownLayoutId(mDropdownLayoutId);
         setAdapter(adapter);
     }
@@ -104,16 +103,16 @@ public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
     /**
      * 设置数据
      */
-    public void setItems(T[] items) {
+    public void setItems(String[] items) {
         this.items = Arrays.asList(items);
-        SimpleSpinnerAdapter<T> adapter = new SimpleSpinnerAdapter<>(getContext(), this.items);
+        SimpleSpinnerAdapter adapter = new SimpleSpinnerAdapter(getContext(), this.items);
         adapter.setDropdownLayoutId(mDropdownLayoutId);
         setAdapter(adapter);
     }
     
-    private class SimpleSpinnerAdapter<K extends ISpinnerData> extends LvBaseAdapter<K> {
+    private class SimpleSpinnerAdapter extends LvBaseAdapter<String> {
         
-        public SimpleSpinnerAdapter(Context context, List<K> data) {
+        public SimpleSpinnerAdapter(Context context, List<String> data) {
             super(context, data);
         }
         
@@ -123,17 +122,17 @@ public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
         }
         
         @Override
-        protected void fillDropDownData(ViewHolder holder, K item, int position) {
+        protected void fillDropDownData(ViewHolder holder, String item, int position) {
             super.fillDropDownData(holder, item, position);
             if (mTextViewId == 0) {
                 throw new RuntimeException("Please invoke the method SimpleSpinner#setTextViewId().");
             }
-            holder.setText(mTextViewId, item.getSpItemName());
+            holder.setText(mTextViewId, item);
         }
         
         @Override
-        protected void fillData(ViewHolder holder, K item, int position) {
-            holder.setText(mTextViewId, item.getSpItemName());
+        protected void fillData(ViewHolder holder, String item, int position) {
+            holder.setText(mTextViewId, item);
         }
     }
 }

@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.0.7'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -30,7 +30,7 @@ If you use this. That means you added dependencies below:
     //v7
     api 'androidx.appcompat:appcompat:1.1.0'
     //RecyclerView
-    api 'androidx.recyclerview:recyclerview:1.0.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
@@ -39,7 +39,7 @@ If you use this. That means you added dependencies below:
     api 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.8"
+    api "io.reactivex.rxjava2:rxjava:2.2.10"
     //RxAndroid2
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //Retrofit2
@@ -311,6 +311,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.0.8 (Published)
+
+- 2019/12/13 改造SimpleSpinner；
 
 > 1.0.6 (Published)
 

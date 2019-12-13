@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 8
-        versionName "1.7"
+        versionCode 9
+        versionName "1.8"
     }
 
     buildTypes {
@@ -53,7 +53,7 @@ dependencies {
     //v7
     api 'androidx.appcompat:appcompat:1.1.0'
     //RecyclerView
-    api 'androidx.recyclerview:recyclerview:1.0.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
@@ -62,7 +62,7 @@ dependencies {
     api 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.8"
+    api "io.reactivex.rxjava2:rxjava:2.2.10"
     //RxAndroid2
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //Retrofit2

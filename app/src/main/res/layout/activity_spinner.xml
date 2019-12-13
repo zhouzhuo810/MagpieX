@@ -47,7 +47,7 @@
         android:overlapAnchor="false"
         android:spinnerMode="dropdown" />
 
-    <me.zhouzhuo810.magpiex.ui.widget.SimpleSpinner
+    <me.zhouzhuo810.magpiex.ui.widget.SimpleStringSpinner
         android:id="@+id/sp_custom_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         android:overlapAnchor="false"
         android:spinnerMode="dropdown" />
 
-    <me.zhouzhuo810.magpiex.ui.widget.SimpleSpinner
+    <me.zhouzhuo810.magpiex.ui.widget.SimpleStringSpinner
         android:id="@+id/sp_custom_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,4 +66,14 @@
         android:layout_marginTop="10px"
         android:overlapAnchor="false"
         android:spinnerMode="dialog" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.SimpleSpinner
+        android:id="@+id/sp_custom_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown" />
 </LinearLayout>

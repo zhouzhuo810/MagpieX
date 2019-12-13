@@ -19,10 +19,10 @@
         <!--设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图.-->
         <meta-data
             android:name="design_width"
-            android:value="1920"/>
+            android:value="1080"/>
         <meta-data
             android:name="design_height"
-            android:value="1080"/>
+            android:value="1920"/>
         <!--设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了-->
         <!--
             宽         	    240 	320 	480 	720     1080 	1440
@@ -47,7 +47,7 @@
             android:name=".MainActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -60,31 +60,31 @@
         <activity
             android:name=".DialogActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TitleActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DownloadActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TabActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PagerActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ToolsActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SpinnerTestActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
     </application>
 
 
