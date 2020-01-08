@@ -36,8 +36,8 @@ If you use this. That means you added dependencies below:
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //Glide
-    api 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    api 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     //RxJava2
     api "io.reactivex.rxjava2:rxjava:2.2.10"
     //RxAndroid2
@@ -49,14 +49,13 @@ If you use this. That means you added dependencies below:
     //Retrofit2+Gson
     api 'com.squareup.retrofit2:converter-gson:2.5.0'
     //OkHttp打印请求数据
-    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.12.0'
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
     api 'com.hjq:toast:8.0'
-
 ```
 
 #### Screen Adapter
