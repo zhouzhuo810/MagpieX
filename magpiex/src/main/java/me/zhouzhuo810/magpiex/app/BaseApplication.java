@@ -46,6 +46,8 @@ public abstract class BaseApplication extends Application {
         } else {
             super.attachBaseContext(base);
         }
+    
+        BaseUtil.init(base, true);
     }
     
     @Override

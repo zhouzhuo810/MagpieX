@@ -46,6 +46,7 @@ public class TitleBar extends RelativeLayout {
     private LinearLayout llRight;
 
     private OnTitleClick titleClick;
+    private OnLeftClickListener onLeftClickListener;
     private MarkView mvLeft;
     private RelativeLayout rlRight;
     private MarkView mvRight;
@@ -59,6 +60,10 @@ public class TitleBar extends RelativeLayout {
         void onRightClick(ImageView ivRight, MarkView mv, TextView tvRight);
     }
 
+    public interface OnLeftClickListener {
+        void onClick(ImageView ivLeft, MarkView mv, TextView tvLeft);
+    }
+    
     /**
      * 设置标题、左边、右边按钮点击事件
      *
@@ -68,7 +73,26 @@ public class TitleBar extends RelativeLayout {
         this.titleClick = titleClick;
         initEvent();
     }
-
+    
+    /**
+     * 只设置左边按钮点击事件
+     * @param onLeftClickListener onLeftClickListener
+     */
+    public void setOnLeftClickListener(OnLeftClickListener onLeftClickListener) {
+        this.onLeftClickListener = onLeftClickListener;
+        llLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (titleClick != null) {
+                    titleClick.onLeftClick(ivLeft, mvLeft, tvLeft);
+                }
+                if (TitleBar.this.onLeftClickListener != null) {
+                    TitleBar.this.onLeftClickListener.onClick(ivLeft, mvLeft, tvLeft);
+                }
+            }
+        });
+    }
+    
     public TitleBar(Context context) {
         super(context);
         init(context, null);

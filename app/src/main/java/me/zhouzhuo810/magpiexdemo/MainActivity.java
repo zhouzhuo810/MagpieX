@@ -20,6 +20,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.RxHelper;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.ToastUtil;
 import me.zhouzhuo810.magpiexdemo.api.Api;
 import me.zhouzhuo810.magpiexdemo.api.entity.GetWeatherList;
@@ -37,6 +38,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button btnDownload;
     private Button btnPager;
     private Button btnTab;
+    private Button tvMap;
+    private Button tvScrollList;
+    private Button tvScrollGrid;
     private Button btnTools;
     private Button btnSpinner;
 
@@ -61,6 +65,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnTab = (Button) findViewById(R.id.btn_tab);
         etCity = (EditText) findViewById(R.id.et_city);
         btnGo = (Button) findViewById(R.id.btn_go);
+        tvMap = findViewById(R.id.tv_map);
+        tvScrollList = findViewById(R.id.tv_scroll_list);
+        tvScrollGrid = findViewById(R.id.tv_scroll_grid);
         btnTools = (Button) findViewById(R.id.btn_tools);
         btnSpinner = (Button) findViewById(R.id.btn_spinner);
         tvResult = (TextView) findViewById(R.id.tv_result);
@@ -76,6 +83,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Log.e(TAG, "排序前：\n" + list.toString());
         CollectionUtil.sort(list, false);
         Log.e(TAG, "排序后：\n" + list.toString());
+        
+//        ToastUtil.showToast(SimpleUtil.getString(R.string.bottom_sheet_dialog));
 
     }
 
@@ -100,6 +109,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnTools.setOnClickListener(this);
 
         btnSpinner.setOnClickListener(this);
+    
+        tvMap.setOnClickListener(this);
+    
+        tvScrollList.setOnClickListener(this);
+    
+        tvScrollGrid.setOnClickListener(this);
     }
 
     @Override
@@ -185,6 +200,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_spinner:
                 startAct(SpinnerTestActivity.class);
+                break;
+            case R.id.tv_map:
+                startAct(MapActivity.class);
+                break;
+            case R.id.tv_scroll_grid:
+                startAct(ScrollGridActivity.class);
+                break;
+            case R.id.tv_scroll_list:
+                startAct(ScrollListActivity.class);
                 break;
         }
     }

@@ -22,15 +22,15 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.0.8'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.0.9'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.appcompat:appcompat:1.2.0-alpha01'
     //RecyclerView
-    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
@@ -142,6 +142,7 @@ public class MyApplication extends Application {
         } else {
             super.attachBaseContext(base);
         }
+        BaseUtil.init(base, true);
     }
 
     @Override
@@ -311,6 +312,11 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.0.9 (Published)
+
+- 2020/1/8 集成TV的滚动控件和地图控件；
+- 2020/1/8 解决Application Context获取字符串时国际化无效问题；
 
 > 1.0.8 (Published)
 

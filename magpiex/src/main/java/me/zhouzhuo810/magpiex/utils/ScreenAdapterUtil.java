@@ -27,7 +27,7 @@ public class ScreenAdapterUtil {
      *
      * @param context 上下文
      */
-    public static void init(Application context) {
+    public static void init(Context context) {
         init(context, new ScreenAdapterUtil.IProvider() {
             @Override
             public AbsLoadViewHelper provide(Context context, boolean scaleWidthAndHeight, int designWidth, int designHeight, int designDpi, float fontSize, String unit) {

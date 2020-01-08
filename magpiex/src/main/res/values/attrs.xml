@@ -112,6 +112,18 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ScrollGridRecyclerView">
+        <attr name="sgr_scrollEnable" format="boolean"/>
+        <attr name="sgr_spanCount" format="integer"/>
+        <attr name="sgr_scrollSpeed" format="integer"/>
+        <attr name="sgr_topBottomDelay" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="ScrollListRecyclerView">
+        <attr name="slr_scrollEnable" format="boolean"/>
+        <attr name="slr_scrollSpeed" format="integer"/>
+        <attr name="slr_topBottomDelay" format="integer"/>
+    </declare-styleable>
+
     <attr name="x_item_text_color" format="color"/>
     <attr name="x_item_bg_color" format="color"/>
     <attr name="x_item_bg_color_21" format="color"/>

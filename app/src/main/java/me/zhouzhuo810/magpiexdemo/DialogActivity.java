@@ -227,6 +227,6 @@ public class DialogActivity extends BaseActivity {
     
     @Override
     public boolean isLandscapeDialog() {
-        return true;
+        return false;
     }
 }

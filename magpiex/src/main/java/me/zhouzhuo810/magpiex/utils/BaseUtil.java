@@ -13,7 +13,7 @@ import android.net.Uri;
  */
 public class BaseUtil {
     
-    private static Application mApp;
+    private static Context mApp;
     
     private BaseUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -24,13 +24,22 @@ public class BaseUtil {
      *
      * @param app Application
      */
-    public static void init(Application app) {
+    public static void init(Context app, boolean isAttachBase) {
         mApp = app;
         //顺便初始化屏幕适配工具类
-        ScreenAdapterUtil.init(mApp);
+        if (isAttachBase) {
+            return;
+        }
+        ScreenAdapterUtil.init(app);
     }
     
-    public static Application getApp() {
+    public static void init(Context app) {
+        mApp = app;
+        //顺便初始化屏幕适配工具类
+        ScreenAdapterUtil.init(app);
+    }
+    
+    public static Context getApp() {
         checkContextNull();
         return mApp;
     }

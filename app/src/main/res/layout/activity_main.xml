@@ -26,115 +26,163 @@
         app:ttb_textSizeTitle="@dimen/base_title_text_size"
         app:ttb_titleText="@string/app_name" />
 
-    <Button
-        android:id="@+id/btn_language"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/language_setting"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-    <Button
-        android:id="@+id/btn_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/dialog_text"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-
-    <Button
-        android:id="@+id/btn_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/title_text_1"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-
-    <Button
-        android:id="@+id/btn_download"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/download_text"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-    <Button
-        android:id="@+id/btn_pager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/pager_text"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-    <Button
-        android:id="@+id/btn_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/tab_text"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-    <Button
-        android:id="@+id/btn_tools"
-        android:layout_width="540px"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/tools_text"
-        android:background="@color/colorBlack80"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-    <Button
-        android:id="@+id/btn_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10px"
-        android:text="@string/spinner_text"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="20px"
-        android:paddingRight="20px">
-
-        <EditText
-            android:id="@+id/et_city"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/colorAccent"
-            android:textSize="40px" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_go"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
-            android:text="@string/search_text"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40px" />
+            <Button
+                android:id="@+id/btn_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/language_setting"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/dialog_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40px" />
+            <Button
+                android:id="@+id/btn_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/title_text_1"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:id="@+id/btn_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/download_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:id="@+id/btn_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/pager_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:id="@+id/btn_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/tab_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:id="@+id/btn_tools"
+                android:layout_width="540px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:background="@color/colorBlack80"
+                android:text="@string/tools_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:id="@+id/btn_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@string/spinner_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+
+            <Button
+                android:id="@+id/tv_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"
+                android:text="地图" />
+
+            <Button
+                android:id="@+id/tv_scroll_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"
+                android:text="滚动列表" />
+
+            <Button
+                android:id="@+id/tv_scroll_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"
+                android:text="滚动格子" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:paddingRight="20px">
+
+                <EditText
+                    android:id="@+id/et_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="40px" />
+
+                <Button
+                    android:id="@+id/btn_go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:text="@string/search_text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="40px" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
