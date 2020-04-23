@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.1.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.1.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -96,8 +96,9 @@ If you use this. That means you added dependencies below:
 
 ```java
 
-//方式1 (推荐)
 public class MyApplication extends BaseApplication {
+
+    private Map<Integer, Locale> mSupportLanguages;
 
     @Override
     public void onCreate() {
@@ -106,55 +107,26 @@ public class MyApplication extends BaseApplication {
         //初始化8.0通知渠道
         NoticeUtil.initNoticeChannel("您的渠道id", "您的渠道名称", "您的渠道描述", 0, true);
     }
-}
 
-Or
 
-//方式2
-public class MyApplication extends Application {
-  
     @Override
-    public void onCreate() {
-        super.onCreate();
-  
-        BaseUtil.init(this);
+    public boolean shouldSupportMultiLanguage() {
+        return true;
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        if (shouldSupportMultiLanguage()) {
-            int language = SpUtil.getInt(base, Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
-            switch (language) {
-                case LanguageUtil.SIMPLE_CHINESE:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.SIMPLIFIED_CHINESE));
-                    break;
-                case LanguageUtil.TRADITIONAL_CHINESE:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.TRADITIONAL_CHINESE));
-                    break;
-                case LanguageUtil.ENGLISH:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.ENGLISH));
-                    break;
-                case LanguageUtil.VI:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.VI));
-                    break;
-            }
-        } else {
-            super.attachBaseContext(base);
+    public Map<Integer, Locale> getSupportLanguages() {
+        if (mSupportLanguages == null) {
+            mSupportLanguages = new HashMap<>();
+            mSupportLanguages.put(MyCons.LANGUAGE_CH_SIMPLE, Locale.SIMPLIFIED_CHINESE);
+            mSupportLanguages.put(MyCons.LANGUAGE_CH_COMPLEX, Locale.TRADITIONAL_CHINESE);
+            mSupportLanguages.put(MyCons.LANGUAGE_EN, Locale.ENGLISH);
+            mSupportLanguages.put(MyCons.LANGUAGE_VI, new Locale("vi"));
         }
-        BaseUtil.init(base, true);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (shouldSupportMultiLanguage()) {
-            LanguageUtil.updateApplicationLanguage();
-        }
-        SimpleUtil.resetScale(this);
+        return mSupportLanguages;
     }
 
 }
-```
 
 - You must use The `MagpieTheme` Or `MagpieTheme.NoActionBar` Theme.
 
@@ -311,6 +283,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.1.1 (Published)
+
+- 2020/4/23 ；多语言支持自定义语言；修复若干bug；
 
 > 1.1.0 (Published)
 

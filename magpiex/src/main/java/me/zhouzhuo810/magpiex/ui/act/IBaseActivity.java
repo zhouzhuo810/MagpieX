@@ -52,12 +52,6 @@ public interface IBaseActivity {
      * {@link LanguageUtil#setGlobalLanguage(int)}
      * 方法设置默认语言
      * <p>
-     * 参数值请参考：
-     * <ul>
-     * <li>{@link LanguageUtil#SIMPLE_CHINESE}</li>
-     * <li>{@link LanguageUtil#TRADITIONAL_CHINESE }</li>
-     * <li>{@link LanguageUtil#ENGLISH }</li>
-     * </ul>
      */
     public boolean shouldSupportMultiLanguage();
     

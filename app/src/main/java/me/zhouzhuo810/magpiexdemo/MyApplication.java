@@ -23,6 +23,7 @@ public class MyApplication extends BaseApplication {
     
     private static final String CRASH_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()
         + File.separator + "Magpie" + File.separator + "Log";
+    
     private Map<Integer, Locale> mMap;
     
     @Override
