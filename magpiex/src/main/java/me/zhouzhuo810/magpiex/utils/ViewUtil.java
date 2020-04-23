@@ -3,7 +3,9 @@ package me.zhouzhuo810.magpiex.utils;
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.os.Build;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,15 +17,13 @@ import androidx.annotation.ColorRes;
 public class ViewUtil {
     private static final String METHOD_GET_MAX_WIDTH = "getMaxWidth";
     private static final String METHOD_GET_MAX_HEIGHT = "getMaxHeight";
-    private static final String METHOD_GET_MIN_WIDTH = "getMinWidth";
-    private static final String METHOD_GET_MIN_HEIGHT = "getMinHeight";
     private static final String METHOD_SET_MAX_WIDTH = "setMaxWidth";
     private static final String METHOD_SET_MAX_HEIGHT = "setMaxHeight";
-
+    
     private ViewUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
     /**
      * TextView设置下划线
      *
@@ -31,13 +31,21 @@ public class ViewUtil {
      * @param use      true:使用下划线;false:清除下划线;
      */
     public static void setTextUnderline(TextView textView, boolean use) {
+        if (textView == null) {
+            return;
+        }
         if (use) {
-            textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            String text = textView.getText().toString();
+            SpannableString sb = new SpannableString(text);
+            UnderlineSpan underlineSpan = new UnderlineSpan();
+            sb.setSpan(underlineSpan, 0, sb.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            textView.setText(sb);
         } else {
-            textView.setPaintFlags(textView.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+            String text = textView.getText().toString();
+            textView.setText(text);
         }
     }
-
+    
     /**
      * TextView设置删除线
      *
@@ -65,7 +73,7 @@ public class ViewUtil {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * 设置TextView文字颜色
      *
@@ -75,47 +83,39 @@ public class ViewUtil {
     public static void setTextColorRes(TextView textView, @ColorRes int resId) {
         textView.setTextColor(BaseUtil.getApp().getResources().getColor(resId));
     }
-
+    
     public static void setMaxWidth(View view, int value) {
         setValue(view, METHOD_SET_MAX_WIDTH, value);
     }
-
+    
     public static void setMaxHeight(View view, int value) {
         setValue(view, METHOD_SET_MAX_HEIGHT, value);
     }
-
+    
     public static void setMinWidth(View view, int value) {
         view.setMinimumWidth(value);
     }
-
+    
     public static void setMinHeight(View view, int value) {
         view.setMinimumHeight(value);
     }
-
+    
     public static int getMaxWidth(View view) {
         return getValue(view, METHOD_GET_MAX_WIDTH);
     }
-
+    
     public static int getMaxHeight(View view) {
         return getValue(view, METHOD_GET_MAX_HEIGHT);
     }
-
+    
     public static int getMinWidth(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            return view.getMinimumWidth();
-        } else {
-            return getValue(view, METHOD_GET_MIN_WIDTH);
-        }
+        return view.getMinimumWidth();
     }
-
+    
     public static int getMinHeight(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            return view.getMinimumHeight();
-        } else {
-            return getValue(view, METHOD_GET_MIN_HEIGHT);
-        }
+        return view.getMinimumHeight();
     }
-
+    
     private static int getValue(View view, String getterMethodName) {
         int result = 0;
         try {
@@ -126,7 +126,7 @@ public class ViewUtil {
         }
         return result;
     }
-
+    
     private static void setValue(View view, String setterMethodName, int value) {
         try {
             Method setValueMethod = view.getClass().getMethod(setterMethodName);

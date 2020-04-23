@@ -118,10 +118,18 @@ public class UriUtil {
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                    Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-                
-                return getDataColumn(context, contentUri, null, null);
+                if (id.contains(":")) {
+                    final String[] split = id.split(":");
+                    final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.parseLong(split[1]));
+    
+                    return getDataColumn(context, contentUri, null, null);
+                } else {
+                    final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.parseLong(id));
+    
+                    return getDataColumn(context, contentUri, null, null);
+                }
             }
             // MediaProvider
             else if (isMediaDocument(uri)) {
