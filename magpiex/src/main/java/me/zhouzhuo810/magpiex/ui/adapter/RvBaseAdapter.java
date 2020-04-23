@@ -27,6 +27,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import me.zhouzhuo810.magpiex.utils.ColorUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 
 /**
@@ -153,6 +154,15 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             return this;
         }
         
+        /**
+         * 设置TextView的字体大小
+         */
+        public ViewHolder setTextSize(int viewId, int unit, float textSize) {
+            TextView tv = getView(viewId);
+            tv.setTextSize(unit, textSize);
+            return this;
+        }
+        
         public ViewHolder setImageResource(int viewId, int resId) {
             ImageView view = getView(viewId);
             view.setImageResource(resId);
@@ -162,6 +172,15 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         public ViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
             ImageView view = getView(viewId);
             view.setImageBitmap(bitmap);
+            return this;
+        }
+        
+        /**
+         * 设置ImageView的图标颜色（适用于纯色图标）
+         */
+        public ViewHolder setImageColor(int viewId, int color) {
+            ImageView view = getView(viewId);
+            ColorUtil.setIconColor(view, color);
             return this;
         }
         
