@@ -278,7 +278,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
-        showOneBtnProgressDialog(title, msg, getString(R.string.magpie_ok_text), cancelable, onDismissListener, onProgressListener);
+        showOneBtnProgressDialog(title, msg, getOkText(), cancelable, onDismissListener, onProgressListener);
     }
     
     @Override
@@ -303,7 +303,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showOneBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
-        showOneBtnTextDialog(title, msg, getString(R.string.magpie_ok_text), true, null, onOneBtnTextClick);
+        showOneBtnTextDialog(title, msg, getOkText(), true, null, onOneBtnTextClick);
     }
     
     @Override
@@ -349,11 +349,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
+        showTwoBtnTextDialog(title, msg, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnClick);
     }
     
     public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, msgCenter, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
+        showTwoBtnTextDialog(title, msg, msgCenter, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnClick);
     }
     
     @Override
@@ -391,18 +391,19 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+        showTwoBtnEditDialog(title, msg, hint, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
     }
     
     @Override
     public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, inputType, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+        showTwoBtnEditDialog(title, msg, hint, inputType, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
     }
     
     @Override
     public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
     }
+    
     @Override
     public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         hideTwoBtnEditDialog();
@@ -589,20 +590,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         //如果支持多语言，才给切换语言
         if (shouldSupportMultiLanguage()) {
             int language = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
-            switch (language) {
-                case LanguageUtil.SIMPLE_CHINESE:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.SIMPLIFIED_CHINESE));
-                    break;
-                case LanguageUtil.TRADITIONAL_CHINESE:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.TRADITIONAL_CHINESE));
-                    break;
-                case LanguageUtil.ENGLISH:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.ENGLISH));
-                    break;
-                case LanguageUtil.VI:
-                    super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.VI));
-                    break;
-            }
+            super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, language));
         } else {
             super.attachBaseContext(newBase);
         }
@@ -786,6 +774,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+    }
+    
+    @Override
+    public String getOkText() {
+        return getString(R.string.magpie_ok_text);
+    }
+    
+    @Override
+    public String getCancelText() {
+        return getString(R.string.magpie_cancel_text);
     }
     
     @Override

@@ -6,55 +6,47 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
-import androidx.annotation.IntDef;
 import androidx.annotation.RequiresApi;
+import me.zhouzhuo810.magpiex.app.BaseApplication;
 import me.zhouzhuo810.magpiex.cons.Cons;
 
 public class LanguageUtil {
     
     
-    public static final int SIMPLE_CHINESE = 0;
-    public static final int TRADITIONAL_CHINESE = 1;
-    public static final int ENGLISH = 2;
-    public static final int VI = 3;
+    private static BaseApplication mApp;
     
-    @IntDef({SIMPLE_CHINESE, TRADITIONAL_CHINESE, ENGLISH, VI})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface LANGUAGE {
+    public static void init(BaseApplication app) {
+        if (app.getSupportLanguages() == null && app.shouldSupportMultiLanguage()) {
+            throw new UnsupportedOperationException("Please invoke method #getSupportLanguages() in your application.");
+        }
+        mApp = app;
     }
-    
-    
-    private static Map<String, Locale> mSupportLanguages = new HashMap<String, Locale>(4) {{
-        put(Cons.SIMPLIFIED_CHINESE, Locale.SIMPLIFIED_CHINESE);
-        put(Cons.TRADITIONAL_CHINESE, Locale.TRADITIONAL_CHINESE);
-        put(Cons.ENGLISH, Locale.ENGLISH);
-        put(Cons.VI, new Locale("vi"));
-    }};
-    
     
     /**
      * 设置应用全局语言
      *
      * @param language 语言
-     *                 <ul>
-     *                 <li>{@link LanguageUtil#SIMPLE_CHINESE}</li>
-     *                 <li>{@link LanguageUtil#TRADITIONAL_CHINESE }</li>
-     *                 <li>{@link LanguageUtil#ENGLISH }</li>
-     *                 <li>{@link LanguageUtil#VI }</li>
-     *                 </ul>
      */
-    public static void setGlobalLanguage(@LanguageUtil.LANGUAGE int language) {
+    public static void setGlobalLanguage(int language) {
+        if (mApp == null) {
+            return;
+        }
         SpUtil.putInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, language);
         updateApplicationLanguage();
+    }
+    
+    
+    /**
+     * 获取当前设置语言的int值
+     *
+     * @param defaultValue 默认语言
+     */
+    public static int getCurrentLanguage(int defaultValue) {
+        return SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, defaultValue);
     }
     
     public static void updateApplicationLanguage() {
@@ -62,21 +54,7 @@ public class LanguageUtil {
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
         int code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
-        Locale locale = null;
-        switch (code) {
-            case LanguageUtil.SIMPLE_CHINESE:
-                locale = LanguageUtil.getSupportLanguage(Cons.SIMPLIFIED_CHINESE);
-                break;
-            case LanguageUtil.TRADITIONAL_CHINESE:
-                locale = LanguageUtil.getSupportLanguage(Cons.TRADITIONAL_CHINESE);
-                break;
-            case LanguageUtil.ENGLISH:
-                locale = LanguageUtil.getSupportLanguage(Cons.ENGLISH);
-                break;
-            case LanguageUtil.VI:
-                locale = LanguageUtil.getSupportLanguage(Cons.VI);
-                break;
-        }
+        Locale locale = LanguageUtil.getSupportLanguage(code);
         if (locale == null) {
             return;
         }
@@ -96,21 +74,7 @@ public class LanguageUtil {
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
         int code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
-        Locale locale = null;
-        switch (code) {
-            case LanguageUtil.SIMPLE_CHINESE:
-                locale = LanguageUtil.getSupportLanguage(Cons.SIMPLIFIED_CHINESE);
-                break;
-            case LanguageUtil.TRADITIONAL_CHINESE:
-                locale = LanguageUtil.getSupportLanguage(Cons.TRADITIONAL_CHINESE);
-                break;
-            case LanguageUtil.ENGLISH:
-                locale = LanguageUtil.getSupportLanguage(Cons.ENGLISH);
-                break;
-            case LanguageUtil.VI:
-                locale = LanguageUtil.getSupportLanguage(Cons.VI);
-                break;
-        }
+        Locale locale = LanguageUtil.getSupportLanguage(code);
         if (locale == null) {
             return;
         }
@@ -125,7 +89,7 @@ public class LanguageUtil {
         resources.updateConfiguration(config, dm);
     }
     
-    public static void applyLanguage(Context context, String newLanguage) {
+    public static void applyLanguage(Context context, int newLanguage) {
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         Locale locale = getSupportLanguage(newLanguage);
@@ -142,7 +106,7 @@ public class LanguageUtil {
         }
     }
     
-    public static Context attachBaseContext(Context context, String language) {
+    public static Context attachBaseContext(Context context, int language) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return createConfigurationResources(context, language);
         } else {
@@ -152,12 +116,12 @@ public class LanguageUtil {
     }
     
     @TargetApi(Build.VERSION_CODES.N)
-    private static Context createConfigurationResources(Context context, String language) {
+    private static Context createConfigurationResources(Context context, int language) {
         Resources resources = context.getResources();
         final Configuration configuration = resources.getConfiguration();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         Locale locale;
-        if (TextUtils.isEmpty(language)) {//如果没有指定语言使用系统首选语言
+        if (language < 0) {//如果没有指定语言使用系统首选语言
             locale = getSystemPreferredLanguage();
         } else {//指定了语言使用指定语言，没有则使用首选语言
             locale = getSupportLanguage(language);
@@ -169,36 +133,16 @@ public class LanguageUtil {
     }
     
     /**
-     * 获取当前系统语言,用于接口请求参数，系统需要的中文标识为zh，而此处返回的是ch，因为接口定的是ch
-     *
-     * @return 只返回中（ch）英（en）文，如果不是英文，其它情况一律中文
-     */
-    public static String getLanguage() {
-        Locale locale;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            locale = BaseUtil.getApp().getResources().getConfiguration().getLocales().get(0);
-        } else {
-            locale = BaseUtil.getApp().getResources().getConfiguration().locale;
-        }
-        
-        if (locale == null) {
-            return "ch";
-        } else if (locale.getLanguage().equals(new Locale("en").getLanguage())) {
-            return "en";
-        } else {
-            return "ch";
-        }
-    }
-    
-    
-    /**
      * 是否支持此语言
      *
      * @param language language
      * @return true:支持 false:不支持
      */
-    public static boolean isSupportLanguage(String language) {
-        return mSupportLanguages.containsKey(language);
+    public static boolean isSupportLanguage(int language) {
+        if (mApp == null) {
+            return false;
+        }
+        return mApp.getSupportLanguages().containsKey(language);
     }
     
     /**
@@ -208,9 +152,9 @@ public class LanguageUtil {
      * @return 支持返回支持语言，不支持返回系统首选语言
      */
     @TargetApi(Build.VERSION_CODES.N)
-    public static Locale getSupportLanguage(String language) {
+    public static Locale getSupportLanguage(int language) {
         if (isSupportLanguage(language)) {
-            return mSupportLanguages.get(language);
+            return mApp.getSupportLanguages().get(language);
         }
         return getSystemPreferredLanguage();
     }

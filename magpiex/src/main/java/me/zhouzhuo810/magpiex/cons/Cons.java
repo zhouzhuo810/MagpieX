@@ -18,15 +18,6 @@ public final class Cons {
     public @interface Unit {
     }
 
-    // 简体中文
-    public static final String SIMPLIFIED_CHINESE = "zh";
-    // 英文
-    public static final String ENGLISH = "en";
-    //越南文
-    public static final String VI = "vi";
-    // 繁体中文
-    public static final String TRADITIONAL_CHINESE = "zh-hant";
-
     public static final String SP_KEY_OF_CHOOSED_LANGUAGE = "sp_key_of_choosed_language";
     public static final String SP_KEY_OF_TAKE_PHOTO_CAMERA_PIC_PATH = "sp_key_of_take_photo_camera_pic_path";
     

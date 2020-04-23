@@ -1,12 +1,13 @@
 package me.zhouzhuo810.magpiex.utils;
 
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+
+import me.zhouzhuo810.magpiex.app.BaseApplication;
 
 /**
  * 基础工具类
@@ -32,7 +33,7 @@ public class BaseUtil {
         }
         ScreenAdapterUtil.init(app);
     }
-    
+
     public static void init(Context app) {
         mApp = app;
         //顺便初始化屏幕适配工具类

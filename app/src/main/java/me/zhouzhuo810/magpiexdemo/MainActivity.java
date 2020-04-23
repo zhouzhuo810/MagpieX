@@ -2,7 +2,6 @@ package me.zhouzhuo810.magpiexdemo;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;
@@ -20,15 +20,15 @@ import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.RxHelper;
-import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.ToastUtil;
 import me.zhouzhuo810.magpiexdemo.api.Api;
 import me.zhouzhuo810.magpiexdemo.api.entity.GetWeatherList;
+import me.zhouzhuo810.magpiexdemo.constants.MyCons;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-
+    
     private static final String TAG = MainActivity.class.getSimpleName();
-
+    
     private EditText etCity;
     private Button btnGo;
     private TextView tvResult;
@@ -43,18 +43,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button tvScrollGrid;
     private Button btnTools;
     private Button btnSpinner;
-
+    
     @Override
     public boolean shouldSupportMultiLanguage() {
         return true;
     }
-
+    
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
     }
-
-
+    
+    
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         btnLanguage = findViewById(R.id.btn_language);
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnSpinner = (Button) findViewById(R.id.btn_spinner);
         tvResult = (TextView) findViewById(R.id.tv_result);
     }
-
+    
     @Override
     public void initData() {
         List<String> list = new ArrayList<>();
@@ -84,74 +84,74 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         CollectionUtil.sort(list, false);
         Log.e(TAG, "排序后：\n" + list.toString());
         
-//        ToastUtil.showToast(SimpleUtil.getString(R.string.bottom_sheet_dialog));
-
+        //        ToastUtil.showToast(SimpleUtil.getString(R.string.bottom_sheet_dialog));
+        
     }
-
-
+    
+    
     @Override
     public void initEvent() {
-
+        
         btnLanguage.setOnClickListener(this);
-
+        
         btnDialog.setOnClickListener(this);
-
+        
         btnTitle.setOnClickListener(this);
-
+        
         btnDownload.setOnClickListener(this);
-
+        
         btnGo.setOnClickListener(this);
-
+        
         btnPager.setOnClickListener(this);
-
+        
         btnTab.setOnClickListener(this);
-
+        
         btnTools.setOnClickListener(this);
-
+        
         btnSpinner.setOnClickListener(this);
-    
+        
         tvMap.setOnClickListener(this);
-    
+        
         tvScrollList.setOnClickListener(this);
-    
+        
         tvScrollGrid.setOnClickListener(this);
     }
-
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_go:
                 String city = etCity.getText().toString().trim();
                 Api.getApi()
-                        .getWeatherList(city)
-                        .compose(RxHelper.<GetWeatherList>io_main())
-                        .subscribe(new Observer<GetWeatherList>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onNext(GetWeatherList getWeatherList) {
-                                tvResult.setText(getWeatherList.toString());
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                ToastUtil.showShortToast(e.getMessage());
-                            }
-
-                            @Override
-                            public void onComplete() {
-
-                            }
-                        });
-
+                    .getWeatherList(city)
+                    .compose(RxHelper.<GetWeatherList>io_main())
+                    .subscribe(new Observer<GetWeatherList>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                        
+                        }
+                        
+                        @Override
+                        public void onNext(GetWeatherList getWeatherList) {
+                            tvResult.setText(getWeatherList.toString());
+                        }
+                        
+                        @Override
+                        public void onError(Throwable e) {
+                            ToastUtil.showShortToast(e.getMessage());
+                        }
+                        
+                        @Override
+                        public void onComplete() {
+                        
+                        }
+                    });
+                
                 break;
             case R.id.btn_language:
                 String[] items = getResources().getStringArray(R.array.language);
@@ -160,19 +160,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     public void onItemClick(int position, String item) {
                         switch (position) {
                             case 0:
-                                LanguageUtil.setGlobalLanguage(LanguageUtil.SIMPLE_CHINESE);
+                                LanguageUtil.setGlobalLanguage(MyCons.LANGUAGE_CH_SIMPLE);
                                 recreate();
                                 break;
                             case 1:
-                                LanguageUtil.setGlobalLanguage(LanguageUtil.TRADITIONAL_CHINESE);
+                                LanguageUtil.setGlobalLanguage(MyCons.LANGUAGE_CH_COMPLEX);
                                 recreate();
                                 break;
                             case 2:
-                                LanguageUtil.setGlobalLanguage(LanguageUtil.ENGLISH);
+                                LanguageUtil.setGlobalLanguage(MyCons.LANGUAGE_EN);
                                 recreate();
                                 break;
                             case 3:
-                                LanguageUtil.setGlobalLanguage(LanguageUtil.VI);
+                                LanguageUtil.setGlobalLanguage(MyCons.LANGUAGE_VI);
                                 recreate();
                                 break;
                         }
@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startAct(TabActivity.class);
                 break;
             case R.id.btn_tools:
-//                ToastUtil.showShortToast(SimpleUtil.getString(R.string.back_text));
+                //                ToastUtil.showShortToast(SimpleUtil.getString(R.string.back_text));
                 startAct(ToolsActivity.class);
                 break;
             case R.id.btn_spinner:

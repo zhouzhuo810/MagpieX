@@ -38,6 +38,7 @@ public class ShareUtil {
         }
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(intent);
@@ -60,6 +61,7 @@ public class ShareUtil {
         intent.setComponent(comp);
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(intent);
@@ -82,6 +84,7 @@ public class ShareUtil {
         }
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(intent);
@@ -97,6 +100,7 @@ public class ShareUtil {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(intent);
@@ -125,6 +129,7 @@ public class ShareUtil {
             uri = Uri.fromFile(file);
         }
         share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         share.setType("image/*");
         context.startActivity(Intent.createChooser(share, "发送"));
     }
@@ -146,6 +151,7 @@ public class ShareUtil {
         ComponentName component = new ComponentName("com.tencent.mobileqq", "com.tencent.mobileqq.activity.JumpActivity");
         share.setComponent(component);
         share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         share.setType("image/*");
         context.startActivity(Intent.createChooser(share, "发送"));
     }
@@ -173,6 +179,7 @@ public class ShareUtil {
             uri = Uri.fromFile(file);
         }
         share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         share.setType("image/*");
         context.startActivity(Intent.createChooser(share, "发送"));
     }
@@ -196,6 +203,7 @@ public class ShareUtil {
         ComponentName component = new ComponentName("com.tencent.tim", "com.tencent.mobileqq.activity.JumpActivity");
         share.setComponent(component);
         share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         share.setType("image/*");
         context.startActivity(Intent.createChooser(share, "发送"));
     }
@@ -211,6 +219,7 @@ public class ShareUtil {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, content);
+        sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         sendIntent.setType("text/plain");
         try {
             sendIntent.setClassName("com.tencent.mobileqq", "com.tencent.mobileqq.activity.JumpActivity");
@@ -218,7 +227,7 @@ public class ShareUtil {
             if (chooserIntent == null) {
                 return;
             }
-            context.startActivity(sendIntent);
+            context.startActivity(chooserIntent);
         } catch (Exception e) {
             context.startActivity(sendIntent);
         }
@@ -235,6 +244,7 @@ public class ShareUtil {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, content);
+        sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         sendIntent.setType("text/plain");
         try {
             sendIntent.setClassName("com.tencent.tim", "com.tencent.mobileqq.activity.JumpActivity");
@@ -242,7 +252,7 @@ public class ShareUtil {
             if (chooserIntent == null) {
                 return;
             }
-            context.startActivity(sendIntent);
+            context.startActivity(chooserIntent);
         } catch (Exception e) {
             context.startActivity(sendIntent);
         }
@@ -259,6 +269,7 @@ public class ShareUtil {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/plain");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Intent.EXTRA_TEXT, content);
         try {
             intent.setClassName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
@@ -266,7 +277,7 @@ public class ShareUtil {
             if (chooserIntent == null) {
                 return;
             }
-            context.startActivity(intent);
+            context.startActivity(chooserIntent);
         } catch (Exception e) {
             context.startActivity(intent);
         }
@@ -280,12 +291,13 @@ public class ShareUtil {
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, content);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             Intent chooserIntent = Intent.createChooser(intent, chooserTitle == null ? "选择分享途径" : chooserTitle);
             if (chooserIntent == null) {
                 return;
             }
-            context.startActivity(intent);
+            context.startActivity(chooserIntent);
         } catch (Exception e) {
             context.startActivity(intent);
         }

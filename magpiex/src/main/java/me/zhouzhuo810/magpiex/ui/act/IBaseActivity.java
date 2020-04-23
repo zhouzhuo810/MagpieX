@@ -292,4 +292,16 @@ public interface IBaseActivity {
      * @return 是否
      */
     public boolean isLandscapeDialog();
+    
+    /**
+     * 返回对话框确定文字
+     * @return String
+     */
+    public String getOkText();
+    
+    /**
+     * 返回对话框取消文字
+     * @return String
+     */
+    public String getCancelText();
 }
