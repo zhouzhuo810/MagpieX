@@ -169,6 +169,10 @@ public class SpUtil {
         return getShared().getString(key, null);
     }
     
+    public static String getString(Context context, String key) {
+        return getShared(context).getString(key, null);
+    }
+    
     /**
      * 获取string类型键值对
      *

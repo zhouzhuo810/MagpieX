@@ -31,7 +31,7 @@ public class LanguageUtil {
      *
      * @param language 语言
      */
-    public static void setGlobalLanguage(int language) {
+    public static void setGlobalLanguage(Integer language) {
         if (mApp == null) {
             return;
         }
@@ -41,11 +41,11 @@ public class LanguageUtil {
     
     
     /**
-     * 获取当前设置语言的int值
+     * 获取当前设置语言的Integer值
      *
      * @param defaultValue 默认语言
      */
-    public static int getCurrentLanguage(int defaultValue) {
+    public static Integer getCurrentLanguage(Integer defaultValue) {
         return SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, defaultValue);
     }
     
@@ -53,7 +53,7 @@ public class LanguageUtil {
         Resources resources = BaseUtil.getApp().getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
-        int code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+        Integer code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
         Locale locale = LanguageUtil.getSupportLanguage(code);
         if (locale == null) {
             return;
@@ -73,7 +73,7 @@ public class LanguageUtil {
         Resources resources = context.getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
-        int code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+        Integer code = SpUtil.getInt(context, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
         Locale locale = LanguageUtil.getSupportLanguage(code);
         if (locale == null) {
             return;
@@ -89,7 +89,7 @@ public class LanguageUtil {
         resources.updateConfiguration(config, dm);
     }
     
-    public static void applyLanguage(Context context, int newLanguage) {
+    public static void applyLanguage(Context context, Integer newLanguage) {
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         Locale locale = getSupportLanguage(newLanguage);
@@ -106,7 +106,7 @@ public class LanguageUtil {
         }
     }
     
-    public static Context attachBaseContext(Context context, int language) {
+    public static Context attachBaseContext(Context context, Integer language) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return createConfigurationResources(context, language);
         } else {
@@ -116,7 +116,7 @@ public class LanguageUtil {
     }
     
     @TargetApi(Build.VERSION_CODES.N)
-    private static Context createConfigurationResources(Context context, int language) {
+    private static Context createConfigurationResources(Context context, Integer language) {
         Resources resources = context.getResources();
         final Configuration configuration = resources.getConfiguration();
         final DisplayMetrics dm = resources.getDisplayMetrics();
@@ -138,7 +138,7 @@ public class LanguageUtil {
      * @param language language
      * @return true:支持 false:不支持
      */
-    public static boolean isSupportLanguage(int language) {
+    public static boolean isSupportLanguage(Integer language) {
         if (mApp == null) {
             return false;
         }
@@ -152,7 +152,7 @@ public class LanguageUtil {
      * @return 支持返回支持语言，不支持返回系统首选语言
      */
     @TargetApi(Build.VERSION_CODES.N)
-    public static Locale getSupportLanguage(int language) {
+    public static Locale getSupportLanguage(Integer language) {
         if (isSupportLanguage(language)) {
             return mApp.getSupportLanguages().get(language);
         }

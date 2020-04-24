@@ -22,15 +22,15 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.1.1'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.1.2'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'androidx.appcompat:appcompat:1.2.0-alpha01'
+    api 'androidx.appcompat:appcompat:1.1.0'
     //RecyclerView
-    api 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus

@@ -7,7 +7,6 @@ import android.view.Gravity;
 
 import com.hjq.toast.ToastUtils;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -22,10 +21,10 @@ public abstract class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        
-        BaseUtil.init(this);
-        
+    
         LanguageUtil.init(this);
+    
+        BaseUtil.init(this);
         
         ToastUtils.init(this);
         ToastUtils.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, SimpleUtil.getScaledValue(200));
@@ -34,7 +33,7 @@ public abstract class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         if (shouldSupportMultiLanguage()) {
-            int language = SpUtil.getInt(base, Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+            int language = SpUtil.getInt(base, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
             super.attachBaseContext(LanguageUtil.attachBaseContext(base, language));
         } else {
             super.attachBaseContext(base);
@@ -62,7 +61,7 @@ public abstract class BaseApplication extends Application {
      * 如果返回true，表示您的app需要支持多语言
      * <p>
      * 可以使用{@link Application#onCreate()}中调用
-     * {@link LanguageUtil#setGlobalLanguage(int)}
+     * {@link LanguageUtil#setGlobalLanguage(Integer)}
      * 方法设置默认语言
      * <p>
      */
@@ -70,6 +69,7 @@ public abstract class BaseApplication extends Application {
     
     /**
      * 获取Code对应的语言
+     *
      * @return 自定义Code
      */
     public abstract Map<Integer, Locale> getSupportLanguages();

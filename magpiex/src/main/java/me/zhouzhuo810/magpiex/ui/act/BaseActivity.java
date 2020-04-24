@@ -589,7 +589,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     protected void attachBaseContext(Context newBase) {
         //如果支持多语言，才给切换语言
         if (shouldSupportMultiLanguage()) {
-            int language = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+            Integer language = SpUtil.getInt(newBase, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
             super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, language));
         } else {
             super.attachBaseContext(newBase);

@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 12
-        versionName "2.1"
+        versionCode 13
+        versionName "2.2"
     }
 
     buildTypes {
@@ -51,9 +51,9 @@ artifacts {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //v7
-    api 'androidx.appcompat:appcompat:1.2.0-alpha02'
+    api 'androidx.appcompat:appcompat:1.1.0'
     //RecyclerView
-    api 'androidx.recyclerview:recyclerview:1.2.0-alpha02'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus

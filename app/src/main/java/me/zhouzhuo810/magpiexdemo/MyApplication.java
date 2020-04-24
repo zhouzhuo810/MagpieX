@@ -11,6 +11,7 @@ import java.util.Map;
 
 import androidx.core.app.ActivityCompat;
 import me.zhouzhuo810.magpiex.app.BaseApplication;
+import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.CrashUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
@@ -26,14 +27,23 @@ public class MyApplication extends BaseApplication {
     
     private Map<Integer, Locale> mMap;
     
+    public static Map<Integer, Locale> mSupportLanguages = new HashMap<Integer, Locale>(4) {{
+        put(MyCons.LANGUAGE_CH_SIMPLE, Locale.SIMPLIFIED_CHINESE);
+        put(MyCons.LANGUAGE_CH_COMPLEX, Locale.TRADITIONAL_CHINESE);
+        put(MyCons.LANGUAGE_EN, Locale.ENGLISH);
+        put(MyCons.LANGUAGE_VI, new Locale("vi"));
+    }};
+    
+    
+    
     @Override
     public void onCreate() {
         super.onCreate();
         
         instance = this;
-        
-        NoticeUtil.initNoticeChannel("1", getString(R.string.app_name), "Magpie通知渠道", 0, true);
     
+        NoticeUtil.initNoticeChannel("1", getString(R.string.app_name), "Magpie通知渠道", 0, true);
+        
         //Crash Handler
         //        initCrash();
     }
@@ -50,14 +60,15 @@ public class MyApplication extends BaseApplication {
     
     @Override
     public Map<Integer, Locale> getSupportLanguages() {
-        if (mMap == null) {
-            mMap = new HashMap<>();
-            mMap.put(MyCons.LANGUAGE_CH_SIMPLE, Locale.SIMPLIFIED_CHINESE);
-            mMap.put(MyCons.LANGUAGE_CH_COMPLEX, Locale.TRADITIONAL_CHINESE);
-            mMap.put(MyCons.LANGUAGE_EN, Locale.ENGLISH);
-            mMap.put(MyCons.LANGUAGE_VI, new Locale("vi"));
-        }
-        return mMap;
+//        if (mMap == null) {
+//            mMap = new HashMap<>();
+//            mMap.put(MyCons.LANGUAGE_CH_SIMPLE, Locale.SIMPLIFIED_CHINESE);
+//            mMap.put(MyCons.LANGUAGE_CH_COMPLEX, Locale.TRADITIONAL_CHINESE);
+//            mMap.put(MyCons.LANGUAGE_EN, Locale.ENGLISH);
+//            mMap.put(MyCons.LANGUAGE_VI, new Locale("vi"));
+//        }
+//        return mMap;
+        return mSupportLanguages;
     }
     
     private void initCrash() {
