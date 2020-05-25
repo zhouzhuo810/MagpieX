@@ -165,11 +165,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         return false;
     }
     
-    
-    protected void onInvisible() {
-    
-    }
-    
     @Override
     public void lazyLoadData() {
     
@@ -647,7 +642,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
                 lazyLoadData();
             }
         } else {
-            onInVisible();
+            onInvisible();
         }
     }
     
@@ -674,7 +669,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     /**
      * 界面不可见
      */
-    protected void onInVisible() {
+    protected void onInvisible() {
     
     }
     
@@ -684,7 +679,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
      * 但是记得参数更新后再调用super.refreshDataIfNeeded(params)
      */
     @CallSuper
-    final public void refreshDataIfNeeded(Object... params) {
+    public void refreshDataIfNeeded(Object... params) {
         if (mViewActualVisible) {
             lazyLoadData();
         } else {

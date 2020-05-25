@@ -32,12 +32,6 @@ public interface IBaseActivity {
      */
     public boolean useSysFinishAnim();
     
-    /**
-     * 获取布局的id
-     *
-     * @return layoutId
-     */
-    public int getLayoutId();
     
     /**
      * 是否支持多语言
@@ -64,6 +58,13 @@ public interface IBaseActivity {
     public View getDecorView();
     
     public void initView(@Nullable Bundle savedInstanceState);
+    
+    /**
+     * 获取布局的id
+     *
+     * @return layoutId
+     */
+    public int getLayoutId();
     
     public void initData();
     
