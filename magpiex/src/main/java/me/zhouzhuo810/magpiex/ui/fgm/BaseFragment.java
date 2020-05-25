@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,8 +166,10 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         return false;
     }
     
-    @Override
-    public void lazyLoadData() {
+    /**
+     * 延迟加载数据
+     */
+    protected void lazyLoadData() {
     
     }
     
@@ -646,15 +649,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
     }
     
-    /**
-     * 按下返回键
-     *
-     * @return {@code true} 消费此次返回事件，{@code false} 不消费此次返回事件
-     */
-    public boolean onBackPressed() {
-        return false;
-    }
-    
     public boolean isDestroy() {
         return mDestroy;
     }
@@ -684,6 +678,71 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             lazyLoadData();
         } else {
             mNeedLazeLoaded = true;
+        }
+    }
+    
+    public boolean isViewActualVisible() {
+        return mViewActualVisible;
+    }
+    
+    /**
+     * 按下返回键
+     *
+     * @return {@code true} 消费此次返回事件，{@code false} 不消费此次返回事件
+     */
+    public boolean onBackPressed() {
+        return doKeyEvent(0, -1, null);
+    }
+    
+    /**
+     * 按键监听
+     *
+     * @return {@code true}处理此次事件，{@code false}不处理
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return doKeyEvent(1, keyCode, event);
+    }
+    
+    /**
+     * 按键分发
+     */
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        return doKeyEvent(2, -1, event);
+    }
+    
+    private boolean doKeyEvent(int type, int keyCode, KeyEvent event) {
+        FragmentManager manager = getChildFragmentManager();
+        List<Fragment> fragments = manager.getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment instanceof BaseFragment) {
+                if (type == 0 && ((BaseFragment) fragment).onBackPressed()) {
+                    return true;
+                } else if (type == 1 && ((BaseFragment) fragment).onKeyDown(keyCode, event)) {
+                    return true;
+                } else if (type == 2 && ((BaseFragment) fragment).dispatchKeyEvent(event)) {
+                    return true;
+                }
+            }
+        }
+        
+        int backStackEntryCount = manager.getBackStackEntryCount();
+        if (backStackEntryCount == 0) {
+            return false;
+        }
+        
+        FragmentManager.BackStackEntry backStackEntryAt
+            = manager.getBackStackEntryAt(backStackEntryCount - 1);
+        Fragment fragment = manager.findFragmentByTag(backStackEntryAt.getName());
+        if (fragment instanceof BaseFragment) {
+            if (type == 0 && ((BaseFragment) fragment).onBackPressed()) {
+                return true;
+            } else if (type == 1 && ((BaseFragment) fragment).onKeyDown(keyCode, event)) {
+                return true;
+            } else {
+                return type == 2 && ((BaseFragment) fragment).dispatchKeyEvent(event);
+            }
+        } else {
+            return false;
         }
     }
     

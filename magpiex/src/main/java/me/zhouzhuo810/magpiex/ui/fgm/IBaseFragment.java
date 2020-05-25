@@ -35,14 +35,6 @@ public interface IBaseFragment {
     
     public void initData();
     
-    /**
-     * 延迟加载数据，数据处理，接口请求等均可放在此方法中执行
-     */
-    public void lazyLoadData();
-    
-    /**
-     * 是否需要调用{@link #lazyLoadData()}
-     */
     public boolean isNeedLazyLoad();
     
     public void initEvent();

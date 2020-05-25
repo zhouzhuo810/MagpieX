@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.1.4'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.1.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -284,6 +284,7 @@ it supports:
 
 ### Update Logs
 
+> 1.1.5 (Published)
 > 1.1.4 (Published)
 > 1.1.3 (Published)
 
