@@ -15,10 +15,12 @@ import android.widget.ImageView;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpiex.R;
@@ -34,9 +36,38 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     protected View rootView;
-    protected boolean isVisible;
-    protected long mCallLazyLoadCount;
-    protected boolean mNeedLazeLoaded = true;
+    
+    /**
+     * 当前界面是否结合ViewPager使用
+     */
+    private boolean mCombineViewPager;
+    
+    /**
+     * 通常是FragmentPagerAdapter中调用{@link Fragment#setUserVisibleHint(boolean)}.
+     * 如果主动调用{@link Fragment#setUserVisibleHint(boolean)}，也会判定当前界面是结合ViewPager
+     * 使用，因此请自行处理好相应的界面展示隐藏逻辑
+     */
+    private boolean mVisibleToUser;
+    
+    /**
+     * 是否在onResume生命周期调用Visible方法
+     */
+    private boolean mOnResumeCallVisible;
+    
+    /**
+     * 是否在onResume生命周期调用Child Fragment的{@link Fragment#setUserVisibleHint(boolean)}
+     */
+    private boolean mOnResumeCallChildSetUserVisibleHint;
+    
+    private boolean mNeedLazeLoaded = true;
+    
+    private boolean mDestroy;
+    
+    /**
+     * 界面是否真的对于用户可见
+     */
+    private boolean mViewActualVisible;
+    
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,41 +140,29 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (isVisible && isVisible() && mCallLazyLoadCount == 0) {
-            // 界面第一次显示且未调用过数据懒加载方法
-            mCallLazyLoadCount++;
-            onVisible();
-        }
-    }
-    
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            // 只能表明界面可能初始化并显示
-            isVisible = true;
-            if (isVisible()) {
-                // 界面显示
-                mCallLazyLoadCount++;
-                onVisible();
+        if (mCombineViewPager) {
+            if (mVisibleToUser && mOnResumeCallVisible && isVisible()) {
+                viewVisibleToUser(true);
             }
-        } else if (isVisible) {
-            // 界面退出
-            isVisible = false;
-            onInvisible();
+        
+            if (mOnResumeCallChildSetUserVisibleHint) {
+                // 如果父Fragment是结合ViewPager使用，则
+                FragmentManager childFragmentManager = getChildFragmentManager();
+                List<Fragment> fragments = childFragmentManager.getFragments();
+                for (Fragment fragment : fragments) {
+                    fragment.setUserVisibleHint(mViewActualVisible);
+                }
+            }
+        } else if (isVisible()) {
+            viewVisibleToUser(true);
         }
+        
     }
     
     
     @Override
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
         return false;
-    }
-    
-    protected void onVisible() {
-        if (needLazyLoadData()) {
-            lazyLoadData();
-        }
     }
     
     
@@ -528,30 +547,149 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         return getChildFragmentManager().findFragmentByTag(tag);
     }
     
-    /**
-     * 判断是否需要懒加载数据，此方法只会允许调用一次懒加载，如果需要界面每次重绘时都加载数据，覆写该方法，一直返回true即可
-     *
-     * @return {@code true} 需要懒加载，则方法{@link #lazyLoadData()}将被调用
-     * {@code false} 不需要懒加载
-     */
-    private boolean needLazyLoadData() {
-        final boolean needLoad = mNeedLazeLoaded;
-        if (mNeedLazeLoaded) {
-            mNeedLazeLoaded = false;
-        }
-        return needLoad;
-    }
     
     public boolean isNeedLazyLoad() {
         return mNeedLazeLoaded;
     }
     
-    public long getCallLazyLoadCount() {
-        return mCallLazyLoadCount;
+    @Override
+    public void onStop() {
+        super.onStop();
+        viewVisibleToUser(false);
     }
     
-    public void clearCallLazyLoadCount() {
-        mCallLazyLoadCount = 0;
+    /**
+     * 设置界面是否可见于用户，通常是FragmentPagerAdapter中调用{@link Fragment#setUserVisibleHint(boolean)}.
+     * 如果主动调用{@link Fragment#setUserVisibleHint(boolean)}，也会判定当前界面是结合ViewPager
+     * 使用，因此请自行处理好相应的界面展示隐藏逻辑。不建议手动调用
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        mCombineViewPager = true;
+        if (isVisibleToUser) {
+            // 只能表明界面可能初始化并显示
+            mVisibleToUser = true;
+            if (isVisible()) {
+                // 界面显示
+                mOnResumeCallVisible = false;
+                viewVisibleToUser(true);
+            } else {
+                // 此时界面还未创建好，生命周期并未执行，结合ViewPager使用时，此方法会先于生命周期执行
+                mOnResumeCallVisible = true;
+            }
+        } else {
+            mVisibleToUser = false;
+            viewVisibleToUser(false);
+        }
+        
+        if (getHost() == null) {
+            mOnResumeCallChildSetUserVisibleHint = true;
+            return;
+        }
+        
+        mOnResumeCallChildSetUserVisibleHint = false;
+        FragmentManager childFragmentManager = getChildFragmentManager();
+        List<Fragment> fragments = childFragmentManager.getFragments();
+        for (Fragment fragment : fragments) {
+            fragment.setUserVisibleHint(isVisibleToUser);
+        }
+    }
+    
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mDestroy = true;
+    }
+    
+    @CallSuper
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        viewVisibleToUser(!hidden);
+        // 当onHiddenChanged被调用时，往往只有被隐藏的Fragment执行这个方法，对于Fragment的ChildFragmentManager管理的Fragment
+        // 往往没有任何变化，这时如果我们想在子Fragment根据界面展示隐藏做一些逻辑就无法实现，而且当外层Fragment hidden时，子Fragment
+        // 调用isVisible()返回的还是true。因此执行以下逻辑，当上层Fragment hidden时，其管理的子Fragment同样执行相同的逻辑
+        FragmentManager childFragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = childFragmentManager.beginTransaction();
+        List<Fragment> fragments = childFragmentManager.getFragments();
+        for (Fragment fragment : fragments) {
+            boolean hidden2 = fragment.isHidden();
+            if (hidden == hidden2) {
+                continue;
+            }
+            
+            if (hidden) {
+                fragmentTransaction.hide(fragment);
+            } else {
+                fragmentTransaction.show(fragment);
+            }
+        }
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+    
+    /**
+     * 界面是否真实可见于用户
+     */
+    private void viewVisibleToUser(boolean visible) {
+        if (getHost() == null) {
+            return;
+        }
+        
+        if (mViewActualVisible == visible) {
+            return;
+        }
+        
+        mViewActualVisible = visible;
+        if (visible) {
+            onVisible();
+            if (mNeedLazeLoaded) {
+                mNeedLazeLoaded = false;
+                lazyLoadData();
+            }
+        } else {
+            onInVisible();
+        }
+    }
+    
+    /**
+     * 按下返回键
+     *
+     * @return {@code true} 消费此次返回事件，{@code false} 不消费此次返回事件
+     */
+    public boolean onBackPressed() {
+        return false;
+    }
+    
+    public boolean isDestroy() {
+        return mDestroy;
+    }
+    
+    /**
+     * 界面可见
+     */
+    protected void onVisible() {
+    
+    }
+    
+    /**
+     * 界面不可见
+     */
+    protected void onInVisible() {
+    
+    }
+    
+    /**
+     * 刷新数据，可在任何时机调用。如果调用时，界面并没有显示，或者压根就没有走生命周期。此时会标记为延迟加载，
+     * 在界面真正显示到界面时，会调用{@link #lazyLoadData()}。如果传参，子类覆盖该类处理参数保存相关操作，
+     * 但是记得参数更新后再调用super.refreshDataIfNeeded(params)
+     */
+    @CallSuper
+    final public void refreshDataIfNeeded(Object... params) {
+        if (mViewActualVisible) {
+            lazyLoadData();
+        } else {
+            mNeedLazeLoaded = true;
+        }
     }
     
     @Override

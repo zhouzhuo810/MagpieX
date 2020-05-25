@@ -36,7 +36,7 @@ public interface IBaseFragment {
     public void initData();
     
     /**
-     * 使用ViewPager+Fragment时使用此方法实现懒加载
+     * 延迟加载数据，数据处理，接口请求等均可放在此方法中执行
      */
     public void lazyLoadData();
     
