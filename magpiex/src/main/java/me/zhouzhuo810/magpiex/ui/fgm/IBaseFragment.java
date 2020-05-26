@@ -24,14 +24,15 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 
 public interface IBaseFragment {
     
-    /**
-     * 获取布局的id
-     */
-    public int getLayoutId();
     
     public <T extends View> T findViewById(@IdRes int id);
     
     public void initView(@Nullable Bundle savedInstanceState);
+    
+    /**
+     * 获取布局的id
+     */
+    public int getLayoutId();
     
     public void initData();
     

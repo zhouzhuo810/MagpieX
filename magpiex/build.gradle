@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 16
-        versionName "2.5"
+        versionCode 17
+        versionName "2.6"
     }
 
     buildTypes {
@@ -78,5 +78,5 @@ dependencies {
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
-    api 'com.hjq:toast:8.0'
+    api 'com.hjq:toast:8.2'
 }

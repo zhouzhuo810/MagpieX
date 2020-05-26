@@ -32,24 +32,6 @@ public interface IBaseActivity {
      */
     public boolean useSysFinishAnim();
     
-    
-    /**
-     * 是否支持多语言
-     *
-     * @return true/false, 默认返回false
-     * <p>
-     * 如果返回false，表示您的app不需要支持多语言；
-     * <p>
-     * 如果返回true，表示您的app需要支持多语言
-     * <p>
-     * 可以使用{@link Application#onCreate()}中调用
-     * {@link LanguageUtil#setGlobalLanguage(int)}
-     * 方法设置默认语言
-     * <p>
-     */
-    public boolean shouldSupportMultiLanguage();
-    
-    
     /**
      * 屏幕适配需要返回getWindow().getDecorView();
      *
@@ -69,6 +51,25 @@ public interface IBaseActivity {
     public void initData();
     
     public void initEvent();
+    
+    
+    
+    /**
+     * 是否支持多语言
+     *
+     * @return true/false, 默认返回false
+     * <p>
+     * 如果返回false，表示您的app不需要支持多语言；
+     * <p>
+     * 如果返回true，表示您的app需要支持多语言
+     * <p>
+     * 可以使用{@link Application#onCreate()}中调用
+     * {@link LanguageUtil#setGlobalLanguage(int)}
+     * 方法设置默认语言
+     * <p>
+     */
+    public boolean shouldSupportMultiLanguage();
+    
     
     /**
      * 判断是否调用initView、initData、initEvent方法。
