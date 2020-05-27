@@ -172,7 +172,6 @@ public class StatusBarUtil {
             window.setAttributes(lp);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -194,7 +193,6 @@ public class StatusBarUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

@@ -128,14 +128,33 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         rootView = inflater.inflate(getLayoutId(), container, false);
         //屏幕适配
         ScreenAdapterUtil.getInstance().loadView(rootView);
+        return rootView;
+    }
+    
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    
+        view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                if (isVisible()) {
+                    viewVisibleToUser(true);
+                }
+            }
+        
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                v.removeOnAttachStateChangeListener(this);
+                viewVisibleToUser(false);
+            }
+        });
         
         if (!shouldNotInvokeInitMethods(savedInstanceState)) {
             initView(savedInstanceState);
             initData();
             initEvent();
         }
-        
-        return rootView;
     }
     
     @Override
