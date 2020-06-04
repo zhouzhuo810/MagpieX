@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.1.8'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.1.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -284,7 +284,7 @@ it supports:
 
 ### Update Logs
 
-> 1.1.8 (Published)
+> 1.1.9 (Published)
 - 修改KeyboardUtil；
 
 > 1.1.7 (Published)
