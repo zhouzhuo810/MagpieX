@@ -1,5 +1,7 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import java.nio.charset.Charset;
+
 /**
  *
  * Created by zz on 2016/11/10.
@@ -96,5 +98,40 @@ public class ByteUtil {
             targets[i] = (byte) ((s >>> offset) & 0xff);
         }
         return targets;
+    }
+    
+    public static byte[] stringToBytes(String str, int strLen) {
+        if (strLen == 0) {
+            return null;
+        }
+        int length = str.length();
+        int size = length / strLen;
+        int left = length % strLen;
+        int start = 0;
+        byte[] newBytes = new byte[0];
+        for (int i = 0; i < size; i++) {
+            byte[] bytes = stringToBytes(str, start, strLen);
+            newBytes = appendBytes(newBytes, bytes);
+            start += strLen;
+        }
+        if (left > 0) {
+            byte[] bytes = stringToBytes(str, start, left);
+            newBytes = appendBytes(newBytes, bytes);
+        }
+        return newBytes;
+    }
+    
+    private static byte[] stringToBytes(String str, int start, int length) {
+        String substring = str.substring(start, start + length);
+        return substring.getBytes(Charset.forName("utf-8"));
+    }
+    
+    private static byte[] appendBytes(byte[] old, byte[] news) {
+        byte[] bytes = new byte[old.length + news.length];
+        if (old.length > 0) {
+            System.arraycopy(old, 0, bytes, 0, old.length);
+        }
+        System.arraycopy(news, 0, bytes, old.length, news.length);
+        return bytes;
     }
 }

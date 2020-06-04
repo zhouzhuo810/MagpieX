@@ -135,6 +135,15 @@ public class CopyUtil {
             return null;
         }
     }
-
+    
+    public static void clearClipBoard() {
+        try {
+            ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
+            if (cm != null) {
+                cm.setPrimaryClip(ClipData.newPlainText(null, ""));
+            }
+        } catch (Exception ignored) {
+        }
+    }
 
 }

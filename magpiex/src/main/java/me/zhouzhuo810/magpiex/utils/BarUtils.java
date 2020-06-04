@@ -13,6 +13,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.lang.reflect.Method;
 
@@ -726,5 +727,12 @@ public final class BarUtils {
         View decorView = window.getDecorView();
         int visibility = decorView.getSystemUiVisibility();
         return (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
+    }
+    
+    public static void statusBarTopMargin(Context context, View view) {
+        int statusBarHeight = StatusBarUtil.getStatusBarHeight(context);
+        RelativeLayout.MarginLayoutParams layoutParams = (RelativeLayout.MarginLayoutParams) view.getLayoutParams();
+        layoutParams.topMargin = statusBarHeight;
+        view.setLayoutParams(layoutParams);
     }
 }

@@ -191,7 +191,7 @@ public class UriUtil {
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            String saveToPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "ZzPaint" + File.separator + "images";
+            String saveToPath = context.getExternalFilesDir(null) + File.separator + "images";
             File dir = new File(saveToPath);
             if (!dir.exists()) {
                 dir.mkdirs();

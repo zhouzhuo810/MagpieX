@@ -7,17 +7,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 /**
  * 文件操作工具类
  */
 public class FileUtil {
-
+    
     private FileUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
     /**
      * 创建文件夹
      *
@@ -31,7 +32,7 @@ public class FileUtil {
         File dir = new File(dirPath);
         return dir.exists() || dir.mkdirs();
     }
-
+    
     /**
      * 文件是否存在
      *
@@ -42,12 +43,11 @@ public class FileUtil {
         File file = new File(filePath);
         return file.exists();
     }
-
+    
     /**
      * 删除文件
      *
      * @param filePath 文件路径
-     * @return
      */
     public static boolean deleteFile(String filePath) {
         if (filePath == null) {
@@ -56,12 +56,11 @@ public class FileUtil {
         File file = new File(filePath);
         return deleteFile(file);
     }
-
+    
     /**
      * 删除文件
      *
      * @param file 文件
-     * @return
      */
     public static boolean deleteFile(File file) {
         if (file == null) {
@@ -79,12 +78,12 @@ public class FileUtil {
             return file.exists() && file.delete();
         }
     }
-
-
+    
+    
     public static void saveFile(InputStream is, String dir, String fileName) {
         saveFile(is, dir + File.separator + fileName);
     }
-
+    
     public static void saveFile(InputStream is, String filePath) {
         byte[] buf = new byte[2048];
         int len;
@@ -108,8 +107,10 @@ public class FileUtil {
             e.printStackTrace();
         } finally {
             try {
-                if (is != null) is.close();
-                if (fos != null) fos.close();
+                if (is != null)
+                    is.close();
+                if (fos != null)
+                    fos.close();
             } catch (IOException e) {
                 Log.e("saveFile", e.getMessage());
             }
@@ -122,5 +123,27 @@ public class FileUtil {
     public static String generateFileName() {
         return UUID.randomUUID().toString();
     }
+    
+    
+    /**
+     * 保存字符串为文件
+     */
+    public static String saveStringAsFile(String content, String path, String filename) throws Exception {
+        // 创建目录
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        // 读取文件流并保持在指定路径
+        String mPath = path + File.separator + filename;
+        OutputStream outputStream = new FileOutputStream(mPath);
+        
+        byte[] buffer = ByteUtil.stringToBytes(content, 20 * 1000);
+        outputStream.write(buffer);
+        outputStream.flush();
+        outputStream.close();
+        return filename;
+    }
+    
     
 }

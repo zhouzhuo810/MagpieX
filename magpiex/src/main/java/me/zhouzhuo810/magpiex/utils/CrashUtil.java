@@ -40,7 +40,7 @@ public final class CrashUtil {
     private static String defaultDir;
     private static String dir;
     private static String versionName;
-    private static int versionCode;
+    private static long versionCode;
     
     private static final String FILE_SEP = System.getProperty("file.separator");
     @SuppressLint("SimpleDateFormat")
@@ -58,7 +58,7 @@ public final class CrashUtil {
                 .getPackageInfo(BaseUtil.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
-                versionCode = pi.versionCode;
+                versionCode = pi.getLongVersionCode();
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
