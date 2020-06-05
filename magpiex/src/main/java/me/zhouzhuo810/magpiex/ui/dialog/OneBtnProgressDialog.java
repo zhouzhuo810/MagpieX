@@ -125,6 +125,10 @@ public class OneBtnProgressDialog extends DialogFragment {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View rootView = inflater.inflate(landscape ? R.layout.layout_one_btn_progress_dialog_land : R.layout.layout_one_btn_progress_dialog, container, false);
+        if (savedInstanceState != null) {
+            dismiss();
+            return rootView;
+        }
         ScreenAdapterUtil.getInstance().loadView(rootView);
         ProgressBar pb = rootView.findViewById(R.id.pb);
         final TextView tvOk = rootView.findViewById(R.id.tv_right);

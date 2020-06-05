@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -147,6 +148,10 @@ public class ListDialog extends DialogFragment {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View rootView = inflater.inflate(landscape ? R.layout.layout_list_dialog_land : R.layout.layout_list_dialog, container, false);
+        if (savedInstanceState != null) {
+            dismiss();
+            return rootView;
+        }
         ScreenAdapterUtil.getInstance().loadView(rootView);
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         View line = rootView.findViewById(R.id.line_item);
@@ -176,8 +181,7 @@ public class ListDialog extends DialogFragment {
         rv.setAdapter(adapter);
         return rootView;
     }
-
-
+    
     @Override
     public void show(FragmentManager manager, String tag) {
         try {

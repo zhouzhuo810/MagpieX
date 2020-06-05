@@ -52,7 +52,8 @@ public final class KeyboardUtil {
     public static void showSoftInput2(final View view) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null) return;
+        if (imm == null)
+            return;
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -87,7 +88,8 @@ public final class KeyboardUtil {
     public static void showSoftInput(@NonNull final View view, final int flags) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null) return;
+        if (imm == null)
+            return;
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -142,7 +144,8 @@ public final class KeyboardUtil {
     public static void hideSoftInput(@NonNull final View view) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null) return;
+        if (imm == null)
+            return;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
     
@@ -168,7 +171,8 @@ public final class KeyboardUtil {
     public static void toggleSoftInput() {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null) return;
+        if (imm == null)
+            return;
         imm.toggleSoftInput(0, 0);
     }
     
@@ -240,15 +244,23 @@ public final class KeyboardUtil {
     /**
      * Unregister soft input changed listener.
      *
+     * @param activity The activity.
+     */
+    public static void unregisterSoftInputChangedListener(@NonNull final Activity activity) {
+        unregisterSoftInputChangedListener(activity.getWindow());
+    }
+    
+    
+    /**
+     * Unregister soft input changed listener.
+     *
      * @param window The window.
      */
     public static void unregisterSoftInputChangedListener(@NonNull final Window window) {
         final FrameLayout contentView = window.findViewById(android.R.id.content);
         Object tag = contentView.getTag(TAG_ON_GLOBAL_LAYOUT_LISTENER);
         if (tag instanceof OnGlobalLayoutListener) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                contentView.getViewTreeObserver().removeOnGlobalLayoutListener((OnGlobalLayoutListener) tag);
-            }
+            contentView.getViewTreeObserver().removeOnGlobalLayoutListener((OnGlobalLayoutListener) tag);
         }
     }
     
@@ -295,7 +307,8 @@ public final class KeyboardUtil {
     
     private static int getContentViewInvisibleHeight(final Window window) {
         final View contentView = window.findViewById(android.R.id.content);
-        if (contentView == null) return 0;
+        if (contentView == null)
+            return 0;
         final Rect outRect = new Rect();
         contentView.getWindowVisibleDisplayFrame(outRect);
         Log.d("KeyboardBaseUtil", "getContentViewInvisibleHeight: "
@@ -324,7 +337,8 @@ public final class KeyboardUtil {
     public static void fixSoftInputLeaks(@NonNull final Window window) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null) return;
+        if (imm == null)
+            return;
         String[] leakViews = new String[]{"mLastSrvView", "mCurRootView", "mServedView", "mNextServedView"};
         for (String leakView : leakViews) {
             try {
@@ -333,7 +347,8 @@ public final class KeyboardUtil {
                     leakViewField.setAccessible(true);
                 }
                 Object obj = leakViewField.get(imm);
-                if (!(obj instanceof View)) continue;
+                if (!(obj instanceof View))
+                    continue;
                 View view = (View) obj;
                 if (view.getRootView() == window.getDecorView().getRootView()) {
                     leakViewField.set(imm, null);

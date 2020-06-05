@@ -150,6 +150,10 @@ public class BottomSheetDialog extends DialogFragment {
             getDialog().getWindow().setGravity(Gravity.BOTTOM);
         }
         View rootView = inflater.inflate(landscape ? R.layout.layout_bottom_sheet_dialog_land : R.layout.layout_bottom_sheet_dialog, container, false);
+        if (savedInstanceState != null) {
+            dismiss();
+            return rootView;
+        }
         ScreenAdapterUtil.getInstance().loadView(rootView);
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         View line = rootView.findViewById(R.id.line_item);

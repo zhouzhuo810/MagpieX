@@ -148,6 +148,10 @@ public class LoadingDialog extends DialogFragment {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         mRootView = inflater.inflate(landscape ?  R.layout.layout_loading_dialog_land : R.layout.layout_loading_dialog, container, false);
+        if (savedInstanceState != null) {
+            dismiss();
+            return mRootView;
+        }
         ScreenAdapterUtil.getInstance().loadView(mRootView);
         ProgressBar pb = mRootView.findViewById(R.id.pb_loading);
         if (iosStyle) {

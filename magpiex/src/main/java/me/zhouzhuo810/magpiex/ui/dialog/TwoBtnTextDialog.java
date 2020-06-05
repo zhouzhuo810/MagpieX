@@ -158,6 +158,10 @@ public class TwoBtnTextDialog extends DialogFragment {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View rootView = inflater.inflate(landscape ? R.layout.layout_two_btn_text_dialog_land : R.layout.layout_two_btn_text_dialog, container, false);
+        if (savedInstanceState != null) {
+            dismiss();
+            return rootView;
+        }
         ScreenAdapterUtil.getInstance().loadView(rootView);
         final TextView tvLeft = rootView.findViewById(R.id.tv_left);
         final TextView tvRight = rootView.findViewById(R.id.tv_right);
