@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.2.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.2.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -284,7 +284,13 @@ it supports:
 
 ### Update Logs
 
-> 1.2.0 (Published)
+> 1.2.1 (Published)
+- 修改BaseFragment部分逻辑；
+- 修改文本对话框对齐方式规则；
+- 添加线程池工具类；
+
+
+>> 1.2.0 (Published)
 - 修改对话框回收逻辑；
 - 优化键盘工具类，和文件工具类；
 

@@ -337,14 +337,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         showTwoBtnTextDialog(title, msg, false, onTwoBtnClick);
     }
     
+    
     @Override
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         showTwoBtnTextDialog(title, msg, cancelable, null, onTwoBtnClick);
-    }
-    
-    @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, msgCenter, cancelable, null, onTwoBtnClick);
     }
     
     @Override
@@ -352,17 +348,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         showTwoBtnTextDialog(title, msg, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnClick);
     }
     
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, msgCenter, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnClick);
-    }
-    
     @Override
     public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, true, leftBtnString, rightBtnString, cancelable, onDismissListener, onTwoBtnClick);
-    }
-    
-    @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         hideTwoBtnTextDialog();
         twoBtnTextDialog = new TwoBtnTextDialog();
         twoBtnTextDialog.setTitle(title)
@@ -370,7 +357,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             .setLandscape(isLandscapeDialog())
             .setLeftText(leftBtnString)
             .setRightText(rightBtnString)
-            .setGravity(msgCenter ? Gravity.CENTER : Gravity.CENTER_VERTICAL | Gravity.START)
             .setOnDismissListener(onDismissListener)
             .setOnTwoBtnClickListener(onTwoBtnClick)
             .setCancelable(cancelable);

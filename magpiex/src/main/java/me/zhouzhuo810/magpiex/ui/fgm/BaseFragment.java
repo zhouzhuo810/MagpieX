@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.CallSuper;
@@ -34,8 +35,22 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 
+/**
+ * 此BaseFragment主要提供了界面展示隐藏，数据延迟加载方法，使用者无需关心界面显示和隐藏的时机，
+ * 只需要关心在界面显示时{@link #onVisible()},界面隐藏时{@link #onInvisible()}
+ * 以及初次加载需要延迟刷新的数据{@link #lazyLoadData()},该方法调用在{@link #onVisible()}之后。
+ * 而且提供了一个刷新数据的方法{@link #refreshDataIfNeeded(Object...)}，使用者无需关心需要刷新的界面是否显示，
+ * 只需要关心界面是否需要刷新，调用{@link #refreshDataIfNeeded(Object...)}后，如果当前界面对于用户可见，则立即
+ * 调用{@link #lazyLoadData()}，否则在界面下次展示后调用{@link #lazyLoadData()}
+ */
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
+    // 是否是结合ViewPager使用，在被回收时需要保存起来，否则下次恢复时，优先执行的是OnResume
+    // 而不是setUserVisibleHint,正常结合ViewPager是先调用setUserVisibleHint
+    private static final String COMBINE_VIEW_PAGER = "CombineViewPager";
+    // 记录当前Fragment hide时，管理的childFragment显示状态，在被回收后恢复时使用
+    private static final String PRE_SHOW_CHILD_FRAGMENT = "preShowChildFragment";
+    
     protected View rootView;
     
     /**
@@ -60,8 +75,14 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
      */
     private boolean mOnResumeCallChildSetUserVisibleHint;
     
+    /**
+     * 是否需要延迟加载
+     */
     private boolean mNeedLazeLoaded = true;
     
+    /**
+     * 当前界面是否被销毁
+     */
     private boolean mDestroy;
     
     /**
@@ -69,10 +90,16 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
      */
     private boolean mViewActualVisible;
     
+    /**
+     * 记录当前Fragment {@link #onHiddenChanged(boolean)}为true时，
+     * 此时ChildFragment显示的界面，用于下次恢复显示时使用
+     */
+    private ArrayList<String> mPreShowChildFragment = new ArrayList<>();
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onRestoredInstanceState(savedInstanceState);
         if (savedInstanceState != null) {
             boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
             if (getFragmentManager() != null) {
@@ -91,6 +118,26 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
+        outState.putBoolean(COMBINE_VIEW_PAGER, mCombineViewPager);
+        outState.putStringArrayList(PRE_SHOW_CHILD_FRAGMENT, mPreShowChildFragment);
+    }
+    
+    /**
+     * 恢复数据，在{@link #onCreate(Bundle)}方法中执行此方法，在系统onCreate之后。
+     * 注意，如果需要销毁数据，建议放在此方法中销毁老数据，因为调用{@link #onSaveInstanceState(Bundle)}
+     * 并不表示当前对象被回收，只是有可能进行回收，因此在此方法中判断savedInstanceState不为null时进行销毁更加稳妥
+     */
+    @CallSuper
+    public void onRestoredInstanceState(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+        
+        mCombineViewPager = savedInstanceState.getBoolean(COMBINE_VIEW_PAGER);
+        mPreShowChildFragment = savedInstanceState.getStringArrayList(PRE_SHOW_CHILD_FRAGMENT);
+        if (mPreShowChildFragment == null) {
+            mPreShowChildFragment = new ArrayList<>();
+        }
     }
     
     public static <T extends BaseFragment> T newInstance(Class<T> clazz, Bundle args) {
@@ -126,7 +173,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
-        //屏幕适配
+        // 屏幕适配
         ScreenAdapterUtil.getInstance().loadView(rootView);
         return rootView;
     }
@@ -134,15 +181,19 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    
+        
         view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
-                if (isVisible()) {
+                if (mCombineViewPager) {
+                    if (mVisibleToUser && isVisibleInner()) {
+                        viewVisibleToUser(true);
+                    }
+                } else if (isVisibleInner()) {
                     viewVisibleToUser(true);
                 }
             }
-        
+            
             @Override
             public void onViewDetachedFromWindow(View v) {
                 v.removeOnAttachStateChangeListener(this);
@@ -157,39 +208,40 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
     }
     
+    /**
+     * 判断界面是否可见，此方法与{@link #isVisible()}的区别在于不管{@link #getView()}的可见性如何，
+     * 只要其它条件为true，则认为界面可见，此举的目的是防止将{@link #getView()}设置为非{@link View#VISIBLE},
+     * 在Fragment周期方法走完，只是由于界面可见性为不可见，导致{@link #onVisible()}和{@link #lazyLoadData()}不调用。
+     * 此时可能更多的是希望调用{@link #onVisible()}和{@link #lazyLoadData()}，以此来处理{@link #getView()}设置
+     * 为可见或不可见以及其它一些业务逻辑
+     */
+    private boolean isVisibleInner() {
+        return isAdded() && !isHidden() && getView() != null && getView().getWindowToken() != null;
+    }
+    
     @Override
     public void onResume() {
         super.onResume();
         if (mCombineViewPager) {
-            if (mVisibleToUser && mOnResumeCallVisible && isVisible()) {
+            if (mVisibleToUser && mOnResumeCallVisible && isVisibleInner()) {
                 viewVisibleToUser(true);
             }
-        
+            
             if (mOnResumeCallChildSetUserVisibleHint) {
-                // 如果父Fragment是结合ViewPager使用，则
-                FragmentManager childFragmentManager = getChildFragmentManager();
-                List<Fragment> fragments = childFragmentManager.getFragments();
+                List<Fragment> fragments = getChildFragment();
                 for (Fragment fragment : fragments) {
                     fragment.setUserVisibleHint(mViewActualVisible);
                 }
             }
-        } else if (isVisible()) {
+        } else if (isVisibleInner()) {
             viewVisibleToUser(true);
         }
         
     }
     
-    
     @Override
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
         return false;
-    }
-    
-    /**
-     * 延迟加载数据
-     */
-    protected void lazyLoadData() {
-    
     }
     
     @Override
@@ -564,11 +616,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         return getChildFragmentManager().findFragmentByTag(tag);
     }
     
-    
-    public boolean isNeedLazyLoad() {
-        return mNeedLazeLoaded;
-    }
-    
     @Override
     public void onStop() {
         super.onStop();
@@ -587,7 +634,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         if (isVisibleToUser) {
             // 只能表明界面可能初始化并显示
             mVisibleToUser = true;
-            if (isVisible()) {
+            if (isVisibleInner()) {
                 // 界面显示
                 mOnResumeCallVisible = false;
                 viewVisibleToUser(true);
@@ -606,8 +653,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         
         mOnResumeCallChildSetUserVisibleHint = false;
-        FragmentManager childFragmentManager = getChildFragmentManager();
-        List<Fragment> fragments = childFragmentManager.getFragments();
+        List<Fragment> fragments = getChildFragment();
         for (Fragment fragment : fragments) {
             fragment.setUserVisibleHint(isVisibleToUser);
         }
@@ -622,42 +668,56 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @CallSuper
     @Override
     public void onHiddenChanged(boolean hidden) {
-        viewVisibleToUser(!hidden);
+        if (hidden) {
+            viewVisibleToUser(false);
+        } else if (mCombineViewPager) {
+            if (mVisibleToUser && isVisibleInner()) {
+                viewVisibleToUser(true);
+            }
+        } else if (isVisibleInner()) {
+            viewVisibleToUser(true);
+        }
+        
         // 当onHiddenChanged被调用时，往往只有被隐藏的Fragment执行这个方法，对于Fragment的ChildFragmentManager管理的Fragment
         // 往往没有任何变化，这时如果我们想在子Fragment根据界面展示隐藏做一些逻辑就无法实现，而且当外层Fragment hidden时，子Fragment
         // 调用isVisible()返回的还是true。因此执行以下逻辑，当上层Fragment hidden时，其管理的子Fragment同样执行相同的逻辑
         FragmentManager childFragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = childFragmentManager.beginTransaction();
-        List<Fragment> fragments = childFragmentManager.getFragments();
+        List<Fragment> fragments = getChildFragment();
+        if (hidden) {
+            mPreShowChildFragment.clear();
+        }
         for (Fragment fragment : fragments) {
-            boolean hidden2 = fragment.isHidden();
-            if (hidden == hidden2) {
-                continue;
-            }
-            
             if (hidden) {
-                fragmentTransaction.hide(fragment);
-            } else {
-                fragmentTransaction.show(fragment);
+                if (!fragment.isHidden()) {
+                    mPreShowChildFragment.add(fragment.getTag());
+                    fragmentTransaction.hide(fragment);
+                }
+            } else if (fragment.isHidden()) {
+                if (mPreShowChildFragment.contains(fragment.getTag())) {
+                    fragmentTransaction.show(fragment);
+                }
             }
         }
-        fragmentTransaction.commitAllowingStateLoss();
+        
+        // 此处一定要使用commitNow，否则上面的fragment.isHidden()会存在延迟性，导致结果与实际不符
+        fragmentTransaction.commitNowAllowingStateLoss();
     }
     
     /**
      * 界面是否真实可见于用户
      */
-    private void viewVisibleToUser(boolean visible) {
+    private void viewVisibleToUser(boolean viewActualVisible) {
         if (getHost() == null) {
             return;
         }
         
-        if (mViewActualVisible == visible) {
+        if (mViewActualVisible == viewActualVisible) {
             return;
         }
         
-        mViewActualVisible = visible;
-        if (visible) {
+        mViewActualVisible = viewActualVisible;
+        if (viewActualVisible) {
             onVisible();
             if (mNeedLazeLoaded) {
                 mNeedLazeLoaded = false;
@@ -673,7 +733,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
     
     /**
-     * 界面可见
+     * 界面可见，此可见是指物理可见，但是不包括将{@link #getView()}设置为非{@link View#VISIBLE}
+     * 的情况，我希望的是此方法调用时，在UI栈中，栈顶对象就是当前对象，因此不管当前对象的根布局是否可见。
      */
     protected void onVisible() {
     
@@ -694,12 +755,30 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @CallSuper
     public void refreshDataIfNeeded(Object... params) {
         if (mViewActualVisible) {
+            mNeedLazeLoaded = false;
             lazyLoadData();
         } else {
             mNeedLazeLoaded = true;
         }
     }
     
+    /**
+     * 延迟加载数据
+     */
+    protected void lazyLoadData() {
+    
+    }
+    
+    /**
+     * 判断界面在下次展示时是否需要调用{@link #lazyLoadData()}方法
+     */
+    public boolean isNeedLazyLoad() {
+        return mNeedLazeLoaded;
+    }
+    
+    /**
+     * 界面是否真实可见于用户，此可见指物理可见而不是逻辑可见,但是不包括将{@link #getView()}设置为非{@link View#VISIBLE}的情况
+     */
     public boolean isViewActualVisible() {
         return mViewActualVisible;
     }
@@ -730,39 +809,49 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
     
     private boolean doKeyEvent(int type, int keyCode, KeyEvent event) {
+        List<Fragment> childFragment = getChildFragment();
+        for (int i = childFragment.size() - 1; i >= 0; i--) {
+            Fragment fragment = childFragment.get(i);
+            if (!(fragment instanceof BaseFragment)) {
+                continue;
+            }
+            
+            BaseFragment baseFragment = (BaseFragment) fragment;
+            if (!baseFragment.isViewActualVisible()) {
+                continue;
+            }
+            
+            if (type == 0 && baseFragment.onBackPressed()) {
+                return true;
+            } else if (type == 1 && baseFragment.onKeyDown(keyCode, event)) {
+                return true;
+            } else if (type == 2 && baseFragment.dispatchKeyEvent(event)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private List<Fragment> getChildFragment() {
         FragmentManager manager = getChildFragmentManager();
-        List<Fragment> fragments = manager.getFragments();
-        for (Fragment fragment : fragments) {
-            if (fragment instanceof BaseFragment) {
-                if (type == 0 && ((BaseFragment) fragment).onBackPressed()) {
-                    return true;
-                } else if (type == 1 && ((BaseFragment) fragment).onKeyDown(keyCode, event)) {
-                    return true;
-                } else if (type == 2 && ((BaseFragment) fragment).dispatchKeyEvent(event)) {
-                    return true;
-                }
-            }
-        }
-        
         int backStackEntryCount = manager.getBackStackEntryCount();
-        if (backStackEntryCount == 0) {
-            return false;
+        Fragment backStackTopFragment = null;
+        if (backStackEntryCount > 0) {
+            FragmentManager.BackStackEntry backStackEntryAt
+                = manager.getBackStackEntryAt(backStackEntryCount - 1);
+            backStackTopFragment = manager.findFragmentByTag(backStackEntryAt.getName());
         }
         
-        FragmentManager.BackStackEntry backStackEntryAt
-            = manager.getBackStackEntryAt(backStackEntryCount - 1);
-        Fragment fragment = manager.findFragmentByTag(backStackEntryAt.getName());
-        if (fragment instanceof BaseFragment) {
-            if (type == 0 && ((BaseFragment) fragment).onBackPressed()) {
-                return true;
-            } else if (type == 1 && ((BaseFragment) fragment).onKeyDown(keyCode, event)) {
-                return true;
-            } else {
-                return type == 2 && ((BaseFragment) fragment).dispatchKeyEvent(event);
-            }
-        } else {
-            return false;
+        // manager.getFragments()返回数据可能包含回退栈中栈顶数据,但是这只在栈顶数据是刚刚新加入的情况
+        // 如果是从回退栈中弹出，立即使用manager.getFragments()获取是不包含栈顶数据的，但是刚弹出的界面
+        // 可能对于用户是可见状态，因此如果不包含，需要加上栈顶Fragment
+        List<Fragment> fragments = manager.getFragments();
+        if (backStackTopFragment != null && !fragments.contains(backStackTopFragment)) {
+            fragments.add(backStackTopFragment);
         }
+        
+        return fragments;
     }
     
     @Override

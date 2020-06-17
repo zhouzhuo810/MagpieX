@@ -64,7 +64,7 @@ public interface IBaseActivity {
      * 如果返回true，表示您的app需要支持多语言
      * <p>
      * 可以使用{@link Application#onCreate()}中调用
-     * {@link LanguageUtil#setGlobalLanguage(int)}
+     * {@link LanguageUtil#setGlobalLanguage(Integer)}
      * 方法设置默认语言
      * <p>
      */
@@ -172,13 +172,9 @@ public interface IBaseActivity {
     
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-    
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
     public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-    
-    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
     public void hideTwoBtnTextDialog();
     

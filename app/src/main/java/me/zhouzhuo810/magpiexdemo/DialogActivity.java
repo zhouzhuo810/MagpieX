@@ -101,7 +101,7 @@ public class DialogActivity extends BaseActivity {
                 ToastUtil.showToast(v.getText().toString().trim());
             }
         });*/
-        showTwoBtnTextDialog(getString(R.string.app_name), getString(R.string.check_update_text), true, true, new TwoBtnTextDialog.OnTwoBtnTextClick() {
+        showTwoBtnTextDialog(getString(R.string.app_name), getString(R.string.check_update_text), true, new TwoBtnTextDialog.OnTwoBtnTextClick() {
             @Override
             public void onLeftClick(TextView v) {
                 ToastUtil.showToast(v.getText().toString().trim());

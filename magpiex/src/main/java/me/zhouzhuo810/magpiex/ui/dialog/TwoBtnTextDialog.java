@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -32,7 +33,6 @@ public class TwoBtnTextDialog extends DialogFragment {
     private String msg;
     private String leftText;
     private String rightText;
-    private int gravity = Gravity.CENTER;
     
     /**
      * 设置对话框关闭监听
@@ -103,10 +103,6 @@ public class TwoBtnTextDialog extends DialogFragment {
         return this;
     }
     
-    public TwoBtnTextDialog setGravity(int gravity) {
-        this.gravity = gravity;
-        return this;
-    }
     
     public TwoBtnTextDialog setRightText(String rightBtnText) {
         this.rightText = rightBtnText;
@@ -204,10 +200,18 @@ public class TwoBtnTextDialog extends DialogFragment {
             }
         }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
-        TextView tvMsg = rootView.findViewById(R.id.tv_msg);
-        tvMsg.setGravity(gravity);
-        View line = rootView.findViewById(R.id.line_item);
+        final TextView tvMsg = rootView.findViewById(R.id.tv_msg);
         tvMsg.setText(msg);
+        tvMsg.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int lineCount = tvMsg.getLineCount();
+                tvMsg.setGravity(lineCount > 1 ? Gravity.START | Gravity.CENTER_VERTICAL : Gravity.CENTER);
+                tvMsg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+        
+        View line = rootView.findViewById(R.id.line_item);
         if (TextUtils.isEmpty(title)) {
             line.setVisibility(View.GONE);
             tvTitle.setVisibility(View.GONE);
