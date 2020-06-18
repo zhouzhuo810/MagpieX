@@ -20,10 +20,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AsyncExecutor {
     private static final AsyncExecutor INSTANCE = new AsyncExecutor();
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-    private static final int MAX_FIX_POOL_SIZE = CPU_COUNT;
-    private static final int MAX_CACHE_POOL_SIZE = 2 * CPU_COUNT + 1;
-    private static final int SCHEDULED_CORE_POOL_SIZE = CPU_COUNT;
-    private static final int MAX_SCHEDULED_POOL_SIZE = 2 * CPU_COUNT + 1;
+    private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
+    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
+    
+    private static final int MAX_FIX_POOL_SIZE = CORE_POOL_SIZE;
+    private static final int MAX_CACHE_POOL_SIZE = CPU_COUNT * 20;
+    private static final int SCHEDULED_CORE_POOL_SIZE = CORE_POOL_SIZE;
+    private static final int MAX_SCHEDULED_POOL_SIZE = MAXIMUM_POOL_SIZE;
+    
     /**
      * 任务队列最多可缓存任务数量
      */
