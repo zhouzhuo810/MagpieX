@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -110,7 +111,11 @@ public class OneBtnProgressDialog extends DialogFragment {
         }
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        if (getDialog().getWindow() != null) {
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            try {
+                getDialog().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            } catch (Exception ignored) {
+            }
             if (landscape) {
                 getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
             } else {

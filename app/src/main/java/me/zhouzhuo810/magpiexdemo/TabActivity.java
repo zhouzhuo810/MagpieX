@@ -22,6 +22,8 @@ public class TabActivity extends BaseActivity {
     private TestFragmentTwo fgm2;
     private TestFragmentThree fgm3;
     private TestFragmentFour fgm4;
+    private TestFragmentThree fgm5;
+    private TestFragmentFour fgm6;
     
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -70,6 +72,12 @@ public class TabActivity extends BaseActivity {
             case 3:
                 fgm4 = addOrShowFragment(R.id.fgm_container, TestFragmentFour.class, bundle);
                 break;
+            case 4:
+                fgm5 = addOrShowFragment(R.id.fgm_container, TestFragmentThree.class, bundle);
+                break;
+            case 5:
+                fgm6 = addOrShowFragment(R.id.fgm_container, TestFragmentFour.class, bundle);
+                break;
             
         }
     }
@@ -80,9 +88,13 @@ public class TabActivity extends BaseActivity {
             R.mipmap.ic_launcher_round,
             R.mipmap.ic_launcher_round,
             R.mipmap.ic_launcher_round,
+            R.mipmap.ic_launcher_round,
+            R.mipmap.ic_launcher_round,
             R.mipmap.ic_launcher_round
         );
         tabBar.setPressIconRes(
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,

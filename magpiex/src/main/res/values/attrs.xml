@@ -47,6 +47,7 @@
             <enum name="THREE" value="3"/>
             <enum name="FOUR" value="4"/>
             <enum name="FIVE" value="5"/>
+            <enum name="SIX" value="6"/>
         </attr>
         <attr name="tb_tabNames" format="reference"/>
         <attr name="tb_showImg" format="boolean"/>

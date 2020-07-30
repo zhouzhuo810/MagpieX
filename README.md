@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.2.2'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.2.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -55,7 +55,7 @@ If you use this. That means you added dependencies below:
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
-    api 'com.hjq:toast:8.0'
+    api 'com.hjq:toast:8.6'
 ```
 
 #### Screen Adapter
@@ -283,6 +283,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.2.3
+- 修改OneProgressDialog显示时屏幕常亮；
+- 修改TabBar支持6个；
 
 > 1.2.2 (Published)
 - 修改BaseFragment部分逻辑；

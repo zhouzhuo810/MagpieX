@@ -48,6 +48,10 @@ public class TabBar extends LinearLayout {
     private ImageView iv4;
     private TextView tv4;
     private View line4;
+    private RelativeLayout ll5;
+    private ImageView iv5;
+    private TextView tv5;
+    private View line5;
 
     private int position = 0;
 
@@ -65,6 +69,7 @@ public class TabBar extends LinearLayout {
     private MarkView mv2;
     private MarkView mv3;
     private MarkView mv4;
+    private MarkView mv5;
     private boolean showMarkView;
     private boolean showImg;
     private boolean showText;
@@ -75,9 +80,10 @@ public class TabBar extends LinearLayout {
     public static final int TAB_COUNT_THREE = 3;
     public static final int TAB_COUNT_FOUR = 4;
     public static final int TAB_COUNT_FIVE = 5;
+    public static final int TAB_COUNT_SIX = 6;
 
     @Retention(SOURCE)
-    @IntDef({TAB_COUNT_TWO, TAB_COUNT_THREE, TAB_COUNT_FOUR, TAB_COUNT_FIVE})
+    @IntDef({TAB_COUNT_TWO, TAB_COUNT_THREE, TAB_COUNT_FOUR, TAB_COUNT_FIVE, TAB_COUNT_SIX})
     public @interface TabCount {
     }
 
@@ -136,6 +142,11 @@ public class TabBar extends LinearLayout {
         tv4 = (TextView) root.findViewById(R.id.tv4);
         mv4 = (MarkView) root.findViewById(R.id.mv4);
         line4 = root.findViewById(R.id.line_4);
+        ll5 = (RelativeLayout) root.findViewById(R.id.rl5);
+        iv5 = (ImageView) root.findViewById(R.id.iv5);
+        tv5 = (TextView) root.findViewById(R.id.tv5);
+        mv5 = (MarkView) root.findViewById(R.id.mv5);
+        line5 = root.findViewById(R.id.line_5);
         initAttrs(context, attrs);
         initEvent();
         addView(root);
@@ -168,18 +179,21 @@ public class TabBar extends LinearLayout {
             setVisible(mv2, showMarkView);
             setVisible(mv3, showMarkView);
             setVisible(mv4, showMarkView);
+            setVisible(mv5, showMarkView);
 
             setVisible(tv0, showText);
             setVisible(tv1, showText);
             setVisible(tv2, showText);
             setVisible(tv3, showText);
             setVisible(tv4, showText);
+            setVisible(tv5, showText);
 
             setVisible(iv0, showImg);
             setVisible(iv1, showImg);
             setVisible(iv2, showImg);
             setVisible(iv3, showImg);
             setVisible(iv4, showImg);
+            setVisible(iv5, showImg);
 
             textColorNormal = t.getColor(R.styleable.TabBar_tb_textColorNormal, 0x7f999999);
             textColorPress = t.getColor(R.styleable.TabBar_tb_textColorPress, 0xff000000);
@@ -197,6 +211,7 @@ public class TabBar extends LinearLayout {
                                 setVisible(ll2, false);
                                 setVisible(ll3, false);
                                 setVisible(ll4, false);
+                                setVisible(ll5, false);
                                 break;
                             case 2:
                                 if (i == 0) {
@@ -208,6 +223,7 @@ public class TabBar extends LinearLayout {
                                 setVisible(ll2, false);
                                 setVisible(ll3, false);
                                 setVisible(ll4, false);
+                                setVisible(ll5, false);
                                 break;
                             case 3:
                                 if (i == 0) {
@@ -221,6 +237,7 @@ public class TabBar extends LinearLayout {
                                 }
                                 setVisible(ll3, false);
                                 setVisible(ll4, false);
+                                setVisible(ll5, false);
                                 break;
                             case 4:
                                 if (i == 0) {
@@ -236,6 +253,7 @@ public class TabBar extends LinearLayout {
                                     tv3.setText(textArray[3]);
                                 }
                                 setVisible(ll4, false);
+                                setVisible(ll5, false);
                                 break;
                             case 5:
                                 if (i == 0) {
@@ -252,6 +270,27 @@ public class TabBar extends LinearLayout {
                                 }
                                 if (i == 4) {
                                     tv4.setText(textArray[4]);
+                                }
+                                setVisible(ll5, false);
+                                break;
+                            case 6:
+                                if (i == 0) {
+                                    tv0.setText(textArray[0]);
+                                }
+                                if (i == 1) {
+                                    tv1.setText(textArray[1]);
+                                }
+                                if (i == 2) {
+                                    tv2.setText(textArray[2]);
+                                }
+                                if (i == 3) {
+                                    tv3.setText(textArray[3]);
+                                }
+                                if (i == 4) {
+                                    tv4.setText(textArray[4]);
+                                }
+                                if (i == 5) {
+                                    tv5.setText(textArray[5]);
                                 }
                                 break;
                         }
@@ -270,6 +309,7 @@ public class TabBar extends LinearLayout {
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     
         textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
     }
@@ -294,6 +334,7 @@ public class TabBar extends LinearLayout {
                     setVisible(ll2, false);
                     setVisible(ll3, false);
                     setVisible(ll4, false);
+                    setVisible(ll5, false);
                     break;
                 case 2:
                     if (i == 0) {
@@ -305,6 +346,7 @@ public class TabBar extends LinearLayout {
                     setVisible(ll2, false);
                     setVisible(ll3, false);
                     setVisible(ll4, false);
+                    setVisible(ll5, false);
                     break;
                 case 3:
                     if (i == 0) {
@@ -318,6 +360,7 @@ public class TabBar extends LinearLayout {
                     }
                     setVisible(ll3, false);
                     setVisible(ll4, false);
+                    setVisible(ll5, false);
                     break;
                 case 4:
                     if (i == 0) {
@@ -333,6 +376,7 @@ public class TabBar extends LinearLayout {
                         tv3.setText(tabNames[3]);
                     }
                     setVisible(ll4, false);
+                    setVisible(ll5, false);
                     break;
                 case 5:
                     if (i == 0) {
@@ -349,6 +393,27 @@ public class TabBar extends LinearLayout {
                     }
                     if (i == 4) {
                         tv4.setText(tabNames[4]);
+                    }
+                    setVisible(ll5, false);
+                    break;
+                case 6:
+                    if (i == 0) {
+                        tv0.setText(tabNames[0]);
+                    }
+                    if (i == 1) {
+                        tv1.setText(tabNames[1]);
+                    }
+                    if (i == 2) {
+                        tv2.setText(tabNames[2]);
+                    }
+                    if (i == 3) {
+                        tv3.setText(tabNames[3]);
+                    }
+                    if (i == 4) {
+                        tv4.setText(tabNames[4]);
+                    }
+                    if (i == 5) {
+                        tv5.setText(tabNames[5]);
                     }
                     break;
             }
@@ -399,16 +464,19 @@ public class TabBar extends LinearLayout {
         LayoutParams lp2 = (LayoutParams) tv2.getLayoutParams();
         LayoutParams lp3 = (LayoutParams) tv3.getLayoutParams();
         LayoutParams lp4 = (LayoutParams) tv4.getLayoutParams();
+        LayoutParams lp5 = (LayoutParams) tv5.getLayoutParams();
         lp0.topMargin = size;
         lp1.topMargin = size;
         lp2.topMargin = size;
         lp3.topMargin = size;
         lp4.topMargin = size;
+        lp5.topMargin = size;
         tv0.setLayoutParams(lp0);
         tv1.setLayoutParams(lp1);
         tv2.setLayoutParams(lp2);
         tv3.setLayoutParams(lp3);
         tv4.setLayoutParams(lp4);
+        tv5.setLayoutParams(lp5);
         return this;
     }
 
@@ -427,6 +495,7 @@ public class TabBar extends LinearLayout {
         LayoutParams lp2 = (LayoutParams) iv2.getLayoutParams();
         LayoutParams lp3 = (LayoutParams) iv3.getLayoutParams();
         LayoutParams lp4 = (LayoutParams) iv4.getLayoutParams();
+        LayoutParams lp5 = (LayoutParams) iv5.getLayoutParams();
         lp0.width = size;
         lp0.height = size;
         lp1.width = size;
@@ -437,11 +506,14 @@ public class TabBar extends LinearLayout {
         lp3.height = size;
         lp4.width = size;
         lp4.height = size;
+        lp5.width = size;
+        lp5.height = size;
         iv0.setLayoutParams(lp0);
         iv1.setLayoutParams(lp1);
         iv2.setLayoutParams(lp2);
         iv3.setLayoutParams(lp3);
         iv4.setLayoutParams(lp4);
+        iv5.setLayoutParams(lp5);
         return this;
     }
 
@@ -451,6 +523,7 @@ public class TabBar extends LinearLayout {
         mv2.setPointSize(pointSizePx);
         mv3.setPointSize(pointSizePx);
         mv4.setPointSize(pointSizePx);
+        mv5.setPointSize(pointSizePx);
         return this;
     }
 
@@ -460,6 +533,7 @@ public class TabBar extends LinearLayout {
         mv2.setTextSizeInPx(textSizePx);
         mv3.setTextSizeInPx(textSizePx);
         mv4.setTextSizeInPx(textSizePx);
+        mv5.setTextSizeInPx(textSizePx);
         return this;
     }
 
@@ -469,6 +543,7 @@ public class TabBar extends LinearLayout {
         mv2.setTextColor(color);
         mv3.setTextColor(color);
         mv4.setTextColor(color);
+        mv5.setTextColor(color);
         return this;
     }
 
@@ -478,6 +553,7 @@ public class TabBar extends LinearLayout {
         mv2.setTextColorRes(colorRes);
         mv3.setTextColorRes(colorRes);
         mv4.setTextColorRes(colorRes);
+        mv5.setTextColorRes(colorRes);
         return this;
     }
 
@@ -487,6 +563,7 @@ public class TabBar extends LinearLayout {
         mv2.setBgColor(color);
         mv3.setBgColor(color);
         mv4.setBgColor(color);
+        mv5.setBgColor(color);
         return this;
     }
 
@@ -496,6 +573,7 @@ public class TabBar extends LinearLayout {
         mv2.setBgColorRes(colorRes);
         mv3.setBgColorRes(colorRes);
         mv4.setBgColorRes(colorRes);
+        mv5.setBgColorRes(colorRes);
         return this;
     }
 
@@ -515,6 +593,9 @@ public class TabBar extends LinearLayout {
                 break;
             case 4:
                 mv4.setVisibility(VISIBLE);
+                break;
+            case 5:
+                mv5.setVisibility(VISIBLE);
                 break;
         }
         return this;
@@ -537,6 +618,9 @@ public class TabBar extends LinearLayout {
             case 4:
                 mv4.setBgShape(bgShape);
                 break;
+            case 5:
+                mv5.setBgShape(bgShape);
+                break;
         }
         return this;
     }
@@ -557,6 +641,9 @@ public class TabBar extends LinearLayout {
                 break;
             case 4:
                 mv4.setMarkNumber(markNumber);
+                break;
+            case 5:
+                mv5.setMarkNumber(markNumber);
                 break;
         }
         return this;
@@ -579,6 +666,9 @@ public class TabBar extends LinearLayout {
             case 4:
                 mv4.setMaxMarkNumber(maxMarkNumber);
                 break;
+            case 5:
+                mv5.setMaxMarkNumber(maxMarkNumber);
+                break;
         }
         return this;
     }
@@ -600,6 +690,9 @@ public class TabBar extends LinearLayout {
             case 4:
                 mv4.setVisibility(GONE);
                 break;
+            case 5:
+                mv5.setVisibility(GONE);
+                break;
         }
         return this;
     }
@@ -610,11 +703,13 @@ public class TabBar extends LinearLayout {
         mv2.update();
         mv3.update();
         mv4.update();
+        mv5.update();
         tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (showImg) {
             if (pressIcons != null && pressIcons.length > 0) {
                 for (int i = 0; i < pressIcons.length; i++) {
@@ -700,6 +795,23 @@ public class TabBar extends LinearLayout {
                                     setVisible2(line3, false);
                                 }
                                 break;
+                            case 5:
+                                iv5.setImageResource(pressIcons[5]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv5, textColorPress);
+                                }
+                                tv5.setTextColor(textColorPress);
+                                if (showUnderLine) {
+                                    line5.setVisibility(VISIBLE);
+                                    line5.setBackgroundColor(textColorPress);
+
+                                    setVisible2(line0, false);
+                                    setVisible2(line1, false);
+                                    setVisible2(line2, false);
+                                    setVisible2(line3, false);
+                                    setVisible2(line4, false);
+                                }
+                                break;
                         }
                         break;
                     }
@@ -744,6 +856,13 @@ public class TabBar extends LinearLayout {
                                 }
                                 tv4.setTextColor(textColorNormal);
                                 break;
+                            case 5:
+                                iv5.setImageResource(normalIcons[5]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv5, textColorNormal);
+                                }
+                                tv5.setTextColor(textColorNormal);
+                                break;
                         }
                     }
                 }
@@ -754,6 +873,7 @@ public class TabBar extends LinearLayout {
             tv2.setTextColor(position == 2 ? textColorPress : textColorNormal);
             tv3.setTextColor(position == 3 ? textColorPress : textColorNormal);
             tv4.setTextColor(position == 4 ? textColorPress : textColorNormal);
+            tv5.setTextColor(position == 5 ? textColorPress : textColorNormal);
 
             if (showUnderLine) {
                 line0.setBackgroundColor(position == 0 ? textColorPress : textColorNormal);
@@ -761,12 +881,14 @@ public class TabBar extends LinearLayout {
                 line2.setBackgroundColor(position == 2 ? textColorPress : textColorNormal);
                 line3.setBackgroundColor(position == 3 ? textColorPress : textColorNormal);
                 line4.setBackgroundColor(position == 4 ? textColorPress : textColorNormal);
+                line5.setBackgroundColor(position == 5 ? textColorPress : textColorNormal);
 
                 setVisible2(line0, position == 0);
                 setVisible2(line1, position == 1);
                 setVisible2(line2, position == 2);
                 setVisible2(line3, position == 3);
                 setVisible2(line4, position == 4);
+                setVisible2(line5, position == 5);
             }
         }
 
@@ -815,6 +937,12 @@ public class TabBar extends LinearLayout {
                 setSelection(4);
             }
         });
+        ll5.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setSelection(5);
+            }
+        });
     }
 
     public RelativeLayout getLl0() {
@@ -836,7 +964,11 @@ public class TabBar extends LinearLayout {
     public RelativeLayout getLl4() {
         return ll4;
     }
-
+    
+    public RelativeLayout getLl5() {
+        return ll5;
+    }
+    
     public void setSelection(int position) {
         if (showImg) {
             if (normalIcons == null) {
@@ -862,6 +994,9 @@ public class TabBar extends LinearLayout {
                     break;
                 case 4:
                     onTabBarClick.onTabClick(iv4, tv4, position, this.position != position);
+                    break;
+                case 5:
+                    onTabBarClick.onTabClick(iv5, tv5, position, this.position != position);
                     break;
             }
         }
@@ -894,6 +1029,10 @@ public class TabBar extends LinearLayout {
         return iv4;
     }
     
+    public ImageView getIv5() {
+        return iv5;
+    }
+    
     public TextView getTv0() {
         return tv0;
     }
@@ -912,6 +1051,10 @@ public class TabBar extends LinearLayout {
     
     public TextView getTv4() {
         return tv4;
+    }
+    
+    public TextView getTv5() {
+        return tv5;
     }
     
     public TabBar setTextColorPress(int textColorPress) {
