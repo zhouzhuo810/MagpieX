@@ -119,16 +119,7 @@ public class SimpleUtil {
      * @return 字符串
      */
     public static String formatFloatWithDecimal(float f, int n) {
-        StringBuilder pattern = new StringBuilder();
-        pattern.append("#0.");
-        if (n <= 1) {
-            pattern.append("0");
-        } else {
-            for (int i = 0; i < n; i++) {
-                pattern.append("0");
-            }
-        }
-        return new DecimalFormat(pattern.toString()).format(f);
+        return NumberUtil.formatFloatWithDecimal(f, n);
     }
     
     /**

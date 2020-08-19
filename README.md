@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.2.3'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.2.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -224,6 +224,10 @@ it supports:
 - NoticeUtil
 > It's for Notification.
 
+
+- NumberUtil
+> It's for digital conversion.
+
 #### Widgets
 
 - Indicator
@@ -283,6 +287,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.2.4
+- 新增NumberUtil；
 
 > 1.2.3
 - 修改OneProgressDialog显示时屏幕常亮；
