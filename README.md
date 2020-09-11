@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.2.4'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.2.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -287,6 +287,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.2.5
+- BaseFragment拦截RootView的触摸事件；
 
 > 1.2.4
 - 新增NumberUtil；

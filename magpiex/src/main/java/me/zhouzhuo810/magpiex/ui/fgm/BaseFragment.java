@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -43,7 +44,7 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
  * 只需要关心界面是否需要刷新，调用{@link #refreshDataIfNeeded(Object...)}后，如果当前界面对于用户可见，则立即
  * 调用{@link #lazyLoadData()}，否则在界面下次展示后调用{@link #lazyLoadData()}
  */
-public abstract class BaseFragment extends Fragment implements IBaseFragment {
+public abstract class BaseFragment extends Fragment implements IBaseFragment, View.OnTouchListener {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     // 是否是结合ViewPager使用，在被回收时需要保存起来，否则下次恢复时，优先执行的是OnResume
     // 而不是setUserVisibleHint,正常结合ViewPager是先调用setUserVisibleHint
@@ -173,6 +174,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
+        rootView.setOnTouchListener(this);
         // 屏幕适配
         ScreenAdapterUtil.getInstance().loadView(rootView);
         return rootView;
@@ -237,6 +239,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             viewVisibleToUser(true);
         }
         
+    }
+    
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return true;
     }
     
     @Override
