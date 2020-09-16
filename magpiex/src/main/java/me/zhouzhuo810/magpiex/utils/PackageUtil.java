@@ -3,6 +3,7 @@ package me.zhouzhuo810.magpiex.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,4 +31,61 @@ public class PackageUtil {
         return !packageNames.contains(packageName);
     }
     
+    /**
+     * 获取APP版本号
+     *
+     * @return 版本号
+     */
+    public static long getVersionCode() {
+        return getVersionCode(1);
+    }
+    
+    /**
+     * 获取APP版本号
+     *
+     * @param defaultVersionCode 默认版本号
+     * @return 版本号
+     */
+    public static long getVersionCode(long defaultVersionCode) {
+        long versionCode = defaultVersionCode;
+        try {
+            if (Build.VERSION.SDK_INT >= 28) {
+                versionCode = BaseUtil.getApp().getPackageManager()
+                    .getPackageInfo(BaseUtil.getApp().getPackageName(), 0).getLongVersionCode();
+            } else {
+                versionCode = BaseUtil.getApp().getPackageManager()
+                    .getPackageInfo(BaseUtil.getApp().getPackageName(), 0).versionCode;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return versionCode;
+        
+    }
+    
+    /**
+     * 获取APP版本名称
+     *
+     * @return 版本名称
+     */
+    public static String getVersionName() {
+        return getVersionName(null);
+    }
+    
+    /**
+     * 获取APP版本名称
+     *
+     * @param defaultVersion 默认版本名称
+     * @return 版本名称
+     */
+    public static String getVersionName(String defaultVersion) {
+        String verName = defaultVersion == null ? "1.0.0" : defaultVersion;
+        try {
+            verName = BaseUtil.getApp().getPackageManager().
+                getPackageInfo(BaseUtil.getApp().getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return verName;
+    }
 }
