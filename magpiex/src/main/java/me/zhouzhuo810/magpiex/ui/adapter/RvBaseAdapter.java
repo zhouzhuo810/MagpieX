@@ -64,7 +64,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     
     public RvBaseAdapter(Context context, T[] data) {
         this.context = context;
-        this.data = Arrays.asList(data);
+        this.data = data == null ? null : Arrays.asList(data);
     }
     
     @NonNull

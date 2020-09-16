@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
 import me.zhouzhuo810.magpiex.ui.adapter.LvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.intef.ISpinnerData;
@@ -104,7 +105,7 @@ public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
     /**
      * 设置数据
      */
-    public void setItems(T[] items) {
+    public void setItems(@NonNull T[] items) {
         this.items = Arrays.asList(items);
         SimpleSpinnerAdapter<T> adapter = new SimpleSpinnerAdapter<>(getContext(), this.items);
         adapter.setDropdownLayoutId(mDropdownLayoutId);

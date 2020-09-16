@@ -13,14 +13,12 @@
         android:layout_centerVertical="true"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
-        android:gravity="center"
-        android:minWidth="180px">
-
+        android:gravity="center">
 
         <RelativeLayout
-            android:id="@+id/rl_left"
-            android:layout_width="180px"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="180px">
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -33,40 +31,40 @@
                 android:id="@+id/tv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginRight="20px"
                 android:layout_centerInParent="true"
+                android:layout_marginStart="20px"
+                android:layout_marginEnd="20px"
+                android:maxWidth="216px"
                 android:textColor="#fff"
                 android:visibility="gone"
                 tools:text="返回" />
 
-            <me.zhouzhuo810.magpiex.ui.widget.MarkView
-                android:id="@+id/mv_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="15px"
-                android:layout_marginRight="15px"
-                android:layout_marginTop="15px"
-                app:mv_bgColor="#ff0000"
-                app:mv_bgShape="oval"
-                app:mv_markNumber="100"
-                app:mv_maxMarkNumber="99"
-                app:mv_textColor="#fff"
-                app:mv_textSize="32px" />
         </RelativeLayout>
 
     </LinearLayout>
+
+    <me.zhouzhuo810.magpiex.ui.widget.MarkView
+        android:id="@+id/mv_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ll_back"
+        android:layout_alignEnd="@id/ll_back"
+        android:layout_marginTop="15px"
+        android:layout_marginEnd="15px"
+        app:mv_bgColor="#ff0000"
+        app:mv_bgShape="oval"
+        app:mv_markNumber="100"
+        app:mv_maxMarkNumber="99"
+        app:mv_textColor="#fff"
+        app:mv_textSize="32px" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="200px"
-        android:layout_marginRight="200px"
+        android:layout_marginStart="220px"
+        android:layout_marginEnd="220px"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
@@ -76,18 +74,17 @@
         android:id="@+id/ll_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
         android:gravity="center"
-        android:minWidth="180px"
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:id="@+id/rl_right"
-            android:layout_width="180px"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="180px">
 
             <ImageView
                 android:id="@+id/iv_right"
@@ -100,29 +97,29 @@
                 android:id="@+id/tv_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginRight="20px"
                 android:layout_centerInParent="true"
+                android:layout_marginStart="20px"
+                android:layout_marginEnd="20px"
+                android:maxWidth="216px"
                 android:textColor="#fff" />
 
-            <me.zhouzhuo810.magpiex.ui.widget.MarkView
-                android:id="@+id/mv_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="15px"
-                android:layout_marginRight="15px"
-                android:layout_marginTop="15px"
-                app:mv_bgColor="#ff0000"
-                app:mv_bgShape="oval"
-                app:mv_markNumber="2"
-                app:mv_maxMarkNumber="99"
-                app:mv_textColor="#fff"
-                app:mv_textSize="32px" />
+
         </RelativeLayout>
 
     </LinearLayout>
 
+    <me.zhouzhuo810.magpiex.ui.widget.MarkView
+        android:id="@+id/mv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15px"
+        android:layout_marginEnd="15px"
+        app:mv_bgColor="#ff0000"
+        app:mv_bgShape="oval"
+        app:mv_markNumber="2"
+        app:mv_maxMarkNumber="99"
+        app:mv_textColor="#fff"
+        app:mv_textSize="32px" />
 </RelativeLayout>

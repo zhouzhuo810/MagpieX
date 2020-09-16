@@ -26,17 +26,17 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
  * Created by zhouzhuo810 on 2017/7/25.
  */
 public class TitleBar extends RelativeLayout {
-
-
+    
+    
     public static final int TITLE_GRAVITY_CENTER = 0;
     public static final int TITLE_GRAVITY_LEFT = 1;
-
+    
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({TITLE_GRAVITY_CENTER, TITLE_GRAVITY_LEFT})
     public @interface TITLE_GRAVITY {
     }
-
-
+    
+    
     private ImageView ivLeft;
     private TextView tvLeft;
     private LinearLayout llLeft;
@@ -44,22 +44,20 @@ public class TitleBar extends RelativeLayout {
     private ImageView ivRight;
     private TextView tvRight;
     private LinearLayout llRight;
-
+    
     private OnTitleClick titleClick;
     private OnLeftClickListener onLeftClickListener;
     private MarkView mvLeft;
-    private RelativeLayout rlRight;
     private MarkView mvRight;
-    private RelativeLayout rlLeft;
-
+    
     public interface OnTitleClick {
         void onLeftClick(ImageView ivLeft, MarkView mv, TextView tvLeft);
-
+        
         void onTitleClick(TextView tvTitle);
-
+        
         void onRightClick(ImageView ivRight, MarkView mv, TextView tvRight);
     }
-
+    
     public interface OnLeftClickListener {
         void onClick(ImageView ivLeft, MarkView mv, TextView tvLeft);
     }
@@ -76,6 +74,7 @@ public class TitleBar extends RelativeLayout {
     
     /**
      * 只设置左边按钮点击事件
+     *
      * @param onLeftClickListener onLeftClickListener
      */
     public void setOnLeftClickListener(OnLeftClickListener onLeftClickListener) {
@@ -97,35 +96,33 @@ public class TitleBar extends RelativeLayout {
         super(context);
         init(context, null);
     }
-
+    
     public TitleBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
-
+    
     public TitleBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
-
+    
     private void init(Context context, AttributeSet attrs) {
         View root = LayoutInflater.from(context).inflate(R.layout.title_layout, this, false);
-        ivLeft = (ImageView) root.findViewById(R.id.iv_back);
-        tvLeft = (TextView) root.findViewById(R.id.tv_back);
-        llLeft = (LinearLayout) root.findViewById(R.id.ll_back);
-        tvTitle = (TextView) root.findViewById(R.id.tv_title);
-        ivRight = (ImageView) root.findViewById(R.id.iv_right);
-        rlRight = (RelativeLayout) root.findViewById(R.id.rl_right);
-        rlLeft = (RelativeLayout) root.findViewById(R.id.rl_left);
-        tvRight = (TextView) root.findViewById(R.id.tv_right);
-        mvLeft = (MarkView) root.findViewById(R.id.mv_left);
-        mvRight = (MarkView) root.findViewById(R.id.mv_right);
-        llRight = (LinearLayout) root.findViewById(R.id.ll_right);
+        ivLeft = root.findViewById(R.id.iv_back);
+        tvLeft = root.findViewById(R.id.tv_back);
+        llLeft = root.findViewById(R.id.ll_back);
+        tvTitle = root.findViewById(R.id.tv_title);
+        ivRight = root.findViewById(R.id.iv_right);
+        tvRight = root.findViewById(R.id.tv_right);
+        mvLeft = root.findViewById(R.id.mv_left);
+        mvRight = root.findViewById(R.id.mv_right);
+        llRight = root.findViewById(R.id.ll_right);
         initAttrs(context, attrs);
         addView(root);
         setGravity(Gravity.CENTER_VERTICAL);
     }
-
+    
     private void initAttrs(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
@@ -140,9 +137,7 @@ public class TitleBar extends RelativeLayout {
             boolean showRightImg = t.getBoolean(R.styleable.TitleBar_ttb_showRightImg, false);
             boolean showRightText = t.getBoolean(R.styleable.TitleBar_ttb_showRightText, true);
             setVisible(llLeft, showLeftLayout);
-            setVisible(rlLeft, showLeftLayout);
             setVisible(llRight, showRightLayout);
-            setVisible(rlRight, showRightLayout);
             setVisible(ivLeft, showLeftImg);
             setVisible(tvLeft, showLeftText);
             setVisible(tvTitle, showTitle);
@@ -185,9 +180,7 @@ public class TitleBar extends RelativeLayout {
             t.recycle();
         } else {
             setVisible(llLeft, true);
-            setVisible(rlLeft, true);
             setVisible(llRight, false);
-            setVisible(rlRight, false);
             setVisible(ivLeft, false);
             setVisible(tvLeft, true);
             setVisible(tvTitle, true);
@@ -195,7 +188,7 @@ public class TitleBar extends RelativeLayout {
             setVisible(tvRight, false);
             setVisible(mvLeft, false);
             setVisible(mvRight, false);
-
+            
             /*gravity*/
             setTitleGravity(TITLE_GRAVITY_CENTER);
             /*textSize*/
@@ -213,7 +206,7 @@ public class TitleBar extends RelativeLayout {
             tvTitle.setText("标题");
         }
     }
-
+    
     /**
      * 设置标题的对其方式
      * 支持居中对齐
@@ -238,17 +231,17 @@ public class TitleBar extends RelativeLayout {
                 tvTitle.setGravity(Gravity.CENTER);
                 break;
         }
-
+        
     }
-
+    
     private void setVisible(View view, boolean visible) {
         if (view != null) {
             view.setVisibility(visible ? VISIBLE : GONE);
         }
     }
-
+    
     private void initEvent() {
-
+        
         tvTitle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,7 +250,7 @@ public class TitleBar extends RelativeLayout {
                 }
             }
         });
-
+        
         llLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -266,7 +259,7 @@ public class TitleBar extends RelativeLayout {
                 }
             }
         });
-
+        
         llRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,7 +269,7 @@ public class TitleBar extends RelativeLayout {
             }
         });
     }
-
+    
     public void setImageSize(int imageSize, boolean autoSize) {
         int size = imageSize;
         if (autoSize) {
@@ -291,48 +284,67 @@ public class TitleBar extends RelativeLayout {
         ivLeft.setLayoutParams(lp0);
         ivRight.setLayoutParams(lp1);
     }
-
-    public ImageView getIvLeft() {
-        return ivLeft;
-    }
-
-    public RelativeLayout getRlLeft() {
-        return rlLeft;
-    }
-
-    public MarkView getMvLeft() {
-        return mvLeft;
-    }
-
-    public MarkView getMvRight() {
-        return mvRight;
-    }
-
-    public TextView getTvLeft() {
-        return tvLeft;
-    }
-
+    
+    /**
+     * 左边布局容器
+     */
     public LinearLayout getLlLeft() {
         return llLeft;
     }
-
+    
+    /**
+     * 左边的图标
+     */
+    public ImageView getIvLeft() {
+        return ivLeft;
+    }
+    
+    /**
+     * 左边的文字
+     */
+    public TextView getTvLeft() {
+        return tvLeft;
+    }
+    
+    /**
+     * 左边的角标
+     */
+    public MarkView getMvLeft() {
+        return mvLeft;
+    }
+    
+    /**
+     * 标题
+     */
     public TextView getTvTitle() {
         return tvTitle;
     }
-
-    public ImageView getIvRight() {
-        return ivRight;
-    }
-
-    public TextView getTvRight() {
-        return tvRight;
-    }
-
+    
+    /**
+     * 右边布局容器
+     */
     public LinearLayout getLlRight() {
         return llRight;
     }
-
-    public RelativeLayout getRlRight() {
-        return rlRight;
+    
+    /**
+     * 右边的图标
+     */
+    public ImageView getIvRight() {
+        return ivRight;
+    }
+    
+    /**
+     * 右边的文字
+     */
+    public TextView getTvRight() {
+        return tvRight;
+    }
+    
+    /**
+     * 右边的角标
+     */
+    public MarkView getMvRight() {
+        return mvRight;
     }
 }
