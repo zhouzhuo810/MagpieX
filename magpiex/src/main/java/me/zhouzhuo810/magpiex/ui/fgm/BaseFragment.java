@@ -92,7 +92,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     private boolean mViewActualVisible;
     
     /**
-     * 记录当前Fragment {@link #onHiddenChanged(boolean)}为true时，
+     * 记录当前Fragment {@link #onHiddenChanged(boolean)}为false之前，
      * 此时ChildFragment显示的界面，用于下次恢复显示时使用
      */
     private ArrayList<String> mPreShowChildFragment = new ArrayList<>();
@@ -139,6 +139,18 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         if (mPreShowChildFragment == null) {
             mPreShowChildFragment = new ArrayList<>();
         }
+    }
+    
+    /**
+     * 初始化参数Bundle，如果已经初始化，则直接返回，否则初始化并绑定到当前{@link Fragment}
+     */
+    protected Bundle initArguments() {
+        Bundle arguments = getArguments();
+        if (arguments == null) {
+            arguments = new Bundle();
+            setArguments(arguments);
+        }
+        return arguments;
     }
     
     public static <T extends BaseFragment> T newInstance(Class<T> clazz, Bundle args) {
@@ -230,10 +242,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             }
             
             if (mOnResumeCallChildSetUserVisibleHint) {
-                List<Fragment> fragments = getChildFragment();
-                for (Fragment fragment : fragments) {
-                    fragment.setUserVisibleHint(mViewActualVisible);
-                }
+                setChildFragmentUserVisibleHint(mViewActualVisible);
             }
         } else if (isVisibleInner()) {
             viewVisibleToUser(true);
@@ -667,9 +676,37 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         }
         
         mOnResumeCallChildSetUserVisibleHint = false;
+        // ViewPager调用setUserVisibleHint只负责直接Fragment,如果直接Fragment中继续嵌套Fragment，
+        // 则不会处理，因此此处需要手动处理
+        setChildFragmentUserVisibleHint(isVisibleToUser);
+    }
+    
+    /**
+     * 设置当前Fragment管理的Child Fragment可见性
+     */
+    private void setChildFragmentUserVisibleHint(boolean isVisibleToUser) {
+        if (!isVisibleToUser) {
+            mPreShowChildFragment.clear();
+        }
+        
         List<Fragment> fragments = getChildFragment();
         for (Fragment fragment : fragments) {
-            fragment.setUserVisibleHint(isVisibleToUser);
+            if (!(fragment instanceof BaseFragment)) {
+                continue;
+            }
+            BaseFragment baseFragment = (BaseFragment) fragment;
+            
+            
+            if (!isVisibleToUser) {
+                if (baseFragment.isViewActualVisible()) {
+                    mPreShowChildFragment.add(baseFragment.getTag());
+                    baseFragment.setUserVisibleHint(false);
+                }
+            } else if (!baseFragment.isViewActualVisible()) {
+                if (mPreShowChildFragment.contains(fragment.getTag())) {
+                    fragment.setUserVisibleHint(true);
+                }
+            }
         }
     }
     
@@ -702,14 +739,22 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             mPreShowChildFragment.clear();
         }
         for (Fragment fragment : fragments) {
+            if (!(fragment instanceof BaseFragment)) {
+                continue;
+            }
+            
+            BaseFragment baseFragment = (BaseFragment) fragment;
             if (hidden) {
-                if (!fragment.isHidden()) {
+                if (baseFragment.isViewActualVisible()) {
                     mPreShowChildFragment.add(fragment.getTag());
-                    fragmentTransaction.hide(fragment);
                 }
-            } else if (fragment.isHidden()) {
-                if (mPreShowChildFragment.contains(fragment.getTag())) {
-                    fragmentTransaction.show(fragment);
+                
+                if (!baseFragment.isHidden()) {
+                    fragmentTransaction.hide(baseFragment);
+                }
+            } else if (baseFragment.isHidden()) {
+                if (mPreShowChildFragment.contains(baseFragment.getTag())) {
+                    fragmentTransaction.show(baseFragment);
                 }
             }
         }
