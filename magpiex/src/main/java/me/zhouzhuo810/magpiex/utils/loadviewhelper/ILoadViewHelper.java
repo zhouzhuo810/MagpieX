@@ -8,23 +8,31 @@ import android.view.View;
 
 public interface ILoadViewHelper {
     
-    void loadWidthHeightFont(View view, boolean forceWidthHeight);
-
-    void loadPadding(View view, boolean forceWidthHeight);
-
-    void loadLayoutMargin(View view, boolean forceWidthHeight);
+    void loadWidthHeightFont(View view);
     
-    void loadMaxWidthAndHeight(View view, boolean forceWidthHeight);
+    void loadPadding(View view);
     
-    void loadMinWidthAndHeight(View view, boolean forceWidthHeight);
-
+    void loadLayoutMargin(View view);
+    
+    void loadMaxWidthAndHeight(View view);
+    
+    void loadMinWidthAndHeight(View view);
+    
+    /**
+     * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
+     *
+     * @param px 原始数据
+     * @return 缩放数据
+     */
+    int getScaledValue(int px);
+    
     /**
      * 动态计算数值大小(按宽度缩放)
      *
      * @param px 原始数据
      * @return 缩放数据
      */
-    int getScaledValue(int px);
+    int getScaledValueByWidth(int px);
     
     /**
      * 动态计算数值大小(按高度缩放)

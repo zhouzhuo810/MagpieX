@@ -38,14 +38,14 @@ public class SimpleUtil {
      * @param v 要缩放的View
      */
     public static void scaleViewByWidthHeight(View v) {
-        ScreenAdapterUtil.getInstance().loadView(v, true);
+        ScreenAdapterUtil.getInstance().loadView(v);
     }
     
     /**
-     * 缩放值按宽度（默认）
+     * 缩放值自动（默认）
      *
      * @param px 原来值
-     * @return 缩放后的值
+     * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
     public static int getScaledValue(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValue(px);
@@ -53,6 +53,16 @@ public class SimpleUtil {
     
     /**
      * 缩放值
+     *
+     * @param px 原来值
+     * @return 缩放后的值
+     */
+    public static int getScaledValueByWidth(int px) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px);
+    }
+    
+    /**
+     * 缩放值按高度
      *
      * @param px 原来值
      * @return 缩放后的值

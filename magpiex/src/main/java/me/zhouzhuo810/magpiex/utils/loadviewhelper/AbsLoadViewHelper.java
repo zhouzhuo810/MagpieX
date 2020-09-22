@@ -1,6 +1,7 @@
 package me.zhouzhuo810.magpiex.utils.loadviewhelper;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,12 +15,13 @@ import me.zhouzhuo810.magpiex.utils.conversion.SimpleConversion;
 
 public abstract class AbsLoadViewHelper implements ILoadViewHelper {
     
+    protected int screenOrientation;
     protected float actualDensity;
     protected float actualDensityDpi;
     protected float actualWidth;
     protected float actualHeight;
     
-    protected boolean scaleWidthAndHeight;
+    protected String adaptType;
     
     protected int designWidth;
     protected int designHeight;
@@ -27,8 +29,8 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper {
     protected float fontSize;
     protected String unit;
     
-    public AbsLoadViewHelper(Context context, boolean scaleWidthAndHeight, int designWidth, int designHeight, int designDpi, float fontSize, String unit) {
-        this.scaleWidthAndHeight = scaleWidthAndHeight;
+    public AbsLoadViewHelper(Context context, String adaptType, int designWidth, int designHeight, int designDpi, float fontSize, String unit) {
+        this.adaptType = adaptType;
         this.designWidth = designWidth;
         this.designHeight = designHeight;
         this.designDpi = designDpi;
@@ -43,36 +45,33 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper {
     
     private void setActualParams(Context context) {
         float[] actualScreenInfo = ActualScreen.screenInfo(context);
-        if (actualScreenInfo != null && actualScreenInfo.length == 4) {
-            actualWidth = actualScreenInfo[0];
-            actualHeight = actualScreenInfo[1];
-            actualDensity = actualScreenInfo[2];
-            actualDensityDpi = actualScreenInfo[3];
+        if (actualScreenInfo != null && actualScreenInfo.length == 5) {
+            screenOrientation = (int) actualScreenInfo[0];
+            actualWidth = actualScreenInfo[1];
+            actualHeight = actualScreenInfo[2];
+            actualDensity = actualScreenInfo[3];
+            actualDensityDpi = actualScreenInfo[4];
         }
     }
     
     // if subclass has owner conversion，you need override this method and provide your conversion
     public void loadView(View view) {
-        loadView(view, new SimpleConversion(), false);
+        loadView(view, new SimpleConversion());
     }
     
-    public void loadView(View view, boolean forceWidthHeight) {
-        loadView(view, new SimpleConversion(), forceWidthHeight);
-    }
-    
-    public final void loadView(View view, IConversion conversion, boolean forceWidthHeight) {
+    public final void loadView(View view, IConversion conversion) {
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
-            conversion.transform(viewGroup, this, forceWidthHeight);
+            conversion.transform(viewGroup, this);
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 if (viewGroup.getChildAt(i) instanceof ViewGroup) {
-                    loadView(viewGroup.getChildAt(i), conversion, forceWidthHeight);
+                    loadView(viewGroup.getChildAt(i), conversion);
                 } else {
-                    conversion.transform(viewGroup.getChildAt(i), this, forceWidthHeight);
+                    conversion.transform(viewGroup.getChildAt(i), this);
                 }
             }
         } else {
-            conversion.transform(view, this, forceWidthHeight);
+            conversion.transform(view, this);
         }
         
     }

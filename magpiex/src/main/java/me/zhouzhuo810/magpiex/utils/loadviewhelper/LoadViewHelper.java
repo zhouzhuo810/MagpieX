@@ -1,10 +1,12 @@
 package me.zhouzhuo810.magpiex.utils.loadviewhelper;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
 /**
@@ -13,47 +15,28 @@ import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
 public class LoadViewHelper extends AbsLoadViewHelper {
     
-    public LoadViewHelper(Context context, boolean scaleWidthAndHeight, int designWidth, int designHeight, int designDpi,
+    public LoadViewHelper(Context context, String adaptType, int designWidth, int designHeight, int designDpi,
                           float fontSize, String unit) {
-        super(context, scaleWidthAndHeight, designWidth, designHeight, designDpi, fontSize, unit);
+        super(context, adaptType, designWidth, designHeight, designDpi, fontSize, unit);
     }
     
     @Override
-    public void loadWidthHeightFont(View view, boolean forceWidthHeight) {
+    public void loadWidthHeightFont(View view) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if (forceWidthHeight) {
-            if (layoutParams.width > 0) {
-                layoutParams.width = setValue(layoutParams.width);
-            }
-            if (layoutParams.height > 0) {
-                layoutParams.height = setValueByHeight(layoutParams.height);
-            }
-        } else {
-            if (layoutParams.width > 0) {
-                //宽度大于0
-                if (layoutParams.height > 0) {
-                    //且高度大于0
-                    if (layoutParams.height == layoutParams.width) {
-                        //如果宽高相等，则只按宽度来，保持原始比例，缩放宽高。
-                        layoutParams.width = setValue(layoutParams.width);
-                        layoutParams.height = setValue(layoutParams.height);
-                    } else {
-                        //如果宽高不一致，缩放宽高
-                        layoutParams.width = setValue(layoutParams.width);
-                        layoutParams.height = scaleWidthAndHeight ? setValueByHeight(layoutParams.height) :
-                            setValue(layoutParams.height);
-                    }
-                } else {
-                    //宽度大于0，高度不大于0，缩放宽
-                    layoutParams.width = setValue(layoutParams.width);
-                }
+        int originalWidth = layoutParams.width;
+        int originalHeight = layoutParams.height;
+        if (originalWidth > 0 && originalHeight > 0) {
+            if (originalWidth == originalHeight) {
+                layoutParams.width = setValue(originalWidth);
+                layoutParams.height = setValue(originalHeight);
             } else {
-                //宽高不大于0，高度大于0，缩放高
-                if (layoutParams.height > 0) {
-                    layoutParams.height = scaleWidthAndHeight ? setValueByHeight(layoutParams.height) :
-                        setValue(layoutParams.height);
-                }
+                layoutParams.width = setValue(originalWidth);
+                layoutParams.height = setValue(originalHeight);
             }
+        } else if (originalWidth > 0) {
+            layoutParams.width = setValue(originalWidth);
+        } else if (originalHeight > 0) {
+            layoutParams.height = setValue(originalHeight);
         }
         loadViewFont(view);
     }
@@ -66,73 +49,68 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float setFontSize(TextView textView) {
-        return calculateValue(textView.getTextSize() * fontSize);
-    }
-    
-    @Override
-    public void loadPadding(View view, boolean forceWidthHeight) {
-        if (forceWidthHeight) {
-            view.setPadding(setValue(view.getPaddingLeft()), setValueByHeight(view.getPaddingTop()),
-                setValue(view.getPaddingRight()), setValueByHeight(view.getPaddingBottom()));
+        if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
+            return isLandscape() ? calculateValueByHeight(textView.getTextSize() * fontSize) : calculateValueByWidth(textView.getTextSize() * fontSize);
+        } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WIDTH.equals(adaptType)) {
+            return calculateValueByWidth(textView.getTextSize() * fontSize);
+        } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_HEIGHT.equals(adaptType)) {
+            return calculateValueByHeight(textView.getTextSize() * fontSize);
         } else {
-            view.setPadding(setValue(view.getPaddingLeft()), scaleWidthAndHeight ? setValueByHeight(view.getPaddingTop()) :
-                    setValue(view.getPaddingTop()),
-                setValue(view.getPaddingRight()), scaleWidthAndHeight ? setValueByHeight(view.getPaddingBottom()) :
-                    setValue(view.getPaddingBottom()));
+            return calculateValueByWidth(textView.getTextSize() * fontSize);
         }
     }
     
     @Override
-    public void loadLayoutMargin(View view, boolean forceWidthHeight) {
+    public void loadPadding(View view) {
+        view.setPadding(setValue(view.getPaddingLeft()), setValue(view.getPaddingTop()),
+            setValue(view.getPaddingRight()), setValue(view.getPaddingBottom()));
+    }
+    
+    @Override
+    public void loadLayoutMargin(View view) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         ViewGroup.MarginLayoutParams marginLayoutParams;
         if (params instanceof ViewGroup.MarginLayoutParams) {
             marginLayoutParams = (ViewGroup.MarginLayoutParams) params;
             marginLayoutParams.leftMargin = setValue(marginLayoutParams.leftMargin);
             marginLayoutParams.rightMargin = setValue(marginLayoutParams.rightMargin);
-            if (forceWidthHeight) {
-                marginLayoutParams.topMargin = setValueByHeight(marginLayoutParams.topMargin);
-                marginLayoutParams.bottomMargin = setValueByHeight(marginLayoutParams.bottomMargin);
-                view.setLayoutParams(marginLayoutParams);
-            } else {
-                marginLayoutParams.topMargin = scaleWidthAndHeight ? setValueByHeight(marginLayoutParams.topMargin) :
-                    setValue(marginLayoutParams.topMargin);
-                marginLayoutParams.bottomMargin = scaleWidthAndHeight ? setValueByHeight(marginLayoutParams.bottomMargin) :
-                    setValue(marginLayoutParams.bottomMargin);
-                view.setLayoutParams(marginLayoutParams);
-            }
+            marginLayoutParams.topMargin = setValue(marginLayoutParams.topMargin);
+            marginLayoutParams.bottomMargin = setValue(marginLayoutParams.bottomMargin);
+            view.setLayoutParams(marginLayoutParams);
         }
     }
     
     @Override
-    public void loadMaxWidthAndHeight(View view, boolean forceWidthHeight) {
+    public void loadMaxWidthAndHeight(View view) {
         ViewUtil.setMaxWidth(view, setValue(ViewUtil.getMaxWidth(view)));
-        if (forceWidthHeight) {
-            ViewUtil.setMaxHeight(view, setValueByHeight(ViewUtil.getMaxHeight(view)));
-        } else {
-            ViewUtil.setMaxHeight(view, scaleWidthAndHeight ? setValueByHeight(ViewUtil.getMaxHeight(view)) :
-                setValue(ViewUtil.getMaxHeight(view)));
-        }
+        ViewUtil.setMaxHeight(view, setValue(ViewUtil.getMaxWidth(view)));
     }
     
     @Override
-    public void loadMinWidthAndHeight(View view, boolean forceWidthHeight) {
+    public void loadMinWidthAndHeight(View view) {
         ViewUtil.setMinWidth(view, setValue(ViewUtil.getMinWidth(view)));
-        if (forceWidthHeight) {
-            ViewUtil.setMinHeight(view, setValueByHeight(ViewUtil.getMinHeight(view)));
-        } else {
-            ViewUtil.setMinHeight(view, scaleWidthAndHeight ? setValueByHeight(ViewUtil.getMinHeight(view)) :
-                setValue(ViewUtil.getMinHeight(view)));
-        }
+        ViewUtil.setMinHeight(view, setValue(ViewUtil.getMinHeight(view)));
     }
     
     private int setValue(int value) {
+        if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
+            return isLandscape() ? setValueByHeight(value) : setValueByWidth(value);
+        } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WIDTH.equals(adaptType)) {
+            return setValueByWidth(value);
+        } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_HEIGHT.equals(adaptType)) {
+            return setValueByHeight(value);
+        }
+        return setValueByWidth(value);
+    }
+    
+    
+    private int setValueByWidth(int value) {
         if (value == 0) {
             return 0;
         } else if (value == 1) {
             return 1;
         }
-        return (int) calculateValue(value);
+        return (int) calculateValueByWidth(value);
     }
     
     private int setValueByHeight(int value) {
@@ -144,25 +122,28 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         return (int) calculateValueByHeight(value);
     }
     
-    private float calculateValue(float value) {
+    private float calculateValueByWidth(float value) {
         if ("px".equals(unit)) {
-            return value * ((float) actualWidth / (float) designWidth);
+            return value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         } else if ("dp".equals(unit)) {
             int dip = px2dip(actualDensity, value);
             value = ((float) designDpi / 160) * dip;
-            return value * ((float) actualWidth / (float) designWidth);
-            
+            return value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         }
         return 0;
     }
     
+    private boolean isLandscape() {
+        return screenOrientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+    
     private float calculateValueByHeight(float value) {
         if ("px".equals(unit)) {
-            return value * ((float) actualHeight / (float) designHeight);
+            return value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         } else if ("dp".equals(unit)) {
             int dip = px2dip(actualDensity, value);
             value = ((float) designDpi / 160) * dip;
-            return value * ((float) actualHeight / (float) designHeight);
+            return value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         }
         return 0;
     }
@@ -175,6 +156,11 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     @Override
     public int getScaledValue(int px) {
         return setValue(px);
+    }
+    
+    @Override
+    public int getScaledValueByWidth(int px) {
+        return setValueByWidth(px);
     }
     
     @Override

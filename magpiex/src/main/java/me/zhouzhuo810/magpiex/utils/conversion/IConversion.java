@@ -12,7 +12,5 @@ import me.zhouzhuo810.magpiex.utils.loadviewhelper.AbsLoadViewHelper;
 public interface IConversion {
 
     void transform(View view, AbsLoadViewHelper loadViewHelper);
-    
-    void transform(View view, AbsLoadViewHelper loadViewHelper, boolean forceWidthHeight);
 
 }

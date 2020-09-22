@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    package="me.zhouzhuo810.magpiexdemo"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.zhouzhuo810.magpiexdemo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -21,10 +21,15 @@
         <!--设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图.-->
         <meta-data
             android:name="design_width"
-            android:value="1080"/>
+            android:value="1080" />
         <meta-data
             android:name="design_height"
-            android:value="1920"/>
+            android:value="1920" />
+        <!-- 屏幕适配模式，auto:自动，width:按宽度，height:按高度  -->
+        <meta-data
+            android:name="screen_adapt_type"
+            android:value="height" />
+
         <!--设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了-->
         <!--
             宽         	    240 	320 	480 	720     1080 	1440
@@ -33,28 +38,25 @@
         -->
         <meta-data
             android:name="design_dpi"
-            android:value="480"/>
+            android:value="480" />
 
         <!--全局字体的大小倍数,有时候老板会觉得你的所有的字小了或者大了,你总不能一个一个去改吧-->
         <meta-data
             android:name="font_size"
-            android:value="1.0"/>
+            android:value="1.0" />
 
         <!--你的布局里面用的是px这就写px,你的布局里面用的是dp这就写dp,要统一,不要一会儿px一会儿dp,字体也用px或者dp,不要用sp,微信qq用的肯定不是sp.-->
         <meta-data
             android:name="unit"
-            android:value="px"/>
+            android:value="px" />
 
         <activity
             android:name=".MainActivity"
-            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen|locale"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            >
+            android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
@@ -62,43 +64,43 @@
         <activity
             android:name=".DialogActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".TitleActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".DownloadActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".TabActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".PagerActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".ToolsActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".SpinnerTestActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".MapActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".ScrollGridActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".ScrollListActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="unspecified" />
     </application>
 
 

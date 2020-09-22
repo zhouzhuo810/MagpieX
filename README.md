@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.2.8'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.2.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -71,6 +71,10 @@ If you use this. That means you added dependencies below:
         <meta-data
             android:name="design_height"
             android:value="1920"/>
+        <!-- 屏幕适配模式，auto:自动，width:按宽度，height:按高度  -->
+        <meta-data
+            android:name="screen_adapt_type"
+            android:value="height" />
         <!--设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了-->
         <!--
             宽         	    240 	320 	480 	720     1080 	1440
@@ -287,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.2.9
+- 修复屏幕适配横竖屏切换适配出错问题； 
 
 > 1.2.8
 - 修复BaseFragment的setUserVisibleHint调用错误问题；
