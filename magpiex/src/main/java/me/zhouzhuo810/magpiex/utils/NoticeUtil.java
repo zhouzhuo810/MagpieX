@@ -148,21 +148,22 @@ public class NoticeUtil {
     /**
      * 显示复制URL调试通知
      *
-     * @param context    上下文
-     * @param title      标题
-     * @param content    内容
-     * @param autoCancel 是否自动取消
-     * @param onGoing    是否常驻
-     * @param smallIcon  小图标
-     * @param vibrate    是否震动
-     * @param channelId  通知渠道id
+     * @param context     上下文
+     * @param title       标题
+     * @param showContent 通知内容
+     * @param realContent 点击通知实际复制内容
+     * @param autoCancel  是否自动取消
+     * @param onGoing     是否常驻
+     * @param smallIcon   小图标
+     * @param vibrate     是否震动
+     * @param channelId   通知渠道id
      */
     public static void showNormalNoticeWithCopyAction(Context context, String title,
-                                                      String content, boolean autoCancel,
+                                                      String showContent, String realContent, boolean autoCancel,
                                                       boolean onGoing, int smallIcon, boolean vibrate, String channelId) {
         NotificationCompat.Builder b = new NotificationCompat.Builder(context, channelId == null ? DEFAULT_CHANNEL_ID : channelId);
         b.setContentTitle(title)
-            .setContentText(content)
+            .setContentText(showContent)
             .setWhen(System.currentTimeMillis())
             .setAutoCancel(autoCancel)
             .setOngoing(onGoing)
@@ -170,7 +171,7 @@ public class NoticeUtil {
             .setVibrate(vibrate ? new long[]{200, 200} : null);
         Intent intent = new Intent(context, CopyUrlActivity.class);
         intent.putExtra(Cons.NOTICE_ACTION, "copy");
-        intent.putExtra(Cons.NOTICE_URL, content);
+        intent.putExtra(Cons.NOTICE_URL, realContent);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(context, RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         b.setContentIntent(pi);
@@ -186,7 +187,8 @@ public class NoticeUtil {
      *
      * @param context    上下文
      * @param title      标题
-     * @param content    内容
+     * @param showContent 通知内容
+     * @param realContent 点击通知实际复制内容
      * @param autoCancel 是否自动取消
      * @param onGoing    是否常驻
      * @param smallIcon  小图标
@@ -194,11 +196,11 @@ public class NoticeUtil {
      * @param channelId  通知渠道id
      */
     public static void showNormalNoticeWithShareAction(Context context, String title,
-                                                       String content, boolean autoCancel,
+                                                       String showContent, String realContent, boolean autoCancel,
                                                        boolean onGoing, int smallIcon, boolean vibrate, String channelId) {
         NotificationCompat.Builder b = new NotificationCompat.Builder(context, channelId == null ? DEFAULT_CHANNEL_ID : channelId);
         b.setContentTitle(title)
-            .setContentText(content)
+            .setContentText(showContent)
             .setWhen(System.currentTimeMillis())
             .setAutoCancel(autoCancel)
             .setOngoing(onGoing)
@@ -206,7 +208,7 @@ public class NoticeUtil {
             .setVibrate(vibrate ? new long[]{200, 200} : null);
         Intent intent = new Intent(context, CopyUrlActivity.class);
         intent.putExtra(Cons.NOTICE_ACTION, "share");
-        intent.putExtra(Cons.NOTICE_URL, content);
+        intent.putExtra(Cons.NOTICE_URL, realContent);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(context, RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         b.setContentIntent(pi);

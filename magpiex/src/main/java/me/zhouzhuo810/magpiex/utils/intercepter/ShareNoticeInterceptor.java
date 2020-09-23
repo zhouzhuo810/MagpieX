@@ -57,11 +57,11 @@ public class ShareNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url() + " params: " + body, true, false,
+                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + " params: " + body, true, false,
                     mLogoId, false, mChannelId);
             } else {
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url() + "", true, false,
+                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + "", true, false,
                     mLogoId, false, mChannelId);
             }
         } catch (Exception e) {

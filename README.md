@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.1'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.2
+>- 修改`CopyNoticeInterceptor`和`ShareNoticeInterceptor`只展示接口路径；
 
 > 1.3.1
 >- 修复`CopyNoticeInterceptor`和`ShareNoticeInterceptor`点击不同通知获取通知内容不对应问题；
