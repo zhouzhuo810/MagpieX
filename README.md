@@ -63,15 +63,15 @@ If you use this. That means you added dependencies below:
 - Add UI Design size in your AndroidManifest.xml.
 
 ```xml
-        <!--设计图的宽,单位是像素,推荐用markman测量-->
+        <!--设计图的宽,单位是像素(必须配置)-->
         <meta-data
             android:name="design_width"
             android:value="1080" />
-        <!--设计图的高,单位是像素,推荐用markman测量，（可选配置项，配置了design_height则按宽高缩放，否则只按design_width缩放）-->
+        <!--设计图的高,单位是像素(必须配置)-->
         <meta-data
             android:name="design_height"
             android:value="1920"/>
-        <!-- 屏幕适配模式，auto:自动，width:按宽度，height:按高度  -->
+        <!-- 屏幕适配模式，(可选) auto:自动(默认)，width:按宽度，height:按高度  -->
         <meta-data
             android:name="screen_adapt_type"
             android:value="height" />
