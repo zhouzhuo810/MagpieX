@@ -50,7 +50,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     // 而不是setUserVisibleHint,正常结合ViewPager是先调用setUserVisibleHint
     private static final String COMBINE_VIEW_PAGER = "CombineViewPager";
     // 记录当前Fragment hide时，管理的childFragment显示状态，在被回收后恢复时使用
-    private static final String PRE_SHOW_CHILD_FRAGMENT = "preShowChildFragment";
+    private static final String PRE_SHOW_CHILD_FRAGMENT_BY_HIDDEN = "preShowChildFragment";
+    // 记录当前Fragment setUserVisibleHint(false)时，管理的childFragment显示状态，在被回收后恢复时使用
+    private static final String PRE_SHOW_CHILD_FRAGMENT_BY_USER_VISIBLE_HINT = "preShowChildFragmentByUserVisibleHint";
     
     protected View rootView;
     
@@ -95,7 +97,13 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      * 记录当前Fragment {@link #onHiddenChanged(boolean)}为false之前，
      * 此时ChildFragment显示的界面，用于下次恢复显示时使用
      */
-    private ArrayList<String> mPreShowChildFragment = new ArrayList<>();
+    private ArrayList<String> mPreShowChildFragmentByHidden = new ArrayList<>();
+    
+    /**
+     * 记录当前Fragment {@link #setUserVisibleHint(boolean)}为false之前，
+     * 此时ChildFragment显示的界面，用于下次恢复显示时使用
+     */
+    private ArrayList<String> mPreShowChildFragmentByUserVisibleHint = new ArrayList<>();
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,7 +128,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         super.onSaveInstanceState(outState);
         outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
         outState.putBoolean(COMBINE_VIEW_PAGER, mCombineViewPager);
-        outState.putStringArrayList(PRE_SHOW_CHILD_FRAGMENT, mPreShowChildFragment);
+        outState.putStringArrayList(PRE_SHOW_CHILD_FRAGMENT_BY_HIDDEN, mPreShowChildFragmentByHidden);
+        outState.putStringArrayList(PRE_SHOW_CHILD_FRAGMENT_BY_USER_VISIBLE_HINT, mPreShowChildFragmentByUserVisibleHint);
     }
     
     /**
@@ -135,9 +144,14 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         }
         
         mCombineViewPager = savedInstanceState.getBoolean(COMBINE_VIEW_PAGER);
-        mPreShowChildFragment = savedInstanceState.getStringArrayList(PRE_SHOW_CHILD_FRAGMENT);
-        if (mPreShowChildFragment == null) {
-            mPreShowChildFragment = new ArrayList<>();
+        mPreShowChildFragmentByHidden = savedInstanceState.getStringArrayList(PRE_SHOW_CHILD_FRAGMENT_BY_HIDDEN);
+        mPreShowChildFragmentByUserVisibleHint = savedInstanceState.getStringArrayList(PRE_SHOW_CHILD_FRAGMENT_BY_USER_VISIBLE_HINT);
+        if (mPreShowChildFragmentByHidden == null) {
+            mPreShowChildFragmentByHidden = new ArrayList<>();
+        }
+        
+        if (mPreShowChildFragmentByUserVisibleHint == null) {
+            mPreShowChildFragmentByUserVisibleHint = new ArrayList<>();
         }
     }
     
@@ -648,8 +662,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     /**
      * 设置界面是否可见于用户，通常是FragmentPagerAdapter中调用{@link Fragment#setUserVisibleHint(boolean)}.
      * 如果主动调用{@link Fragment#setUserVisibleHint(boolean)}，也会判定当前界面是结合ViewPager
-     * 使用，因此请自行处理好相应的界面展示隐藏逻辑。不建议手动调用
+     * 使用，因此请自行处理好相应的界面展示隐藏逻辑，不建议手动调用。
      */
+    @Deprecated
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -686,7 +701,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      */
     private void setChildFragmentUserVisibleHint(boolean isVisibleToUser) {
         if (!isVisibleToUser) {
-            mPreShowChildFragment.clear();
+            mPreShowChildFragmentByUserVisibleHint.clear();
         }
         
         List<Fragment> fragments = getChildFragment();
@@ -694,17 +709,16 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             if (!(fragment instanceof BaseFragment)) {
                 continue;
             }
+            
             BaseFragment baseFragment = (BaseFragment) fragment;
-            
-            
             if (!isVisibleToUser) {
                 if (baseFragment.isViewActualVisible()) {
-                    mPreShowChildFragment.add(baseFragment.getTag());
+                    mPreShowChildFragmentByUserVisibleHint.add(baseFragment.getTag());
                     baseFragment.setUserVisibleHint(false);
                 }
             } else if (!baseFragment.isViewActualVisible()) {
-                if (mPreShowChildFragment.contains(fragment.getTag())) {
-                    fragment.setUserVisibleHint(true);
+                if (mPreShowChildFragmentByUserVisibleHint.contains(fragment.getTag())) {
+                    baseFragment.setUserVisibleHint(true);
                 }
             }
         }
@@ -736,7 +750,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         FragmentTransaction fragmentTransaction = childFragmentManager.beginTransaction();
         List<Fragment> fragments = getChildFragment();
         if (hidden) {
-            mPreShowChildFragment.clear();
+            mPreShowChildFragmentByHidden.clear();
         }
         for (Fragment fragment : fragments) {
             if (!(fragment instanceof BaseFragment)) {
@@ -745,15 +759,14 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             
             BaseFragment baseFragment = (BaseFragment) fragment;
             if (hidden) {
-                if (baseFragment.isViewActualVisible()) {
-                    mPreShowChildFragment.add(fragment.getTag());
-                }
-                
                 if (!baseFragment.isHidden()) {
+                    // 不能使用 baseFragment.isViewActualVisible() 为true时作为判定条件将fragment添加到mPreShowChildFragmentByHidden
+                    // 因为使用该条件，在同一时间只会有一个界面是true，然而此时需要保留下次恢复的界面是本次状态是否是Hidden，而不是是否真实可见
+                    mPreShowChildFragmentByHidden.add(fragment.getTag());
                     fragmentTransaction.hide(baseFragment);
                 }
             } else if (baseFragment.isHidden()) {
-                if (mPreShowChildFragment.contains(baseFragment.getTag())) {
+                if (mPreShowChildFragmentByHidden.contains(baseFragment.getTag())) {
                     fragmentTransaction.show(baseFragment);
                 }
             }
@@ -809,7 +822,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     /**
      * 刷新数据，可在任何时机调用。如果调用时，界面并没有显示，或者压根就没有走生命周期。此时会标记为延迟加载，
      * 在界面真正显示到界面时，会调用{@link #lazyLoadData()}。如果传参，子类覆盖该类处理参数保存相关操作，
-     * 但是记得参数更新后再调用super.refreshDataIfNeeded(params)
+     * 但是记得参数更新后"再"调用super.refreshDataIfNeeded(params)
      */
     @CallSuper
     public void refreshDataIfNeeded(Object... params) {
