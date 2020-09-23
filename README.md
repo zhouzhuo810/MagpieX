@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.2.9'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.0
+- 修复嵌套Fragment，如果父Fragment HIDDEN后再恢复，子Fragment只恢复了最后一次可见的界面，其它子Fragment在父Fragment HIDDEN之前也是Show状态界面未恢复Bug
 
 > 1.2.9
 - 修复屏幕适配横竖屏切换适配出错问题； 
