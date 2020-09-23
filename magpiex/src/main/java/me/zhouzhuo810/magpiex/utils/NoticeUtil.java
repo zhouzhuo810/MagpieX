@@ -54,7 +54,7 @@ public class NoticeUtil {
             .setDefaults(voice ? Notification.DEFAULT_SOUND : Notification.DEFAULT_ALL)
             .setVibrate(vibrate ? new long[]{200, 200} : null);
         if (intent != null) {
-            b.setContentIntent(PendingIntent.getActivity(BaseUtil.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            b.setContentIntent(PendingIntent.getActivity(BaseUtil.getApp(), RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT));
         }
         NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtil.getApp());
         nm.notify(NOTICE_NORMAL, b.build());
@@ -91,7 +91,7 @@ public class NoticeUtil {
             b.setSound(Uri.parse("android.resource://" + BaseUtil.getPackageInfo(BaseUtil.getApp()).packageName + "/" + voiceId));
         }
         if (intent != null) {
-            PendingIntent pi = PendingIntent.getActivity(BaseUtil.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pi = PendingIntent.getActivity(BaseUtil.getApp(), RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
             b.setContentIntent(pi);
         }
         Notification notification = b.build();
@@ -172,7 +172,7 @@ public class NoticeUtil {
         intent.putExtra(Cons.NOTICE_ACTION, "copy");
         intent.putExtra(Cons.NOTICE_URL, content);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(context, RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         b.setContentIntent(pi);
         Notification notification = b.build();
         NotificationManagerCompat nm = NotificationManagerCompat.from(context);
@@ -208,7 +208,7 @@ public class NoticeUtil {
         intent.putExtra(Cons.NOTICE_ACTION, "share");
         intent.putExtra(Cons.NOTICE_URL, content);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(context, RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         b.setContentIntent(pi);
         Notification notification = b.build();
         NotificationManagerCompat nm = NotificationManagerCompat.from(context);

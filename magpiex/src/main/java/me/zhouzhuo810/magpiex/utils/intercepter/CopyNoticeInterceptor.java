@@ -48,10 +48,6 @@ public class CopyNoticeInterceptor implements Interceptor {
         
         String requestInfo = ".\nREQUEST URL：" + request.url();
         
-        //发通知，用于复制url
-        NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url() + "", true, false,
-            mLogoId, false, mChannelId);
-        
         try {
             Buffer requestBuffer = new Buffer();
             if (request.body() != null) {
@@ -60,6 +56,13 @@ public class CopyNoticeInterceptor implements Interceptor {
             String body = requestBuffer.readString(requestBuffer.size() > 2048 ? 2048 : requestBuffer.size(), UTF8);
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
+                //发通知，用于复制url
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url() + " params: " + body, true, false,
+                    mLogoId, false, mChannelId);
+            } else {
+                //发通知，用于复制url
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url() + "", true, false,
+                    mLogoId, false, mChannelId);
             }
         } catch (Exception e) {
             e.printStackTrace();
