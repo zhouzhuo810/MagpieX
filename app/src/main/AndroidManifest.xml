@@ -18,10 +18,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <!--设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图.-->
+        <!--设计图的宽, 单位是像素(必须配置)，注意：如果是电视，一体机，Pad的话，则是设计图的高，比如1920x1080的电视，应该配置1080-->
         <meta-data
             android:name="design_width"
             android:value="1080" />
+        <!--设计图的高, 单位是像素(必须配置)，注意：如果是电视，一体机，Pad的话，则是设计图的宽，比如1920x1080的电视，应该配置1920-->
         <meta-data
             android:name="design_height"
             android:value="1920" />
@@ -52,7 +53,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +66,7 @@
         <activity
             android:name=".DialogActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="unspecified" />
+            android:screenOrientation="sensor" />
         <activity
             android:name=".TitleActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"

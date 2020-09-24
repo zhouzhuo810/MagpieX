@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.2'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -63,11 +63,11 @@ If you use this. That means you added dependencies below:
 - Add UI Design size in your AndroidManifest.xml.
 
 ```xml
-        <!--设计图的宽,单位是像素(必须配置)-->
+        <!--设计图的宽, 单位是像素(必须配置)，注意：如果是电视，一体机，Pad则是设计图的高，比如1920x1080的电视，应该配置1080-->
         <meta-data
             android:name="design_width"
             android:value="1080" />
-        <!--设计图的高,单位是像素(必须配置)-->
+        <!--设计图的高, 单位是像素(必须配置)，注意：如果是电视，一体机，Pad则是设计图的宽，比如1920x1080的电视，应该配置1920-->
         <meta-data
             android:name="design_height"
             android:value="1920"/>
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.3
+>- 修改屏幕适配的方向判断逻辑；
 
 > 1.3.2
 >- 修改`CopyNoticeInterceptor`和`ShareNoticeInterceptor`只展示接口路径；

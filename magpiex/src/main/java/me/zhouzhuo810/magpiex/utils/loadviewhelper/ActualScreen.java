@@ -20,9 +20,8 @@ public class ActualScreen {
             return null;
         }
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
-        return new float[]{(rotation == 1 || rotation == 3) ? Configuration.ORIENTATION_LANDSCAPE : Configuration.ORIENTATION_PORTRAIT,
-            displayMetrics.widthPixels, displayMetrics.heightPixels, displayMetrics.density, displayMetrics.densityDpi};
+        int orientation = context.getResources().getConfiguration().orientation;
+        return new float[]{orientation, displayMetrics.widthPixels, displayMetrics.heightPixels, displayMetrics.density, displayMetrics.densityDpi};
     }
     
 }
