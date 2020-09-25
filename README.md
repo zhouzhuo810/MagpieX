@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.4'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -143,7 +143,7 @@ public class MyApplication extends BaseApplication {
 - ok, Just use `px` unit in your layout.
 
 - If you do not use BaseActivity, Then you should invoke the method
- `   ScreenAdapterUtil.getInstance().loadView(getWindow().getDecorView());` in `Activity#onCreate()` method after `setContentView()`.
+ `SimpleUtil.resetScale(this);` and `ScreenAdapterUtil.getInstance().loadView(getWindow().getDecorView());` in `Activity#onCreate()` method after `setContentView()`.
 
 - If you do not use BaseFragment, Then you should invoke the method
  `   ScreenAdapterUtil.getInstance().loadView(view);` in `Fragment#onCreateView()` method after `inflate()`.
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.5
+>- 修改屏幕适配的方向判断逻辑；
 
 > 1.3.4
 >- 修改屏幕适配的方向判断逻辑；
