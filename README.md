@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.3'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.4
+>- 修改屏幕适配的方向判断逻辑；
 
 > 1.3.3
 >- 修改屏幕适配的方向判断逻辑；
