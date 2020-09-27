@@ -23,6 +23,7 @@ import java.util.List;
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.disposables.Disposable;
@@ -579,7 +580,22 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         //如果支持多语言，才给切换语言
         if (shouldSupportMultiLanguage()) {
             Integer language = SpUtil.getInt(newBase, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
-            super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, language));
+            Context context = LanguageUtil.attachBaseContext(newBase, language);
+            final Configuration configuration = context.getResources().getConfiguration();
+            // 此处的ContextThemeWrapper是androidx.appcompat.view包下的
+            // 你也可以使用android.view.ContextThemeWrapper，但是使用该对象最低只兼容到API 17
+            // 所以使用 androidx.appcompat.view.ContextThemeWrapper省心
+            final ContextThemeWrapper wrappedContext = new ContextThemeWrapper(context,
+                R.style.MagpieTheme_NoActionBar) {
+                @Override
+                public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+                    if (overrideConfiguration != null) {
+                        overrideConfiguration.setTo(configuration);
+                    }
+                    super.applyOverrideConfiguration(overrideConfiguration);
+                }
+            };
+            super.attachBaseContext(wrappedContext);
         } else {
             super.attachBaseContext(newBase);
         }
