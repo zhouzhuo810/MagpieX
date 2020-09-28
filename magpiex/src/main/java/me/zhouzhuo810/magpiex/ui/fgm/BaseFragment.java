@@ -34,7 +34,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * 此BaseFragment主要提供了界面展示隐藏，数据延迟加载方法，使用者无需关心界面显示和隐藏的时机，
@@ -202,7 +202,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         rootView = inflater.inflate(getLayoutId(), container, false);
         rootView.setOnTouchListener(this);
         // 屏幕适配
-        ScreenAdapterUtil.getInstance().loadView(rootView);
+        SimpleUtil.scaleView(rootView);
         return rootView;
     }
     

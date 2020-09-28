@@ -57,7 +57,7 @@ public class CopyNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + " params: " + body, true, false,
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + "\n\nparams: " + body, true, false,
                     mLogoId, false, mChannelId);
             } else {
                 //发通知，用于复制url

@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.6'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.7
+>- 缩放添加Tag防止重复缩放；
 
 > 1.3.6
 >- 修复`androidx.appcompat:appcompat:1.2.0`导致多语言切换失效问题;

@@ -40,7 +40,6 @@ import me.zhouzhuo810.magpiex.ui.fgm.BaseFragment;
 import me.zhouzhuo810.magpiex.utils.ActivityUtil;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
 
@@ -61,10 +60,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         EventBus.getDefault().register(this);
         
         setContentView(getLayoutId());
-    
-        SimpleUtil.resetScale(this);
         
-        ScreenAdapterUtil.getInstance().loadView(getDecorView());
+        SimpleUtil.resetScale(this);
+    
+        SimpleUtil.scaleView(getDecorView());
         
         if (!shouldNotInvokeInitMethods(savedInstanceState)) {
             initView(savedInstanceState);
