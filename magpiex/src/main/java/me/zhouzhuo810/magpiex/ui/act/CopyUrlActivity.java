@@ -21,7 +21,7 @@ public class CopyUrlActivity extends BaseActivity {
         String url = getIntent().getStringExtra(Cons.NOTICE_URL);
         if ("copy".equals(action)) {
             CopyUtil.copyPlainText("", url);
-            ToastUtil.showShortToast(getString(R.string.magpie_copy_ok));
+            ToastUtil.showToast(getString(R.string.magpie_copy_ok));
         } else if ("share".equals(action)) {
             ShareUtil.shareTextToOther(this, url, null);
         }

@@ -27,6 +27,11 @@ public class AutoSplitTextView extends androidx.appcompat.widget.AppCompatTextVi
      */
     private String mText;
     
+    /**
+     * 启动线程来分割文字的最小长度，大于这个值开始启用线程
+     */
+    public static int MIN_TEXT_LENGTH_TO_START_THREAD = 1000;
+    
     public AutoSplitTextView(Context context) {super(context);}
     
     public AutoSplitTextView(Context context, AttributeSet attrs) {super(context, attrs); }
@@ -77,20 +82,27 @@ public class AutoSplitTextView extends androidx.appcompat.widget.AppCompatTextVi
             final int width = getMeasuredWidth();
             int height = getMeasuredHeight();
             if (width > 0 && height > 0) {
-                AsyncExecutor.getInstance().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        final String newText = autoSplitText(mText, width);
-                        if (!TextUtils.isEmpty(newText)) {
-                            post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AutoSplitTextView.super.setText(newText, BufferType.NORMAL);
-                                }
-                            });
+                if (mText.length() > MIN_TEXT_LENGTH_TO_START_THREAD) {
+                    AsyncExecutor.getInstance().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            final String newText = autoSplitText(mText, width);
+                            if (!TextUtils.isEmpty(newText)) {
+                                post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AutoSplitTextView.super.setText(newText, BufferType.NORMAL);
+                                    }
+                                });
+                            }
                         }
+                    });
+                } else {
+                    String newText = autoSplitText(mText, width);
+                    if (!TextUtils.isEmpty(newText)) {
+                        super.setText(newText, BufferType.NORMAL);
                     }
-                });
+                }
             }
         }
     }

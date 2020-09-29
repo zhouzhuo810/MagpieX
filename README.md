@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.7'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.8
+>- 新增`RvQuickAdapter`和`RvMultiItemQuickAdapter`适配器；
+>- `AutoSplitTextView`新增`MIN_TEXT_LENGTH_TO_START_THREAD`来决定是否启用线程,默认1000；
 
 > 1.3.7
 >- 缩放添加Tag防止重复缩放；
