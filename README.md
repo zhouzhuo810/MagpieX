@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.8'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.3.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.9
+>- 修改RxHelper参数int为long类型；
 
 > 1.3.8
 >- 新增`RvQuickAdapter`和`RvMultiItemQuickAdapter`适配器；
