@@ -278,19 +278,16 @@ public class TwoBtnEditDialog extends DialogFragment {
      * super.onDismiss就没问题
      */
     public void dismissDialog() {
-        if (getActivity() != null && !getActivity().isFinishing()) {
-            if (rootView != null) {
-                EditText etMsg = rootView.findViewById(R.id.et_msg);
-                KeyboardUtil.hideSoftInput(etMsg);
-            }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    TwoBtnEditDialog.super.dismissAllowingStateLoss();
-                }
-            }, 150);
-            
+        if (rootView != null) {
+            EditText etMsg = rootView.findViewById(R.id.et_msg);
+            KeyboardUtil.hideSoftInput(etMsg);
         }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TwoBtnEditDialog.super.dismissAllowingStateLoss();
+            }
+        }, 150);
     }
     
     @Override

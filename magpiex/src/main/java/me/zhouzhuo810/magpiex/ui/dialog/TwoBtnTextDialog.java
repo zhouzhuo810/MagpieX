@@ -58,6 +58,7 @@ public class TwoBtnTextDialog extends DialogFragment {
     
     /**
      * 设置一个按钮点击监听
+     *
      * @param onOneBtnClickListener 监听
      * @return 自己
      */
@@ -240,9 +241,7 @@ public class TwoBtnTextDialog extends DialogFragment {
      * super.onDismiss就没问题
      */
     public void dismissDialog() {
-        if (getActivity() != null && !getActivity().isFinishing()) {
-            super.dismissAllowingStateLoss();
-        }
+        super.dismissAllowingStateLoss();
     }
     
     @Override

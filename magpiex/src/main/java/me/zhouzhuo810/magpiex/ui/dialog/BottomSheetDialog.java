@@ -200,9 +200,7 @@ public class BottomSheetDialog extends DialogFragment {
      * super.onDismiss就没问题
      */
     public void dismissDialog() {
-        if (getActivity() != null && !getActivity().isFinishing()) {
-            super.dismissAllowingStateLoss();
-        }
+        super.dismissAllowingStateLoss();
     }
     
     @Override

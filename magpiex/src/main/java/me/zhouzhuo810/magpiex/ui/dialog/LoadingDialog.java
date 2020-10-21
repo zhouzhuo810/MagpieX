@@ -147,7 +147,7 @@ public class LoadingDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mRootView = inflater.inflate(landscape ?  R.layout.layout_loading_dialog_land : R.layout.layout_loading_dialog, container, false);
+        mRootView = inflater.inflate(landscape ? R.layout.layout_loading_dialog_land : R.layout.layout_loading_dialog, container, false);
         if (savedInstanceState != null) {
             dismiss();
             return mRootView;
@@ -202,9 +202,7 @@ public class LoadingDialog extends DialogFragment {
      */
     public void dismissDialog() {
         isLoading = false;
-        if (getActivity() != null && !getActivity().isFinishing()) {
-            super.dismissAllowingStateLoss();
-        }
+        super.dismissAllowingStateLoss();
     }
     
     @Override

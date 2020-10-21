@@ -23,14 +23,14 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
  * 单个按钮进度对话框
  */
 public class OneBtnProgressDialog extends DialogFragment {
-
+    
     private DialogInterface.OnDismissListener dismissListener;
     private OnProgressListener onProgressListener;
     private boolean landscape;
     private String title;
     private String msg;
     private String btnText;
-
+    
     /**
      * 设置对话框关闭监听
      *
@@ -41,7 +41,7 @@ public class OneBtnProgressDialog extends DialogFragment {
         this.dismissListener = dismissListener;
         return this;
     }
-
+    
     /**
      * 设置进度改变和按钮点击监听
      *
@@ -69,7 +69,6 @@ public class OneBtnProgressDialog extends DialogFragment {
     }
     
     
-    
     /**
      * 设置按钮文字
      *
@@ -80,7 +79,7 @@ public class OneBtnProgressDialog extends DialogFragment {
         this.btnText = btnText;
         return this;
     }
-
+    
     /**
      * 设置标题
      *
@@ -91,7 +90,7 @@ public class OneBtnProgressDialog extends DialogFragment {
         this.title = title;
         return this;
     }
-
+    
     /**
      * 设置消息内容
      *
@@ -102,7 +101,7 @@ public class OneBtnProgressDialog extends DialogFragment {
         this.msg = msg;
         return this;
     }
-
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -123,7 +122,7 @@ public class OneBtnProgressDialog extends DialogFragment {
             }
         }
     }
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -167,8 +166,8 @@ public class OneBtnProgressDialog extends DialogFragment {
         }
         return rootView;
     }
-
-
+    
+    
     @Override
     public void show(FragmentManager manager, String tag) {
         try {
@@ -177,18 +176,16 @@ public class OneBtnProgressDialog extends DialogFragment {
             e.printStackTrace();
         }
     }
-
-
+    
+    
     /**
      * 注意,不要用super.dismiss(),bug 同上show()
      * super.onDismiss就没问题
      */
     public void dismissDialog() {
-        if (getActivity() != null && !getActivity().isFinishing()) {
-            super.dismissAllowingStateLoss();
-        }
+        super.dismissAllowingStateLoss();
     }
-
+    
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
@@ -196,12 +193,12 @@ public class OneBtnProgressDialog extends DialogFragment {
             dismissListener.onDismiss(dialog);
         }
     }
-
+    
     public interface OnProgressListener {
-
+        
         void onStart(ProgressBar pb, TextView tvMsg, TextView tvOk);
-
+        
         void onBtnClick();
-
+        
     }
 }

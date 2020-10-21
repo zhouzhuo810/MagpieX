@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.adapter.ListDialogAdapter;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 
 public class ListDialog extends DialogFragment {
-
+    
     private List<String> items;
     private OnItemClick onItemClick;
     private DialogInterface.OnDismissListener dismissListener;
@@ -33,11 +32,11 @@ public class ListDialog extends DialogFragment {
     private boolean landscape;
     private String title;
     private ListDialogAdapter adapter;
-
+    
     public interface OnItemClick {
         void onItemClick(int position, String item);
     }
-
+    
     /**
      * 设置对话框关闭监听
      *
@@ -48,7 +47,7 @@ public class ListDialog extends DialogFragment {
         this.dismissListener = dismissListener;
         return this;
     }
-
+    
     /**
      * 设置点击事件
      *
@@ -59,7 +58,7 @@ public class ListDialog extends DialogFragment {
         this.onItemClick = onItemClick;
         return this;
     }
-
+    
     /**
      * 设置标题
      *
@@ -105,7 +104,7 @@ public class ListDialog extends DialogFragment {
         }
         return this;
     }
-
+    
     /**
      * 设置数据
      *
@@ -119,12 +118,12 @@ public class ListDialog extends DialogFragment {
         }
         return this;
     }
-
-
+    
+    
     public ListDialogAdapter getAdapter() {
         return adapter;
     }
-
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -141,7 +140,7 @@ public class ListDialog extends DialogFragment {
             }
         }
     }
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -190,18 +189,16 @@ public class ListDialog extends DialogFragment {
             e.printStackTrace();
         }
     }
-
-
+    
+    
     /**
      * 注意,不要用super.dismiss(),bug 同上show()
      * super.onDismiss就没问题
      */
     public void dismissDialog() {
-        if (getActivity() != null && !getActivity().isFinishing()) {
-            super.dismissAllowingStateLoss();
-        }
+        super.dismissAllowingStateLoss();
     }
-
+    
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);

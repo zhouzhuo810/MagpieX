@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.3.9'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.4.0
+>- 修复对话框show之后立即关闭导致无法关闭的问题；
 
 > 1.3.9
 >- 修改RxHelper参数int为long类型；
