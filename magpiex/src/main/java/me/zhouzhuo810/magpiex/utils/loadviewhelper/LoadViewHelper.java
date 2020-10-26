@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
@@ -91,12 +92,14 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         ViewUtil.setMinWidth(view, setValue(ViewUtil.getMinWidth(view)));
         ViewUtil.setMinHeight(view, setValue(ViewUtil.getMinHeight(view)));
         if (view instanceof TextView) {
-            TextView tv = (TextView)view;
-            if (tv.getMaxWidth() != Integer.MAX_VALUE) {
+            TextView tv = (TextView) view;
+            if (tv.getMaxWidth() != Integer.MAX_VALUE && tv.getMaxWidth() > 0) {
                 tv.setMaxWidth(setValue(tv.getMaxWidth()));
             }
-            if (tv.getMaxHeight() != Integer.MAX_VALUE) {
-                tv.setMaxHeight(setValue(tv.getMaxHeight()));
+        } else if (view instanceof ImageView) {
+            ImageView iv = (ImageView) view;
+            if (iv.getMaxWidth() != Integer.MAX_VALUE && iv.getMaxWidth() > 0) {
+                iv.setMaxWidth(setValue(iv.getMaxWidth()));
             }
         }
     }

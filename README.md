@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.1'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -291,6 +291,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.4.2
+> - 修复缩放setMaxHeight造成的幕适配问题；
 
 > 1.4.1
 > - 参考阿里编码规范修改部分代码；
