@@ -88,14 +88,15 @@ public class SpinnerTestActivity extends BaseActivity {
                 .setDropdownLayoutId(R.layout.spinner_item)
                 .setTextViewId(R.id.tv_sp_content)
                 .setOnSimpleSpinnerItemSelectedListener(new SimpleSpinner.OnSimpleSpinnerItemSelectedListener<SimpleSpinnerEntity>() {
+    
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id, SimpleSpinnerEntity data) {
                         ToastUtil.showToast(data.getSpItemName());
                     }
     
                     @Override
-                    public void onNothingSelected(AdapterView parent) {
-        
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    
                     }
                 })
                 .setItems(list);

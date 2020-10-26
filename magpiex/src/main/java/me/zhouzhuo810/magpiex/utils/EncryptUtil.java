@@ -159,7 +159,9 @@ public final class EncryptUtil {
      * @return 文件的 MD5 校验码
      */
     public static byte[] encryptMD5File(final File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         FileInputStream fis = null;
         DigestInputStream digestInputStream;
         try {
@@ -168,7 +170,9 @@ public final class EncryptUtil {
             digestInputStream = new DigestInputStream(fis, md);
             byte[] buffer = new byte[256 * 1024];
             while (true) {
-                if (!(digestInputStream.read(buffer) > 0)) break;
+                if (!(digestInputStream.read(buffer) > 0)) {
+                    break;
+                }
             }
             md = digestInputStream.getMessageDigest();
             return md.digest();
@@ -338,7 +342,9 @@ public final class EncryptUtil {
      * @return 密文字节数组
      */
     private static byte[] hashTemplate(final byte[] data, final String algorithm) {
-        if (data == null || data.length <= 0) return null;
+        if (data == null || data.length <= 0) {
+            return null;
+        }
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(data);
@@ -558,7 +564,9 @@ public final class EncryptUtil {
     private static byte[] hmacTemplate(final byte[] data,
                                        final byte[] key,
                                        final String algorithm) {
-        if (data == null || data.length == 0 || key == null || key.length == 0) return null;
+        if (data == null || data.length == 0 || key == null || key.length == 0) {
+            return null;
+        }
         try {
             SecretKeySpec secretKey = new SecretKeySpec(key, algorithm);
             Mac mac = Mac.getInstance(algorithm);
@@ -912,7 +920,9 @@ public final class EncryptUtil {
                                       final String transformation,
                                       final byte[] iv,
                                       final boolean isEncrypt) {
-        if (data == null || data.length == 0 || key == null || key.length == 0) return null;
+        if (data == null || data.length == 0 || key == null || key.length == 0) {
+            return null;
+        }
         try {
             SecretKeySpec keySpec = new SecretKeySpec(key, algorithm);
             Cipher cipher = Cipher.getInstance(transformation);
@@ -933,9 +943,13 @@ public final class EncryptUtil {
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     private static String bytes2HexString(final byte[] bytes) {
-        if (bytes == null) return null;
+        if (bytes == null) {
+            return null;
+        }
         int len = bytes.length;
-        if (len <= 0) return null;
+        if (len <= 0) {
+            return null;
+        }
         char[] ret = new char[len << 1];
         for (int i = 0, j = 0; i < len; i++) {
             ret[j++] = hexDigits[bytes[i] >>> 4 & 0x0f];
@@ -945,7 +959,9 @@ public final class EncryptUtil {
     }
 
     private static byte[] hexString2Bytes(String hexString) {
-        if (isSpace(hexString)) return null;
+        if (isSpace(hexString)) {
+            return null;
+        }
         int len = hexString.length();
         if (len % 2 != 0) {
             hexString = "0" + hexString;
@@ -978,7 +994,9 @@ public final class EncryptUtil {
     }
 
     private static boolean isSpace(final String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

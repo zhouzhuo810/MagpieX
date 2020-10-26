@@ -221,12 +221,10 @@ public class TitleBar extends RelativeLayout {
      */
     public void setTitleGravity(@TITLE_GRAVITY int gravity) {
         switch (gravity) {
-            case TITLE_GRAVITY_CENTER:
-                tvTitle.setGravity(Gravity.CENTER);
-                break;
             case TITLE_GRAVITY_LEFT:
                 tvTitle.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
                 break;
+            case TITLE_GRAVITY_CENTER:
             default:
                 tvTitle.setGravity(Gravity.CENTER);
                 break;

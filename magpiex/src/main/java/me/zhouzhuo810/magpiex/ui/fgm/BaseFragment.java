@@ -844,6 +844,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     /**
      * 判断界面在下次展示时是否需要调用{@link #lazyLoadData()}方法
      */
+    @Override
     public boolean isNeedLazyLoad() {
         return mNeedLazeLoaded;
     }

@@ -76,7 +76,6 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     
     private int tabCount;
     private int lastScrollX = 0;
-    private boolean isNeedScaleInPx = true;
     
     private boolean horizontalHideIconMode = false;
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
@@ -113,7 +112,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         //init attrs
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Indicator);
-            isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_isNeedScaleInPx, true);
+            boolean isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_isNeedScaleInPx, true);
             
             shouldExpand = a.getBoolean(R.styleable.Indicator_i_shouldTabExpand, false);
             int indicatorInt = a.getInt(R.styleable.Indicator_i_indicator_type, 0);
@@ -235,10 +234,12 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             case TabWithIcon:
             case TabWithText:
             case TabWithIconAndText:
-                if (showUnderline)
+                if (showUnderline) {
                     drawUnderline(canvas);
-                if (showGapLine)
+                }
+                if (showGapLine) {
                     drawGapLine(canvas);
+                }
                 break;
         }
     }
@@ -545,15 +546,6 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-                    //                    switch (indicatorType) {
-                    //                        case TabWithIcon:
-                    //                        case TabWithText:
-                    //                        case TabWithIconAndText:
-                    //                            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    //                                scrollToChild(mViewPager.getCurrentItem(), 0);
-                    //                            }
-                    //                            break;
-                    //                    }
                 }
             };
             mViewPager.addOnPageChangeListener(mOnPageChangeListener);

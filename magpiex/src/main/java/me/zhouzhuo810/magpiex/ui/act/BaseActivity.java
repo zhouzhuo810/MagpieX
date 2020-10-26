@@ -53,16 +53,23 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     private TwoBtnEditDialog twoBtnEditDialog;
     private OneBtnProgressDialog progressDialog;
     
+    /**
+     * 上下文对象
+     */
+    protected Context mContext;
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        mContext = this;
         
         EventBus.getDefault().register(this);
         
         setContentView(getLayoutId());
         
         SimpleUtil.resetScale(this);
-    
+        
         SimpleUtil.scaleView(getDecorView());
         
         if (!shouldNotInvokeInitMethods(savedInstanceState)) {

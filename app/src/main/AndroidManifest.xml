@@ -4,7 +4,8 @@
     package="me.zhouzhuo810.magpiexdemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".MyApplication"
@@ -16,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="p">
 
         <!--设计图的宽, 单位是像素(必须配置)，注意：如果是电视，一体机，Pad的话，则是设计图的高，比如1920x1080的电视，应该配置1080-->
         <meta-data

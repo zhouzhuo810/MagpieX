@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
@@ -28,7 +29,10 @@ public class LoadingDialog extends DialogFragment {
     private DialogInterface.OnDismissListener dismissListener;
     private String title;
     private String msg;
-    private boolean iosStyle; //是否使用菊花加载
+    /**
+     * 是否使用菊花加载
+     */
+    private boolean iosStyle;
     private boolean isLoading;
     private boolean landscape;
     private View mRootView;
@@ -101,12 +105,12 @@ public class LoadingDialog extends DialogFragment {
             if (iosStyle) {
                 if (Build.VERSION.SDK_INT >= 21) {
                     if (getActivity() != null) {
-                        pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim, getActivity().getTheme()));
+                        pb.setIndeterminateDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.loading_ios_anim, getActivity().getTheme()));
                     } else {
-                        pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+                        pb.setIndeterminateDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.loading_ios_anim, null));
                     }
                 } else {
-                    pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+                    pb.setIndeterminateDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.loading_ios_anim, null));
                 }
             }
             TextView tvTitle = mRootView.findViewById(R.id.tv_title);
@@ -133,7 +137,7 @@ public class LoadingDialog extends DialogFragment {
         }
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        if (getDialog().getWindow() != null) {
+        if (getDialog() != null && getDialog().getWindow() != null) {
             if (landscape) {
                 getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
             } else {
@@ -146,7 +150,9 @@ public class LoadingDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (getDialog() != null) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
         mRootView = inflater.inflate(landscape ? R.layout.layout_loading_dialog_land : R.layout.layout_loading_dialog, container, false);
         if (savedInstanceState != null) {
             dismiss();
@@ -157,12 +163,12 @@ public class LoadingDialog extends DialogFragment {
         if (iosStyle) {
             if (Build.VERSION.SDK_INT >= 21) {
                 if (getActivity() != null) {
-                    pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim, getActivity().getTheme()));
+                    pb.setIndeterminateDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.loading_ios_anim, getActivity().getTheme()));
                 } else {
-                    pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+                    pb.setIndeterminateDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.loading_ios_anim, null));
                 }
             } else {
-                pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+                pb.setIndeterminateDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.loading_ios_anim, null));
             }
         }
         TextView tvTitle = mRootView.findViewById(R.id.tv_title);
@@ -183,7 +189,7 @@ public class LoadingDialog extends DialogFragment {
     
     
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
         try {
             super.show(manager, tag);
             isLoading = true;
@@ -206,7 +212,7 @@ public class LoadingDialog extends DialogFragment {
     }
     
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         isLoading = false;
         if (dismissListener != null) {

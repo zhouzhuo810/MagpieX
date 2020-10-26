@@ -90,6 +90,15 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     public void loadMinWidthAndHeight(View view) {
         ViewUtil.setMinWidth(view, setValue(ViewUtil.getMinWidth(view)));
         ViewUtil.setMinHeight(view, setValue(ViewUtil.getMinHeight(view)));
+        if (view instanceof TextView) {
+            TextView tv = (TextView)view;
+            if (tv.getMaxWidth() != Integer.MAX_VALUE) {
+                tv.setMaxWidth(setValue(tv.getMaxWidth()));
+            }
+            if (tv.getMaxHeight() != Integer.MAX_VALUE) {
+                tv.setMaxHeight(setValue(tv.getMaxHeight()));
+            }
+        }
     }
     
     private int setValue(int value) {

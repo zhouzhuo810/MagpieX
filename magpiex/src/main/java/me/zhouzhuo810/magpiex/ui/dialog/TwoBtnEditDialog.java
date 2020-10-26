@@ -164,7 +164,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         }
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        if (getDialog().getWindow() != null) {
+        if (getDialog() != null && getDialog().getWindow() != null) {
             if (landscape) {
                 getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
             } else {
@@ -177,7 +177,9 @@ public class TwoBtnEditDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (getDialog() != null) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
         rootView = inflater.inflate(landscape ? R.layout.layout_two_btn_edit_dialog_land : R.layout.layout_two_btn_edit_dialog, container, false);
         if (savedInstanceState != null) {
             dismiss();
@@ -255,7 +257,7 @@ public class TwoBtnEditDialog extends DialogFragment {
     }
     
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public void show(@NonNull FragmentManager manager, String tag) {
         try {
             super.show(manager, tag);
         } catch (Exception e) {
@@ -291,7 +293,7 @@ public class TwoBtnEditDialog extends DialogFragment {
     }
     
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         if (dismissListener != null) {
             dismissListener.onDismiss(dialog);

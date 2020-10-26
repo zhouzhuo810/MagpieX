@@ -44,8 +44,10 @@ public class StatusBarUtil {
             //使用SystemBarTintManager,需要先将状态栏设置为透明
             setTranslucentStatus(activity);
             SystemBarTintManager systemBarTintManager = new SystemBarTintManager(activity);
-            systemBarTintManager.setStatusBarTintEnabled(true);//显示状态栏
-            systemBarTintManager.setStatusBarTintColor(colorId);//设置状态栏颜色
+            //显示状态栏
+            systemBarTintManager.setStatusBarTintEnabled(true);
+            //设置状态栏颜色
+            systemBarTintManager.setStatusBarTintColor(colorId);
         }
     }
     
@@ -134,19 +136,17 @@ public class StatusBarUtil {
     public static boolean setCommonUI(Activity activity, boolean dark) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             View decorView = activity.getWindow().getDecorView();
-            if (decorView != null) {
-                int vis = decorView.getSystemUiVisibility();
-                if (dark) {
-                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                } else {
-                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                }
-                if (decorView.getSystemUiVisibility() != vis) {
-                    decorView.setSystemUiVisibility(vis);
-                }
-                return true;
+            int vis = decorView.getSystemUiVisibility();
+            if (dark) {
+                vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             }
-
+            if (decorView.getSystemUiVisibility() != vis) {
+                decorView.setSystemUiVisibility(vis);
+            }
+            return true;
+    
         }
         return false;
         

@@ -12,7 +12,9 @@ import me.zhouzhuo810.magpiex.ui.widget.intef.IResProvider;
 
 
 /**
- * Created by zz on 2016/8/22.
+ * Fragment+ViewPager适配器
+ * @author zz
+ * @date 2016/8/22
  */
 public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter implements IResProvider {
     
@@ -67,8 +69,14 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter impl
         return null;
     }
     
+    /**
+     * 获取Fragment
+     * @param position ViewPager页码
+     * @return Fragment
+     */
     protected abstract Fragment getFragment(int position);
     
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return getFragment(position);

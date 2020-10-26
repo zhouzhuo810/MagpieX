@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.R;
@@ -106,12 +107,13 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }
             
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == 0)
+                if (newState == 0) {
                     mIsScrolling = false;
-                else if (newState == 2)
+                } else if (newState == 2) {
                     mIsScrolling = true;
+                }
             }
         });
     }
@@ -216,7 +218,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
     
     public void startScrollDelay(int mills) {
         if (mScrollEnable) {
-            if (!mIsScrolling) {//滚动刷新
+            if (!mIsScrolling) {
                 postDelayed(new Runnable() {
                     @Override
                     public void run() {

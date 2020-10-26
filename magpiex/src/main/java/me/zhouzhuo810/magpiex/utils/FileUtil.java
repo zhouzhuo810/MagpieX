@@ -120,10 +120,12 @@ public class FileUtil {
             e.printStackTrace();
         } finally {
             try {
-                if (is != null)
+                if (is != null) {
                     is.close();
-                if (fos != null)
+                }
+                if (fos != null) {
                     fos.close();
+                }
             } catch (IOException e) {
                 Log.e("saveFile", e.getMessage());
             }
@@ -152,7 +154,9 @@ public class FileUtil {
         OutputStream outputStream = new FileOutputStream(mPath);
         
         byte[] buffer = ByteUtil.stringToBytes(content, 20 * 1000);
-        outputStream.write(buffer);
+        if (buffer != null) {
+            outputStream.write(buffer);
+        }
         outputStream.flush();
         outputStream.close();
         return filename;
@@ -162,8 +166,9 @@ public class FileUtil {
     public static boolean copy(Context context, Uri srcUri, File dstFile) {
         try {
             InputStream inputStream = context.getContentResolver().openInputStream(srcUri);
-            if (inputStream == null)
+            if (inputStream == null) {
                 return false;
+            }
             OutputStream outputStream = new FileOutputStream(dstFile);
             copy(inputStream, outputStream);
             inputStream.close();
@@ -292,8 +297,9 @@ public class FileUtil {
     
     
     public static boolean isSpace(final String s) {
-        if (s == null)
+        if (s == null) {
             return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;
@@ -309,8 +315,9 @@ public class FileUtil {
      * @return the name of file
      */
     public static String getFileName(final String filePath) {
-        if (isSpace(filePath))
+        if (isSpace(filePath)) {
             return "";
+        }
         int lastSep = filePath.lastIndexOf(File.separator);
         return lastSep == -1 ? filePath : filePath.substring(lastSep + 1);
     }
@@ -324,8 +331,9 @@ public class FileUtil {
      */
     public static String readFile2String(final File file, final String charsetName) {
         byte[] bytes = readFile2BytesByStream(file);
-        if (bytes == null)
+        if (bytes == null) {
             return null;
+        }
         if (isSpace(charsetName)) {
             return new String(bytes);
         } else {
@@ -345,8 +353,9 @@ public class FileUtil {
      * @return the bytes in file
      */
     public static byte[] readFile2BytesByStream(final File file) {
-        if (!isFileExists(file))
+        if (!isFileExists(file)) {
             return null;
+        }
         try {
             return is2Bytes(new FileInputStream(file));
         } catch (FileNotFoundException e) {
@@ -367,15 +376,17 @@ public class FileUtil {
      * @return the bytes in file
      */
     public static byte[] readFile2BytesByChannel(final File file) {
-        if (!isFileExists(file))
+        if (!isFileExists(file)) {
             return null;
+        }
         FileChannel fc = null;
         try {
             fc = new RandomAccessFile(file, "r").getChannel();
             ByteBuffer byteBuffer = ByteBuffer.allocate((int) fc.size());
             while (true) {
-                if (!((fc.read(byteBuffer)) > 0))
+                if (!((fc.read(byteBuffer)) > 0)) {
                     break;
+                }
             }
             return byteBuffer.array();
         } catch (IOException e) {
@@ -397,8 +408,9 @@ public class FileUtil {
     }
     
     private static byte[] is2Bytes(final InputStream is) {
-        if (is == null)
+        if (is == null) {
             return null;
+        }
         ByteArrayOutputStream os = null;
         try {
             os = new ByteArrayOutputStream();
@@ -455,12 +467,15 @@ public class FileUtil {
      * @return {@code true}: exists or creates successfully<br>{@code false}: otherwise
      */
     public static boolean createOrExistsFile(final File file) {
-        if (file == null)
+        if (file == null) {
             return false;
-        if (file.exists())
+        }
+        if (file.exists()) {
             return file.isFile();
-        if (!createOrExistsDir(file.getParentFile()))
+        }
+        if (!createOrExistsDir(file.getParentFile())) {
             return false;
+        }
         try {
             return file.createNewFile();
         } catch (IOException e) {

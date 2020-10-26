@@ -25,102 +25,128 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 public interface IBaseFragment {
     
     
-    public <T extends View> T findViewById(@IdRes int id);
+    /**
+     * 代替{@code rootView.findViewById()};
+     * @param id viewId
+     * @param <T> ViewType
+     * @return View
+     */
+    <T extends View> T findViewById(@IdRes int id);
     
-    public void initView(@Nullable Bundle savedInstanceState);
+    /**
+     * 初始化视图
+     *
+     * @param savedInstanceState Bundle
+     */
+    void initView(@Nullable Bundle savedInstanceState);
     
     /**
      * 获取布局的id
      */
-    public int getLayoutId();
+    int getLayoutId();
     
-    public void initData();
+    /**
+     * 初始化数据
+     */
+    void initData();
     
-    public boolean isNeedLazyLoad();
+    boolean isNeedLazyLoad();
     
-    public void initEvent();
+    /**
+     * 绑定事件
+     */
+    void initEvent();
     
-    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
+    /**
+     * 是否不调用initView，initData和initEvent，默认false
+     *
+     * @param savedInstanceState Bundle
+     * @return 是否
+     */
+    boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
     
-    public IBaseActivity getBaseAct();
+    IBaseActivity getBaseAct();
     
-    public void startAct(Class<? extends Activity> clazz);
+    void startAct(Class<? extends Activity> clazz);
     
-    public void startActForResult(Class<? extends Activity> clazz, int requestCode);
+    void startActForResult(Class<? extends Activity> clazz, int requestCode);
     
-    public void startActWithIntent(Intent intent);
+    void startActWithIntent(Intent intent);
     
-    public void startActWithIntent(Intent intent, boolean defaultAnim);
+    void startActWithIntent(Intent intent, boolean defaultAnim);
     
-    public void startActWithIntentForResult(Intent intent, int requestCode);
+    void startActWithIntentForResult(Intent intent, int requestCode);
     
-    public void startActWithIntentForResult(Intent intent, int requestCode, boolean defaultAnim);
+    void startActWithIntentForResult(Intent intent, int requestCode, boolean defaultAnim);
     
-    public void closeAct();
+    void closeAct();
     
-    public void closeAct(boolean defaultAnimation);
+    void closeAct(boolean defaultAnimation);
     
-    public void closeAllAct();
+    /**
+     * 关闭已打开的所有Activity
+     */
+    void closeAllAct();
     
-    public void overridePendingTransition(int enterAnim, int exitAnim);
+    void overridePendingTransition(int enterAnim, int exitAnim);
     
-    public void showLoadingDialog(String msg);
+    void showLoadingDialog(String msg);
     
-    public void showLoadingDialog(String title, String msg);
+    void showLoadingDialog(String title, String msg);
     
-    public void showLoadingDialog(String title, String msg, boolean cancelable);
+    void showLoadingDialog(String title, String msg, boolean cancelable);
     
-    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle);
+    void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle);
     
-    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener);
+    void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener);
     
-    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
+    void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
     
-    public void hideLoadingDialog();
+    void hideLoadingDialog();
     
-    public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
+    void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
     
-    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
+    void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
     
-    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
+    void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
     
-    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
+    void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
     
-    public void hideOneBtnProgressDialog();
+    void hideOneBtnProgressDialog();
     
-    public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+    void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
-    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+    void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
-    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+    void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
-    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+    void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
     
-    public void hideTwoBtnTextDialog();
+    void hideTwoBtnTextDialog();
     
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+    void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
     
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+    void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
     
-    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+    void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
     
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+    void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
     
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+    void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
     
-    public void hideTwoBtnEditDialog();
+    void hideTwoBtnEditDialog();
     
-    public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
     
-    public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
     
-    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
     
-    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
     
-    public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
     
-    public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
     
     /**
      * 显示列表对话框
@@ -132,29 +158,29 @@ public interface IBaseFragment {
      * @param onDismissListener 对话框消失回调
      * @param onItemClick       对话框点击回调
      */
-    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
+    void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
     
-    public void hideListDialog();
+    void hideListDialog();
     
-    public void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    public void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
     
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
     
-    public void hideBottomSheet();
+    void hideBottomSheet();
     
-    public void refreshData(String... params);
+    void refreshData(String... params);
     
-    public void loadMoreData(String... params);
+    void loadMoreData(String... params);
     
-    public TextWatcher setEditImageListener(EditText et, ImageView iv);
+    TextWatcher setEditImageListener(EditText et, ImageView iv);
     
     /**
      * 启动Activity进入动画
@@ -184,7 +210,7 @@ public interface IBaseFragment {
      */
     int closeOutAnimation();
     
-    public Fragment findFragmentByTag(String tag);
+    Fragment findFragmentByTag(String tag);
     
-    public void cancelDisposable(Disposable disposable);
+    void cancelDisposable(Disposable disposable);
 }

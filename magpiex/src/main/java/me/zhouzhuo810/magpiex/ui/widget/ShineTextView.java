@@ -60,8 +60,9 @@ public class ShineTextView extends AppCompatTextView {
     
     @SuppressLint("CheckResult")
     public void startShiningBg() {
-        if (mAnimatingBg)
+        if (mAnimatingBg) {
             return;
+        }
         mAnimatingBg = true;
         /*定时器闪烁*/
         if (mDuration == 0) {
@@ -96,8 +97,9 @@ public class ShineTextView extends AppCompatTextView {
     
     @SuppressLint("CheckResult")
     public void startShiningTextColor() {
-        if (mAnimatingTextColor)
+        if (mAnimatingTextColor) {
             return;
+        }
         originTextColor = getCurrentTextColor();
         mAnimatingTextColor = true;
         /*定时器闪烁*/

@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.R;
@@ -20,6 +21,7 @@ import me.zhouzhuo810.magpiex.ui.widget.scroll.ScrollGridLayoutManager;
 
 /**
  * 滚动格子列表
+ * @author zhouzhuo810
  */
 public class ScrollGridRecyclerView<T> extends RecyclerView {
     
@@ -81,12 +83,13 @@ public class ScrollGridRecyclerView<T> extends RecyclerView {
             }
             
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == 0)
+                if (newState == 0) {
                     mIsScrolling = false;
-                else if (newState == 2)
+                } else if (newState == 2) {
                     mIsScrolling = true;
+                }
             }
         });
     }

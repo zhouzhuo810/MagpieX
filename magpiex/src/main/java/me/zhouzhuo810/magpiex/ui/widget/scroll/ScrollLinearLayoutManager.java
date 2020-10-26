@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ScrollLinearLayoutManager extends LinearLayoutManager {
 
-    private int MILLISECONDS_PER_PIXEL = 20;
+    private int mMillsPerPx = 20;
 
     public ScrollLinearLayoutManager(Context context) {
         super(context);
@@ -29,7 +29,7 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
     }
 
     public void setMillsPerPixel(int millsPerPixel) {
-        this.MILLISECONDS_PER_PIXEL = millsPerPixel;
+        this.mMillsPerPx = millsPerPixel;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
                     //scroll one pixel.
                     @Override
                     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
-                        return MILLISECONDS_PER_PIXEL / displayMetrics.density;
+                        return mMillsPerPx / displayMetrics.density;
                         //返回滑动一个pixel需要多少毫秒
                     }
     
@@ -84,14 +84,14 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
     public void onRestoreInstanceState(Parcelable state) {
         SavedState savedState = (SavedState) state;
         super.onRestoreInstanceState(savedState.getSuperState());
-        MILLISECONDS_PER_PIXEL = savedState.millsPerPixel;
+        mMillsPerPx = savedState.millsPerPixel;
     }
 
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         SavedState savedState = new SavedState(superState);
-        savedState.millsPerPixel = MILLISECONDS_PER_PIXEL;
+        savedState.millsPerPixel = mMillsPerPx;
         return savedState;
     }
 

@@ -4,7 +4,9 @@ package me.zhouzhuo810.magpiex.ui.widget.intef;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * Created by zz on 2016/8/22.
+ *
+ * @author zz
+ * @date 2016/8/22
  */
 public interface IPagerIndicator {
 

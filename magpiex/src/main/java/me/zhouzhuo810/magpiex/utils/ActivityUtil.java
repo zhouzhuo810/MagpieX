@@ -20,10 +20,16 @@ public class ActivityUtil {
 
     public static Bundle getOptionsBundle(final Activity activity,
                                           final View[] sharedElements) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return null;
-        if (sharedElements == null) return null;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return null;
+        }
+        if (sharedElements == null) {
+            return null;
+        }
         int len = sharedElements.length;
-        if (len <= 0) return null;
+        if (len <= 0) {
+            return null;
+        }
         @SuppressWarnings("unchecked")
         Pair<View, String>[] pairs = new Pair[len];
         for (int i = 0; i < len; i++) {

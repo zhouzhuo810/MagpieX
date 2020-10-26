@@ -18,7 +18,7 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
  * Created by admin on 2017/7/27.
  */
 public class MarkView extends View {
-
+    
     /**
      * {@link #OVAL} 圆形
      * {@link #RECT} 方形
@@ -29,10 +29,10 @@ public class MarkView extends View {
         RECT,
         POINT
     }
-
+    
     private int markNumber = 0;
     private int maxMarkNumber = 99;
-
+    
     private Paint textPaint;
     private Paint bgPaint;
     private int textSize = 34;
@@ -40,37 +40,36 @@ public class MarkView extends View {
     private int bgColor = 0xffff0000;
     private int bgShape = 0;
     private int pointSize = 24;
-
+    
     public MarkView(Context context) {
         super(context);
         init(context, null);
     }
-
+    
     public MarkView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
-
+    
     public MarkView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
-
+    
     @RequiresApi(value = 21)
     public MarkView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
-
+    
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int wMode = MeasureSpec.getMode(widthMeasureSpec);
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
         int wSize = MeasureSpec.getSize(widthMeasureSpec);
         int hSize = MeasureSpec.getSize(heightMeasureSpec);
-
+        
         if (wMode == MeasureSpec.AT_MOST || wMode == MeasureSpec.UNSPECIFIED) {
-            //TODO 手动计算 wSize
             switch (bgShape) {
                 case 0:
                 case 1:
@@ -78,37 +77,40 @@ public class MarkView extends View {
                     if (markNumber > maxMarkNumber) {
                         float textWidth = textPaint.measureText(maxMarkNumber + "+");
                         float textHeight = textPaint.descent() - textPaint.ascent();
-                        if (textWidth < textHeight)
+                        if (textWidth < textHeight) {
                             if (maxMarkNumber < 10) {
                                 wSize = (int) (textHeight);
                             } else {
                                 wSize = (int) (textHeight + textHeight / 2);
                             }
-                        else
+                        } else {
                             wSize = (int) (textWidth + textHeight / 2);
+                        }
                     } else {
                         float textWidth = textPaint.measureText(markNumber + "");
                         float textHeight = textPaint.descent() - textPaint.ascent();
-                        if (textWidth < textHeight)
+                        if (textWidth < textHeight) {
                             if (markNumber < 10) {
                                 wSize = (int) (textHeight);
                             } else {
                                 wSize = (int) (textHeight + textHeight / 2);
                             }
-                        else
+                        } else {
                             wSize = (int) (textWidth + textHeight / 2);
+                        }
                     }
                     break;
                 case 2:
                     //point
                     wSize = pointSize;
                     break;
+                default:
+                    break;
             }
-
+            
         }
-
+        
         if (hMode == MeasureSpec.AT_MOST || hMode == MeasureSpec.UNSPECIFIED) {
-            //TODO 手动计算 hSize
             switch (bgShape) {
                 case 0:
                 case 1:
@@ -121,31 +123,33 @@ public class MarkView extends View {
                     //point
                     hSize = pointSize;
                     break;
+                default:
+                    break;
             }
-
+            
         }
         setMeasuredDimension(wSize, hSize);
     }
-
+    
     private void init(Context context, AttributeSet attrs) {
         initAttrs(context, attrs);
         initPaints();
     }
-
+    
     private void initPaints() {
         textPaint = new Paint();
         textPaint.setTextSize(textSize);
         textPaint.setColor(textColor);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setAntiAlias(true);
-
+        
         bgPaint = new Paint();
         bgPaint.setStyle(Paint.Style.FILL);
         bgPaint.setColor(bgColor);
         bgPaint.setAntiAlias(true);
-
+        
     }
-
+    
     private void initAttrs(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.MarkView);
@@ -163,15 +167,16 @@ public class MarkView extends View {
             pointSize = ScreenAdapterUtil.getInstance().getScaledValue(pointSize);
         }
     }
-
+    
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawBg(canvas);
-        if (bgShape != 2)
+        if (bgShape != 2) {
             drawText(canvas);
+        }
     }
-
+    
     private void drawBg(Canvas canvas) {
         RectF rectF = new RectF();
         rectF.left = 0;
@@ -192,17 +197,19 @@ public class MarkView extends View {
                 break;
             case 2:
                 //point
-                canvas.drawCircle(width / 2, width / 2, width / 2, bgPaint);
+                canvas.drawCircle(width / 2.0f, width / 2.0f, width / 2.0f, bgPaint);
+                break;
+            default:
                 break;
         }
-
+        
     }
-
+    
     public MarkView setBgShape(MarkShape bgShape) {
         this.bgShape = bgShape.ordinal();
         return this;
     }
-
+    
     private void drawText(Canvas canvas) {
         int w = getWidth();
         int h = getHeight();
@@ -216,56 +223,56 @@ public class MarkView extends View {
             canvas.drawText(markNumber + "", (w - textWidth) / 2, (h - textHeight) / 2, textPaint);
         }
     }
-
+    
     public MarkView setMaxMarkNumber(int maxMarkNumber) {
         this.maxMarkNumber = maxMarkNumber;
         return this;
     }
-
+    
     public MarkView setMarkNumber(int markNumber) {
         this.markNumber = markNumber;
         return this;
     }
-
+    
     public MarkView setPointSize(int pointSize) {
         this.pointSize = ScreenAdapterUtil.getInstance().getScaledValue(pointSize);
         return this;
     }
-
+    
     public int getMarkNumber() {
         return this.markNumber;
     }
-
+    
     public MarkView setTextColor(int color) {
         this.textColor = color;
         textPaint.setColor(textColor);
         return this;
     }
-
+    
     public MarkView setTextSizeInPx(int pxSize) {
         this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(pxSize);
         textPaint.setTextSize(textSize);
         return this;
     }
-
+    
     public MarkView setBgColor(int color) {
         this.bgColor = color;
         bgPaint.setColor(bgColor);
         return this;
     }
-
+    
     public MarkView setTextColorRes(int colorRes) {
         this.textColor = getContext().getResources().getColor(colorRes);
         textPaint.setColor(textColor);
         return this;
     }
-
+    
     public MarkView setBgColorRes(int colorRes) {
         this.bgColor = getContext().getResources().getColor(colorRes);
         bgPaint.setColor(bgColor);
         return this;
     }
-
+    
     /**
      * 刷新控件
      */
@@ -273,5 +280,5 @@ public class MarkView extends View {
         requestLayout();
         invalidate();
     }
-
+    
 }

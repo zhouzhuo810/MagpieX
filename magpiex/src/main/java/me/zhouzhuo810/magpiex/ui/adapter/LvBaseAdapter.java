@@ -153,10 +153,10 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
     protected abstract void fillData(ViewHolder holder, T item, int position);
     
     public static class ViewHolder {
-        private SparseArray<View> mViews;
+        private final SparseArray<View> mViews;
         protected int mPosition;
-        private View mConvertView;
-        private Context mContext;
+        private final View mConvertView;
+        private final Context mContext;
         protected int mLayoutId;
         
         public ViewHolder(Context context, View itemView, ViewGroup parent, int position) {
@@ -206,7 +206,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
             return mPosition;
         }
         
-        public ViewHolder setText(int viewId, String text) {
+        public ViewHolder setText(int viewId, CharSequence text) {
             TextView tv = getView(viewId);
             tv.setText(text);
             return this;
@@ -256,15 +256,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         
         @SuppressLint("NewApi")
         public ViewHolder setAlpha(int viewId, float value) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                getView(viewId).setAlpha(value);
-            } else {
-                // Pre-honeycomb hack to set Alpha value
-                AlphaAnimation alpha = new AlphaAnimation(value, value);
-                alpha.setDuration(0);
-                alpha.setFillAfter(true);
-                getView(viewId).startAnimation(alpha);
-            }
+            getView(viewId).setAlpha(value);
             return this;
         }
         

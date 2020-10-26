@@ -219,8 +219,9 @@ public final class NetworkUtil {
         @SuppressLint("WifiManagerLeak")
         WifiManager manager = (WifiManager) BaseUtil.getApp().getSystemService(WIFI_SERVICE);
         //noinspection ConstantConditions
-        if (enabled == manager.isWifiEnabled())
+        if (enabled == manager.isWifiEnabled()) {
             return;
+        }
         manager.setWifiEnabled(enabled);
     }
     
@@ -361,8 +362,9 @@ public final class NetworkUtil {
             while (nis.hasMoreElements()) {
                 NetworkInterface ni = nis.nextElement();
                 // To prevent phone of xiaomi return "10.0.2.15"
-                if (!ni.isUp() || ni.isLoopback())
+                if (!ni.isUp() || ni.isLoopback()) {
                     continue;
+                }
                 Enumeration<InetAddress> addresses = ni.getInetAddresses();
                 while (addresses.hasMoreElements()) {
                     adds.addFirst(addresses.nextElement());
@@ -373,8 +375,9 @@ public final class NetworkUtil {
                     String hostAddress = add.getHostAddress();
                     boolean isIPv4 = hostAddress.indexOf(':') < 0;
                     if (useIPv4) {
-                        if (isIPv4)
+                        if (isIPv4) {
                             return hostAddress;
+                        }
                     } else {
                         if (!isIPv4) {
                             int index = hostAddress.indexOf('%');
@@ -402,8 +405,9 @@ public final class NetworkUtil {
             LinkedList<InetAddress> adds = new LinkedList<>();
             while (nis.hasMoreElements()) {
                 NetworkInterface ni = nis.nextElement();
-                if (!ni.isUp() || ni.isLoopback())
+                if (!ni.isUp() || ni.isLoopback()) {
                     continue;
+                }
                 List<InterfaceAddress> ias = ni.getInterfaceAddresses();
                 for (int i = 0; i < ias.size(); i++) {
                     InterfaceAddress ia = ias.get(i);

@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -74,7 +74,7 @@ If you use this. That means you added dependencies below:
         <!-- 屏幕适配模式，(可选) auto:自动(默认)，width:按宽度，height:按高度  -->
         <meta-data
             android:name="screen_adapt_type"
-            android:value="height" />
+            android:value="width" />
         <!--设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了-->
         <!--
             宽         	    240 	320 	480 	720     1080 	1440
@@ -291,6 +291,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.4.1
+> - 参考阿里编码规范修改部分代码；
+> - 增加WebUtil工具；
 
 > 1.4.0
 >- 修复对话框show之后立即关闭导致无法关闭的问题；

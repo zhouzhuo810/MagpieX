@@ -12,11 +12,18 @@ import androidx.annotation.RequiresApi;
  * Android 复制粘贴工具
  */
 public class CopyUtil {
-
+    
     private CopyUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
+    /**
+     * 复制普通文本
+     *
+     * @param label 标签
+     * @param text  文本
+     * @return 是否成功
+     */
     public static boolean copyPlainText(CharSequence label, CharSequence text) {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -29,7 +36,7 @@ public class CopyUtil {
             return false;
         }
     }
-
+    
     public static CharSequence getCopyPlainText() {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -43,7 +50,7 @@ public class CopyUtil {
         }
         return null;
     }
-
+    
     public static boolean copyUrl(CharSequence label, String url) {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -56,7 +63,7 @@ public class CopyUtil {
             return false;
         }
     }
-
+    
     public static boolean copyUri(CharSequence label, Uri uri) {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -69,8 +76,8 @@ public class CopyUtil {
             return false;
         }
     }
-
-
+    
+    
     public static Uri getCopyUri() {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -82,7 +89,7 @@ public class CopyUtil {
             return null;
         }
     }
-
+    
     @RequiresApi(value = 16)
     public static boolean copyHtml(CharSequence label, String text, String html) {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -96,7 +103,7 @@ public class CopyUtil {
             return false;
         }
     }
-
+    
     @RequiresApi(value = 16)
     public static CharSequence getCopyHtmlText() {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -109,7 +116,7 @@ public class CopyUtil {
             return null;
         }
     }
-
+    
     public static boolean copyIntent(CharSequence label, Intent intent) {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -121,9 +128,9 @@ public class CopyUtil {
         } catch (Exception e) {
             return false;
         }
-
+        
     }
-
+    
     public static Intent getCopyIntent() {
         ClipboardManager cm = (ClipboardManager) BaseUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
@@ -145,5 +152,5 @@ public class CopyUtil {
         } catch (Exception ignored) {
         }
     }
-
+    
 }

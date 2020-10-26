@@ -66,13 +66,14 @@ public class UriUtil {
      * @return the file path or null
      */
     private static String getPathSmallLevel(final Context context, final Uri uri) {
-        if (null == uri)
+        if (null == uri) {
             return null;
+        }
         final String scheme = uri.getScheme();
         String data = null;
-        if (scheme == null)
+        if (scheme == null) {
             data = uri.getPath();
-        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+        } else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
             data = uri.getPath();
         } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
             Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
@@ -186,8 +187,8 @@ public class UriUtil {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
                 null);
             if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                path = cursor.getString(column_index);
+                final int columnIndex = cursor.getColumnIndexOrThrow(column);
+                path = cursor.getString(columnIndex);
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -199,8 +200,9 @@ public class UriUtil {
             String fileName = System.currentTimeMillis() + ".jpg";
             return copyUriToFile(context, uri, new File(saveToPath + File.separator + fileName));
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return path;
     }

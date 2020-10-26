@@ -20,6 +20,8 @@ public class ApkUtil {
 
     /**
      * 安装 App(支持 8.0)
+     * <br>
+     * 注意authority的后缀如果不是".fileProvider",请使用{@link ApkUtil#installApkWithAuthority(Context, String, String, String)}方法。
      * <p>8.0 需添加权限
      * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
      *

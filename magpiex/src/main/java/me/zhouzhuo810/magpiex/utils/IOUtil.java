@@ -25,8 +25,9 @@ public final class IOUtil {
      * @param closeables closeables
      */
     public static void closeIO(final Closeable... closeables) {
-        if (closeables == null)
+        if (closeables == null) {
             return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {
@@ -44,8 +45,9 @@ public final class IOUtil {
      * @param closeables closeables
      */
     public static void closeIOQuietly(final Closeable... closeables) {
-        if (closeables == null)
+        if (closeables == null) {
             return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {

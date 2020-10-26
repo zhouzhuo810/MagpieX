@@ -64,6 +64,10 @@ public class OneBtnProgressDialog extends DialogFragment {
         return this;
     }
     
+    /**
+     * 是否横竖屏
+     * @return 是否
+     */
     public boolean isLandscape() {
         return landscape;
     }
@@ -127,7 +131,9 @@ public class OneBtnProgressDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (getDialog() != null) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
         View rootView = inflater.inflate(landscape ? R.layout.layout_one_btn_progress_dialog_land : R.layout.layout_one_btn_progress_dialog, container, false);
         if (savedInstanceState != null) {
             dismiss();
@@ -169,7 +175,7 @@ public class OneBtnProgressDialog extends DialogFragment {
     
     
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public void show(@NonNull FragmentManager manager, String tag) {
         try {
             super.show(manager, tag);
         } catch (Exception e) {
@@ -187,7 +193,7 @@ public class OneBtnProgressDialog extends DialogFragment {
     }
     
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         if (dismissListener != null) {
             dismissListener.onDismiss(dialog);

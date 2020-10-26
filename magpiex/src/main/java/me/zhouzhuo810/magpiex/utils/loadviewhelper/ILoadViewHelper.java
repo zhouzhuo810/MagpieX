@@ -8,14 +8,34 @@ import android.view.View;
 
 public interface ILoadViewHelper {
     
+    /**
+     * 缩放width，height，textSize
+     * @param view View
+     */
     void loadWidthHeightFont(View view);
     
+    /**
+     * 缩放padding
+     * @param view View
+     */
     void loadPadding(View view);
     
+    /**
+     * 缩放margin
+     * @param view View
+     */
     void loadLayoutMargin(View view);
     
+    /**
+     * 缩放最大宽高
+     * @param view View
+     */
     void loadMaxWidthAndHeight(View view);
     
+    /**
+     * 缩放最小宽高
+     * @param view View
+     */
     void loadMinWidthAndHeight(View view);
     
     /**

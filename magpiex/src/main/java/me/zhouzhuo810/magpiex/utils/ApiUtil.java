@@ -4,6 +4,7 @@ package me.zhouzhuo810.magpiex.utils;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import me.jessyan.progressmanager.ProgressManager;
 import me.zhouzhuo810.magpiex.utils.intercepter.CopyNoticeInterceptor;
 import me.zhouzhuo810.magpiex.utils.intercepter.ShareNoticeInterceptor;
@@ -32,7 +33,8 @@ public class ApiUtil {
      * @param enableLog 是否打印日志
      * @return T 返回接口
      */
-    public static <T> T createApi(Class<T> clazz, String baseUrl, int timeOut, TimeUnit timeUnit, boolean enableLog, boolean forceNoCache) {
+    public static <T> T createApi(Class<T> clazz, String baseUrl, int timeOut,
+                                  TimeUnit timeUnit, boolean enableLog, boolean forceNoCache) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
             .connectTimeout(timeOut, timeUnit)
             .writeTimeout(timeOut, timeUnit)
@@ -41,8 +43,9 @@ public class ApiUtil {
             builder.cache(null);
             builder.addNetworkInterceptor(
                 new Interceptor() {
+                    @NonNull
                     @Override
-                    public Response intercept(Chain chain) throws IOException {
+                    public Response intercept(@NonNull Chain chain) throws IOException {
                         Request request = chain.request();
                         //缓存0s,即不缓存
                         Response response = chain.proceed(request);
@@ -97,8 +100,9 @@ public class ApiUtil {
             builder.cache(null);
             builder.addNetworkInterceptor(
                 new Interceptor() {
+                    @NonNull
                     @Override
-                    public Response intercept(Chain chain) throws IOException {
+                    public Response intercept(@NonNull Chain chain) throws IOException {
                         Request request = chain.request();
                         //缓存0s,即不缓存
                         Response response = chain.proceed(request);
@@ -151,8 +155,9 @@ public class ApiUtil {
             builder.cache(null);
             builder.addNetworkInterceptor(
                 new Interceptor() {
+                    @NonNull
                     @Override
-                    public Response intercept(Chain chain) throws IOException {
+                    public Response intercept(@NonNull Chain chain) throws IOException {
                         Request request = chain.request();
                         //缓存0s,即不缓存
                         Response response = chain.proceed(request);

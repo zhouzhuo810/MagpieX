@@ -87,7 +87,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     }
     
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         if (onItemClickListener != null) {
             holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,9 +115,9 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     }
     
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private SparseArray<View> mViews;
-        private View mConvertView;
-        private Context mContext;
+        private final SparseArray<View> mViews;
+        private final View mConvertView;
+        private final Context mContext;
         
         
         public ViewHolder(Context context, View itemView) {
@@ -148,7 +148,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         /**
          * 设置TextView的值
          */
-        public ViewHolder setText(int viewId, String text) {
+        public ViewHolder setText(int viewId, CharSequence text) {
             TextView tv = getView(viewId);
             tv.setText(text);
             return this;
@@ -216,15 +216,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         
         @SuppressLint("NewApi")
         public ViewHolder setAlpha(int viewId, float value) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                getView(viewId).setAlpha(value);
-            } else {
-                // Pre-honeycomb hack to set Alpha value
-                AlphaAnimation alpha = new AlphaAnimation(value, value);
-                alpha.setDuration(0);
-                alpha.setFillAfter(true);
-                getView(viewId).startAnimation(alpha);
-            }
+            getView(viewId).setAlpha(value);
             return this;
         }
         

@@ -18,12 +18,14 @@ public class AppStoreRemarkUtils {
      */
     public static void launchAppDetail(String appPkg, String marketPkg, String noStoreHint) {
         try {
-            if (TextUtils.isEmpty(appPkg))
+            if (TextUtils.isEmpty(appPkg)) {
                 return;
+            }
             Uri uri = Uri.parse("market://details?id=" + appPkg);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            if (!TextUtils.isEmpty(marketPkg))
+            if (!TextUtils.isEmpty(marketPkg)) {
                 intent.setPackage(marketPkg);
+            }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             BaseUtil.getApp().startActivity(intent);
         } catch (Exception e) {

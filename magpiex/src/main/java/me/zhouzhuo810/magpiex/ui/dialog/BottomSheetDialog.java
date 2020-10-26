@@ -134,7 +134,7 @@ public class BottomSheetDialog extends DialogFragment {
         }
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        if (getDialog().getWindow() != null) {
+        if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setLayout(dm.widthPixels, getDialog().getWindow().getAttributes().height);
         }
     }
@@ -143,7 +143,9 @@ public class BottomSheetDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (getDialog() != null) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
         //设置dialog的 进出 动画
         if (getDialog().getWindow() != null) {
             getDialog().getWindow().setWindowAnimations(R.style.BottomSheetDialog);
@@ -186,7 +188,7 @@ public class BottomSheetDialog extends DialogFragment {
     
     
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public void show(@NonNull FragmentManager manager, String tag) {
         try {
             super.show(manager, tag);
         } catch (Exception e) {
@@ -204,7 +206,7 @@ public class BottomSheetDialog extends DialogFragment {
     }
     
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         if (dismissListener != null) {
             dismissListener.onDismiss(dialog);

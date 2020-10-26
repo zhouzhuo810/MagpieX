@@ -3,7 +3,7 @@ package me.zhouzhuo810.magpiex.ui.adapter.rule;
 import java.util.List;
 
 /**
- * 用于adapter本地搜索
+ * 本地搜索的Adapter实现此接口，用户规范搜索实现的逻辑。
  *
  * @param <T>
  */

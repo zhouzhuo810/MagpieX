@@ -29,7 +29,7 @@ public class SimpleSpinnerEntity implements ISpinnerData {
     }
     
     @Override
-    public String getSpItemName() {
+    public CharSequence getSpItemName() {
         return name;
     }
 }

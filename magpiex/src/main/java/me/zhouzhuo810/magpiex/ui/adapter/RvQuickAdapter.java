@@ -39,6 +39,7 @@ public abstract class RvQuickAdapter<T, K extends BaseViewHolder> extends BaseQu
     
     /**
      * Item中需要设置点击或长按事件的子View的Id
+     * @return ids
      */
     public abstract int[] getNestViewIds();
     
