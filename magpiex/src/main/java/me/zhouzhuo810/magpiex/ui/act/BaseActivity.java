@@ -293,10 +293,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, btnString, cancelable, false, onDismissListener, onProgressListener);
+    }
+    
+    @Override
+    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, boolean fromHtml, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         progressDialog = new OneBtnProgressDialog();
         progressDialog.setTitle(title)
             .setMsg(msg)
             .setBtnText(btnString)
+            .setFromHtml(fromHtml)
             .setLandscape(isLandscapeDialog())
             .setOnDismissListener(onDismissListener)
             .setProgressListener(onProgressListener)

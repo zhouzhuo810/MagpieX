@@ -24,6 +24,8 @@ import java.util.concurrent.Future;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
+import me.zhouzhuo810.magpiex.utils.thread.AsyncExecutor;
+import me.zhouzhuo810.magpiex.utils.thread.ThreadPoolType;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -58,7 +60,7 @@ public final class CrashUtil {
                 .getPackageInfo(BaseUtil.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
-                versionCode = pi.getLongVersionCode();
+                versionCode = PackageUtil.getVersionCode();
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -198,9 +200,9 @@ public final class CrashUtil {
             dir = crashDirPath.endsWith(FILE_SEP) ? crashDirPath : crashDirPath + FILE_SEP;
         }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-            && BaseUtil.getApp().getExternalCacheDir() != null)
+            && BaseUtil.getApp().getExternalCacheDir() != null) {
             defaultDir = BaseUtil.getApp().getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
-        else {
+        } else {
             defaultDir = BaseUtil.getApp().getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         }
         sOnCrashListener = onCrashListener;
@@ -220,7 +222,7 @@ public final class CrashUtil {
     ///////////////////////////////////////////////////////////////////////////
     
     private static void input2File(final String input, final String filePath) {
-        Future<Boolean> submit = Executors.newSingleThreadExecutor().submit(new Callable<Boolean>() {
+        Future<Boolean> submit = AsyncExecutor.getInstance(ThreadPoolType.SINGLE).submit(new Callable<Boolean>() {
             @Override
             public Boolean call() {
                 BufferedWriter bw = null;
@@ -243,8 +245,9 @@ public final class CrashUtil {
             }
         });
         try {
-            if (submit.get())
+            if (submit.get()) {
                 return;
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -255,10 +258,12 @@ public final class CrashUtil {
     
     private static boolean createOrExistsFile(final String filePath) {
         File file = new File(filePath);
-        if (file.exists())
+        if (file.exists()) {
             return file.isFile();
-        if (!createOrExistsDir(file.getParentFile()))
+        }
+        if (!createOrExistsDir(file.getParentFile())) {
             return false;
+        }
         try {
             return file.createNewFile();
         } catch (IOException e) {
@@ -272,8 +277,9 @@ public final class CrashUtil {
     }
     
     private static boolean isSpace(final String s) {
-        if (s == null)
+        if (s == null) {
             return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

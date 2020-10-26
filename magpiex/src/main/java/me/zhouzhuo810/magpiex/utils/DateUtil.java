@@ -1409,12 +1409,14 @@ public class DateUtil {
      * @return
      */
     public static String millis2FitTimeSpan(long millis, int precision) {
-        if (precision <= 0)
+        if (precision <= 0) {
             return null;
+        }
         precision = Math.min(precision, 5);
         String[] units = {"天", "小时", "分钟", "秒", "毫秒"};
-        if (millis == 0)
+        if (millis == 0) {
             return 0 + units[precision - 1];
+        }
         StringBuilder sb = new StringBuilder();
         if (millis < 0) {
             sb.append("-");

@@ -29,8 +29,9 @@ public class ColorUtil {
             if (index != -1) {
                 builder.setSpan(selection, index, index + selectionString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.setText(builder);
-            } else
+            } else {
                 textView.setText(fullString);
+            }
         }
     }
 

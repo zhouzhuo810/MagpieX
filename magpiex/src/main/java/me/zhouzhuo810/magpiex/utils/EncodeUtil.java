@@ -17,11 +17,11 @@ import java.net.URLEncoder;
  * </pre>
  */
 public final class EncodeUtil {
-
+    
     private EncodeUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
     /**
      * URL 编码
      * <p>若想自己指定字符集,可以使用{@link #urlEncode(String input, String charset)}方法</p>
@@ -32,7 +32,7 @@ public final class EncodeUtil {
     public static String urlEncode(final String input) {
         return urlEncode(input, "UTF-8");
     }
-
+    
     /**
      * URL 编码
      * <p>若系统不支持指定的编码字符集,则直接将 input 原样返回</p>
@@ -48,7 +48,7 @@ public final class EncodeUtil {
             return input;
         }
     }
-
+    
     /**
      * URL 解码
      * <p>若想自己指定字符集,可以使用 {@link #urlDecode(String input, String charset)}方法</p>
@@ -59,7 +59,7 @@ public final class EncodeUtil {
     public static String urlDecode(final String input) {
         return urlDecode(input, "UTF-8");
     }
-
+    
     /**
      * URL 解码
      * <p>若系统不支持指定的解码字符集,则直接将 input 原样返回</p>
@@ -75,7 +75,7 @@ public final class EncodeUtil {
             return input;
         }
     }
-
+    
     /**
      * Base64 编码
      *
@@ -85,7 +85,7 @@ public final class EncodeUtil {
     public static byte[] base64Encode(final String input) {
         return base64Encode(input.getBytes());
     }
-
+    
     /**
      * Base64 编码
      *
@@ -95,7 +95,7 @@ public final class EncodeUtil {
     public static byte[] base64Encode(final byte[] input) {
         return Base64.encode(input, Base64.NO_WRAP);
     }
-
+    
     /**
      * Base64 编码
      *
@@ -105,7 +105,7 @@ public final class EncodeUtil {
     public static String base64Encode2String(final byte[] input) {
         return Base64.encodeToString(input, Base64.NO_WRAP);
     }
-
+    
     /**
      * Base64 解码
      *
@@ -115,7 +115,7 @@ public final class EncodeUtil {
     public static byte[] base64Decode(final String input) {
         return Base64.decode(input, Base64.NO_WRAP);
     }
-
+    
     /**
      * Base64 解码
      *
@@ -125,7 +125,7 @@ public final class EncodeUtil {
     public static byte[] base64Decode(final byte[] input) {
         return Base64.decode(input, Base64.NO_WRAP);
     }
-
+    
     /**
      * Base64URL 安全编码
      * <p>将 Base64 中的 URL 非法字符�?,/=转为其他字符, 见 RFC3548</p>
@@ -136,7 +136,7 @@ public final class EncodeUtil {
     public static byte[] base64UrlSafeEncode(final String input) {
         return Base64.encode(input.getBytes(), Base64.URL_SAFE);
     }
-
+    
     /**
      * Html 编码
      *
@@ -150,13 +150,16 @@ public final class EncodeUtil {
             c = input.charAt(i);
             switch (c) {
                 case '<':
-                    sb.append("&lt;"); //$NON-NLS-1$
+                    //$NON-NLS-1$
+                    sb.append("&lt;");
                     break;
                 case '>':
-                    sb.append("&gt;"); //$NON-NLS-1$
+                    //$NON-NLS-1$
+                    sb.append("&gt;");
                     break;
                 case '&':
-                    sb.append("&amp;"); //$NON-NLS-1$
+                    //$NON-NLS-1$
+                    sb.append("&amp;");
                     break;
                 case '\'':
                     //http://www.w3.org/TR/xhtml1
@@ -164,10 +167,12 @@ public final class EncodeUtil {
                     // introduced in XML 1.0 but does not appear in HTML. Authors should
                     // therefore use &#39; instead of &apos; to work as expected in HTML 4
                     // user agents.
-                    sb.append("&#39;"); //$NON-NLS-1$
+                    //$NON-NLS-1$
+                    sb.append("&#39;");
                     break;
                 case '"':
-                    sb.append("&quot;"); //$NON-NLS-1$
+                    //$NON-NLS-1$
+                    sb.append("&quot;");
                     break;
                 default:
                     sb.append(c);
@@ -175,7 +180,7 @@ public final class EncodeUtil {
         }
         return sb.toString();
     }
-
+    
     /**
      * Html 解码
      *

@@ -52,8 +52,9 @@ public final class KeyboardUtil {
     public static void showSoftInput2(final View view) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null)
+        if (imm == null) {
             return;
+        }
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -88,8 +89,9 @@ public final class KeyboardUtil {
     public static void showSoftInput(@NonNull final View view, final int flags) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null)
+        if (imm == null) {
             return;
+        }
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -144,8 +146,9 @@ public final class KeyboardUtil {
     public static void hideSoftInput(@NonNull final View view) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null)
+        if (imm == null) {
             return;
+        }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
     
@@ -171,8 +174,9 @@ public final class KeyboardUtil {
     public static void toggleSoftInput() {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null)
+        if (imm == null) {
             return;
+        }
         imm.toggleSoftInput(0, 0);
     }
     
@@ -307,8 +311,9 @@ public final class KeyboardUtil {
     
     private static int getContentViewInvisibleHeight(final Window window) {
         final View contentView = window.findViewById(android.R.id.content);
-        if (contentView == null)
+        if (contentView == null) {
             return 0;
+        }
         final Rect outRect = new Rect();
         contentView.getWindowVisibleDisplayFrame(outRect);
         Log.d("KeyboardBaseUtil", "getContentViewInvisibleHeight: "
@@ -337,8 +342,9 @@ public final class KeyboardUtil {
     public static void fixSoftInputLeaks(@NonNull final Window window) {
         InputMethodManager imm =
             (InputMethodManager) BaseUtil.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm == null)
+        if (imm == null) {
             return;
+        }
         String[] leakViews = new String[]{"mLastSrvView", "mCurRootView", "mServedView", "mNextServedView"};
         for (String leakView : leakViews) {
             try {
@@ -347,8 +353,9 @@ public final class KeyboardUtil {
                     leakViewField.setAccessible(true);
                 }
                 Object obj = leakViewField.get(imm);
-                if (!(obj instanceof View))
+                if (!(obj instanceof View)) {
                     continue;
+                }
                 View view = (View) obj;
                 if (view.getRootView() == window.getDecorView().getRootView()) {
                     leakViewField.set(imm, null);

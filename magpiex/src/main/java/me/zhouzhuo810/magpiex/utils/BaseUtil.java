@@ -7,8 +7,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
-import me.zhouzhuo810.magpiex.app.BaseApplication;
-
 /**
  * 基础工具类
  */

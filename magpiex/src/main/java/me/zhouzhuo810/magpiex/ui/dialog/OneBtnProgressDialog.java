@@ -2,7 +2,9 @@ package me.zhouzhuo810.magpiex.ui.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ public class OneBtnProgressDialog extends DialogFragment {
     private DialogInterface.OnDismissListener dismissListener;
     private OnProgressListener onProgressListener;
     private boolean landscape;
+    private boolean fromHtml;
     private String title;
     private String msg;
     private String btnText;
@@ -66,12 +69,28 @@ public class OneBtnProgressDialog extends DialogFragment {
     
     /**
      * 是否横竖屏
+     *
      * @return 是否
      */
     public boolean isLandscape() {
         return landscape;
     }
     
+    
+    /**
+     * 是否使用网页模式加载msg
+     *
+     * @param fromHtml 是否
+     * @return 自己
+     */
+    public OneBtnProgressDialog setFromHtml(boolean fromHtml) {
+        this.fromHtml = fromHtml;
+        return this;
+    }
+    
+    public boolean isFromHtml() {
+        return fromHtml;
+    }
     
     /**
      * 设置按钮文字
@@ -160,7 +179,17 @@ public class OneBtnProgressDialog extends DialogFragment {
             onProgressListener.onStart(pb, tvMsg, tvOk);
         }
         View line = rootView.findViewById(R.id.line_item);
-        tvMsg.setText(msg);
+        if (fromHtml) {
+            tvMsg.setMovementMethod(LinkMovementMethod.getInstance());
+            tvMsg.setClickable(true);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                tvMsg.setText(Html.fromHtml(msg, Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                tvMsg.setText(Html.fromHtml(msg));
+            }
+        } else {
+            tvMsg.setText(msg);
+        }
         if (TextUtils.isEmpty(title)) {
             line.setVisibility(View.GONE);
             tvTitle.setVisibility(View.GONE);
