@@ -30,7 +30,7 @@ public class ListDialog extends DialogFragment {
     private DialogInterface.OnDismissListener dismissListener;
     private boolean alignLeft;
     private boolean landscape;
-    private String title;
+    private CharSequence title;
     private ListDialogAdapter adapter;
     
     public interface OnItemClick {
@@ -65,7 +65,7 @@ public class ListDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public ListDialog setTitle(String title) {
+    public ListDialog setTitle(CharSequence title) {
         this.title = title;
         return this;
     }

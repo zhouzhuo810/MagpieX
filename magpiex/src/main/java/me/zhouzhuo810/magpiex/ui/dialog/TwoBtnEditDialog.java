@@ -32,11 +32,11 @@ public class TwoBtnEditDialog extends DialogFragment {
     private DialogInterface.OnDismissListener dismissListener;
     private OnTwoBtnEditClick onTwoBtnClick;
     private boolean landscape;
-    private String title;
-    private String hint;
-    private String msg;
-    private String leftText;
-    private String rightText;
+    private CharSequence title;
+    private CharSequence hint;
+    private CharSequence msg;
+    private CharSequence leftText;
+    private CharSequence rightText;
     private View rootView;
     
     
@@ -107,7 +107,7 @@ public class TwoBtnEditDialog extends DialogFragment {
      * @param leftBtnText 文字
      * @return 自己
      */
-    public TwoBtnEditDialog setLeftText(String leftBtnText) {
+    public TwoBtnEditDialog setLeftText(CharSequence leftBtnText) {
         this.leftText = leftBtnText;
         return this;
     }
@@ -118,7 +118,7 @@ public class TwoBtnEditDialog extends DialogFragment {
      * @param rightBtnText 文字
      * @return 自己
      */
-    public TwoBtnEditDialog setRightText(String rightBtnText) {
+    public TwoBtnEditDialog setRightText(CharSequence rightBtnText) {
         this.rightText = rightBtnText;
         return this;
     }
@@ -129,7 +129,7 @@ public class TwoBtnEditDialog extends DialogFragment {
      * @param hint 提示内容
      * @return 自己
      */
-    public TwoBtnEditDialog setHint(String hint) {
+    public TwoBtnEditDialog setHint(CharSequence hint) {
         this.hint = hint;
         return this;
     }
@@ -140,7 +140,7 @@ public class TwoBtnEditDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public TwoBtnEditDialog setTitle(String title) {
+    public TwoBtnEditDialog setTitle(CharSequence title) {
         this.title = title;
         return this;
     }
@@ -151,7 +151,7 @@ public class TwoBtnEditDialog extends DialogFragment {
      * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public TwoBtnEditDialog setMsg(String msg) {
+    public TwoBtnEditDialog setMsg(CharSequence msg) {
         this.msg = msg;
         return this;
     }

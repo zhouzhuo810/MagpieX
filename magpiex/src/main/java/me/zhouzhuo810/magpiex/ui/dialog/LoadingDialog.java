@@ -27,8 +27,8 @@ import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 public class LoadingDialog extends DialogFragment {
     
     private DialogInterface.OnDismissListener dismissListener;
-    private String title;
-    private String msg;
+    private CharSequence title;
+    private CharSequence msg;
     /**
      * 是否使用菊花加载
      */
@@ -80,7 +80,7 @@ public class LoadingDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public LoadingDialog setTitle(String title) {
+    public LoadingDialog setTitle(CharSequence title) {
         this.title = title;
         return this;
     }
@@ -91,7 +91,7 @@ public class LoadingDialog extends DialogFragment {
      * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public LoadingDialog setMsg(String msg) {
+    public LoadingDialog setMsg(CharSequence msg) {
         this.msg = msg;
         return this;
     }

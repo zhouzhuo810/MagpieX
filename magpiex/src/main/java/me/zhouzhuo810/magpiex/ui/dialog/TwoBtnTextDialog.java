@@ -3,6 +3,7 @@ package me.zhouzhuo810.magpiex.ui.dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.WebUtil;
 
 /**
  * 两个按钮普通对话框
@@ -29,10 +31,11 @@ public class TwoBtnTextDialog extends DialogFragment {
     private OnOneBtnTextClick onOneBtnClickListener;
     private boolean landscape;
     private boolean oneBtn;
-    private String title;
-    private String msg;
-    private String leftText;
-    private String rightText;
+    private boolean fromHtml;
+    private CharSequence title;
+    private CharSequence msg;
+    private CharSequence leftText;
+    private CharSequence rightText;
     
     /**
      * 设置对话框关闭监听
@@ -99,13 +102,23 @@ public class TwoBtnTextDialog extends DialogFragment {
         return oneBtn;
     }
     
-    public TwoBtnTextDialog setLeftText(String leftBtnText) {
+    public TwoBtnTextDialog setLeftText(CharSequence leftBtnText) {
         this.leftText = leftBtnText;
         return this;
     }
     
+    /**
+     * 设置是否使用Html.formHtml()加载msg;
+     *
+     * @param fromHtml 是否
+     * @return 自己
+     */
+    public TwoBtnTextDialog setFromHtml(boolean fromHtml) {
+        this.fromHtml = fromHtml;
+        return this;
+    }
     
-    public TwoBtnTextDialog setRightText(String rightBtnText) {
+    public TwoBtnTextDialog setRightText(CharSequence rightBtnText) {
         this.rightText = rightBtnText;
         return this;
     }
@@ -116,7 +129,7 @@ public class TwoBtnTextDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public TwoBtnTextDialog setTitle(String title) {
+    public TwoBtnTextDialog setTitle(CharSequence title) {
         this.title = title;
         return this;
     }
@@ -127,7 +140,7 @@ public class TwoBtnTextDialog extends DialogFragment {
      * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public TwoBtnTextDialog setMsg(String msg) {
+    public TwoBtnTextDialog setMsg(CharSequence msg) {
         this.msg = msg;
         return this;
     }
@@ -162,6 +175,11 @@ public class TwoBtnTextDialog extends DialogFragment {
             return rootView;
         }
         ScreenAdapterUtil.getInstance().loadView(rootView);
+        initView(rootView);
+        return rootView;
+    }
+    
+    private void initView(View rootView) {
         final TextView tvLeft = rootView.findViewById(R.id.tv_left);
         final TextView tvRight = rootView.findViewById(R.id.tv_right);
         tvLeft.setText(leftText);
@@ -204,7 +222,13 @@ public class TwoBtnTextDialog extends DialogFragment {
         }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         final TextView tvMsg = rootView.findViewById(R.id.tv_msg);
-        tvMsg.setText(msg);
+        if (fromHtml) {
+            tvMsg.setMovementMethod(LinkMovementMethod.getInstance());
+            tvMsg.setText(WebUtil.fromHtml((String) msg));
+            tvMsg.setClickable(true);
+        } else {
+            tvMsg.setText(msg);
+        }
         tvMsg.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -213,7 +237,7 @@ public class TwoBtnTextDialog extends DialogFragment {
                 tvMsg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
-        
+    
         View line = rootView.findViewById(R.id.line_item);
         if (TextUtils.isEmpty(title)) {
             line.setVisibility(View.GONE);
@@ -224,7 +248,6 @@ public class TwoBtnTextDialog extends DialogFragment {
             tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setText(title);
         }
-        return rootView;
     }
     
     

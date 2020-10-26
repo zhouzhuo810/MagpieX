@@ -109,6 +109,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         startActWithIntentForResult(new Intent(this, clazz), requestCode);
     }
     
+    @Override
     public void startActShared(Class<? extends Activity> clazz, final View... sharedElements) {
         startActWithIntentShared(new Intent(this, clazz), sharedElements);
     }
@@ -209,32 +210,32 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showLoadingDialog(String msg) {
+    public void showLoadingDialog(CharSequence msg) {
         showLoadingDialog(null, msg);
     }
     
     @Override
-    public void showLoadingDialog(String title, String msg) {
+    public void showLoadingDialog(CharSequence title, CharSequence msg) {
         showLoadingDialog(title, msg, false, null);
     }
     
     @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener) {
+    public void showLoadingDialog(CharSequence title, CharSequence msg, boolean cancelable, DialogInterface.OnDismissListener listener) {
         showLoadingDialog(title, msg, cancelable, false, listener);
     }
     
     @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable) {
+    public void showLoadingDialog(CharSequence title, CharSequence msg, boolean cancelable) {
         showLoadingDialog(title, msg, cancelable, false, null);
     }
     
     @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle) {
+    public void showLoadingDialog(CharSequence title, CharSequence msg, boolean cancelable, boolean iosStyle) {
         showLoadingDialog(title, msg, cancelable, iosStyle, null);
     }
     
     @Override
-    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
+    public void showLoadingDialog(CharSequence title, CharSequence msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
         if (loadingDialog != null && loadingDialog.isLoading()) {
             loadingDialog.setCancelable(cancelable);
             loadingDialog.setTitle(title)
@@ -277,27 +278,27 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+    public void showOneBtnProgressDialog(CharSequence title, CharSequence msg, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         showOneBtnProgressDialog(title, msg, false, null, onProgressListener);
     }
     
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+    public void showOneBtnProgressDialog(CharSequence title, CharSequence msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         showOneBtnProgressDialog(title, msg, false, onDismissListener, onProgressListener);
     }
     
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+    public void showOneBtnProgressDialog(CharSequence title, CharSequence msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         showOneBtnProgressDialog(title, msg, getOkText(), cancelable, onDismissListener, onProgressListener);
     }
     
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+    public void showOneBtnProgressDialog(CharSequence title, CharSequence msg, CharSequence btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         showOneBtnProgressDialog(title, msg, btnString, cancelable, false, onDismissListener, onProgressListener);
     }
     
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, boolean fromHtml, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+    public void showOneBtnProgressDialog(CharSequence title, CharSequence msg, CharSequence btnString, boolean cancelable, boolean fromHtml, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         progressDialog = new OneBtnProgressDialog();
         progressDialog.setTitle(title)
             .setMsg(msg)
@@ -318,22 +319,28 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showOneBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
+    public void showOneBtnTextDialog(CharSequence title, CharSequence msg, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
         showOneBtnTextDialog(title, msg, getOkText(), true, null, onOneBtnTextClick);
     }
     
     @Override
-    public void showOneBtnTextDialog(String title, String msg, String btnText, boolean cancelable, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
+    public void showOneBtnTextDialog(CharSequence title, CharSequence msg, CharSequence btnText, boolean cancelable, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
         showOneBtnTextDialog(title, msg, btnText, cancelable, null, onOneBtnTextClick);
     }
     
     @Override
-    public void showOneBtnTextDialog(String title, String msg, String btnText, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
+    public void showOneBtnTextDialog(CharSequence title, CharSequence msg, CharSequence btnText, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
+        showOneBtnTextDialog(title, msg, btnText, cancelable, false, onDismissListener, onOneBtnTextClick);
+    }
+    
+    @Override
+    public void showOneBtnTextDialog(CharSequence title, CharSequence msg, CharSequence btnText, boolean cancelable, boolean fromHtml, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnOneBtnTextClick onOneBtnTextClick) {
         oneBtnTextDialog = new TwoBtnTextDialog();
         oneBtnTextDialog.setTitle(title)
             .setMsg(msg)
             .setLandscape(isLandscapeDialog())
             .setOneBtn(true)
+            .setFromHtml(fromHtml)
             .setLeftText(btnText)
             .setOnDismissListener(onDismissListener)
             .setOnOneBtnClickListener(onOneBtnTextClick)
@@ -349,23 +356,28 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+    public void showTwoBtnTextDialog(CharSequence title, CharSequence msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         showTwoBtnTextDialog(title, msg, false, onTwoBtnClick);
     }
     
     
     @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+    public void showTwoBtnTextDialog(CharSequence title, CharSequence msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         showTwoBtnTextDialog(title, msg, cancelable, null, onTwoBtnClick);
     }
     
     @Override
-    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+    public void showTwoBtnTextDialog(CharSequence title, CharSequence msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         showTwoBtnTextDialog(title, msg, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnClick);
     }
     
     @Override
-    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+    public void showTwoBtnTextDialog(CharSequence title, CharSequence msg, CharSequence leftBtnString, CharSequence rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, leftBtnString, rightBtnString, cancelable, false, onDismissListener, onTwoBtnClick);
+    }
+    
+    @Override
+    public void showTwoBtnTextDialog(CharSequence title, CharSequence msg, CharSequence leftBtnString, CharSequence rightBtnString, boolean cancelable, boolean fromHtml, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         hideTwoBtnTextDialog();
         twoBtnTextDialog = new TwoBtnTextDialog();
         twoBtnTextDialog.setTitle(title)
@@ -373,6 +385,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             .setLandscape(isLandscapeDialog())
             .setLeftText(leftBtnString)
             .setRightText(rightBtnString)
+            .setFromHtml(fromHtml)
             .setOnDismissListener(onDismissListener)
             .setOnTwoBtnClickListener(onTwoBtnClick)
             .setCancelable(cancelable);
@@ -387,27 +400,27 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+    public void showTwoBtnEditDialog(CharSequence title, CharSequence msg, CharSequence hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         showTwoBtnEditDialog(title, msg, hint, cancelable, null, onTwoBtnEditClick);
     }
     
     @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+    public void showTwoBtnEditDialog(CharSequence title, CharSequence msg, CharSequence hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         showTwoBtnEditDialog(title, msg, hint, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
     }
     
     @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+    public void showTwoBtnEditDialog(CharSequence title, CharSequence msg, CharSequence hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         showTwoBtnEditDialog(title, msg, hint, inputType, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
     }
     
     @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+    public void showTwoBtnEditDialog(CharSequence title, CharSequence msg, CharSequence hint, CharSequence leftBtnString, CharSequence rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
     }
     
     @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+    public void showTwoBtnEditDialog(CharSequence title, CharSequence msg, CharSequence hint, int inputType, CharSequence leftBtnString, CharSequence rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
         hideTwoBtnEditDialog();
         twoBtnEditDialog = new TwoBtnEditDialog();
         twoBtnEditDialog.setTitle(title)
@@ -436,32 +449,32 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(CharSequence title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
         showListDialog(title, CollectionUtil.stringToList(items), cancelable, null, onItemClick);
     }
     
     @Override
-    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(CharSequence title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
         showListDialog(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(CharSequence title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
         showListDialog(title, items, alignLeft, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(CharSequence title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
         showListDialog(title, items, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(CharSequence title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
         showListDialog(title, items, false, cancelable, onDismissListener, onItemClick);
     }
     
     @Override
-    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(CharSequence title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
         hideListDialog();
         listDialog = new ListDialog();
         listDialog
@@ -483,32 +496,32 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(CharSequence title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
         showBottomSheet(title, items, false, cancelable, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(CharSequence title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
         showBottomSheet(title, CollectionUtil.stringToList(items), false, cancelable, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(CharSequence title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
         showBottomSheet(title, items, alignLeft, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(CharSequence title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
         showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(CharSequence title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
         showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, onDismissListener, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(CharSequence title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
         hideBottomSheet();
         bsDialog = new BottomSheetDialog();
         bsDialog
@@ -704,6 +717,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         return fragment;
     }
     
+    @Override
     public <T extends BaseFragment> T addOrShowFragmentCustomTag(@IdRes int containerId, Class<T> clazz, String tag, Bundle bundle) {
         T fragment = findFragmentByTag(tag);
         if (fragment == null) {

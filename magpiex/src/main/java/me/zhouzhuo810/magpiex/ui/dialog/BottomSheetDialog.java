@@ -31,7 +31,7 @@ public class BottomSheetDialog extends DialogFragment {
     private OnItemClick onItemClick;
     private boolean alignLeft;
     private boolean landscape;
-    private String title;
+    private CharSequence title;
     private DialogInterface.OnDismissListener dismissListener;
     private ListDialogAdapter adapter;
     
@@ -68,7 +68,7 @@ public class BottomSheetDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public BottomSheetDialog setTitle(String title) {
+    public BottomSheetDialog setTitle(CharSequence title) {
         this.title = title;
         return this;
     }

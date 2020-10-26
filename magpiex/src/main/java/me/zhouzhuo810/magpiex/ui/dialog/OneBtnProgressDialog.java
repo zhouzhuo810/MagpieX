@@ -2,7 +2,6 @@ package me.zhouzhuo810.magpiex.ui.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
@@ -20,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.WebUtil;
 
 /**
  * 单个按钮进度对话框
@@ -30,9 +30,9 @@ public class OneBtnProgressDialog extends DialogFragment {
     private OnProgressListener onProgressListener;
     private boolean landscape;
     private boolean fromHtml;
-    private String title;
-    private String msg;
-    private String btnText;
+    private CharSequence title;
+    private CharSequence msg;
+    private CharSequence btnText;
     
     /**
      * 设置对话框关闭监听
@@ -98,7 +98,7 @@ public class OneBtnProgressDialog extends DialogFragment {
      * @param btnText 按钮文字
      * @return 自己
      */
-    public OneBtnProgressDialog setBtnText(String btnText) {
+    public OneBtnProgressDialog setBtnText(CharSequence btnText) {
         this.btnText = btnText;
         return this;
     }
@@ -109,7 +109,7 @@ public class OneBtnProgressDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public OneBtnProgressDialog setTitle(String title) {
+    public OneBtnProgressDialog setTitle(CharSequence title) {
         this.title = title;
         return this;
     }
@@ -120,7 +120,7 @@ public class OneBtnProgressDialog extends DialogFragment {
      * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public OneBtnProgressDialog setMsg(String msg) {
+    public OneBtnProgressDialog setMsg(CharSequence msg) {
         this.msg = msg;
         return this;
     }
@@ -181,12 +181,8 @@ public class OneBtnProgressDialog extends DialogFragment {
         View line = rootView.findViewById(R.id.line_item);
         if (fromHtml) {
             tvMsg.setMovementMethod(LinkMovementMethod.getInstance());
+            tvMsg.setText(WebUtil.fromHtml((String) msg));
             tvMsg.setClickable(true);
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                tvMsg.setText(Html.fromHtml(msg, Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                tvMsg.setText(Html.fromHtml(msg));
-            }
         } else {
             tvMsg.setText(msg);
         }
