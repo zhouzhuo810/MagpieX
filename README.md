@@ -22,19 +22,19 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.2'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.3'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.appcompat:appcompat:1.2.0'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.1.0'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
-    api 'org.greenrobot:eventbus:3.1.1'
+    api 'org.greenrobot:eventbus:3.2.0'
     //Glide
     api 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
@@ -143,18 +143,16 @@ public class MyApplication extends BaseApplication {
 - ok, Just use `px` unit in your layout.
 
 - If you do not use BaseActivity, Then you should invoke the method
- `SimpleUtil.resetScale(this);` and `ScreenAdapterUtil.getInstance().loadView(getWindow().getDecorView());` in `Activity#onCreate()` method after `setContentView()`.
+ `SimpleUtil.resetScale(this);` and `SimpleUtil.scaleView(getWindow().getDecorView());` in `Activity#onCreate()` method after `setContentView()`.
 
 - If you do not use BaseFragment, Then you should invoke the method
- `   ScreenAdapterUtil.getInstance().loadView(view);` in `Fragment#onCreateView()` method after `inflate()`.
+ `   SimpleUtil.scaleView(view);` in `Fragment#onCreateView()` method after `inflate()`.
 
 - If you do not use LvBaseAdapter or RvBaseAdapter, Then you should invoke the method
- `ScreenAdapterUtil.getInstance().loadView(view);` when you create ViewHolder.
+ `SimpleUtil.scaleView(view);` when you create ViewHolder.
 
 - If you want to use in custom View, you should invoke the method
-`ScreenAdapterUtil.getInstance().getScaledValue(int);` when you what to scale the dynamic value.
-
-- If you don't want to use `ScreenAdapterUtil.getInstance()`, just replace it with `SimpleUtil`.
+`SimpleUtil.getScaledValue(int);` when you what to scale the dynamic value.
 
 #### BaseApplication
 
@@ -291,6 +289,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.4.3
+> - 部分工具类加上注视，适配框架判断是否缩放的Tag改成id类型；
 
 > 1.4.2
 > - 修复缩放setMaxHeight造成的幕适配问题；
