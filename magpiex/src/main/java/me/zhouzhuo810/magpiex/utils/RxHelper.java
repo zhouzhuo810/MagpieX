@@ -16,8 +16,9 @@ public class RxHelper {
     
     public static <T> ObservableTransformer<T, T> io_main() {
         return new ObservableTransformer<T, T>() {
+            @NonNull
             @Override
-            public Observable<T> apply(Observable<T> tObservable) {
+            public Observable<T> apply(@NonNull Observable<T> tObservable) {
                 return tObservable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread());
@@ -27,8 +28,9 @@ public class RxHelper {
     
     public static <T> ObservableTransformer<T, T> io_io() {
         return new ObservableTransformer<T, T>() {
+            @NonNull
             @Override
-            public Observable<T> apply(Observable<T> tObservable) {
+            public Observable<T> apply(@NonNull Observable<T> tObservable) {
                 return tObservable
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());

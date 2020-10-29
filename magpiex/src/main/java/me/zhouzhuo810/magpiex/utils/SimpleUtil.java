@@ -3,9 +3,8 @@ package me.zhouzhuo810.magpiex.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.view.View;
-
-import java.text.DecimalFormat;
 
 import androidx.annotation.ArrayRes;
 import androidx.annotation.ColorRes;
@@ -88,7 +87,11 @@ public class SimpleUtil {
      * @return 颜色值
      */
     public static int getColor(@ColorRes int resId) {
-        return BaseUtil.getApp().getResources().getColor(resId);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return BaseUtil.getApp().getResources().getColor(resId, BaseUtil.getApp().getTheme());
+        } else {
+            return BaseUtil.getApp().getResources().getColor(resId);
+        }
     }
     
     /**

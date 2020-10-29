@@ -11,7 +11,7 @@ public class CustomConversion implements IConversion {
     @Override
     public void transform(View view, AbsLoadViewHelper loadViewHelper) {
         if (view.getLayoutParams() != null) {
-            Object tag = view.getTag(R.integer.view_scale_tag);
+            Object tag = view.getTag(R.id.view_scale_tag);
             if (tag instanceof Boolean && (Boolean) tag) {
                 return;
             }
@@ -20,7 +20,7 @@ public class CustomConversion implements IConversion {
             loadViewHelper.loadLayoutMargin(view);
             loadViewHelper.loadMaxWidthAndHeight(view);
             loadViewHelper.loadMinWidthAndHeight(view);
-            view.setTag(R.integer.view_scale_tag, true);
+            view.setTag(R.id.view_scale_tag, true);
         }
     }
 }

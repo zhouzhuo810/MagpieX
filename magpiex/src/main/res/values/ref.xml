@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="view_scale_tag" type="integer">0xacbd</item>
+    <item type="id" name="view_scale_tag"/>
 </resources>

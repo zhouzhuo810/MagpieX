@@ -34,14 +34,13 @@ public class ViewUtil {
         if (textView == null) {
             return;
         }
+        String text = textView.getText().toString();
         if (use) {
-            String text = textView.getText().toString();
             SpannableString sb = new SpannableString(text);
             UnderlineSpan underlineSpan = new UnderlineSpan();
             sb.setSpan(underlineSpan, 0, sb.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             textView.setText(sb);
         } else {
-            String text = textView.getText().toString();
             textView.setText(text);
         }
     }
@@ -60,7 +59,11 @@ public class ViewUtil {
         }
     }
     
-    //设置图标的颜色
+    /**
+     * 设置图标的颜色
+     * @param icon ImageView
+     * @param color 颜色值
+     */
     public static void setIconColor(ImageView icon, int color) {
         int r = Color.red(color);
         int g = Color.green(color);
@@ -81,7 +84,7 @@ public class ViewUtil {
      * @param resId    颜色资源id
      */
     public static void setTextColorRes(TextView textView, @ColorRes int resId) {
-        textView.setTextColor(BaseUtil.getApp().getResources().getColor(resId));
+        textView.setTextColor(SimpleUtil.getColor(resId));
     }
     
     public static void setMaxWidth(View view, int value) {
