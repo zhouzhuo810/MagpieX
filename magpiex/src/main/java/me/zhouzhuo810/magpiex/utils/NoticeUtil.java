@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -254,5 +255,34 @@ public class NoticeUtil {
         }
     }
     
+    /**
+     * 通知权限是否打开
+     *
+     * @param context Context
+     * @return 是否打开
+     */
+    public static boolean isNoticePermissionEnable(Context context) {
+        return NotificationManagerCompat.from(context).areNotificationsEnabled();
+    }
+    
+    /**
+     * 打开通知权限设置界面
+     *
+     * @param context Context
+     */
+    public static void launchNoticeSettings(Context context) {
+        Intent localIntent = new Intent();
+        //直接跳转到应用通知设置的代码：
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            localIntent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+            localIntent.putExtra("app_package", context.getPackageName());
+            localIntent.putExtra("app_uid", context.getApplicationInfo().uid);
+        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            localIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            localIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            localIntent.setData(Uri.parse("package:" + context.getPackageName()));
+        }
+        context.startActivity(localIntent);
+    }
     
 }
