@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="PxUsage">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dialog_title_height_land"
+        android:background="?attr/x_dialog_title_bg_color"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingLeft="30px"
-        android:paddingRight="30px"
-        android:background="?attr/x_dialog_title_bg_color"
+        android:paddingStart="30px"
+        android:paddingEnd="30px"
         android:textColor="?attr/x_dialog_title_text_color"
         android:textSize="@dimen/base_dialog_title_text_size_land"
         android:textStyle="bold"
@@ -34,10 +35,10 @@
         android:background="@null"
         android:ellipsize="end"
         android:gravity="top|start"
-        android:maxLines="3"
-        android:inputType="text"
-        android:padding="30px"
         android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="3"
+        android:padding="30px"
         android:textColor="?attr/x_dialog_content_text_color"
         android:textCursorDrawable="@null"
         android:textSize="@dimen/base_dialog_title_text_size_land"
@@ -51,9 +52,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_left"
             android:layout_width="0dp"
             android:layout_height="@dimen/base_dialog_item_height_land"
@@ -69,7 +71,7 @@
             android:layout_height="@dimen/base_dialog_item_height_land"
             android:background="@color/colorBlack10" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_right"
             android:layout_width="0dp"
             android:layout_height="@dimen/base_dialog_item_height_land"

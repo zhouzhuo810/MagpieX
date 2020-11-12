@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="PxUsage">
 
     <LinearLayout
         android:id="@+id/ll_back"
@@ -20,14 +21,14 @@
             android:layout_height="match_parent"
             android:minWidth="180px">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
                 android:layout_width="@dimen/base_title_icon_size"
                 android:layout_height="@dimen/base_title_icon_size"
                 android:layout_centerInParent="true"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
         app:mv_textColor="#fff"
         app:mv_textSize="32px" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,14 +87,14 @@
             android:layout_height="match_parent"
             android:minWidth="180px">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_right"
                 android:layout_width="@dimen/base_title_icon_size"
                 android:layout_height="@dimen/base_title_icon_size"
                 android:layout_centerInParent="true"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,8 +103,6 @@
                 android:layout_marginEnd="20px"
                 android:maxWidth="216px"
                 android:textColor="#fff" />
-
-
         </RelativeLayout>
 
     </LinearLayout>

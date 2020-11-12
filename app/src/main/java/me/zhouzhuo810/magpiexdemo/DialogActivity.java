@@ -229,4 +229,14 @@ public class DialogActivity extends BaseActivity {
     public boolean isLandscapeDialog() {
         return false;
     }
+    
+    @Override
+    public String getOkText() {
+        return super.getOkText();
+    }
+    
+    @Override
+    public String getCancelText() {
+        return getString(R.string.cancel_text);
+    }
 }

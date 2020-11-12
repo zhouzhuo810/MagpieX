@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="PxUsage">
 
     <RelativeLayout
         android:id="@+id/rl0"
@@ -22,23 +23,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4px"
             android:layout_marginTop="10px"
+            android:layout_marginBottom="4px"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tab0"
-                android:textColor="#000" />
+                android:textColor="#000"
+                tools:text="Tab0" />
         </LinearLayout>
 
         <View
@@ -56,9 +57,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-6px"
+            android:layout_marginStart="-6px"
             android:layout_marginTop="3px"
-            android:layout_toRightOf="@id/ll0"
+            android:layout_toEndOf="@id/ll0"
             android:visibility="gone"
             app:mv_bgColor="#ff0000"
             app:mv_markNumber="88"
@@ -82,23 +83,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="4px"
             android:layout_marginTop="10px"
+            android:layout_marginBottom="4px"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tab1"
-                android:textColor="#000" />
+                android:textColor="#000"
+                tools:text="Tab1" />
         </LinearLayout>
 
         <View
@@ -116,9 +117,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-6px"
+            android:layout_marginStart="-6px"
             android:layout_marginTop="3px"
-            android:layout_toRightOf="@id/ll1"
+            android:layout_toEndOf="@id/ll1"
             android:visibility="gone"
             app:mv_bgColor="#ff0000"
             app:mv_markNumber="88"
@@ -142,24 +143,24 @@
             android:id="@+id/ll2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4px"
             android:layout_marginTop="10px"
+            android:layout_marginBottom="4px"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tab2"
-                android:textColor="#000" />
+                android:textColor="#000"
+                tools:text="Tab2" />
         </LinearLayout>
 
         <View
@@ -177,9 +178,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-6px"
+            android:layout_marginStart="-6px"
             android:layout_marginTop="3px"
-            android:layout_toRightOf="@id/ll2"
+            android:layout_toEndOf="@id/ll2"
             android:visibility="gone"
             app:mv_bgColor="#ff0000"
             app:mv_markNumber="88"
@@ -204,23 +205,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="4px"
             android:layout_marginTop="10px"
+            android:layout_marginBottom="4px"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tab3"
-                android:textColor="#000" />
+                android:textColor="#000"
+                tools:text="Tab3" />
         </LinearLayout>
 
         <View
@@ -238,9 +239,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-6px"
+            android:layout_marginStart="-6px"
             android:layout_marginTop="3px"
-            android:layout_toRightOf="@id/ll3"
+            android:layout_toEndOf="@id/ll3"
             android:visibility="gone"
             app:mv_bgColor="#ff0000"
             app:mv_markNumber="88"
@@ -264,24 +265,24 @@
             android:id="@+id/ll4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4px"
             android:layout_marginTop="10px"
+            android:layout_marginBottom="4px"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tab4"
-                android:textColor="#000" />
+                android:textColor="#000"
+                tools:text="Tab4" />
         </LinearLayout>
 
         <View
@@ -298,9 +299,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-6px"
+            android:layout_marginStart="-6px"
             android:layout_marginTop="3px"
-            android:layout_toRightOf="@id/ll4"
+            android:layout_toEndOf="@id/ll4"
             android:visibility="gone"
             app:mv_bgColor="#ff0000"
             app:mv_markNumber="88"
@@ -324,24 +325,24 @@
             android:id="@+id/ll5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4px"
             android:layout_marginTop="10px"
+            android:layout_marginBottom="4px"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tab5"
-                android:textColor="#000" />
+                android:textColor="#000"
+                tools:text="Tab5" />
         </LinearLayout>
 
         <View
@@ -358,9 +359,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-6px"
+            android:layout_marginStart="-6px"
             android:layout_marginTop="3px"
-            android:layout_toRightOf="@id/ll5"
+            android:layout_toEndOf="@id/ll5"
             android:visibility="gone"
             app:mv_bgColor="#ff0000"
             app:mv_markNumber="88"

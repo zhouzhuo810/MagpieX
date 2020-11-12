@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.4'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -294,6 +294,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.4.5
+> - 修复对话框底部确认取消按钮没有垂直方向对齐问题；
 
 > 1.4.4
 > - 修复重启APP后Application级别的Context获取字符串没有适配多语言问题；

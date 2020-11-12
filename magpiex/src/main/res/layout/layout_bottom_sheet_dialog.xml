@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="PxUsage">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dialog_title_height"
+        android:background="?attr/x_dialog_title_bg_color"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingLeft="60px"
-        android:paddingRight="60px"
-        android:background="?attr/x_dialog_title_bg_color"
+        android:paddingStart="60px"
+        android:paddingEnd="60px"
         android:textColor="?attr/x_dialog_title_text_color"
         android:textSize="@dimen/base_dialog_title_text_size"
         android:textStyle="bold"
