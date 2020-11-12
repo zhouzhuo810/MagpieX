@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Magpie</string>
+    <string name="app_name">MagpieX</string>
     <string name="cancel_text">Cancel Cancel Cancel Cancel Cancel Cancel</string>
     <string name="search_text">Search</string>
     <string name="language_setting">Language Settings</string>

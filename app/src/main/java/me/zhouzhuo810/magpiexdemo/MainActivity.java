@@ -61,17 +61,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnLanguage = findViewById(R.id.btn_language);
         btnDialog = findViewById(R.id.btn_dialog);
         btnTitle = findViewById(R.id.btn_title);
-        btnDownload = (Button) findViewById(R.id.btn_download);
-        btnPager = (Button) findViewById(R.id.btn_pager);
-        btnTab = (Button) findViewById(R.id.btn_tab);
-        etCity = (EditText) findViewById(R.id.et_city);
-        btnGo = (Button) findViewById(R.id.btn_go);
+        btnDownload = findViewById(R.id.btn_download);
+        btnPager = findViewById(R.id.btn_pager);
+        btnTab = findViewById(R.id.btn_tab);
+        etCity = findViewById(R.id.et_city);
+        btnGo = findViewById(R.id.btn_go);
         tvMap = findViewById(R.id.tv_map);
         tvScrollList = findViewById(R.id.tv_scroll_list);
         tvScrollGrid = findViewById(R.id.tv_scroll_grid);
-        btnTools = (Button) findViewById(R.id.btn_tools);
-        btnSpinner = (Button) findViewById(R.id.btn_spinner);
-        tvResult = (TextView) findViewById(R.id.tv_result);
+        btnTools = findViewById(R.id.btn_tools);
+        btnSpinner = findViewById(R.id.btn_spinner);
+        tvResult = findViewById(R.id.tv_result);
     }
     
     @Override
@@ -176,6 +176,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 LanguageUtil.setGlobalLanguage(MyCons.LANGUAGE_VI);
                                 recreate();
                                 break;
+                            default:
+                                break;
                         }
                     }
                 });
@@ -211,6 +213,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.tv_scroll_list:
                 startAct(ScrollListActivity.class);
                 break;
+            default:
+                break;
         }
     }
     
@@ -222,7 +226,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         ToastUtil.showToast(SimpleUtil.getString(R.string.back_text));
     }
 }

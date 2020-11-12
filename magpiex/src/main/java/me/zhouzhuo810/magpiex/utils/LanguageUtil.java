@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
-import android.util.DisplayMetrics;
 
 import java.util.Locale;
 import java.util.Map;
@@ -15,6 +14,11 @@ import androidx.annotation.RequiresApi;
 import me.zhouzhuo810.magpiex.app.BaseApplication;
 import me.zhouzhuo810.magpiex.cons.Cons;
 
+/**
+ * 多语言工具类
+ *
+ * @author zhouzhuo810
+ */
 public class LanguageUtil {
     
     
@@ -51,70 +55,57 @@ public class LanguageUtil {
         return SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, defaultValue);
     }
     
+    /**
+     * 更新Application Context 的Locale
+     */
     public static void updateApplicationLanguage() {
         Resources resources = BaseUtil.getApp().getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
         Integer code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
         Locale locale = LanguageUtil.getSupportLanguage(code);
         if (locale == null) {
             return;
         }
-        config.locale = locale;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             LocaleList localeList = new LocaleList(locale);
             LocaleList.setDefault(localeList);
             config.setLocales(localeList);
-            BaseUtil.getApp().createConfigurationContext(config);
             Locale.setDefault(locale);
+        } else {
+            config.setLocale(locale);
         }
-        resources.updateConfiguration(config, dm);
+        BaseUtil.init(BaseUtil.getApp().createConfigurationContext(config), true);
     }
     
+    /**
+     * 更新Activity Context 的Locale
+     */
     public static void updateActivityLanguage(Context context) {
         Resources resources = context.getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
         Integer code = SpUtil.getInt(context, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
         Locale locale = LanguageUtil.getSupportLanguage(code);
         if (locale == null) {
             return;
         }
-        config.locale = locale;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             LocaleList localeList = new LocaleList(locale);
             LocaleList.setDefault(localeList);
             config.setLocales(localeList);
-            context.createConfigurationContext(config);
             Locale.setDefault(locale);
+        } else {
+            config.setLocale(locale);
         }
-        resources.updateConfiguration(config, dm);
+        context.createConfigurationContext(config);
     }
     
-    public static void applyLanguage(Context context, Integer newLanguage) {
-        Resources resources = context.getResources();
-        Configuration configuration = resources.getConfiguration();
-        Locale locale = getSupportLanguage(newLanguage);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            DisplayMetrics dm = resources.getDisplayMetrics();
-            // apply locale
-            configuration.setLocale(locale);
-            resources.updateConfiguration(configuration, dm);
-        } else {
-            // updateConfiguration
-            DisplayMetrics dm = resources.getDisplayMetrics();
-            configuration.locale = locale;
-            resources.updateConfiguration(configuration, dm);
-        }
-    }
     
     public static Context attachBaseContext(Context context, Integer language, Map<Integer, Locale> supportLanguages) {
         mSupportLanguages = supportLanguages;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return createConfigurationResources(context, language);
         } else {
-            applyLanguage(context, language);
-            return context;
+            return applyLanguage(context, language);
         }
     }
     
@@ -122,26 +113,33 @@ public class LanguageUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return createConfigurationResources(context, language);
         } else {
-            applyLanguage(context, language);
-            return context;
+            return applyLanguage(context, language);
         }
+    }
+    
+    private static Context applyLanguage(Context context, Integer newLanguage) {
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        Locale locale = getSupportLanguage(newLanguage);
+        configuration.setLocale(locale);
+        context.createConfigurationContext(configuration);
+        return context;
     }
     
     @TargetApi(Build.VERSION_CODES.N)
     private static Context createConfigurationResources(Context context, Integer language) {
         Resources resources = context.getResources();
         final Configuration configuration = resources.getConfiguration();
-        final DisplayMetrics dm = resources.getDisplayMetrics();
         Locale locale;
-        if (language < 0) {//如果没有指定语言使用系统首选语言
+        if (language < 0) {
+            //如果没有指定语言使用系统首选语言
             locale = getSystemPreferredLanguage();
-        } else {//指定了语言使用指定语言，没有则使用首选语言
+        } else {
+            //指定了语言使用指定语言，没有则使用首选语言
             locale = getSupportLanguage(language);
         }
         configuration.setLocale(locale);
-        //        Context configurationContext = context.createConfigurationContext(configuration);
-        resources.updateConfiguration(configuration, dm);
-        return context;
+        return context.createConfigurationContext(configuration);
     }
     
     /**

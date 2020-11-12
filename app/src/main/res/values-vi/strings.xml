@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Magpie</string>
+    <string name="app_name">MagpieX</string>
     <string name="cancel_text">取消</string>
     <string name="search_text">Tìm kiếm</string>
     <string name="language_setting">Cài đặt ngôn ngữ</string>

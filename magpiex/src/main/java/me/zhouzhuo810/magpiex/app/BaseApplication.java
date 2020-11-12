@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.view.Gravity;
+import android.webkit.WebView;
 
 import com.hjq.toast.ToastUtils;
 
@@ -17,19 +18,32 @@ import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
 
+/**
+ * 使用此框架，强烈建议自定义的Application继承BaseApplication，否则需要自行复制内部逻辑。
+ *
+ * @author zhouzhuo810
+ */
 public abstract class BaseApplication extends Application {
     
     @Override
     public void onCreate() {
         super.onCreate();
+        
+        BaseUtil.init(this);
     
         LanguageUtil.init(this);
-    
-        BaseUtil.init(this);
         
         ToastUtils.init(this);
         
         ToastUtils.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, SimpleUtil.getScaledValue(200));
+        
+        if (shouldSupportMultiLanguage()) {
+            try {
+                new WebView(this, null).destroy();
+            } catch (Exception ignored) {
+            }
+            LanguageUtil.updateApplicationLanguage();
+        }
     }
     
     @Override
@@ -40,8 +54,6 @@ public abstract class BaseApplication extends Application {
         } else {
             super.attachBaseContext(base);
         }
-        
-        BaseUtil.init(base, true);
     }
     
     @Override

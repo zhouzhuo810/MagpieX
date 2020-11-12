@@ -23,15 +23,15 @@ public class BaseUtil {
      *
      * @param app Application
      */
-    public static void init(Context app, boolean isAttachBase) {
+    public static void init(Context app, boolean onlyReplaceApp) {
         mApp = app;
         //顺便初始化屏幕适配工具类
-        if (isAttachBase) {
+        if (onlyReplaceApp) {
             return;
         }
         ScreenAdapterUtil.init(app);
     }
-
+    
     public static void init(Context app) {
         mApp = app;
         //顺便初始化屏幕适配工具类
