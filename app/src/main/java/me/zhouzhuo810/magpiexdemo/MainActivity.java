@@ -20,6 +20,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.RxHelper;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.ToastUtil;
 import me.zhouzhuo810.magpiexdemo.api.Api;
 import me.zhouzhuo810.magpiexdemo.api.entity.GetWeatherList;
@@ -219,4 +220,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         
     }
     
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ToastUtil.showToast(SimpleUtil.getString(R.string.back_text));
+    }
 }

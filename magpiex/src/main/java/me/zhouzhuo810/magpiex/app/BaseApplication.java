@@ -10,6 +10,7 @@ import com.hjq.toast.ToastUtils;
 import java.util.Locale;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
@@ -27,6 +28,7 @@ public abstract class BaseApplication extends Application {
         BaseUtil.init(this);
         
         ToastUtils.init(this);
+        
         ToastUtils.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, SimpleUtil.getScaledValue(200));
     }
     
@@ -34,7 +36,7 @@ public abstract class BaseApplication extends Application {
     protected void attachBaseContext(Context base) {
         if (shouldSupportMultiLanguage()) {
             int language = SpUtil.getInt(base, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
-            super.attachBaseContext(LanguageUtil.attachBaseContext(base, language));
+            super.attachBaseContext(LanguageUtil.attachBaseContext(base, language, getSupportLanguages()));
         } else {
             super.attachBaseContext(base);
         }
@@ -43,7 +45,7 @@ public abstract class BaseApplication extends Application {
     }
     
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (shouldSupportMultiLanguage()) {
             LanguageUtil.updateApplicationLanguage();

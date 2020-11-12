@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.3'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -31,6 +31,8 @@ If you use this. That means you added dependencies below:
     api 'androidx.appcompat:appcompat:1.2.0'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.1.0'
+    //Material Design
+    api 'com.google.android.material:material:1.2.1'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
@@ -288,7 +290,14 @@ it supports:
 - ShareUtil
 > It's for sharing Text or File to other app.
 
+- DrawableUtil
+> Drawable相关工具类.
+
 ### Update Logs
+
+> 1.4.4
+> - 修复重启APP后Application级别的Context获取字符串没有适配多语言问题；
+> - 新增`DrawableUtil`工具类；
 
 > 1.4.3
 > - 部分工具类加上注视，适配框架判断是否缩放的Tag改成id类型；

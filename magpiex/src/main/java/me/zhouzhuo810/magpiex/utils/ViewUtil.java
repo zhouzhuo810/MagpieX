@@ -1,8 +1,10 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
@@ -10,8 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.lang.reflect.Method;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 
 public class ViewUtil {
@@ -61,7 +66,8 @@ public class ViewUtil {
     
     /**
      * 设置图标的颜色
-     * @param icon ImageView
+     *
+     * @param icon  ImageView
      * @param color 颜色值
      */
     public static void setIconColor(ImageView icon, int color) {
@@ -74,6 +80,24 @@ public class ViewUtil {
             icon.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
+    /**
+     * 设置FloatingActionButton的背景颜色
+     *
+     * @param color   颜色
+     * @param buttons 按钮
+     */
+    public static void setFloatingActionButtonBgColor(@ColorInt int color, FloatingActionButton... buttons) {
+        if (buttons != null) {
+            for (FloatingActionButton btn : buttons) {
+                if (btn != null) {
+                    ColorStateList colorStateList = ColorStateList.valueOf(color);
+                    btn.setBackgroundTintMode(PorterDuff.Mode.SRC_ATOP);
+                    btn.setBackgroundTintList(colorStateList);
+                }
+            }
         }
     }
     

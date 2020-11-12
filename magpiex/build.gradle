@@ -54,6 +54,8 @@ dependencies {
     api 'androidx.appcompat:appcompat:1.2.0'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.1.0'
+    //Material Design
+    api 'com.google.android.material:material:1.2.1'
     //BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
     //EventBus
@@ -78,5 +80,5 @@ dependencies {
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
-    api 'com.hjq:toast:8.6'
+    api 'com.hjq:toast:8.8'
 }

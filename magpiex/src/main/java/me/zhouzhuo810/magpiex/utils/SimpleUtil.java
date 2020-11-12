@@ -3,12 +3,15 @@ package me.zhouzhuo810.magpiex.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.ArrayRes;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
 
 /**
  * 常用方法简化
@@ -87,11 +90,11 @@ public class SimpleUtil {
      * @return 颜色值
      */
     public static int getColor(@ColorRes int resId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return BaseUtil.getApp().getResources().getColor(resId, BaseUtil.getApp().getTheme());
-        } else {
-            return BaseUtil.getApp().getResources().getColor(resId);
-        }
+        return ResourcesCompat.getColor(BaseUtil.getApp().getResources(), resId, BaseUtil.getApp().getTheme());
+    }
+    
+    public static Drawable getDrawable(@DrawableRes int resId) {
+        return ResourcesCompat.getDrawable(BaseUtil.getApp().getResources(), resId, BaseUtil.getApp().getTheme());
     }
     
     /**

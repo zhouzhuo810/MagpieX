@@ -9,6 +9,7 @@ import android.os.LocaleList;
 import android.util.DisplayMetrics;
 
 import java.util.Locale;
+import java.util.Map;
 
 import androidx.annotation.RequiresApi;
 import me.zhouzhuo810.magpiex.app.BaseApplication;
@@ -18,6 +19,7 @@ public class LanguageUtil {
     
     
     private static BaseApplication mApp;
+    private static Map<Integer, Locale> mSupportLanguages;
     
     public static void init(BaseApplication app) {
         if (app.getSupportLanguages() == null && app.shouldSupportMultiLanguage()) {
@@ -106,6 +108,16 @@ public class LanguageUtil {
         }
     }
     
+    public static Context attachBaseContext(Context context, Integer language, Map<Integer, Locale> supportLanguages) {
+        mSupportLanguages = supportLanguages;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return createConfigurationResources(context, language);
+        } else {
+            applyLanguage(context, language);
+            return context;
+        }
+    }
+    
     public static Context attachBaseContext(Context context, Integer language) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return createConfigurationResources(context, language);
@@ -140,7 +152,11 @@ public class LanguageUtil {
      */
     public static boolean isSupportLanguage(Integer language) {
         if (mApp == null) {
-            return false;
+            if (mSupportLanguages == null) {
+                return false;
+            } else {
+                return mSupportLanguages.containsKey(language);
+            }
         }
         return mApp.getSupportLanguages().containsKey(language);
     }
@@ -154,6 +170,9 @@ public class LanguageUtil {
     @TargetApi(Build.VERSION_CODES.N)
     public static Locale getSupportLanguage(Integer language) {
         if (isSupportLanguage(language)) {
+            if (mSupportLanguages != null) {
+                return mSupportLanguages.get(language);
+            }
             return mApp.getSupportLanguages().get(language);
         }
         return getSystemPreferredLanguage();

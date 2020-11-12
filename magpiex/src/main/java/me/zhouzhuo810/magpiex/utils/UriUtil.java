@@ -3,6 +3,7 @@ package me.zhouzhuo810.magpiex.utils;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -273,29 +274,57 @@ public class UriUtil {
     private static String uriToFileApiQ(Context context, Uri uri) {
         File file = null;
         //android10以上转换
-        if (uri.getScheme().equals(ContentResolver.SCHEME_FILE)) {
+        if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
+            if (uri.getPath() == null) {
+                return null;
+            }
             file = new File(uri.getPath());
-        } else if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+        } else if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             //把文件复制到沙盒目录
             ContentResolver contentResolver = context.getContentResolver();
             Cursor cursor = contentResolver.query(uri, null, null, null, null);
+            if (cursor == null) {
+                return null;
+            }
             if (cursor.moveToFirst()) {
                 String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 try {
                     InputStream is = contentResolver.openInputStream(uri);
                     File cache = new File(context.getExternalCacheDir().getAbsolutePath(), Math.round((Math.random() + 1) * 1000) + displayName);
                     FileOutputStream fos = new FileOutputStream(cache);
-                    FileUtils.copy(is, fos);
+                    if (is != null) {
+                        FileUtils.copy(is, fos);
+                    }
                     file = cache;
                     fos.close();
-                    is.close();
+                    if (is != null) {
+                        is.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             cursor.close();
         }
+        if (file == null) {
+            return null;
+        }
         return file.getAbsolutePath();
     }
     
+    /**
+     * 授予打开的文档树永久性的读写权限
+     *
+     * @param data onResult的data
+     * @param uri  Uri
+     */
+    public static void grantUriPermission(Intent data, Uri uri) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            final int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            try {
+                BaseUtil.getApp().getContentResolver().takePersistableUriPermission(uri, takeFlags);
+            } catch (Exception ignored) {
+            }
+        }
+    }
 }

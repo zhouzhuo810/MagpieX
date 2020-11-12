@@ -39,7 +39,7 @@ public class ResourcesUtil {
     }
 
     /**
-     * 获取资源文件drawble的id
+     * 获取资源文件drawable的id
      * @param context Context
      * @param resName 资源名
      * @return 资源id
