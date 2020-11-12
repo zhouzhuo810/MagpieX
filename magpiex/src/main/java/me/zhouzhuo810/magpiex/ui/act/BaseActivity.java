@@ -21,6 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -636,15 +637,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
         super.applyOverrideConfiguration(overrideConfiguration);
     }
-    
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (shouldSupportMultiLanguage()) {
-            LanguageUtil.updateActivityLanguage(this);
-        }
-    }
-    
     
     @Override
     public <T extends BaseFragment> T findFragmentByClazzAsTag(Class<T> clazz) {

@@ -77,29 +77,6 @@ public class LanguageUtil {
         BaseUtil.init(BaseUtil.getApp().createConfigurationContext(config), true);
     }
     
-    /**
-     * 更新Activity Context 的Locale
-     */
-    public static void updateActivityLanguage(Context context) {
-        Resources resources = context.getResources();
-        Configuration config = resources.getConfiguration();
-        Integer code = SpUtil.getInt(context, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
-        Locale locale = LanguageUtil.getSupportLanguage(code);
-        if (locale == null) {
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            LocaleList localeList = new LocaleList(locale);
-            LocaleList.setDefault(localeList);
-            config.setLocales(localeList);
-            Locale.setDefault(locale);
-        } else {
-            config.setLocale(locale);
-        }
-        context.createConfigurationContext(config);
-    }
-    
-    
     public static Context attachBaseContext(Context context, Integer language, Map<Integer, Locale> supportLanguages) {
         mSupportLanguages = supportLanguages;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -122,7 +99,6 @@ public class LanguageUtil {
         Configuration configuration = resources.getConfiguration();
         Locale locale = getSupportLanguage(newLanguage);
         configuration.setLocale(locale);
-        context.createConfigurationContext(configuration);
         return context;
     }
     
