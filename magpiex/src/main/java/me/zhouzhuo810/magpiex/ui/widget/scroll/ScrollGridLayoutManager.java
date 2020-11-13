@@ -2,8 +2,6 @@ package me.zhouzhuo810.magpiex.ui.widget.scroll;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -74,53 +72,6 @@ public class ScrollGridLayoutManager extends GridLayoutManager {
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onRestoreInstanceState(Parcelable state) {
-        SavedState savedState = (SavedState) state;
-        super.onRestoreInstanceState(savedState.getSuperState());
-        mMillsPerPx = savedState.millsPerPixel;
-    }
-
-    @Override
-    public Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        SavedState savedState = new SavedState(superState);
-        savedState.millsPerPixel = mMillsPerPx;
-        return savedState;
-    }
-
-
-    static class SavedState extends View.BaseSavedState {
-        int millsPerPixel;
-
-        public SavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        private SavedState(Parcel in) {
-            super(in);
-            millsPerPixel = in.readInt();
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            super.writeToParcel(dest, flags);
-            dest.writeInt(millsPerPixel);
-        }
-
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-            @Override
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            @Override
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
     }
 
 }

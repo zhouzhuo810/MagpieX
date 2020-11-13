@@ -57,6 +57,24 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
     }
     
     /**
+     * 是否启动滚动
+     *
+     * @return 是否
+     */
+    public boolean isScrollEnable() {
+        return mScrollEnable;
+    }
+    
+    /**
+     * 是否正在滚动
+     *
+     * @return 是否
+     */
+    public boolean isScrolling() {
+        return mIsScrolling;
+    }
+    
+    /**
      * 设置滚动速度
      *
      * @param millsPerPx 滚动1px需要多少毫秒
@@ -267,6 +285,8 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
                 mIsTouched = false;
                 startScrollImmediately();
                 break;
+            default:
+                break;
         }
         return super.onTouchEvent(e);
     }
@@ -277,50 +297,5 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
         stopScroll();
     }
     
-    @Override
-    public void onRestoreInstanceState(Parcelable state) {
-        SavedState savedState = (SavedState) state;
-        super.onRestoreInstanceState(savedState.getSuperState());
-        mTopBottomDelay = savedState.delay;
-    }
     
-    @Override
-    public Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        SavedState savedState = new SavedState(superState);
-        savedState.delay = mTopBottomDelay;
-        return savedState;
-    }
-    
-    
-    static class SavedState extends View.BaseSavedState {
-        int delay;
-        
-        public SavedState(Parcelable superState) {
-            super(superState);
-        }
-        
-        private SavedState(Parcel in) {
-            super(in);
-            delay = in.readInt();
-        }
-        
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            super.writeToParcel(dest, flags);
-            dest.writeInt(delay);
-        }
-        
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-            @Override
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-            
-            @Override
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
-    }
 }

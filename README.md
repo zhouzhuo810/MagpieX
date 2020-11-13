@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.6'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -294,6 +294,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.4.7
+> - 修复ScrollListRecyclerView和ScrollGridRecyclerView报错问题；
 
 > 1.4.6
 > - 兼容创建WebView导致多语言失效问题；
