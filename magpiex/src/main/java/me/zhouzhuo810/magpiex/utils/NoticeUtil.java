@@ -272,8 +272,12 @@ public class NoticeUtil {
      */
     public static void launchNoticeSettings(Context context) {
         Intent localIntent = new Intent();
-        //直接跳转到应用通知设置的代码：
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            localIntent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            //这种方案适用于 API 26, 即8.0（含8.0）以上可以用
+            localIntent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
+            localIntent.setData(Uri.fromParts("package", context.getPackageName(), null));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             localIntent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             localIntent.putExtra("app_package", context.getPackageName());
             localIntent.putExtra("app_uid", context.getApplicationInfo().uid);
@@ -282,7 +286,16 @@ public class NoticeUtil {
             localIntent.addCategory(Intent.CATEGORY_DEFAULT);
             localIntent.setData(Uri.parse("package:" + context.getPackageName()));
         }
-        context.startActivity(localIntent);
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(localIntent);
+        } catch (Exception e) {
+            localIntent = new Intent();
+            localIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            localIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            localIntent.setData(Uri.parse("package:" + context.getPackageName()));
+            context.startActivity(localIntent);
+        }
     }
     
 }
