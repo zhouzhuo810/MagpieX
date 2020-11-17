@@ -10,7 +10,7 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 import me.zhouzhuo810.magpiex.R;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
@@ -30,6 +30,11 @@ public class MarkView extends View {
         POINT
     }
     
+    public enum PaintStyle {
+        FILL,
+        STROKE
+    }
+    
     private int markNumber = 0;
     private int maxMarkNumber = 99;
     
@@ -40,6 +45,13 @@ public class MarkView extends View {
     private int bgColor = 0xffff0000;
     private int bgShape = 0;
     private int pointSize = 24;
+    private int strokeWidth = 4;
+    private int paintStyle = 0;
+    
+    @Override
+    protected boolean awakenScrollBars() {
+        return super.awakenScrollBars();
+    }
     
     public MarkView(Context context) {
         super(context);
@@ -144,7 +156,8 @@ public class MarkView extends View {
         textPaint.setAntiAlias(true);
         
         bgPaint = new Paint();
-        bgPaint.setStyle(Paint.Style.FILL);
+        bgPaint.setStyle(paintStyle == 0 ? Paint.Style.FILL : Paint.Style.STROKE);
+        bgPaint.setStrokeWidth(strokeWidth);
         bgPaint.setColor(bgColor);
         bgPaint.setAntiAlias(true);
         
@@ -156,15 +169,18 @@ public class MarkView extends View {
             markNumber = t.getInteger(R.styleable.MarkView_mv_markNumber, 0);
             maxMarkNumber = t.getInteger(R.styleable.MarkView_mv_maxMarkNumber, 99);
             textSize = t.getDimensionPixelSize(R.styleable.MarkView_mv_textSize, 34);
+            strokeWidth = t.getDimensionPixelSize(R.styleable.MarkView_mv_strokeWidth, 2);
             textColor = t.getColor(R.styleable.MarkView_mv_textColor, 0xffffffff);
             bgColor = t.getColor(R.styleable.MarkView_mv_bgColor, 0xffff0000);
             bgShape = t.getInt(R.styleable.MarkView_mv_bgShape, 0);
+            paintStyle = t.getInt(R.styleable.MarkView_mv_paintStyle, 0);
             pointSize = t.getDimensionPixelSize(R.styleable.MarkView_mv_point_size, 24);
             t.recycle();
         }
         if (!isInEditMode()) {
-            textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
-            pointSize = ScreenAdapterUtil.getInstance().getScaledValue(pointSize);
+            strokeWidth = SimpleUtil.getScaledValue(strokeWidth);
+            textSize = SimpleUtil.getScaledValue(textSize);
+            pointSize = SimpleUtil.getScaledValue(pointSize);
         }
     }
     
@@ -235,7 +251,19 @@ public class MarkView extends View {
     }
     
     public MarkView setPointSize(int pointSize) {
-        this.pointSize = ScreenAdapterUtil.getInstance().getScaledValue(pointSize);
+        this.pointSize = SimpleUtil.getScaledValue(pointSize);
+        return this;
+    }
+    
+    public MarkView setStrokeWidth(int strokeWidthPx) {
+        this.strokeWidth = SimpleUtil.getScaledValue(strokeWidthPx);
+        this.bgPaint.setStrokeWidth(this.strokeWidth);
+        return this;
+    }
+    
+    public MarkView setPaintStyle(PaintStyle paintStyle) {
+        this.paintStyle = paintStyle.ordinal();
+        this.bgPaint.setStyle(this.paintStyle == 0 ? Paint.Style.FILL : Paint.Style.STROKE);
         return this;
     }
     
@@ -250,7 +278,7 @@ public class MarkView extends View {
     }
     
     public MarkView setTextSizeInPx(int pxSize) {
-        this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(pxSize);
+        this.textSize = SimpleUtil.getScaledValue(pxSize);
         textPaint.setTextSize(textSize);
         return this;
     }

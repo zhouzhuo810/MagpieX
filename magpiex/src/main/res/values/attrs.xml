@@ -27,6 +27,7 @@
 
     <declare-styleable name="MarkView">
         <attr name="mv_textSize" format="dimension|reference"/>
+        <attr name="mv_strokeWidth" format="dimension|reference"/>
         <attr name="mv_textColor" format="color|reference"/>
         <attr name="mv_markNumber" format="integer"/>
         <attr name="mv_maxMarkNumber" format="integer"/>
@@ -34,6 +35,10 @@
             <enum name="oval" value="0"/>
             <enum name="rect" value="1"/>
             <enum name="point" value="2"/>
+        </attr>
+        <attr name="mv_paintStyle" format="enum">
+            <enum name="fill" value="0"/>
+            <enum name="stroke" value="1"/>
         </attr>
         <attr name="mv_bgColor" format="color|reference"/>
         <attr name="mv_point_size" format="dimension|reference"/>
