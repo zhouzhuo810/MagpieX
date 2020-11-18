@@ -204,16 +204,32 @@ public class MarkView extends View {
         switch (bgShape) {
             case 0:
                 //oval
-                int radius = width > height ? height / 2 : width / 2;
+                float radius = width > height ? height / 2.0f : width / 2.0f;
+                if (paintStyle == 1) {
+                    //stroke
+                    radius = radius - strokeWidth / 4.0f;
+                }
                 canvas.drawRoundRect(rectF, radius, radius, bgPaint);
                 break;
             case 1:
                 //rect
+                if (paintStyle == 1) {
+                    //stroke
+                    rectF.left = strokeWidth / 4.0f;
+                    rectF.top = strokeWidth / 4.0f;
+                    rectF.right = getWidth() - strokeWidth / 4.0f;
+                    rectF.bottom = getHeight() - strokeWidth / 4.0f;
+                }
                 canvas.drawRect(rectF, bgPaint);
                 break;
             case 2:
                 //point
-                canvas.drawCircle(width / 2.0f, width / 2.0f, width / 2.0f, bgPaint);
+                float r = width / 2.0f;
+                if (paintStyle == 1) {
+                    //stroke
+                    r = r - strokeWidth / 2.0f;
+                }
+                canvas.drawCircle(width / 2.0f, width / 2.0f, r, bgPaint);
                 break;
             default:
                 break;

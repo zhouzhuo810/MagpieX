@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button tvScrollGrid;
     private Button btnTools;
     private Button btnSpinner;
+    private TextView mTvWidget;
     
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         tvMap = findViewById(R.id.tv_map);
         tvScrollList = findViewById(R.id.tv_scroll_list);
         tvScrollGrid = findViewById(R.id.tv_scroll_grid);
+        mTvWidget = findViewById(R.id.tv_widget);
         btnTools = findViewById(R.id.btn_tools);
         btnSpinner = findViewById(R.id.btn_spinner);
         tvResult = findViewById(R.id.tv_result);
@@ -116,6 +118,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         tvScrollList.setOnClickListener(this);
         
         tvScrollGrid.setOnClickListener(this);
+        
+        mTvWidget.setOnClickListener(this);
     }
     
     @Override
@@ -212,6 +216,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.tv_scroll_list:
                 startAct(ScrollListActivity.class);
+                break;
+            case R.id.tv_widget:
+                startAct(WidgetActivity.class);
                 break;
             default:
                 break;

@@ -105,6 +105,10 @@
             android:name=".ScrollListActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".WidgetActivity"
+            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
+            android:screenOrientation="unspecified" />
     </application>
 
 

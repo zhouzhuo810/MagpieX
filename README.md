@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.4.8'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.4.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -294,6 +294,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.4.9
+> - 修复MarkView在Stroke模式显示异常问题；
 
 > 1.4.8
 > - MarkView支持Stroke模式；

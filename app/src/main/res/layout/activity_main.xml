@@ -145,6 +145,15 @@
                 android:textSize="40px"
                 android:text="滚动格子" />
 
+            <Button
+                android:id="@+id/tv_widget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"
+                android:text="自定义View" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
