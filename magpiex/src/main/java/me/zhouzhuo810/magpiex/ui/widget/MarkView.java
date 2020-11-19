@@ -244,7 +244,7 @@ public class MarkView extends View {
     private void drawText(Canvas canvas) {
         int w = getWidth();
         int h = getHeight();
-        if (markNumber > maxMarkNumber) {
+        if (maxMarkNumber > 0 && markNumber > maxMarkNumber) {
             float textWidth = textPaint.measureText(maxMarkNumber + "+");
             float textHeight = textPaint.descent() + textPaint.ascent();
             canvas.drawText(maxMarkNumber + "+", (w - textWidth) / 2, (h - textHeight) / 2, textPaint);

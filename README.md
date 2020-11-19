@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.5.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.5.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -295,6 +295,7 @@ it supports:
 
 ### Update Logs
 
+> 1.5.1
 > 1.5.0
 > - 当MarkView最大值为0时不限制最大值；
 
