@@ -35,8 +35,8 @@ public class MarkView extends View {
         STROKE
     }
     
-    private int markNumber = 0;
-    private int maxMarkNumber = 99;
+    private long markNumber = 0;
+    private long maxMarkNumber = 99;
     
     private Paint textPaint;
     private Paint bgPaint;
@@ -86,7 +86,7 @@ public class MarkView extends View {
                 case 0:
                 case 1:
                     //oval or rect
-                    if (markNumber > maxMarkNumber) {
+                    if (maxMarkNumber > 0 && markNumber > maxMarkNumber) {
                         float textWidth = textPaint.measureText(maxMarkNumber + "+");
                         float textHeight = textPaint.descent() - textPaint.ascent();
                         if (textWidth < textHeight) {
@@ -127,7 +127,6 @@ public class MarkView extends View {
                 case 0:
                 case 1:
                     //oval or rect
-                    float textWidth = textPaint.measureText(markNumber + "");
                     float textHeight = textPaint.descent() - textPaint.ascent();
                     hSize = (int) textHeight;
                     break;
@@ -283,7 +282,7 @@ public class MarkView extends View {
         return this;
     }
     
-    public int getMarkNumber() {
+    public long getMarkNumber() {
         return this.markNumber;
     }
     
