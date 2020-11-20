@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.5.1'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.5.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -294,6 +294,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.5.2
+> - 尝试修复TextView设置minHeight导致的适配问题；
 
 > 1.5.1
 > 1.5.0

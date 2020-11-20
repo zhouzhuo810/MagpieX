@@ -255,12 +255,12 @@ public class MarkView extends View {
         }
     }
     
-    public MarkView setMaxMarkNumber(int maxMarkNumber) {
+    public MarkView setMaxMarkNumber(long maxMarkNumber) {
         this.maxMarkNumber = maxMarkNumber;
         return this;
     }
     
-    public MarkView setMarkNumber(int markNumber) {
+    public MarkView setMarkNumber(long markNumber) {
         this.markNumber = markNumber;
         return this;
     }

@@ -127,6 +127,14 @@ public class ViewUtil {
         view.setMinimumHeight(value);
     }
     
+    public static void setTextViewMinWidth(TextView view, int value) {
+        view.setMinWidth(value);
+    }
+    
+    public static void setTextViewMinHeight(TextView view, int value) {
+        view.setMinHeight(value);
+    }
+    
     public static int getMaxWidth(View view) {
         return getValue(view, METHOD_GET_MAX_WIDTH);
     }
@@ -138,9 +146,17 @@ public class ViewUtil {
     public static int getMinWidth(View view) {
         return view.getMinimumWidth();
     }
+
+    public static int getTextViewMinWidth(TextView view) {
+        return view.getMinWidth();
+    }
     
     public static int getMinHeight(View view) {
         return view.getMinimumHeight();
+    }
+
+    public static int getTextViewMinHeight(TextView view) {
+        return view.getMinHeight();
     }
     
     private static int getValue(View view, String getterMethodName) {
