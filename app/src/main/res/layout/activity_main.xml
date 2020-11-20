@@ -7,27 +7,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorRed"
-            android:minHeight="130px"
-            android:paddingTop="20px"
-            android:paddingBottom="20px"
-            android:text="哈哈哈"
-            android:paddingStart="40px"
-            android:paddingEnd="40px"
-            android:textSize="40px"
-            android:gravity="center_vertical|start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <me.zhouzhuo810.magpiex.ui.widget.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
