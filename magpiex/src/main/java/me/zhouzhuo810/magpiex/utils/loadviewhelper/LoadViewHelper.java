@@ -40,11 +40,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         } else if (originalHeight > 0) {
             layoutParams.height = setValue(originalHeight);
         }
-        if (layoutParams instanceof ConstraintLayout.LayoutParams) {
-            ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) layoutParams;
-            cp.matchConstraintDefaultWidth = setValue(cp.matchConstraintDefaultWidth);
-            cp.matchConstraintDefaultHeight = setValue(cp.matchConstraintDefaultHeight);
-        }
         loadViewFont(view);
     }
     
