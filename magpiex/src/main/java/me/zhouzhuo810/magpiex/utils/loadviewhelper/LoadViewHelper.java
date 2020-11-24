@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
@@ -103,6 +105,10 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             if (iv.getMaxWidth() != Integer.MAX_VALUE && iv.getMaxWidth() > 0) {
                 iv.setMaxWidth(setValue(iv.getMaxWidth()));
             }
+        } else if (view instanceof ConstraintLayout) {
+            ConstraintLayout sl = (ConstraintLayout) view;
+            sl.setMinHeight(setValue(sl.getMinHeight()));
+            sl.setMinWidth(setValue(sl.getMinWidth()));
         }
     }
     

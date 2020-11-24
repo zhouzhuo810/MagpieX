@@ -34,7 +34,7 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-    failOnError  false
+    failOnError false
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     classpath += configurations.compile
@@ -85,4 +85,6 @@ dependencies {
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
     api 'com.hjq:toast:8.8'
+    //ConstraintLayout
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
 }
