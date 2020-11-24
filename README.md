@@ -58,6 +58,8 @@ If you use this. That means you added dependencies below:
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
     api 'com.hjq:toast:8.6'
+    //ConstraintLayout
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
 ```
 
 #### Screen Adapter
