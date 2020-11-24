@@ -297,6 +297,7 @@ it supports:
 
 > 1.5.3
 > - 修复ConstraintLayout设置minHeight导致的适配问题；
+> - 适配ConstraintLayout相关属性；
 
 > 1.5.2
 > - 尝试修复TextView设置minHeight导致的适配问题；

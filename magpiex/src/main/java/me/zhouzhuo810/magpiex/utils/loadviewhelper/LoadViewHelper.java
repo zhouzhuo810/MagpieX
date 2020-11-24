@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
@@ -41,6 +40,11 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         } else if (originalHeight > 0) {
             layoutParams.height = setValue(originalHeight);
         }
+        if (layoutParams instanceof ConstraintLayout.LayoutParams) {
+            ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) layoutParams;
+            cp.matchConstraintDefaultWidth = setValue(cp.matchConstraintDefaultWidth);
+            cp.matchConstraintDefaultHeight = setValue(cp.matchConstraintDefaultHeight);
+        }
         loadViewFont(view);
     }
     
@@ -72,14 +76,22 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     @Override
     public void loadLayoutMargin(View view) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
-        ViewGroup.MarginLayoutParams marginLayoutParams;
         if (params instanceof ViewGroup.MarginLayoutParams) {
-            marginLayoutParams = (ViewGroup.MarginLayoutParams) params;
+            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) params;
             marginLayoutParams.leftMargin = setValue(marginLayoutParams.leftMargin);
             marginLayoutParams.rightMargin = setValue(marginLayoutParams.rightMargin);
             marginLayoutParams.topMargin = setValue(marginLayoutParams.topMargin);
             marginLayoutParams.bottomMargin = setValue(marginLayoutParams.bottomMargin);
             view.setLayoutParams(marginLayoutParams);
+        }
+        if (params instanceof ConstraintLayout.LayoutParams) {
+            ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) params;
+            cp.goneBottomMargin = setValue(cp.goneBottomMargin);
+            cp.goneEndMargin = setValue(cp.goneEndMargin);
+            cp.goneLeftMargin = setValue(cp.goneLeftMargin);
+            cp.goneRightMargin = setValue(cp.goneRightMargin);
+            cp.goneStartMargin = setValue(cp.goneStartMargin);
+            cp.goneTopMargin = setValue(cp.goneTopMargin);
         }
     }
     
@@ -109,6 +121,14 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             ConstraintLayout sl = (ConstraintLayout) view;
             sl.setMinHeight(setValue(sl.getMinHeight()));
             sl.setMinWidth(setValue(sl.getMinWidth()));
+        }
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (params instanceof ConstraintLayout.LayoutParams) {
+            ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) params;
+            cp.matchConstraintMinHeight = setValue(cp.matchConstraintMinHeight);
+            cp.matchConstraintMinWidth = setValue(cp.matchConstraintMinWidth);
+            cp.matchConstraintMaxWidth = setValue(cp.matchConstraintMaxWidth);
+            cp.matchConstraintMaxHeight = setValue(cp.matchConstraintMaxHeight);
         }
     }
     
