@@ -132,6 +132,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             cp.goneRightMargin = setValue(cp.goneRightMargin);
             cp.goneStartMargin = setValue(cp.goneStartMargin);
             cp.goneTopMargin = setValue(cp.goneTopMargin);
+            cp.circleRadius = setValue(cp.circleRadius);
         }
         if (view instanceof Barrier) {
             Barrier barrier = (Barrier) view;
