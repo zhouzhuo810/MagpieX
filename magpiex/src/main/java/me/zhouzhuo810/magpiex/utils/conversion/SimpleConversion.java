@@ -19,6 +19,7 @@ public class SimpleConversion implements IConversion {
             loadViewHelper.loadPadding(view);
             loadViewHelper.loadLayoutMargin(view);
             loadViewHelper.loadMinWidthAndHeight(view);
+            loadViewHelper.loadCustomAttrs(view);
             view.setTag(R.id.view_scale_tag, true);
         }
     }

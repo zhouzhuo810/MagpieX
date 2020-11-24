@@ -20,6 +20,7 @@ public class CustomConversion implements IConversion {
             loadViewHelper.loadLayoutMargin(view);
             loadViewHelper.loadMaxWidthAndHeight(view);
             loadViewHelper.loadMinWidthAndHeight(view);
+            loadViewHelper.loadCustomAttrs(view);
             view.setTag(R.id.view_scale_tag, true);
         }
     }

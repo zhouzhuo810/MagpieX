@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
@@ -79,15 +80,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             marginLayoutParams.bottomMargin = setValue(marginLayoutParams.bottomMargin);
             view.setLayoutParams(marginLayoutParams);
         }
-        if (params instanceof ConstraintLayout.LayoutParams) {
-            ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) params;
-            cp.goneBottomMargin = setValue(cp.goneBottomMargin);
-            cp.goneEndMargin = setValue(cp.goneEndMargin);
-            cp.goneLeftMargin = setValue(cp.goneLeftMargin);
-            cp.goneRightMargin = setValue(cp.goneRightMargin);
-            cp.goneStartMargin = setValue(cp.goneStartMargin);
-            cp.goneTopMargin = setValue(cp.goneTopMargin);
-        }
     }
     
     @Override
@@ -117,15 +109,36 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             sl.setMinHeight(setValue(sl.getMinHeight()));
             sl.setMinWidth(setValue(sl.getMinWidth()));
         }
+    }
+    
+    @Override
+    public void loadCustomAttrs(View view) {
+        loadConstraintLayout(view);
+    }
+    
+    private void loadConstraintLayout(View view) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params instanceof ConstraintLayout.LayoutParams) {
             ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) params;
+            cp.guideBegin = setValue(cp.guideBegin);
+            cp.guideEnd = setValue(cp.guideEnd);
             cp.matchConstraintMinHeight = setValue(cp.matchConstraintMinHeight);
             cp.matchConstraintMinWidth = setValue(cp.matchConstraintMinWidth);
             cp.matchConstraintMaxWidth = setValue(cp.matchConstraintMaxWidth);
             cp.matchConstraintMaxHeight = setValue(cp.matchConstraintMaxHeight);
+            cp.goneBottomMargin = setValue(cp.goneBottomMargin);
+            cp.goneEndMargin = setValue(cp.goneEndMargin);
+            cp.goneLeftMargin = setValue(cp.goneLeftMargin);
+            cp.goneRightMargin = setValue(cp.goneRightMargin);
+            cp.goneStartMargin = setValue(cp.goneStartMargin);
+            cp.goneTopMargin = setValue(cp.goneTopMargin);
+        }
+        if (view instanceof Barrier) {
+            Barrier barrier = (Barrier) view;
+            barrier.setMargin(setValue(barrier.getMargin()));
         }
     }
+    
     
     private int setValue(int value) {
         if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
