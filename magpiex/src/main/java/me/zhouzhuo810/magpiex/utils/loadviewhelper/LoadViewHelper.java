@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
@@ -120,8 +121,14 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params instanceof ConstraintLayout.LayoutParams) {
             ConstraintLayout.LayoutParams cp = (ConstraintLayout.LayoutParams) params;
-            cp.guideBegin = setValue(cp.guideBegin);
-            cp.guideEnd = setValue(cp.guideEnd);
+            if (view instanceof Guideline) {
+                if (cp.guideBegin != -1) {
+                    cp.guideBegin = setValue(cp.guideBegin);
+                }
+                if (cp.guideEnd != -1) {
+                    cp.guideEnd = setValue(cp.guideEnd);
+                }
+            }
             cp.matchConstraintMinHeight = setValue(cp.matchConstraintMinHeight);
             cp.matchConstraintMinWidth = setValue(cp.matchConstraintMinWidth);
             cp.matchConstraintMaxWidth = setValue(cp.matchConstraintMaxWidth);
@@ -133,6 +140,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             cp.goneStartMargin = setValue(cp.goneStartMargin);
             cp.goneTopMargin = setValue(cp.goneTopMargin);
             cp.circleRadius = setValue(cp.circleRadius);
+            view.setLayoutParams(cp);
         }
         if (view instanceof Barrier) {
             Barrier barrier = (Barrier) view;

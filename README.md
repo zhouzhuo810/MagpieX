@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.5.3'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.5.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.5.4
+> - 适配ConstraintLayout的guideBegin和guideEnd；
 
 > 1.5.3
 > - 修复ConstraintLayout设置minHeight导致的适配问题；
