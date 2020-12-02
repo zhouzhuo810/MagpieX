@@ -122,7 +122,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void startActWithIntentShared(Intent intent, final View... sharedElements) {
-        startActivity(intent, ActivityUtil.getOptionsBundle(this, sharedElements));
+        try {
+            startActivity(intent, ActivityUtil.getOptionsBundle(this, sharedElements));
+        } catch (Exception e) {
+            startActivity(intent);
+            overridePendingTransition(openInAnimation(), openOutAnimation());
+        }
     }
     
     @Override
@@ -130,7 +135,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (defaultAnim) {
             startActivity(intent);
         } else {
-            startActivity(intent, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
+            try {
+                startActivity(intent, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
+            } catch (Exception e) {
+                startActivity(intent);
+                overridePendingTransition(openInAnimation(), openOutAnimation());
+            }
         }
     }
     
@@ -145,7 +155,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (defaultAnim) {
             startActivityForResult(intent, requestCode);
         } else {
-            startActivityForResult(intent, requestCode, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
+            try {
+                startActivityForResult(intent, requestCode, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
+            } catch (Exception e) {
+                startActivityForResult(intent, requestCode);
+                overridePendingTransition(openInAnimation(), openOutAnimation());
+            }
         }
     }
     
