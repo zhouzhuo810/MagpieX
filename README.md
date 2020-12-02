@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.5.6'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.5.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.5.7
+> - 修复onResume导致的奔溃问题；
 
 > 1.5.6
 > - 修复startActivity导致的奔溃问题；

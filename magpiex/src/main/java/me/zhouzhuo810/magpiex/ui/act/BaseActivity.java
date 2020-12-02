@@ -21,7 +21,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -95,6 +94,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         return getWindow().getDecorView();
     }
     
+    @Override
+    protected void onResume() {
+        // FIXME by 周卓 时间：12/2/20 11:23 AM 防止调用Activity#isTopTask()方法时某些手机奔溃
+        try {
+            super.onResume();
+        } catch (Exception ignored) {
+        }
+    }
+    
     /**
      * 跳转到目标Activity
      *
@@ -125,6 +133,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         try {
             startActivity(intent, ActivityUtil.getOptionsBundle(this, sharedElements));
         } catch (Exception e) {
+            // FIXME by 周卓 时间：12/2/20 11:23 AM 防止调用Activity#isTopTask()方法时某些手机奔溃
             startActivity(intent);
             overridePendingTransition(openInAnimation(), openOutAnimation());
         }
@@ -138,6 +147,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             try {
                 startActivity(intent, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
             } catch (Exception e) {
+                // FIXME by 周卓 时间：12/2/20 11:23 AM 防止调用Activity#isTopTask()方法时某些手机奔溃
                 startActivity(intent);
                 overridePendingTransition(openInAnimation(), openOutAnimation());
             }
@@ -158,6 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             try {
                 startActivityForResult(intent, requestCode, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
             } catch (Exception e) {
+                // FIXME by 周卓 时间：12/2/20 11:23 AM 防止调用Activity#isTopTask()方法时某些手机奔溃
                 startActivityForResult(intent, requestCode);
                 overridePendingTransition(openInAnimation(), openOutAnimation());
             }
