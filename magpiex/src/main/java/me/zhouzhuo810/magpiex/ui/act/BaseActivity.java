@@ -101,6 +101,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             super.onResume();
         } catch (Exception ignored) {
         }
+        String simpleName = getClass().getSimpleName();
+        SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
     }
     
     /**

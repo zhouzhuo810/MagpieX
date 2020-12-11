@@ -121,4 +121,5 @@ public abstract class BaseApplication extends Application {
      * @return 自定义Code
      */
     public abstract Map<Integer, Locale> getSupportLanguages();
+    
 }

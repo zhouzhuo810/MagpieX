@@ -7,8 +7,10 @@ import android.util.Log;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.NoticeUtil;
+import me.zhouzhuo810.magpiex.utils.SpUtil;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -18,6 +20,7 @@ import okio.BufferedSource;
 
 /**
  * 全局参数拦截器，用于设置全局请求参数，通知栏弹出通知，点击复制请求路径
+ *
  * @author zhouzhuo810
  */
 public class CopyNoticeInterceptor implements Interceptor {
@@ -55,14 +58,15 @@ public class CopyNoticeInterceptor implements Interceptor {
                 request.body().writeTo(requestBuffer);
             }
             String body = requestBuffer.readString(requestBuffer.size() > 2048 ? 2048 : requestBuffer.size(), UTF8);
+            String clazzName = SpUtil.getString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME);
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + "\n\nparams: " + body, true, false,
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), "POST: " + request.url() + "\nBody: " + body + "\nClass: " + clazzName + "\n", true, false,
                     mLogoId, false, mChannelId);
             } else {
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + "", true, false,
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), "GET: " + request.url() + "\nClass: " + clazzName + "\n", true, false,
                     mLogoId, false, mChannelId);
             }
         } catch (Exception e) {

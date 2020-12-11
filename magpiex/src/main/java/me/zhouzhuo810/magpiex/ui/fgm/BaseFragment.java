@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpiex.R;
+import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.ui.act.IBaseActivity;
 import me.zhouzhuo810.magpiex.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
@@ -35,6 +36,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
+import me.zhouzhuo810.magpiex.utils.SpUtil;
 
 /**
  * 此BaseFragment主要提供了界面展示隐藏，数据延迟加载方法，使用者无需关心界面显示和隐藏的时机，
@@ -790,6 +792,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         
         mViewActualVisible = viewActualVisible;
         if (viewActualVisible) {
+            String simpleName = getClass().getSimpleName();
+            SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
             onVisible();
             if (mNeedLazeLoaded) {
                 mNeedLazeLoaded = false;

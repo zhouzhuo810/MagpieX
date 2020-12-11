@@ -31,4 +31,6 @@ public final class Cons {
     public static final String NOTICE_ACTION = "notice_action";
     
     public static final String NOTICE_URL = "notice_url";
+    
+    public static final String SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME = "sp_key_of_current_activity_or_fragment_name";
 }

@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
