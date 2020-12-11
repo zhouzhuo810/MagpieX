@@ -18,6 +18,7 @@ import okio.BufferedSource;
 
 /**
  * 全局参数拦截器，用于设置全局请求参数，通知栏弹出通知，点击分享请求路径
+ * @author zhouzhuo810
  */
 public class ShareNoticeInterceptor implements Interceptor {
     
@@ -46,8 +47,7 @@ public class ShareNoticeInterceptor implements Interceptor {
             throw new IOException(e.getMessage());
         }
         
-        String requestInfo = ".\nREQUEST URL：" + request.url();
-        
+        String requestInfo = "\nREQUEST URL：" + request.url();
         try {
             Buffer requestBuffer = new Buffer();
             if (request.body() != null) {
@@ -57,11 +57,11 @@ public class ShareNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + "\n\nparams: " + body, true, false,
+                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), "POST: "+request.url()+"  Body: "+body, true, false,
                     mLogoId, false, mChannelId);
             } else {
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), request.url() + "", true, false,
+                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), "GET: "+request.url(), true, false,
                     mLogoId, false, mChannelId);
             }
         } catch (Exception e) {

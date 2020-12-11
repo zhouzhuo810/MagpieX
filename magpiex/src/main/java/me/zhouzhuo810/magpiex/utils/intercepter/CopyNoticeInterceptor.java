@@ -18,6 +18,7 @@ import okio.BufferedSource;
 
 /**
  * 全局参数拦截器，用于设置全局请求参数，通知栏弹出通知，点击复制请求路径
+ * @author zhouzhuo810
  */
 public class CopyNoticeInterceptor implements Interceptor {
     
