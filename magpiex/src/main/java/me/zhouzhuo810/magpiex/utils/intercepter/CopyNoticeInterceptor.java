@@ -64,11 +64,11 @@ public class CopyNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + "-" + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\nBody: " + body + "\nClass: " + clazzName + "\n", true, false,
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\n\nBody: " + body + "\n\nClass: " + clazzName, true, false,
                     mLogoId, false, mChannelId, mTargetAppPackageName);
             } else {
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + "-" + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\nClass: " + clazzName + "\n", true, false,
+                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\n\nClass: " + clazzName, true, false,
                     mLogoId, false, mChannelId, mTargetAppPackageName);
             }
         } catch (Exception e) {

@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.6.0'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.6.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.6.1
+> - 修复拦截器指定app跳转无法返回原app问题；
 
 > 1.6.0
 > - 复制url拦截器支持复制后跳转到制定包名的app；

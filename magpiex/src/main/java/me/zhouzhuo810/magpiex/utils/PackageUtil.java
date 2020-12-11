@@ -107,6 +107,7 @@ public class PackageUtil {
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             ComponentName cn = new ComponentName(name, className);
             intent.setComponent(cn);
+            intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED|Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
     }

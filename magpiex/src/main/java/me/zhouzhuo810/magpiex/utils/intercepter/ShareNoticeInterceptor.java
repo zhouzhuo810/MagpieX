@@ -7,7 +7,6 @@ import android.util.Log;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import androidx.annotation.Nullable;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.NoticeUtil;
@@ -62,11 +61,11 @@ public class ShareNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), "POST: " + request.url() + "\nBody: " + body + "\nClass: " + clazzName + "\n", true, false,
+                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\n\nBody: " + body + "\n\nClass: " + clazzName + "\n", true, false,
                     mLogoId, false, mChannelId);
             } else {
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle, request.url().encodedPath(), "GET: " + request.url() + "\nClass: " + clazzName + "\n", true, false,
+                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\n\nClass: " + clazzName + "\n", true, false,
                     mLogoId, false, mChannelId);
             }
         } catch (Exception e) {
