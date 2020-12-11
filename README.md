@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.5.8'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.5.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -297,8 +297,11 @@ it supports:
 
 ### Update Logs
 
+> 1.5.9
+> - 接口拦截器分享和复制通知标题带上当前可见界面的类名；
+
 > 1.5.8
-> - 接口拦截器分享和复制通知带上当前可见界面的类名；
+> - 接口拦截器分享和复制通知内容带上当前可见界面的类名；
 
 > 1.5.7
 > - 修复onResume导致的奔溃问题；
