@@ -1,8 +1,11 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 
 import java.util.ArrayList;
@@ -87,5 +90,24 @@ public class PackageUtil {
             e.printStackTrace();
         }
         return verName;
+    }
+    
+    public static void openApp(Context context, String packageName) throws PackageManager.NameNotFoundException {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo pi = pm.getPackageInfo(packageName, 0);
+        Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
+        resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        resolveIntent.setPackage(pi.packageName);
+        List<ResolveInfo> apps = pm.queryIntentActivities(resolveIntent, 0);
+        ResolveInfo ri = apps.iterator().next();
+        if (ri != null) {
+            String name = ri.activityInfo.packageName;
+            String className = ri.activityInfo.name;
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            ComponentName cn = new ComponentName(name, className);
+            intent.setComponent(cn);
+            context.startActivity(intent);
+        }
     }
 }

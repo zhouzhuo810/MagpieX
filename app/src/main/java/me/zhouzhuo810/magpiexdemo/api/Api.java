@@ -34,7 +34,7 @@ public class Api {
         if (weatherApi == null) {
             synchronized (Api.class) {
                 if (weatherApi == null) {
-                    weatherApi = ApiUtil.createApiWithShareNotice(
+                    weatherApi = ApiUtil.createApiWithCopyNotice(
                         WeatherApi.class,
                         URL_RETROFIT,
                         20,
@@ -43,7 +43,8 @@ public class Api {
                         false,
                         R.mipmap.ic_launcher,
                         "1",
-                        BaseUtil.getApp().getString(R.string.app_name)
+                        BaseUtil.getApp().getString(R.string.app_name),
+                        "com.alibaba.android.rimet"
                     );
                 }
             }

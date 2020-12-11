@@ -162,7 +162,8 @@ public class NoticeUtil {
      */
     public static void showNormalNoticeWithCopyAction(Context context, String title,
                                                       String showContent, String realContent, boolean autoCancel,
-                                                      boolean onGoing, int smallIcon, boolean vibrate, String channelId) {
+                                                      boolean onGoing, int smallIcon, boolean vibrate, String channelId,
+                                                      String targetAppPackageName) {
         NotificationCompat.Builder b = new NotificationCompat.Builder(context, channelId == null ? DEFAULT_CHANNEL_ID : channelId);
         b.setContentTitle(title)
             .setContentText(showContent)
@@ -174,6 +175,7 @@ public class NoticeUtil {
         Intent intent = new Intent(context, CopyUrlActivity.class);
         intent.putExtra(Cons.NOTICE_ACTION, CopyUrlActivity.NOTICE_ACTION_COPY);
         intent.putExtra(Cons.NOTICE_URL, realContent);
+        intent.putExtra(Cons.NOTICE_TARGET_APP_PACKAGE_NAME, targetAppPackageName);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(context, RandomUtil.getRandomSixInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         b.setContentIntent(pi);

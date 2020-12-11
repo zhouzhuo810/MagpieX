@@ -7,6 +7,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import androidx.annotation.Nullable;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.NoticeUtil;
@@ -50,7 +51,7 @@ public class ShareNoticeInterceptor implements Interceptor {
             throw new IOException(e.getMessage());
         }
         
-        String requestInfo = "\nREQUEST URL：" + request.url();
+        String requestInfo = ".\nREQUEST URL：" + request.url();
         try {
             Buffer requestBuffer = new Buffer();
             if (request.body() != null) {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import me.jessyan.progressmanager.ProgressManager;
 import me.zhouzhuo810.magpiex.utils.intercepter.CopyNoticeInterceptor;
 import me.zhouzhuo810.magpiex.utils.intercepter.ShareNoticeInterceptor;
@@ -91,7 +92,8 @@ public class ApiUtil {
     public static <T> T createApiWithCopyNotice(Class<T> clazz, String baseUrl, int timeOut, TimeUnit timeUnit,
                                                 boolean enableLog, boolean forceNoCache,
                                                 int logoId, String noticeChannelId,
-                                                String noticeTitle) {
+                                                String noticeTitle,
+                                                String targetAppPackageName) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
             .connectTimeout(timeOut, timeUnit)
             .writeTimeout(timeOut, timeUnit)
@@ -115,7 +117,7 @@ public class ApiUtil {
             );
         }
         if (enableLog) {
-            builder.addInterceptor(new CopyNoticeInterceptor(logoId, noticeChannelId, noticeTitle));
+            builder.addInterceptor(new CopyNoticeInterceptor(logoId, noticeChannelId, noticeTitle, targetAppPackageName));
         }
         //注册上传或下载监听器
         OkHttpClient client = ProgressManager.getInstance().with(builder).build();

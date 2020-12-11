@@ -30,13 +30,15 @@ public class CopyNoticeInterceptor implements Interceptor {
     private int mLogoId;
     private String mChannelId;
     private String mNoticeTitle;
+    private String mTargetAppPackageName;
     
     private static final Charset UTF8 = Charset.forName("UTF-8");
     
-    public CopyNoticeInterceptor(int logoId, String channelId, String noticeTitle) {
+    public CopyNoticeInterceptor(int logoId, String channelId, String noticeTitle, String targetAppPackageName) {
         this.mLogoId = logoId;
         this.mChannelId = channelId;
         this.mNoticeTitle = noticeTitle;
+        this.mTargetAppPackageName = targetAppPackageName;
     }
     
     @SuppressWarnings("ConstantConditions")
@@ -63,11 +65,11 @@ public class CopyNoticeInterceptor implements Interceptor {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于复制url
                 NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + "-" + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\nBody: " + body + "\nClass: " + clazzName + "\n", true, false,
-                    mLogoId, false, mChannelId);
+                    mLogoId, false, mChannelId, mTargetAppPackageName);
             } else {
                 //发通知，用于复制url
                 NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + "-" + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\nClass: " + clazzName + "\n", true, false,
-                    mLogoId, false, mChannelId);
+                    mLogoId, false, mChannelId, mTargetAppPackageName);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +78,8 @@ public class CopyNoticeInterceptor implements Interceptor {
         try {
             ResponseBody responseBody = response.body();
             BufferedSource source = responseBody.source();
-            source.request(Long.MAX_VALUE); // Buffer the entire body.
+            // Buffer the entire body.
+            source.request(Long.MAX_VALUE);
             Buffer buffer = source.buffer();
             requestInfo += "\n" + "RESPONSE：" + buffer.clone().readString(UTF8);
         } catch (Exception e) {

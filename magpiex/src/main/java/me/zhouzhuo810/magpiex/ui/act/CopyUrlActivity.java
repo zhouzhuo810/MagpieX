@@ -1,11 +1,14 @@
 package me.zhouzhuo810.magpiex.ui.act;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.CopyUtil;
+import me.zhouzhuo810.magpiex.utils.PackageUtil;
 import me.zhouzhuo810.magpiex.utils.ShareUtil;
 import me.zhouzhuo810.magpiex.utils.ToastUtil;
 
@@ -22,9 +25,16 @@ public class CopyUrlActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         String action = getIntent().getStringExtra(Cons.NOTICE_ACTION);
         String url = getIntent().getStringExtra(Cons.NOTICE_URL);
+        String packageName = getIntent().getStringExtra(Cons.NOTICE_TARGET_APP_PACKAGE_NAME);
         if (NOTICE_ACTION_COPY.equals(action)) {
             CopyUtil.copyPlainText("", url);
             ToastUtil.showToast(getString(R.string.magpie_copy_ok));
+            if (!TextUtils.isEmpty(packageName)) {
+                try {
+                    PackageUtil.openApp(this, packageName);
+                } catch (PackageManager.NameNotFoundException ignored) {
+                }
+            }
         } else if (NOTICE_ACTION_SHARE.equals(action)) {
             ShareUtil.shareTextToOther(this, url, null);
         }
