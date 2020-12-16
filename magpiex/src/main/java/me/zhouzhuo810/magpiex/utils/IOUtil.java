@@ -1,5 +1,7 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,5 +79,32 @@ public final class IOUtil {
             output.write(buffer, 0, n);
         }
         return count;
+    }
+    
+    public static byte[] inputStreamToByteArray(InputStream ins) {
+        if (ins == null) {
+            return null;
+        }
+        BufferedInputStream bis = new BufferedInputStream(ins);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            byte[] buffer = new byte[128];
+            int n = -1;
+            while ((n = bis.read(buffer)) != -1) {
+                bos.write(buffer, 0, n);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return bos.toByteArray();
     }
 }

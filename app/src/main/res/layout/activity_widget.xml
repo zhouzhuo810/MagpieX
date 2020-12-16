@@ -10,15 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:mv_bgColor="@color/colorRed"
-        app:mv_markNumber="5"
+        app:mv_markNumber="9"
         app:mv_maxMarkNumber="99"
         android:layout_marginTop="50px"
         android:layout_marginStart="50px"
         app:mv_paintStyle="stroke"
-        app:mv_bgShape="point"
-        app:mv_strokeWidth="5px"
+        app:mv_bgShape="oval"
+        app:mv_strokeWidth="4px"
         app:mv_textColor="@color/colorRed"
-        app:mv_textSize="50px" />
+        app:mv_textSize="60px" />
 
     <Button
         android:layout_width="wrap_content"

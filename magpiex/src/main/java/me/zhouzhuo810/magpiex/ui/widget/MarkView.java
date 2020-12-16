@@ -80,6 +80,10 @@ public class MarkView extends View {
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
         int wSize = MeasureSpec.getSize(widthMeasureSpec);
         int hSize = MeasureSpec.getSize(heightMeasureSpec);
+        int paddingStart = getPaddingStart();
+        int paddingEnd = getPaddingEnd();
+        int paddingTop = getPaddingTop();
+        int paddingBottom = getPaddingBottom();
         
         if (wMode == MeasureSpec.AT_MOST || wMode == MeasureSpec.UNSPECIFIED) {
             switch (bgShape) {
@@ -111,6 +115,8 @@ public class MarkView extends View {
                             wSize = (int) (textWidth + textHeight / 2);
                         }
                     }
+                    wSize += (paddingStart + paddingEnd);
+                    wSize += strokeWidth;
                     break;
                 case 2:
                     //point
@@ -128,7 +134,7 @@ public class MarkView extends View {
                 case 1:
                     //oval or rect
                     float textHeight = textPaint.descent() - textPaint.ascent();
-                    hSize = (int) textHeight;
+                    hSize = (int) textHeight + strokeWidth + paddingTop + paddingBottom;
                     break;
                 case 2:
                     //point
@@ -203,6 +209,10 @@ public class MarkView extends View {
         switch (bgShape) {
             case 0:
                 //oval
+                rectF.left = strokeWidth / 2.0f;
+                rectF.top = strokeWidth / 2.0f;
+                rectF.right = width - strokeWidth / 2.0f;
+                rectF.bottom = height - strokeWidth / 2.0f;
                 float radius = width > height ? height / 2.0f : width / 2.0f;
                 if (paintStyle == 1) {
                     //stroke
