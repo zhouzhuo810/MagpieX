@@ -44,7 +44,7 @@ public class SimpleUtil {
     }
     
     /**
-     * 缩放值自动（默认）
+     * 缩放值自动（默认）- int
      *
      * @param px 原来值
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
@@ -53,8 +53,19 @@ public class SimpleUtil {
         return ScreenAdapterUtil.getInstance().getScaledValue(px);
     }
     
+    
     /**
-     * 缩放值
+     * 缩放值自动（默认）- float
+     *
+     * @param px 原来值
+     * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
+     */
+    public static float getScaledValue(float px) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px);
+    }
+    
+    /**
+     * 缩放值 - int
      *
      * @param px 原来值
      * @return 缩放后的值
@@ -62,14 +73,34 @@ public class SimpleUtil {
     public static int getScaledValueByWidth(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px);
     }
+
+    /**
+     * 缩放值 - float
+     *
+     * @param px 原来值
+     * @return 缩放后的值
+     */
+    public static float getScaledValueByWidth(float px) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px);
+    }
     
     /**
-     * 缩放值按高度
+     * 缩放值按高度 - int
      *
      * @param px 原来值
      * @return 缩放后的值
      */
     public static int getScaledValueByHeight(int px) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px);
+    }
+
+    /**
+     * 缩放值按高度 - float
+     *
+     * @param px 原来值
+     * @return 缩放后的值
+     */
+    public static float getScaledValueByHeight(float px) {
         return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px);
     }
     

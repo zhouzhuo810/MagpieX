@@ -160,6 +160,17 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         return setValueByWidth(value);
     }
     
+    private float setValue(float value) {
+        if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
+            return isLandscape() ? setValueByHeight(value) : setValueByWidth(value);
+        } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WIDTH.equals(adaptType)) {
+            return setValueByWidth(value);
+        } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_HEIGHT.equals(adaptType)) {
+            return setValueByHeight(value);
+        }
+        return setValueByWidth(value);
+    }
+    
     
     private int setValueByWidth(int value) {
         if (value == 0) {
@@ -169,6 +180,10 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         }
         return (int) calculateValueByWidth(value);
     }
+
+    private float setValueByWidth(float value) {
+        return calculateValueByWidth(value);
+    }
     
     private int setValueByHeight(int value) {
         if (value == 0) {
@@ -177,6 +192,10 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             return 1;
         }
         return (int) calculateValueByHeight(value);
+    }
+
+    private float setValueByHeight(float value) {
+        return calculateValueByHeight(value);
     }
     
     private float calculateValueByWidth(float value) {
@@ -216,12 +235,27 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     @Override
+    public float getScaledValue(float px) {
+        return setValue(px);
+    }
+    
+    @Override
     public int getScaledValueByWidth(int px) {
         return setValueByWidth(px);
     }
     
     @Override
+    public float getScaledValueByWidth(float px) {
+        return setValueByWidth(px);
+    }
+    
+    @Override
     public int getScaledValueByHeight(int px) {
+        return setValueByHeight(px);
+    }
+    
+    @Override
+    public float getScaledValueByHeight(float px) {
         return setValueByHeight(px);
     }
 }

@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.6.2'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.6.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.6.3
+> - SimpleUtil支持计算浮点数大小;
 
 > 1.6.2
 > - MarkView支持padding属性；
