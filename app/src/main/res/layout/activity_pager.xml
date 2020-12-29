@@ -72,7 +72,7 @@
         app:i_isNeedScaleInPx="true"
         app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
         app:i_selectTabTextColor="@color/colorPrimary"
-        app:i_selectTabTextSize="50px"
+        app:i_selectTabTextSize="70px"
         app:i_shouldTabExpand="false"
         app:i_showUnderline="false" />
 

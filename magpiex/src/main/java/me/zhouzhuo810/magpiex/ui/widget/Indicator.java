@@ -24,13 +24,15 @@ import me.zhouzhuo810.magpiex.ui.widget.adapter.BaseFragmentPagerAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.en.IndicatorType;
 import me.zhouzhuo810.magpiex.ui.widget.intef.IPagerIndicator;
 import me.zhouzhuo810.magpiex.ui.widget.intef.IResProvider;
+import me.zhouzhuo810.magpiex.utils.ColorUtil;
+import me.zhouzhuo810.magpiex.utils.NavigatorHelper;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 
 
 /**
  * Created by zz on 2016/8/22.
  */
-public class Indicator extends HorizontalScrollView implements IPagerIndicator {
+public class Indicator extends HorizontalScrollView implements IPagerIndicator, NavigatorHelper.OnNavigatorScrollListener {
     
     private IndicatorType indicatorType = IndicatorType.RoundPoint;
     
@@ -81,7 +83,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
     private DataSetObserver mDataSetObserver;
     
-    public static enum TabOrientation {
+    private NavigatorHelper mNavigatorHelper;
+    
+    
+    public enum TabOrientation {
         VERTICAL, HORIZONTAL
     }
     
@@ -103,11 +108,13 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     }
     
     private void init(Context context, AttributeSet attrs) {
-        
         setHorizontalScrollBarEnabled(false);
         
         setFillViewport(true);
         setWillNotDraw(false);
+        
+        mNavigatorHelper = new NavigatorHelper();
+        mNavigatorHelper.setNavigatorScrollListener(this);
         
         //init attrs
         if (attrs != null) {
@@ -267,7 +274,6 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 
                 // if there is an offset, start interpolating left and right coordinates between current and next tab
                 if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
-                    
                     View nextTab = getItem(currentPosition + 1);
                     final float nextTabLeft = nextTab.getLeft() + underlinePadding;
                     final float nextTabRight = nextTab.getRight() - underlinePadding;
@@ -298,16 +304,19 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     }
     
     @Override
-    public void setCurrentItem(int position, boolean animate) {
+    public Indicator setCurrentItem(int position, boolean animate) {
         if (mViewPager != null) {
             mViewPager.setCurrentItem(position, animate);
+        } else {
+            select(position);
         }
+        return this;
     }
     
     @Override
-    public void updateText(int position, String title) {
+    public Indicator updateText(int position, String title) {
         if (mViewPager == null) {
-            return;
+            return this;
         }
         PagerAdapter adapter = mViewPager.getAdapter();
         if (adapter != null) {
@@ -317,17 +326,11 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 tv.setText(adapter.getPageTitle(position));
             }
         }
+        return this;
     }
     
-    /**
-     * bind indicator to your viewpager.
-     *
-     * 如果重新{@link ViewPager#setAdapter}，需要重新调用 {@link Indicator#setViewPager}
-     *
-     * @param viewPager your viewpager
-     */
     @Override
-    public void setViewPager(final ViewPager viewPager) {
+    public Indicator setViewPager(final ViewPager viewPager) {
         final PagerAdapter adapter = viewPager.getAdapter();
         if (adapter == null) {
             throw new IllegalStateException("ViewPager does not have adapter instance.");
@@ -343,6 +346,280 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         adapter.registerDataSetObserver(mDataSetObserver);
         initIndicator();
         addPageChangeListener();
+        return this;
+    }
+    
+    @Override
+    public Indicator select(int position) {
+        currentPosition = position;
+        switch (indicatorType) {
+            case TabWithIcon:
+                selectIcon(currentPosition);
+                break;
+            case TabWithText:
+                selectText(currentPosition);
+                break;
+            case TabWithIconAndText:
+                selectIconAndText(currentPosition);
+                break;
+            default:
+                break;
+        }
+        return this;
+    }
+    
+    @Override
+    public Indicator setTabTextColorSelect(int tabTextColorSelect) {
+        this.tabTextColorSelect = tabTextColorSelect;
+        return this;
+    }
+    
+    @Override
+    public Indicator setTabTextColorUnSelect(int tabTextColorUnSelect) {
+        this.tabTextColorUnSelect = tabTextColorUnSelect;
+        return this;
+    }
+    
+    @Override
+    public Indicator setUnderlineColor(int underlineColor) {
+        this.underlineColor = underlineColor;
+        underlinePaint.setColor(this.underlineColor);
+        return this;
+    }
+    
+    @Override
+    public Indicator update() {
+        switch (indicatorType) {
+            case TabWithIcon:
+                selectIcon(currentPosition);
+                break;
+            case TabWithText:
+                selectText(currentPosition);
+                break;
+            case TabWithIconAndText:
+                selectIconAndText(currentPosition);
+                break;
+            default:
+                break;
+        }
+        invalidate();
+        return this;
+    }
+    
+    @Override
+    public Indicator setTabTextIconOrientation(TabOrientation orientation) {
+        if (indicatorType != IndicatorType.TabWithIconAndText) {
+            return this;
+        }
+        this.tabTextIconOrientation = orientation;
+        switch (orientation) {
+            case VERTICAL:
+                if (mViewPager.getAdapter() != null) {
+                    for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                        LinearLayout ll = (LinearLayout) getItem(i);
+                        ll.setOrientation(LinearLayout.VERTICAL);
+                        ImageView iv = (ImageView) ll.getChildAt(0);
+                        iv.setVisibility(VISIBLE);
+                        TextView tv = (TextView) ll.getChildAt(1);
+                        LinearLayout.LayoutParams ivP = (LinearLayout.LayoutParams) iv.getLayoutParams();
+                        LinearLayout.LayoutParams tvP = (LinearLayout.LayoutParams) tv.getLayoutParams();
+                        ivP.topMargin = 0;
+                        tvP.leftMargin = 0;
+                        tvP.topMargin = tabIconTextMargin;
+                        iv.setLayoutParams(ivP);
+                        tv.setLayoutParams(tvP);
+                    }
+                }
+                break;
+            case HORIZONTAL:
+                if (mViewPager.getAdapter() != null) {
+                    for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                        LinearLayout ll = (LinearLayout) getItem(i);
+                        ll.setOrientation(LinearLayout.HORIZONTAL);
+                        ImageView iv = (ImageView) ll.getChildAt(0);
+                        TextView tv = (TextView) ll.getChildAt(1);
+                        LinearLayout.LayoutParams ivP = (LinearLayout.LayoutParams) iv.getLayoutParams();
+                        LinearLayout.LayoutParams tvP = (LinearLayout.LayoutParams) tv.getLayoutParams();
+                        ivP.topMargin = 0;
+                        tvP.topMargin = 0;
+                        tvP.bottomMargin = 0;
+                        tvP.leftMargin = tabIconTextMargin;
+                        iv.setLayoutParams(ivP);
+                        tv.setLayoutParams(tvP);
+                    }
+                }
+                break;
+            
+        }
+        return this;
+    }
+    
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SaveState saveState = new SaveState(superState);
+        saveState.position = currentPosition;
+        return saveState;
+    }
+    
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        SaveState savedState = (SaveState) state;
+        super.onRestoreInstanceState(savedState.getSuperState());
+        select(savedState.position);
+    }
+    
+    static class SaveState extends BaseSavedState {
+        int position;
+        
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+        
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeInt(this.position);
+        }
+        
+        public SaveState(Parcelable superState) {
+            super(superState);
+        }
+        
+        protected SaveState(Parcel in) {
+            super(in);
+            this.position = in.readInt();
+        }
+        
+        public static final Creator<SaveState> CREATOR = new Creator<SaveState>() {
+            @Override
+            public SaveState createFromParcel(Parcel source) {
+                return new SaveState(source);
+            }
+            
+            @Override
+            public SaveState[] newArray(int size) {
+                return new SaveState[size];
+            }
+        };
+    }
+    
+    private void scrollToChild(int position, float offset) {
+        if (tabCount == 0) {
+            return;
+        }
+        
+        View selectedChild = getItem(position);
+        if (selectedChild != null) {
+            int selectedWidth = selectedChild.getWidth();
+            View nextChild = position + 1 < mIndicatorContainer.getChildCount() ? mIndicatorContainer.getChildAt(position + 1) : null;
+            int nextWidth = nextChild != null ? nextChild.getWidth() : 0;
+            int scrollOffset = (int) ((float) (selectedWidth + nextWidth) * 0.5F * offset);
+            int newScrollX = selectedChild.getLeft() + selectedWidth / 2 - this.getWidth() / 2 + scrollOffset;
+            
+            if (newScrollX != lastScrollX) {
+                lastScrollX = newScrollX;
+                scrollTo(newScrollX, 0);
+            }
+        }
+        
+    }
+    
+    private void selectIcon(int position) {
+        if (mViewPager == null) {
+            return;
+        }
+        if (mViewPager.getAdapter() != null) {
+            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                LinearLayout ll = (LinearLayout) getItem(i);
+                ImageView iv = (ImageView) ll.getChildAt(0);
+                if (i == position) {
+                    if (tabBgSelectId != -1) {
+                        ll.setBackgroundResource(tabBgSelectId);
+                    }
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
+                    iv.setImageResource(icon);
+                } else {
+                    if (tabBgNormalId != -1) {
+                        ll.setBackgroundResource(tabBgNormalId);
+                    }
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    iv.setImageResource(icon);
+                }
+            }
+        }
+    }
+    
+    private void selectIconAndText(int position) {
+        if (mViewPager == null) {
+            return;
+        }
+        if (mViewPager.getAdapter() != null) {
+            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+                throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
+            }
+            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                LinearLayout ll = (LinearLayout) getItem(i);
+                ImageView iv = (ImageView) ll.getChildAt(0);
+                TextView tv = (TextView) ll.getChildAt(1);
+                if (i == position) {
+                    iv.setVisibility(VISIBLE);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeSelect);
+                    tv.setTextColor(tabTextColorSelect);
+                    if (tabBgSelectId != -1) {
+                        ll.setBackgroundResource(tabBgSelectId);
+                    }
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
+                    iv.setImageResource(icon);
+                } else {
+                    if (horizontalHideIconMode && tabTextIconOrientation == TabOrientation.HORIZONTAL) {
+                        iv.setVisibility(GONE);
+                    } else {
+                        iv.setVisibility(VISIBLE);
+                    }
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
+                    tv.setTextColor(tabTextColorUnSelect);
+                    if (tabBgNormalId != -1) {
+                        ll.setBackgroundResource(tabBgNormalId);
+                    }
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    iv.setImageResource(icon);
+                }
+            }
+        }
+    }
+    
+    private void selectText(final int position) {
+        if (mViewPager == null) {
+            return;
+        }
+        if (mViewPager.getAdapter() != null) {
+            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                final TextView tv = (TextView) getItem(i);
+                if (i == position) {
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeSelect);
+                    tv.setTextColor(tabTextColorSelect);
+                    if (tabBgSelectId != -1) {
+                        tv.setBackgroundResource(tabBgSelectId);
+                    }
+                } else {
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
+                    tv.setTextColor(tabTextColorUnSelect);
+                    if (tabBgNormalId != -1) {
+                        tv.setBackgroundResource(tabBgNormalId);
+                    }
+                }
+            }
+        }
+    }
+    
+    public TabOrientation getTabTextIconOrientation() {
+        return tabTextIconOrientation;
+    }
+    
+    private View getItem(int position) {
+        return mIndicatorContainer.getChildAt(position);
     }
     
     public DataSetObserver getDataSetObserver() {
@@ -368,9 +645,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     
     private void initIndicator() {
         if (mViewPager.getAdapter() == null) {
+            if (mNavigatorHelper != null) {
+                mNavigatorHelper.setTotalCount(0);
+            }
             return;
         }
         tabCount = mViewPager.getAdapter().getCount();
+        if (mNavigatorHelper != null) {
+            mNavigatorHelper.setTotalCount(tabCount);
+        }
         switch (indicatorType) {
             case RoundPoint:
                 setMinimumWidth(selectPointSize > unSelectPointSize ? selectPointSize * tabCount + spacing * (tabCount - 1) : unSelectPointSize * tabCount + spacing * (tabCount - 1));
@@ -516,6 +799,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     currentPosition = position;
                     currentPositionOffset = positionOffset;
                     
+                    if (mNavigatorHelper != null) {
+                        mNavigatorHelper.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
+                    
                     switch (indicatorType) {
                         case TabWithIcon:
                         case TabWithText:
@@ -526,26 +813,23 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                             break;
                     }
                     
-                    invalidate();
+                    if (showUnderline || showGapLine) {
+                        invalidate();
+                    }
                 }
                 
                 @Override
                 public void onPageSelected(int position) {
-                    switch (indicatorType) {
-                        case TabWithIcon:
-                            selectIcon(position);
-                            break;
-                        case TabWithText:
-                            selectText(position);
-                            break;
-                        case TabWithIconAndText:
-                            selectIconAndText(position);
-                            break;
+                    if (mNavigatorHelper != null) {
+                        mNavigatorHelper.onPageSelected(position);
                     }
                 }
                 
                 @Override
                 public void onPageScrollStateChanged(int state) {
+                    if (mNavigatorHelper != null) {
+                        mNavigatorHelper.onPageScrollStateChanged(state);
+                    }
                 }
             };
             mViewPager.addOnPageChangeListener(mOnPageChangeListener);
@@ -553,257 +837,85 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     }
     
     @Override
-    protected Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        SaveState saveState = new SaveState(superState);
-        saveState.position = currentPosition;
-        return saveState;
+    public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
+        if (mViewPager != null) {
+            View nextTab = getItem(index);
+            if (indicatorType == IndicatorType.TabWithText || indicatorType == IndicatorType.TabWithIconAndText) {
+                if (tabTextSizeSelect > 0 && tabTextSizeUnSelect > 0 && tabTextSizeSelect != tabTextSizeUnSelect) {
+                    final float nextTextSize = tabTextSizeSelect + (tabTextSizeUnSelect - tabTextSizeSelect) * (1 - enterPercent);
+                    if (nextTab instanceof TextView) {
+                        final TextView tv = (TextView) nextTab;
+                        tv.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, nextTextSize);
+                            }
+                        });
+                    }
+                }
+                if (tabTextColorSelect != tabTextColorUnSelect) {
+                    final int nextColor = ColorUtil.computeColor(tabTextColorUnSelect, tabTextColorSelect, enterPercent);
+                    if (nextTab instanceof TextView) {
+                        final TextView tv = (TextView) nextTab;
+                        tv.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv.setTextColor(nextColor);
+                            }
+                        });
+                    }
+                }
+            }
+        }
     }
     
     @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        SaveState savedState = (SaveState) state;
-        super.onRestoreInstanceState(savedState.getSuperState());
-        currentPosition = savedState.position;
+    public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
+        if (mViewPager != null) {
+            View currentTab = getItem(index);
+            if (indicatorType == IndicatorType.TabWithText || indicatorType == IndicatorType.TabWithIconAndText) {
+                if (tabTextSizeSelect > 0 && tabTextSizeUnSelect > 0 && tabTextSizeSelect != tabTextSizeUnSelect) {
+                    final float curTextSize = tabTextSizeSelect + (tabTextSizeUnSelect - tabTextSizeSelect) * leavePercent;
+                    if (currentTab instanceof TextView) {
+                        final TextView tv = (TextView) currentTab;
+                        tv.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, curTextSize);
+                            }
+                        });
+                    }
+                }
+                if (tabTextColorSelect != tabTextColorUnSelect) {
+                    final int curColor = ColorUtil.computeColor(tabTextColorSelect, tabTextColorUnSelect, leavePercent);
+                    if (currentTab instanceof TextView) {
+                        final TextView tv = (TextView) currentTab;
+                        tv.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv.setTextColor(curColor);
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    }
+    
+    @Override
+    public void onSelected(int index, int totalCount) {
         switch (indicatorType) {
             case TabWithIcon:
-                selectIcon(currentPosition);
-                break;
-            case TabWithText:
-                selectText(currentPosition);
+                selectIcon(index);
                 break;
             case TabWithIconAndText:
-                selectIconAndText(currentPosition);
+                selectIconAndText(index);
                 break;
         }
     }
     
-    static class SaveState extends BaseSavedState {
-        int position;
-        
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-        
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            super.writeToParcel(dest, flags);
-            dest.writeInt(this.position);
-        }
-        
-        public SaveState(Parcelable superState) {
-            super(superState);
-        }
-        
-        protected SaveState(Parcel in) {
-            super(in);
-            this.position = in.readInt();
-        }
-        
-        public static final Creator<SaveState> CREATOR = new Creator<SaveState>() {
-            @Override
-            public SaveState createFromParcel(Parcel source) {
-                return new SaveState(source);
-            }
-            
-            @Override
-            public SaveState[] newArray(int size) {
-                return new SaveState[size];
-            }
-        };
-    }
+    @Override
+    public void onDeselected(int index, int totalCount) {
     
-    private void scrollToChild(int position, float offset) {
-        
-        if (tabCount == 0) {
-            return;
-        }
-        
-        View selectedChild = getItem(position);
-        if (selectedChild != null) {
-            int selectedWidth = selectedChild.getWidth();
-            View nextChild = position + 1 < mIndicatorContainer.getChildCount() ? mIndicatorContainer.getChildAt(position + 1) : null;
-            int nextWidth = nextChild != null ? nextChild.getWidth() : 0;
-            int scrollOffset = (int) ((float) (selectedWidth + nextWidth) * 0.5F * offset);
-            int newScrollX = selectedChild.getLeft() + selectedWidth / 2 - this.getWidth() / 2 + scrollOffset;
-            
-            if (newScrollX != lastScrollX) {
-                lastScrollX = newScrollX;
-                scrollTo(newScrollX, 0);
-            }
-        }
-        
-    }
-    
-    private void selectIcon(int position) {
-        if (mViewPager == null) {
-            return;
-        }
-        if (mViewPager.getAdapter() != null) {
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                LinearLayout ll = (LinearLayout) getItem(i);
-                ImageView iv = (ImageView) ll.getChildAt(0);
-                if (i == position) {
-                    if (tabBgSelectId != -1) {
-                        ll.setBackgroundResource(tabBgSelectId);
-                    }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
-                    iv.setImageResource(icon);
-                } else {
-                    if (tabBgNormalId != -1) {
-                        ll.setBackgroundResource(tabBgNormalId);
-                    }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
-                    iv.setImageResource(icon);
-                }
-            }
-        }
-    }
-    
-    public void selectText(int position) {
-        if (mViewPager == null) {
-            return;
-        }
-        if (mViewPager.getAdapter() != null) {
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                TextView tv = (TextView) getItem(i);
-                if (i == position) {
-                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeSelect);
-                    tv.setTextColor(tabTextColorSelect);
-                    if (tabBgSelectId != -1) {
-                        tv.setBackgroundResource(tabBgSelectId);
-                    }
-                } else {
-                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
-                    tv.setTextColor(tabTextColorUnSelect);
-                    if (tabBgNormalId != -1) {
-                        tv.setBackgroundResource(tabBgNormalId);
-                    }
-                }
-            }
-        }
-    }
-    
-    public void setTabTextIconOrientation(TabOrientation orientation) {
-        if (indicatorType != IndicatorType.TabWithIconAndText) {
-            return;
-        }
-        this.tabTextIconOrientation = orientation;
-        switch (orientation) {
-            case VERTICAL:
-                if (mViewPager.getAdapter() != null) {
-                    for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                        LinearLayout ll = (LinearLayout) getItem(i);
-                        ll.setOrientation(LinearLayout.VERTICAL);
-                        ImageView iv = (ImageView) ll.getChildAt(0);
-                        iv.setVisibility(VISIBLE);
-                        TextView tv = (TextView) ll.getChildAt(1);
-                        LinearLayout.LayoutParams ivP = (LinearLayout.LayoutParams) iv.getLayoutParams();
-                        LinearLayout.LayoutParams tvP = (LinearLayout.LayoutParams) tv.getLayoutParams();
-                        ivP.topMargin = 0;
-                        tvP.leftMargin = 0;
-                        tvP.topMargin = tabIconTextMargin;
-                        iv.setLayoutParams(ivP);
-                        tv.setLayoutParams(tvP);
-                    }
-                }
-                break;
-            case HORIZONTAL:
-                if (mViewPager.getAdapter() != null) {
-                    for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                        LinearLayout ll = (LinearLayout) getItem(i);
-                        ll.setOrientation(LinearLayout.HORIZONTAL);
-                        ImageView iv = (ImageView) ll.getChildAt(0);
-                        TextView tv = (TextView) ll.getChildAt(1);
-                        LinearLayout.LayoutParams ivP = (LinearLayout.LayoutParams) iv.getLayoutParams();
-                        LinearLayout.LayoutParams tvP = (LinearLayout.LayoutParams) tv.getLayoutParams();
-                        ivP.topMargin = 0;
-                        tvP.topMargin = 0;
-                        tvP.bottomMargin = 0;
-                        tvP.leftMargin = tabIconTextMargin;
-                        iv.setLayoutParams(ivP);
-                        tv.setLayoutParams(tvP);
-                    }
-                }
-                break;
-            
-        }
-    }
-    
-    public TabOrientation getTabTextIconOrientation() {
-        return tabTextIconOrientation;
-    }
-    
-    public void selectIconAndText(int position) {
-        if (mViewPager == null) {
-            return;
-        }
-        if (mViewPager.getAdapter() != null) {
-            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
-                throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
-            }
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                LinearLayout ll = (LinearLayout) getItem(i);
-                ImageView iv = (ImageView) ll.getChildAt(0);
-                TextView tv = (TextView) ll.getChildAt(1);
-                if (i == position) {
-                    iv.setVisibility(VISIBLE);
-                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeSelect);
-                    tv.setTextColor(tabTextColorSelect);
-                    if (tabBgSelectId != -1) {
-                        ll.setBackgroundResource(tabBgSelectId);
-                    }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
-                    iv.setImageResource(icon);
-                } else {
-                    if (horizontalHideIconMode && tabTextIconOrientation == TabOrientation.HORIZONTAL) {
-                        iv.setVisibility(GONE);
-                    } else {
-                        iv.setVisibility(VISIBLE);
-                    }
-                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
-                    tv.setTextColor(tabTextColorUnSelect);
-                    if (tabBgNormalId != -1) {
-                        ll.setBackgroundResource(tabBgNormalId);
-                    }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
-                    iv.setImageResource(icon);
-                }
-            }
-        }
-    }
-    
-    private View getItem(int position) {
-        return mIndicatorContainer.getChildAt(position);
-    }
-    
-    
-    public void setTabTextColorSelect(int tabTextColorSelect) {
-        this.tabTextColorSelect = tabTextColorSelect;
-    }
-    
-    public void setTabTextColorUnSelect(int tabTextColorUnSelect) {
-        this.tabTextColorUnSelect = tabTextColorUnSelect;
-    }
-    
-    public void setUnderlineColor(int underlineColor) {
-        this.underlineColor = underlineColor;
-        underlinePaint.setColor(this.underlineColor);
-    }
-    
-    public void update() {
-        switch (indicatorType) {
-            case TabWithIcon:
-                selectIcon(currentPosition);
-                break;
-            case TabWithText:
-                selectText(currentPosition);
-                break;
-            case TabWithIconAndText:
-                selectIconAndText(currentPosition);
-                break;
-        }
-        invalidate();
     }
 }
