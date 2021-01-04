@@ -39,24 +39,6 @@ public class TabActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         tabBar = findViewById(R.id.tab_bar);
     }
-
-/*    private void changeToPosition(int position, Bundle bundle) {
-        switch (position) {
-            case 0:
-                replaceFragment(R.id.fgm_container, TestFragmentOne.class, fgm1, bundle);
-                break;
-            case 1:
-                replaceFragment(R.id.fgm_container, TestFragmentOne.class, fgm2, bundle);
-                break;
-            case 2:
-                replaceFragment(R.id.fgm_container, TestFragmentOne.class, fgm3, bundle);
-                break;
-            case 3:
-                replaceFragment(R.id.fgm_container, TestFragmentOne.class, fgm4, bundle);
-                break;
-
-        }
-    }*/
     
     private void changeToPositionBetter(int position, Bundle bundle) {
         switch (position) {
@@ -89,11 +71,9 @@ public class TabActivity extends BaseActivity {
             R.mipmap.ic_launcher_round,
             R.mipmap.ic_launcher_round,
             R.mipmap.ic_launcher_round,
-            R.mipmap.ic_launcher_round,
             R.mipmap.ic_launcher_round
         );
         tabBar.setPressIconRes(
-            R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
