@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
@@ -115,6 +117,17 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     @Override
     public void loadCustomAttrs(View view) {
         loadConstraintLayout(view);
+        loadFloatingActionButton(view);
+    }
+    
+    private void loadFloatingActionButton(View view) {
+        if (view instanceof FloatingActionButton) {
+            FloatingActionButton btn = (FloatingActionButton) view;
+            int customSize = btn.getCustomSize();
+            if (customSize > FloatingActionButton.NO_CUSTOM_SIZE ) {
+                btn.setCustomSize(setValue(customSize));
+            }
+        }
     }
     
     private void loadConstraintLayout(View view) {
@@ -180,7 +193,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         }
         return (int) calculateValueByWidth(value);
     }
-
+    
     private float setValueByWidth(float value) {
         return calculateValueByWidth(value);
     }
@@ -193,7 +206,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         }
         return (int) calculateValueByHeight(value);
     }
-
+    
     private float setValueByHeight(float value) {
         return calculateValueByHeight(value);
     }

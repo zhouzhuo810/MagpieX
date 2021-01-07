@@ -91,11 +91,13 @@
         <attr name="i_gapLineWidth" format="dimension|reference"/>
         <attr name="i_gapLineColor" format="color|reference"/>
         <attr name="i_gapLinePadding" format="dimension|reference"/>
-        <attr name="i_showUnderline" format="boolean"/>
         <attr name="i_shouldTabExpand" format="boolean"/>
+        <attr name="i_showUnderline" format="boolean"/>
         <attr name="i_underlineColor" format="color|reference"/>
         <attr name="i_underlineHeight" format="dimension|reference"/>
         <attr name="i_underlinePadding" format="dimension|reference"/>
+        <attr name="i_showRoundBg" format="boolean"/>
+        <attr name="i_roundBgColor" format="color|reference"/>
         <attr name="i_tabPadding" format="dimension|reference"/>
         <attr name="i_tabIconSize" format="dimension|reference"/>
 

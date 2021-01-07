@@ -59,8 +59,10 @@
         app:i_indicator_type="tab_with_text"
         app:i_isNeedScaleInPx="true"
         app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
-        app:i_selectTabTextColor="@color/colorPrimary"
+        app:i_selectTabTextColor="@color/colorWhite"
         app:i_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i_showRoundBg="true"
+        app:i_roundBgColor="@color/colorPrimary"
         app:i_shouldTabExpand="false"
         app:i_showUnderline="false" />
 
@@ -71,8 +73,10 @@
         app:i_indicator_type="tab_with_text"
         app:i_isNeedScaleInPx="true"
         app:i_normalTabTextSize="@dimen/base_indicator_text_size_normal"
-        app:i_selectTabTextColor="@color/colorPrimary"
+        app:i_selectTabTextColor="@color/colorWhite"
         app:i_selectTabTextSize="70px"
+        app:i_showRoundBg="true"
+        app:i_roundBgColor="@color/colorPrimary"
         app:i_shouldTabExpand="false"
         app:i_showUnderline="false" />
 

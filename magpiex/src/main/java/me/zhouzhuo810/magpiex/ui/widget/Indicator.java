@@ -5,9 +5,11 @@ import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -43,6 +45,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     private Paint selectPaint;
     private Paint unSelectPaint;
     private Paint underlinePaint;
+    private Paint roundBgPaint;
     private Paint gapLinePaint;
     private int colorSelectPoint = 0xff438cff;
     private int colorUnSelectPoint = 0xff000000;
@@ -52,11 +55,13 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     
     private boolean showUnderline = true;
     private boolean showGapLine = false;
+    private boolean showRoundBg = false;
     private int gapLineColor = 0xff000000;
     private int gapLineWidth = 1;
     private int gapLinePadding = 0;
     private int tabTextColorSelect = 0xff438cff;
     private int tabTextColorUnSelect = 0xff000000;
+    private int tabRoundBgColor = 0xff438cff;
     private int tabTextSizeUnSelect = 30;
     private int tabIconTextMargin = 10;
     private int tabTextSizeSelect = 40;
@@ -144,9 +149,11 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
             showUnderline = a.getBoolean(R.styleable.Indicator_i_showUnderline, true);
             underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator_i_underlineHeight, 10);
             underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_underlinePadding, 20);
+            showRoundBg = a.getBoolean(R.styleable.Indicator_i_showRoundBg, false);
             tabPadding = a.getDimensionPixelSize(R.styleable.Indicator_i_tabPadding, 24);
             tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconSize, 80);
             underlineColor = a.getColor(R.styleable.Indicator_i_underlineColor, 0xff438cff);
+            tabRoundBgColor = a.getColor(R.styleable.Indicator_i_roundBgColor, 0xff438cff);
             horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tabIsHorizontalHideIcon, false);
             
             if (isNeedScaleInPx && !isInEditMode()) {
@@ -209,9 +216,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         selectPaint.setStyle(Paint.Style.FILL);
         selectPaint.setColor(colorSelectPoint);
         underlinePaint = new Paint();
+        underlinePaint.setTextSize(tabTextSizeSelect);
         underlinePaint.setColor(underlineColor);
         underlinePaint.setStyle(Paint.Style.FILL);
         underlinePaint.setAntiAlias(true);
+        roundBgPaint = new Paint();
+        roundBgPaint.setTextSize(tabTextSizeSelect);
+        roundBgPaint.setColor(tabRoundBgColor);
+        roundBgPaint.setStyle(Paint.Style.FILL);
+        roundBgPaint.setAntiAlias(true);
         gapLinePaint = new Paint();
         gapLinePaint.setColor(gapLineColor);
         gapLinePaint.setStyle(Paint.Style.FILL);
@@ -243,6 +256,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
             case TabWithIconAndText:
                 if (showUnderline) {
                     drawUnderline(canvas);
+                }
+                if (showRoundBg) {
+                    drawRoundBg(canvas);
                 }
                 if (showGapLine) {
                     drawGapLine(canvas);
@@ -282,6 +298,30 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                     lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
                 }
                 canvas.drawRect(lineLeft, getHeight() - underlineHeight, lineRight, getHeight(), underlinePaint);
+            }
+        }
+    }
+    
+    private void drawRoundBg(Canvas canvas) {
+        if (mViewPager != null) {
+            View currentTab = getItem(currentPosition);
+            if (currentTab != null) {
+                float lineLeft = currentTab.getLeft() + underlinePadding;
+                float lineRight = currentTab.getRight() - underlinePadding;
+                
+                // if there is an offset, start interpolating left and right coordinates between current and next tab
+                if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
+                    View nextTab = getItem(currentPosition + 1);
+                    final float nextTabLeft = nextTab.getLeft() + underlinePadding;
+                    final float nextTabRight = nextTab.getRight() - underlinePadding;
+                    
+                    lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
+                    lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
+                }
+                float textHeight = roundBgPaint.descent() - roundBgPaint.ascent();
+                float top = (getHeight() - textHeight) / 2.0f - tabPadding / 2.0f;
+                float radius = (textHeight + tabPadding) / 2.0f;
+                canvas.drawRoundRect(new RectF(lineLeft - tabPadding, top, lineRight + tabPadding, getHeight() - top), radius, radius, roundBgPaint);
             }
         }
     }
@@ -813,7 +853,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                             break;
                     }
                     
-                    if (showUnderline || showGapLine) {
+                    if (showUnderline || showGapLine || showRoundBg) {
                         invalidate();
                     }
                 }
