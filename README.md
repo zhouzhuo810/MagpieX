@@ -299,6 +299,7 @@ it supports:
 
 > 1.6.5
 > - Indicator支持配置圆角背景效果;
+> - 适配FloatingActionButton的fabCustomSize字段缩放；
 
 > 1.6.4
 > - Indicator支持颜色渐变和文字大小渐变;
