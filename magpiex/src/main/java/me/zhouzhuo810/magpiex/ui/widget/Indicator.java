@@ -306,22 +306,22 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         if (mViewPager != null) {
             View currentTab = getItem(currentPosition);
             if (currentTab != null) {
-                float lineLeft = currentTab.getLeft() + underlinePadding;
-                float lineRight = currentTab.getRight() - underlinePadding;
+                float lineLeft = currentTab.getLeft();
+                float lineRight = currentTab.getRight();
                 
                 // if there is an offset, start interpolating left and right coordinates between current and next tab
                 if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
                     View nextTab = getItem(currentPosition + 1);
-                    final float nextTabLeft = nextTab.getLeft() + underlinePadding;
-                    final float nextTabRight = nextTab.getRight() - underlinePadding;
+                    final float nextTabLeft = nextTab.getLeft();
+                    final float nextTabRight = nextTab.getRight();
                     
                     lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
                     lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
                 }
                 float textHeight = roundBgPaint.descent() - roundBgPaint.ascent();
-                float top = (getHeight() - textHeight) / 2.0f - tabPadding / 2.0f;
-                float radius = (textHeight + tabPadding) / 2.0f;
-                canvas.drawRoundRect(new RectF(lineLeft - tabPadding, top, lineRight + tabPadding, getHeight() - top), radius, radius, roundBgPaint);
+                float top = (getHeight() - textHeight) / 2.0f - tabPadding / 3.0f;
+                float radius = (textHeight) / 2.0f + tabPadding / 3.0f;
+                canvas.drawRoundRect(new RectF(lineLeft, top, lineRight, getHeight() - top), radius, radius, roundBgPaint);
             }
         }
     }

@@ -30,6 +30,21 @@
     <color name="colorWhite80">#CCffffff</color>
     <color name="colorWhite90">#E6ffffff</color>
 
+    <color name="color222">#222</color>
+    <color name="color333">#333</color>
+    <color name="color444">#444</color>
+    <color name="color555">#555</color>
+    <color name="color666">#666</color>
+    <color name="color777">#777</color>
+    <color name="color888">#888</color>
+    <color name="color999">#999</color>
+    <color name="colorAAA">#aaa</color>
+    <color name="colorBBB">#bbb</color>
+    <color name="colorCCC">#ccc</color>
+    <color name="colorDDD">#ddd</color>
+    <color name="colorEEE">#eee</color>
+    <color name="colorF4">#f4f4f4</color>
+
     <color name="colorExit">#cf1212</color>
     <color name="colorExitPress">#ce060a</color>
     <color name="colorXItemXBg21">#3C4043</color>
