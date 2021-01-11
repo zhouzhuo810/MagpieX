@@ -6,9 +6,12 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.List;
 
+import androidx.annotation.Nullable;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
+import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.NoticeUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
 import okhttp3.Interceptor;
@@ -31,6 +34,7 @@ public class CopyNoticeInterceptor implements Interceptor {
     private String mChannelId;
     private String mNoticeTitle;
     private String mTargetAppPackageName;
+    private List<String> ignoredApi;
     
     private static final Charset UTF8 = Charset.forName("UTF-8");
     
@@ -40,6 +44,12 @@ public class CopyNoticeInterceptor implements Interceptor {
         this.mNoticeTitle = noticeTitle;
         this.mTargetAppPackageName = targetAppPackageName;
     }
+    
+    public CopyNoticeInterceptor(int logoId, String channelId, String noticeTitle, String targetAppPackageName, @Nullable List<String> ignoredApi) {
+        this(logoId, channelId, noticeTitle, targetAppPackageName);
+        this.ignoredApi = ignoredApi;
+    }
+    
     
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -64,12 +74,16 @@ public class CopyNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\n\nBody: " + body + "\n\nClass: " + clazzName, true, false,
-                    mLogoId, false, mChannelId, mTargetAppPackageName);
+                if (!hasIgnored(request.url().encodedPath())) {
+                    NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\n\nBody: " + body + "\n\nClass: " + clazzName, true, false,
+                        mLogoId, false, mChannelId, mTargetAppPackageName);
+                }
             } else {
                 //发通知，用于复制url
-                NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\n\nClass: " + clazzName, true, false,
-                    mLogoId, false, mChannelId, mTargetAppPackageName);
+                if (!hasIgnored(request.url().encodedPath())) {
+                    NoticeUtil.showNormalNoticeWithCopyAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\n\nClass: " + clazzName, true, false,
+                        mLogoId, false, mChannelId, mTargetAppPackageName);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,5 +101,18 @@ public class CopyNoticeInterceptor implements Interceptor {
         }
         Log.e(TAG, requestInfo);
         return response;
+    }
+    
+    /**
+     * 是否忽略此API
+     *
+     * @param encodedPath 接口路径
+     * @return 是否忽略
+     */
+    private boolean hasIgnored(String encodedPath) {
+        if (CollectionUtil.isEmpty(ignoredApi)) {
+            return false;
+        }
+        return ignoredApi.contains(encodedPath);
     }
 }

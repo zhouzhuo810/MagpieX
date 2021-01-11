@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.6.6'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.6.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.6.7
+> - 添加接口调试模式忽略接口配置；；
 
 > 1.6.6
 > - 修复Indicator设置marginStart导致圆角背景显示不全问题；

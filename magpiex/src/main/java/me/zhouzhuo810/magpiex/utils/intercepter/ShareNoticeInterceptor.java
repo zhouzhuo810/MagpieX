@@ -6,9 +6,12 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.List;
 
+import androidx.annotation.Nullable;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
+import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.NoticeUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
 import okhttp3.Interceptor;
@@ -30,6 +33,7 @@ public class ShareNoticeInterceptor implements Interceptor {
     private int mLogoId;
     private String mChannelId;
     private String mNoticeTitle;
+    private List<String> ignoredApi;
     
     private static final Charset UTF8 = Charset.forName("UTF-8");
     
@@ -37,6 +41,11 @@ public class ShareNoticeInterceptor implements Interceptor {
         this.mLogoId = logoId;
         this.mChannelId = channelId;
         this.mNoticeTitle = noticeTitle;
+    }
+    
+    public ShareNoticeInterceptor(int logoId, String channelId, String noticeTitle, @Nullable List<String> ignoredApi) {
+        this(logoId, channelId, noticeTitle);
+        this.ignoredApi = ignoredApi;
     }
     
     @SuppressWarnings("ConstantConditions")
@@ -61,12 +70,16 @@ public class ShareNoticeInterceptor implements Interceptor {
             if (!TextUtils.isEmpty(body)) {
                 requestInfo += "\nREQUEST BODY：" + body;
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\n\nBody: " + body + "\n\nClass: " + clazzName + "\n", true, false,
-                    mLogoId, false, mChannelId);
+                if (!hasIgnored(request.url().encodedPath())) {
+                    NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "POST: " + request.url() + "\n\nBody: " + body + "\n\nClass: " + clazzName + "\n", true, false,
+                        mLogoId, false, mChannelId);
+                }
             } else {
                 //发通知，用于分享url
-                NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\n\nClass: " + clazzName + "\n", true, false,
-                    mLogoId, false, mChannelId);
+                if (!hasIgnored(request.url().encodedPath())) {
+                    NoticeUtil.showNormalNoticeWithShareAction(BaseUtil.getApp(), mNoticeTitle + " - " + clazzName, request.url().encodedPath(), "GET: " + request.url() + "\n\nClass: " + clazzName + "\n", true, false,
+                        mLogoId, false, mChannelId);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +88,7 @@ public class ShareNoticeInterceptor implements Interceptor {
         try {
             ResponseBody responseBody = response.body();
             BufferedSource source = responseBody.source();
-            source.request(Long.MAX_VALUE); // Buffer the entire body.
+            source.request(Long.MAX_VALUE);
             Buffer buffer = source.buffer();
             requestInfo += "\n" + "RESPONSE：" + buffer.clone().readString(UTF8);
         } catch (Exception e) {
@@ -84,4 +97,18 @@ public class ShareNoticeInterceptor implements Interceptor {
         Log.e(TAG, requestInfo);
         return response;
     }
+    
+    /**
+     * 是否忽略此API
+     *
+     * @param encodedPath 接口路径
+     * @return 是否忽略
+     */
+    private boolean hasIgnored(String encodedPath) {
+        if (CollectionUtil.isEmpty(ignoredApi)) {
+            return false;
+        }
+        return ignoredApi.contains(encodedPath);
+    }
+    
 }
