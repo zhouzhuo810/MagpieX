@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.6.7'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.6.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.6.8
+> - 修复Indicator切换文字颜色不对应问题；
 
 > 1.6.7
 > - 添加接口调试模式忽略接口配置；；

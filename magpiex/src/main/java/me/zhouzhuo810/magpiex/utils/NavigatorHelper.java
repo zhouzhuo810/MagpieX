@@ -147,6 +147,8 @@ public class NavigatorHelper {
     
     public void setTotalCount(int totalCount) {
         mTotalCount = totalCount;
+        mCurrentIndex = 0;
+        mLastIndex = 0;
         mDeselectedItems.clear();
         mLeavedPercents.clear();
     }
