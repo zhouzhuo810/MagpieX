@@ -196,19 +196,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void onBackPressed() {
-        if (useSysFinishAnim()) {
-            super.onBackPressed();
-        } else {
-            closeAct();
-        }
+        closeAct(useSysFinishAnim());
     }
     
     @Override
     public void closeAct(boolean defaultAnimation) {
         if (defaultAnimation) {
-            finish();
+            super.onBackPressed();
         } else {
-            finish();
+            super.onBackPressed();
             overridePendingTransition(closeInAnimation(), closeOutAnimation());
         }
     }

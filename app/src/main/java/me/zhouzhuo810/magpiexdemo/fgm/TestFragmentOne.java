@@ -8,6 +8,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import androidx.annotation.Nullable;
 import me.zhouzhuo810.magpiex.ui.fgm.BaseFragment;
+import me.zhouzhuo810.magpiex.utils.ToastUtil;
 import me.zhouzhuo810.magpiexdemo.R;
 import me.zhouzhuo810.magpiexdemo.event.ChangeTextEvent;
 
@@ -56,4 +57,9 @@ public class TestFragmentOne extends BaseFragment {
         });
     }
     
+    @Override
+    public boolean onBackPressed() {
+        ToastUtil.showToast("1");
+        return mIndex == 2;
+    }
 }

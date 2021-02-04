@@ -1,6 +1,7 @@
 package me.zhouzhuo810.magpiex.ui.fgm;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -106,6 +109,25 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      * 此时ChildFragment显示的界面，用于下次恢复显示时使用
      */
     private ArrayList<String> mPreShowChildFragmentByUserVisibleHint = new ArrayList<>();
+    
+    /**
+     * 系统返回按钮点击回调
+     */
+    OnBackPressedCallback mOnBackPressedCallback = new OnBackPressedCallback(false) {
+        @Override
+        public void handleOnBackPressed() {
+            boolean backPressed = onBackPressed();
+            if (backPressed) {
+                return;
+            }
+            setEnabled(false);
+            mOnBackPressedDispatcher.onBackPressed();
+        }
+    };
+    /**
+     * host Activity返回点击分发
+     */
+    private OnBackPressedDispatcher mOnBackPressedDispatcher;
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -236,6 +258,14 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             initData();
             initEvent();
         }
+    }
+    
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        
+        mOnBackPressedDispatcher = requireActivity().getOnBackPressedDispatcher();
+        mOnBackPressedDispatcher.addCallback(this, mOnBackPressedCallback);
     }
     
     /**
@@ -649,6 +679,12 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     }
     
     @Override
+    public void onPause() {
+        super.onPause();
+        viewVisibleToUser(false);
+    }
+    
+    @Override
     public void onStop() {
         super.onStop();
         if (mViewActualVisible) {
@@ -658,7 +694,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             // 界面恢复可见不会调用setUserVisibleHint
             mOnResumeCallVisible = true;
         }
-        viewVisibleToUser(false);
     }
     
     /**
@@ -813,14 +848,18 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      * 的情况，我希望的是此方法调用时，在UI栈中，栈顶对象就是当前对象，因此不管当前对象的根布局是否可见。
      */
     protected void onVisible() {
-    
+        if (mOnBackPressedCallback != null) {
+            mOnBackPressedCallback.setEnabled(true);
+        }
     }
     
     /**
      * 界面不可见
      */
     protected void onInvisible() {
-    
+        if (mOnBackPressedCallback != null) {
+            mOnBackPressedCallback.setEnabled(false);
+        }
     }
     
     /**

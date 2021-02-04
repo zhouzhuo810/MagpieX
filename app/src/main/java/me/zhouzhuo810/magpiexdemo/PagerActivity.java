@@ -1,7 +1,6 @@
 package me.zhouzhuo810.magpiexdemo;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -9,6 +8,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;
@@ -98,8 +98,7 @@ public class PagerActivity extends BaseActivity {
     
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onChangeTextEvent(ChangeTextEvent event) {
-        ToastUtil.showShortToast("修改"+event.getIndex());
-        indicator.updateText(event.getIndex(), "修改"+event.getIndex());
+        ToastUtil.showShortToast("修改" + event.getIndex());
+        indicator.updateText(event.getIndex(), "修改" + event.getIndex());
     }
-    
 }
