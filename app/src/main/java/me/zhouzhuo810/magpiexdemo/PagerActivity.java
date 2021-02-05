@@ -101,4 +101,9 @@ public class PagerActivity extends BaseActivity {
         ToastUtil.showShortToast("修改" + event.getIndex());
         indicator.updateText(event.getIndex(), "修改" + event.getIndex());
     }
+    
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

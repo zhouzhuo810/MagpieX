@@ -122,6 +122,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             }
             setEnabled(false);
             mOnBackPressedDispatcher.onBackPressed();
+            setEnabled(true);
         }
     };
     /**
@@ -829,13 +830,13 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         if (viewActualVisible) {
             String simpleName = getClass().getSimpleName();
             SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
-            onVisible();
+            visible();
             if (mNeedLazeLoaded) {
                 mNeedLazeLoaded = false;
                 lazyLoadData();
             }
         } else {
-            onInvisible();
+            invisible();
         }
     }
     
@@ -843,23 +844,36 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         return mDestroy;
     }
     
+    @CallSuper
+    protected void visible() {
+        if (mOnBackPressedCallback != null) {
+            mOnBackPressedCallback.setEnabled(true);
+        }
+        onVisible();
+    }
+    
+    
     /**
      * 界面可见，此可见是指物理可见，但是不包括将{@link #getView()}设置为非{@link View#VISIBLE}
      * 的情况，我希望的是此方法调用时，在UI栈中，栈顶对象就是当前对象，因此不管当前对象的根布局是否可见。
      */
     protected void onVisible() {
+   
+    }
+    
+    @CallSuper
+    protected void invisible() {
         if (mOnBackPressedCallback != null) {
-            mOnBackPressedCallback.setEnabled(true);
+            mOnBackPressedCallback.setEnabled(false);
         }
+        onInvisible();
     }
     
     /**
      * 界面不可见
      */
     protected void onInvisible() {
-        if (mOnBackPressedCallback != null) {
-            mOnBackPressedCallback.setEnabled(false);
-        }
+    
     }
     
     /**
@@ -905,7 +919,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      * @return {@code true} 消费此次返回事件，{@code false} 不消费此次返回事件
      */
     public boolean onBackPressed() {
-        return doKeyEvent(0, -1, null);
+        return false;
     }
     
     /**
