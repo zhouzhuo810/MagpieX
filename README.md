@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.6.9'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.7.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.7.0
+> - 修复输入对话框左右按钮自定义无效问题；
 
 > 1.6.9
 > - 优化BaseFragment拦截返回按钮逻辑；

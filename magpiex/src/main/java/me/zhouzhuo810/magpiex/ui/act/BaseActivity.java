@@ -446,7 +446,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showTwoBtnEditDialog(CharSequence title, CharSequence msg, CharSequence hint, CharSequence leftBtnString, CharSequence rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getCancelText(), getOkText(), cancelable, onDismissListener, onTwoBtnEditClick);
+        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, leftBtnString, rightBtnString, cancelable, onDismissListener, onTwoBtnEditClick);
     }
     
     @Override
