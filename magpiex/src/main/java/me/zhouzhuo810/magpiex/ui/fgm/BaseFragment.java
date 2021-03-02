@@ -682,12 +682,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     @Override
     public void onPause() {
         super.onPause();
-        viewVisibleToUser(false);
-    }
-    
-    @Override
-    public void onStop() {
-        super.onStop();
         if (mViewActualVisible) {
             // 此举目的是记录如果是因为跳转其它界面，导致当前界面不可见
             // 在下次界面可见时，在onResume中，如果是结合ViewPager使用
@@ -695,6 +689,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             // 界面恢复可见不会调用setUserVisibleHint
             mOnResumeCallVisible = true;
         }
+        viewVisibleToUser(false);
     }
     
     /**
