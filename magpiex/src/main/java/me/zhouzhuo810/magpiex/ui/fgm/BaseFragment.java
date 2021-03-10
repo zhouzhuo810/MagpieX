@@ -853,7 +853,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      * 的情况，我希望的是此方法调用时，在UI栈中，栈顶对象就是当前对象，因此不管当前对象的根布局是否可见。
      */
     protected void onVisible() {
-   
+    
     }
     
     @CallSuper
@@ -878,6 +878,24 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
      */
     @CallSuper
     public void refreshDataIfNeeded(Object... params) {
+        refreshDataIfNeeded();
+    }
+    
+    /**
+     * 刷新数据，可在任何时机调用。如果调用时，界面并没有显示，或者压根就没有走生命周期。此时会标记为延迟加载，
+     * 在界面真正显示到界面时，会调用{@link #lazyLoadData()}。如果传参，子类覆盖该类处理参数保存相关操作，
+     * 但是记得参数更新后"再"调用super.refreshDataIfNeeded(params)
+     */
+    @CallSuper
+    public void refreshDataIfNeeded(Bundle params) {
+        refreshDataIfNeeded();
+    }
+    
+    /**
+     * 刷新数据，可在任何时机调用。如果调用时，界面并没有显示，或者压根就没有走生命周期。此时会标记为延迟加载，
+     * 在界面真正显示到界面时，会调用{@link #lazyLoadData()}。
+     */
+    public final void refreshDataIfNeeded() {
         if (mViewActualVisible) {
             mNeedLazeLoaded = false;
             lazyLoadData();
@@ -887,9 +905,17 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     }
     
     /**
-     * 延迟加载数据
+     * 延迟加载数据，{@link #onResume()}之后调用
      */
+    @CallSuper
     protected void lazyLoadData() {
+        onLazyLoadData();
+    }
+    
+    /**
+     * 执行自定义延迟加载数据逻辑，{@link #lazyLoadData()}之后调用
+     */
+    protected void onLazyLoadData() {
     
     }
     

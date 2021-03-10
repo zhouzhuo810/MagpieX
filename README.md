@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.7.1'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.7.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -296,6 +296,10 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.7.2
+> - BaseFragment新增`refreshDataIfNeeded(Bundle params)`方法。
+> - BaseFragment新增`onLazyLoadData()`方法。
 
 > 1.7.1
 > - 解决BaseFragment不刷新问题；
