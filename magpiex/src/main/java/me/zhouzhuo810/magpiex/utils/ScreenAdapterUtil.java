@@ -1,6 +1,5 @@
 package me.zhouzhuo810.magpiex.utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -12,10 +11,22 @@ import me.zhouzhuo810.magpiex.utils.loadviewhelper.LoadViewHelper;
  * 屏幕适配工具类
  */
 public class ScreenAdapterUtil {
-    
+    /**
+     * 自动，横屏设备按高度，竖屏设备按宽度(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920)
+     */
     public static final String SCREEN_ADAPT_TYPE_AUTO = "auto";
+    /**
+     * 按宽度缩放(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920)
+     */
     public static final String SCREEN_ADAPT_TYPE_WIDTH = "width";
+    /**
+     * 按高度缩放(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920)
+     */
     public static final String SCREEN_ADAPT_TYPE_HEIGHT = "height";
+    /**
+     * 宽按宽度缩放，高按高度缩放(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920)
+     */
+    public static final String SCREEN_ADAPT_TYPE_WH = "wh";
     
     private ScreenAdapterUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");

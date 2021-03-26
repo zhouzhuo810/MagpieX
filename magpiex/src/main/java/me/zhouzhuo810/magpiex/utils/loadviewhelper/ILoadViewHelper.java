@@ -67,6 +67,24 @@ public interface ILoadViewHelper {
     float getScaledValue(float px);
     
     /**
+     * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
+     *
+     * @param px         原始数据
+     * @param horizontal 是否水平方向
+     * @return 缩放数据
+     */
+    int getScaledValue(int px, boolean horizontal);
+    
+    /**
+     * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
+     *
+     * @param px         原始数据
+     * @param horizontal 是否水平方向
+     * @return 缩放数据
+     */
+    float getScaledValue(float px, boolean horizontal);
+    
+    /**
      * 动态计算数值大小(按宽度缩放)
      *
      * @param px 原始数据

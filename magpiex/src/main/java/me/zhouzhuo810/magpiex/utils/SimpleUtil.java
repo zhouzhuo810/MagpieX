@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.ArrayRes;
@@ -65,6 +64,29 @@ public class SimpleUtil {
     }
     
     /**
+     * 缩放值自动（默认）- int
+     *
+     * @param px         原来值
+     * @param horizontal 是否水平方向
+     * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
+     */
+    public static int getScaledValue(int px, boolean horizontal) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, horizontal);
+    }
+    
+    
+    /**
+     * 缩放值自动（默认）- float
+     *
+     * @param px         原来值
+     * @param horizontal 是否水平方向
+     * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
+     */
+    public static float getScaledValue(float px, boolean horizontal) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, horizontal);
+    }
+    
+    /**
      * 缩放值 - int
      *
      * @param px 原来值
@@ -73,7 +95,7 @@ public class SimpleUtil {
     public static int getScaledValueByWidth(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px);
     }
-
+    
     /**
      * 缩放值 - float
      *
@@ -93,7 +115,7 @@ public class SimpleUtil {
     public static int getScaledValueByHeight(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px);
     }
-
+    
     /**
      * 缩放值按高度 - float
      *

@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.7.2'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.7.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -75,7 +75,11 @@ If you use this. That means you added dependencies below:
         <meta-data
             android:name="design_height"
             android:value="1920"/>
-        <!-- 屏幕适配模式，(可选) auto:自动(默认)，width:按宽度，height:按高度  -->
+        <!-- 屏幕适配模式，(可选) auto:自动(默认)，width:按宽度，height:按高度，wh:宽按宽，高按高  -->
+        <!-- width: 按宽度缩放(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920) -->
+        <!-- height: 按高度缩放(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920) -->
+        <!-- auto: 横屏设备按高度，竖屏设备按宽度(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920) -->
+        <!-- wh: 宽按宽度缩放，高按高度缩放(宽高基于竖屏状态下定义，比如横屏设备1920x1080的宽度还是1080，而不是1920) -->
         <meta-data
             android:name="screen_adapt_type"
             android:value="width" />
