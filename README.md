@@ -302,6 +302,9 @@ it supports:
 ### Update Logs
 
 > 1.7.2
+> - 屏幕适配类型支持"wh"，宽按宽缩放，高按高缩放；
+
+> 1.7.2
 > - BaseFragment新增`refreshDataIfNeeded(Bundle params)`方法。
 > - BaseFragment新增`onLazyLoadData()`方法。
 
