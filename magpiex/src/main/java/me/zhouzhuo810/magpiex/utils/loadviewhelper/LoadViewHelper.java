@@ -33,16 +33,16 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         int originalHeight = layoutParams.height;
         if (originalWidth > 0 && originalHeight > 0) {
             if (originalWidth == originalHeight) {
-                layoutParams.width = setValue(originalWidth, true);
-                layoutParams.height = setValue(originalHeight, false);
+                layoutParams.width = setValue(originalWidth, true, false);
+                layoutParams.height = setValue(originalHeight, false, false);
             } else {
-                layoutParams.width = setValue(originalWidth, true);
-                layoutParams.height = setValue(originalHeight, false);
+                layoutParams.width = setValue(originalWidth, true, false);
+                layoutParams.height = setValue(originalHeight, false, false);
             }
         } else if (originalWidth > 0) {
-            layoutParams.width = setValue(originalWidth, true);
+            layoutParams.width = setValue(originalWidth, true, false);
         } else if (originalHeight > 0) {
-            layoutParams.height = setValue(originalHeight, false);
+            layoutParams.height = setValue(originalHeight, false, false);
         }
         loadViewFont(view);
     }
@@ -56,20 +56,20 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     
     private float setFontSize(TextView textView) {
         if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType) || ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WH.equals(adaptType)) {
-            return isLandscape() ? calculateValueByHeight(textView.getTextSize() * fontSize) : calculateValueByWidth(textView.getTextSize() * fontSize);
+            return isLandscape() ? calculateValueByHeight(textView.getTextSize(), true) : calculateValueByWidth(textView.getTextSize(), true);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WIDTH.equals(adaptType)) {
-            return calculateValueByWidth(textView.getTextSize() * fontSize);
+            return calculateValueByWidth(textView.getTextSize(), true);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_HEIGHT.equals(adaptType)) {
-            return calculateValueByHeight(textView.getTextSize() * fontSize);
+            return calculateValueByHeight(textView.getTextSize(), true);
         } else {
-            return calculateValueByWidth(textView.getTextSize() * fontSize);
+            return calculateValueByWidth(textView.getTextSize(), true);
         }
     }
     
     @Override
     public void loadPadding(View view) {
-        view.setPadding(setValue(view.getPaddingLeft(), true), setValue(view.getPaddingTop(), false),
-            setValue(view.getPaddingRight(), true), setValue(view.getPaddingBottom(), false));
+        view.setPadding(setValue(view.getPaddingLeft(), true, false), setValue(view.getPaddingTop(), false, false),
+            setValue(view.getPaddingRight(), true, false), setValue(view.getPaddingBottom(), false, false));
     }
     
     @Override
@@ -77,40 +77,40 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) params;
-            marginLayoutParams.leftMargin = setValue(marginLayoutParams.leftMargin, true);
-            marginLayoutParams.rightMargin = setValue(marginLayoutParams.rightMargin, true);
-            marginLayoutParams.topMargin = setValue(marginLayoutParams.topMargin, false);
-            marginLayoutParams.bottomMargin = setValue(marginLayoutParams.bottomMargin, false);
+            marginLayoutParams.leftMargin = setValue(marginLayoutParams.leftMargin, true, false);
+            marginLayoutParams.rightMargin = setValue(marginLayoutParams.rightMargin, true, false);
+            marginLayoutParams.topMargin = setValue(marginLayoutParams.topMargin, false, false);
+            marginLayoutParams.bottomMargin = setValue(marginLayoutParams.bottomMargin, false, false);
             view.setLayoutParams(marginLayoutParams);
         }
     }
     
     @Override
     public void loadMaxWidthAndHeight(View view) {
-        ViewUtil.setMaxWidth(view, setValue(ViewUtil.getMaxWidth(view), true));
-        ViewUtil.setMaxHeight(view, setValue(ViewUtil.getMaxWidth(view), false));
+        ViewUtil.setMaxWidth(view, setValue(ViewUtil.getMaxWidth(view), true, false));
+        ViewUtil.setMaxHeight(view, setValue(ViewUtil.getMaxWidth(view), false, false));
     }
     
     @Override
     public void loadMinWidthAndHeight(View view) {
-        ViewUtil.setMinWidth(view, setValue(ViewUtil.getMinWidth(view), true));
-        ViewUtil.setMinHeight(view, setValue(ViewUtil.getMinHeight(view), false));
+        ViewUtil.setMinWidth(view, setValue(ViewUtil.getMinWidth(view), true, false));
+        ViewUtil.setMinHeight(view, setValue(ViewUtil.getMinHeight(view), false, false));
         if (view instanceof TextView) {
             TextView tv = (TextView) view;
-            ViewUtil.setTextViewMinWidth(tv, setValue(ViewUtil.getTextViewMinWidth(tv), true));
-            ViewUtil.setTextViewMinHeight(tv, setValue(ViewUtil.getTextViewMinHeight(tv), false));
+            ViewUtil.setTextViewMinWidth(tv, setValue(ViewUtil.getTextViewMinWidth(tv), true, false));
+            ViewUtil.setTextViewMinHeight(tv, setValue(ViewUtil.getTextViewMinHeight(tv), false, false));
             if (tv.getMaxWidth() != Integer.MAX_VALUE && tv.getMaxWidth() > 0) {
-                tv.setMaxWidth(setValue(tv.getMaxWidth(), true));
+                tv.setMaxWidth(setValue(tv.getMaxWidth(), true, false));
             }
         } else if (view instanceof ImageView) {
             ImageView iv = (ImageView) view;
             if (iv.getMaxWidth() != Integer.MAX_VALUE && iv.getMaxWidth() > 0) {
-                iv.setMaxWidth(setValue(iv.getMaxWidth(), true));
+                iv.setMaxWidth(setValue(iv.getMaxWidth(), true, false));
             }
         } else if (view instanceof ConstraintLayout) {
             ConstraintLayout sl = (ConstraintLayout) view;
-            sl.setMinWidth(setValue(sl.getMinWidth(), true));
-            sl.setMinHeight(setValue(sl.getMinHeight(), false));
+            sl.setMinWidth(setValue(sl.getMinWidth(), true, false));
+            sl.setMinHeight(setValue(sl.getMinHeight(), false, false));
         }
     }
     
@@ -125,7 +125,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             FloatingActionButton btn = (FloatingActionButton) view;
             int customSize = btn.getCustomSize();
             if (customSize > FloatingActionButton.NO_CUSTOM_SIZE) {
-                btn.setCustomSize(setValue(customSize, isLandscape()));
+                btn.setCustomSize(setValue(customSize, isLandscape(), false));
             }
         }
     }
@@ -137,23 +137,23 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             int orientation = cp.orientation;
             if (view instanceof Guideline) {
                 if (cp.guideBegin != -1) {
-                    cp.guideBegin = setValue(cp.guideBegin, orientation == ConstraintLayout.LayoutParams.HORIZONTAL);
+                    cp.guideBegin = setValue(cp.guideBegin, orientation == ConstraintLayout.LayoutParams.HORIZONTAL, false);
                 }
                 if (cp.guideEnd != -1) {
-                    cp.guideEnd = setValue(cp.guideEnd, orientation == ConstraintLayout.LayoutParams.HORIZONTAL);
+                    cp.guideEnd = setValue(cp.guideEnd, orientation == ConstraintLayout.LayoutParams.HORIZONTAL, false);
                 }
             }
-            cp.matchConstraintMinWidth = setValue(cp.matchConstraintMinWidth, true);
-            cp.matchConstraintMinHeight = setValue(cp.matchConstraintMinHeight, false);
-            cp.matchConstraintMaxWidth = setValue(cp.matchConstraintMaxWidth, true);
-            cp.matchConstraintMaxHeight = setValue(cp.matchConstraintMaxHeight, false);
-            cp.goneLeftMargin = setValue(cp.goneLeftMargin, true);
-            cp.goneRightMargin = setValue(cp.goneRightMargin, true);
-            cp.goneStartMargin = setValue(cp.goneStartMargin, true);
-            cp.goneEndMargin = setValue(cp.goneEndMargin, true);
-            cp.goneTopMargin = setValue(cp.goneTopMargin, false);
-            cp.goneBottomMargin = setValue(cp.goneBottomMargin, false);
-            cp.circleRadius = setValue(cp.circleRadius, isLandscape());
+            cp.matchConstraintMinWidth = setValue(cp.matchConstraintMinWidth, true, false);
+            cp.matchConstraintMinHeight = setValue(cp.matchConstraintMinHeight, false, false);
+            cp.matchConstraintMaxWidth = setValue(cp.matchConstraintMaxWidth, true, false);
+            cp.matchConstraintMaxHeight = setValue(cp.matchConstraintMaxHeight, false, false);
+            cp.goneLeftMargin = setValue(cp.goneLeftMargin, true, false);
+            cp.goneRightMargin = setValue(cp.goneRightMargin, true, false);
+            cp.goneStartMargin = setValue(cp.goneStartMargin, true, false);
+            cp.goneEndMargin = setValue(cp.goneEndMargin, true, false);
+            cp.goneTopMargin = setValue(cp.goneTopMargin, false, false);
+            cp.goneBottomMargin = setValue(cp.goneBottomMargin, false, false);
+            cp.circleRadius = setValue(cp.circleRadius, isLandscape(), false);
             view.setLayoutParams(cp);
         }
         if (view instanceof Barrier) {
@@ -165,11 +165,11 @@ public class LoadViewHelper extends AbsLoadViewHelper {
                     case Barrier.RIGHT:
                     case Barrier.START:
                     case Barrier.END:
-                        barrier.setMargin(setValue(barrier.getMargin(), true));
+                        barrier.setMargin(setValue(barrier.getMargin(), true, false));
                         break;
                     case Barrier.TOP:
                     case Barrier.BOTTOM:
-                        barrier.setMargin(setValue(barrier.getMargin(), false));
+                        barrier.setMargin(setValue(barrier.getMargin(), false, false));
                         break;
                 }
             }
@@ -177,66 +177,68 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     
-    private int setValue(int value, boolean horizontal) {
+    private int setValue(int value, boolean horizontal, boolean isFontSize) {
         if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
-            return isLandscape() ? setValueByHeight(value) : setValueByWidth(value);
+            return isLandscape() ? setValueByHeight(value, isFontSize) : setValueByWidth(value, isFontSize);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WIDTH.equals(adaptType)) {
-            return setValueByWidth(value);
+            return setValueByWidth(value, isFontSize);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_HEIGHT.equals(adaptType)) {
-            return setValueByHeight(value);
+            return setValueByHeight(value, isFontSize);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WH.equals(adaptType)) {
-            return horizontal ? (isLandscape() ? setValueByHeight(value) : setValueByWidth(value)) : (isLandscape() ? setValueByWidth(value) : setValueByHeight(value));
+            return horizontal ? (isLandscape() ? setValueByHeight(value, isFontSize)
+                : setValueByWidth(value, isFontSize)) : (isLandscape() ? setValueByWidth(value, isFontSize) : setValueByHeight(value, isFontSize));
         }
-        return setValueByWidth(value);
+        return setValueByWidth(value, isFontSize);
     }
     
-    private float setValue(float value, boolean horizontal) {
+    private float setValue(float value, boolean horizontal, boolean isFontSize) {
         if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
-            return isLandscape() ? setValueByHeight(value) : setValueByWidth(value);
+            return isLandscape() ? setValueByHeight(value, isFontSize) : setValueByWidth(value, isFontSize);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WIDTH.equals(adaptType)) {
-            return setValueByWidth(value);
+            return setValueByWidth(value, isFontSize);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_HEIGHT.equals(adaptType)) {
-            return setValueByHeight(value);
+            return setValueByHeight(value, isFontSize);
         } else if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_WH.equals(adaptType)) {
-            return horizontal ? (isLandscape() ? setValueByHeight(value) : setValueByWidth(value)) : (isLandscape() ? setValueByWidth(value) : setValueByHeight(value));
+            return horizontal ? (isLandscape() ? setValueByHeight(value, isFontSize) : setValueByWidth(value, isFontSize)) :
+                (isLandscape() ? setValueByWidth(value, isFontSize) : setValueByHeight(value, isFontSize));
         }
-        return setValueByWidth(value);
+        return setValueByWidth(value, isFontSize);
     }
     
     
-    private int setValueByWidth(int value) {
+    private int setValueByWidth(int value, boolean isFontSize) {
         if (value == 0) {
             return 0;
         } else if (value == 1) {
             return 1;
         }
-        return (int) calculateValueByWidth(value);
+        return (int) calculateValueByWidth(value, isFontSize);
     }
     
-    private float setValueByWidth(float value) {
-        return calculateValueByWidth(value);
+    private float setValueByWidth(float value, boolean isFontSize) {
+        return calculateValueByWidth(value, isFontSize);
     }
     
-    private int setValueByHeight(int value) {
+    private int setValueByHeight(int value, boolean isFontSize) {
         if (value == 0) {
             return 0;
         } else if (value == 1) {
             return 1;
         }
-        return (int) calculateValueByHeight(value);
+        return (int) calculateValueByHeight(value, isFontSize);
     }
     
-    private float setValueByHeight(float value) {
-        return calculateValueByHeight(value);
+    private float setValueByHeight(float value, boolean isFontSize) {
+        return calculateValueByHeight(value, isFontSize);
     }
     
-    private float calculateValueByWidth(float value) {
+    private float calculateValueByWidth(float value, boolean isFontSize) {
         if ("px".equals(unit)) {
-            return value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
+            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         } else if ("dp".equals(unit)) {
             int dip = px2dip(actualDensity, value);
             value = ((float) designDpi / 160) * dip;
-            return value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
+            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         }
         return 0;
     }
@@ -245,13 +247,13 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         return screenOrientation == Configuration.ORIENTATION_LANDSCAPE;
     }
     
-    private float calculateValueByHeight(float value) {
+    private float calculateValueByHeight(float value, boolean isFontSize) {
         if ("px".equals(unit)) {
-            return value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
+            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         } else if ("dp".equals(unit)) {
             int dip = px2dip(actualDensity, value);
             value = ((float) designDpi / 160) * dip;
-            return value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
+            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         }
         return 0;
     }
@@ -262,42 +264,42 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     
     
     @Override
-    public int getScaledValue(int px) {
-        return setValue(px, isLandscape());
+    public int getScaledValue(int px, boolean isFontSize) {
+        return setValue(px, isLandscape(), isFontSize);
     }
     
     @Override
-    public float getScaledValue(float px) {
-        return setValue(px, isLandscape());
+    public float getScaledValue(float px, boolean isFontSize) {
+        return setValue(px, isLandscape(), isFontSize);
     }
     
     @Override
-    public int getScaledValue(int px, boolean horizontal) {
-        return setValue(px, horizontal);
+    public int getScaledValue(int px, boolean horizontal, boolean isFontSize) {
+        return setValue(px, horizontal, isFontSize);
     }
     
     @Override
-    public float getScaledValue(float px, boolean horizontal) {
-        return setValue(px, horizontal);
+    public float getScaledValue(float px, boolean horizontal, boolean isFontSize) {
+        return setValue(px, horizontal, isFontSize);
     }
     
     @Override
-    public int getScaledValueByWidth(int px) {
-        return setValueByWidth(px);
+    public int getScaledValueByWidth(int px, boolean isFontSize) {
+        return setValueByWidth(px, isFontSize);
     }
     
     @Override
-    public float getScaledValueByWidth(float px) {
-        return setValueByWidth(px);
+    public float getScaledValueByWidth(float px, boolean isFontSize) {
+        return setValueByWidth(px, isFontSize);
     }
     
     @Override
-    public int getScaledValueByHeight(int px) {
-        return setValueByHeight(px);
+    public int getScaledValueByHeight(int px, boolean isFontSize) {
+        return setValueByHeight(px, isFontSize);
     }
     
     @Override
-    public float getScaledValueByHeight(float px) {
-        return setValueByHeight(px);
+    public float getScaledValueByHeight(float px, boolean isFontSize) {
+        return setValueByHeight(px, isFontSize);
     }
 }

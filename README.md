@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.7.3'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.7.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -300,6 +300,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.7.4
+> - 屏幕适配添加适配字体大小缩放；
 
 > 1.7.2
 > - 屏幕适配类型支持"wh"，宽按宽缩放，高按高缩放；

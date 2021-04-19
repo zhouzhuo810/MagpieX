@@ -9,7 +9,6 @@ import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -28,7 +27,7 @@ import me.zhouzhuo810.magpiex.ui.widget.intef.IPagerIndicator;
 import me.zhouzhuo810.magpiex.ui.widget.intef.IResProvider;
 import me.zhouzhuo810.magpiex.utils.ColorUtil;
 import me.zhouzhuo810.magpiex.utils.NavigatorHelper;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
@@ -157,18 +156,18 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
             horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tabIsHorizontalHideIcon, false);
             
             if (isNeedScaleInPx && !isInEditMode()) {
-                selectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(selectPointSize);
-                unSelectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(unSelectPointSize);
-                spacing = ScreenAdapterUtil.getInstance().getScaledValue(spacing);
-                tabTextSizeSelect = ScreenAdapterUtil.getInstance().getScaledValue(tabTextSizeSelect);
-                tabIconTextMargin = ScreenAdapterUtil.getInstance().getScaledValue(tabIconTextMargin);
-                tabTextSizeUnSelect = ScreenAdapterUtil.getInstance().getScaledValue(tabTextSizeUnSelect);
-                underlineHeight = ScreenAdapterUtil.getInstance().getScaledValue(underlineHeight);
-                underlinePadding = ScreenAdapterUtil.getInstance().getScaledValue(underlinePadding);
-                tabPadding = ScreenAdapterUtil.getInstance().getScaledValue(tabPadding);
-                tabIconSize = ScreenAdapterUtil.getInstance().getScaledValue(tabIconSize);
-                gapLineWidth = ScreenAdapterUtil.getInstance().getScaledValue(gapLineWidth);
-                gapLinePadding = ScreenAdapterUtil.getInstance().getScaledValue(gapLinePadding);
+                selectPointSize = SimpleUtil.getScaledValue(selectPointSize);
+                unSelectPointSize = SimpleUtil.getScaledValue(unSelectPointSize);
+                spacing = SimpleUtil.getScaledValue(spacing);
+                tabTextSizeSelect = SimpleUtil.getScaledValue(tabTextSizeSelect);
+                tabIconTextMargin = SimpleUtil.getScaledValue(tabIconTextMargin);
+                tabTextSizeUnSelect = SimpleUtil.getScaledValue(tabTextSizeUnSelect);
+                underlineHeight = SimpleUtil.getScaledValue(underlineHeight);
+                underlinePadding = SimpleUtil.getScaledValue(underlinePadding);
+                tabPadding = SimpleUtil.getScaledValue(tabPadding);
+                tabIconSize = SimpleUtil.getScaledValue(tabIconSize);
+                gapLineWidth = SimpleUtil.getScaledValue(gapLineWidth);
+                gapLinePadding = SimpleUtil.getScaledValue(gapLinePadding);
             }
             
             switch (indicatorInt) {

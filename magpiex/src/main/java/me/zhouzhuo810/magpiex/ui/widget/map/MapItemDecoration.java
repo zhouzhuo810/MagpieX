@@ -13,7 +13,7 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.ui.widget.map.entity.MapLine;
 import me.zhouzhuo810.magpiex.ui.widget.map.entity.MapTextRectEntity;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
@@ -32,7 +32,7 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
     public MapItemDecoration(List<MapTextRectEntity> entity) {
         this.mEntity = entity;
         mPaint = new Paint();
-        mPaint.setStrokeWidth(ScreenAdapterUtil.getInstance().getScaledValue(2));
+        mPaint.setStrokeWidth(SimpleUtil.getScaledValue(2));
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.WHITE);
     }

@@ -19,6 +19,7 @@ import java.lang.annotation.RetentionPolicy;
 import androidx.annotation.IntDef;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
@@ -271,7 +272,7 @@ public class TitleBar extends RelativeLayout {
     public void setImageSize(int imageSize, boolean autoSize) {
         int size = imageSize;
         if (autoSize) {
-            size = ScreenAdapterUtil.getInstance().getScaledValue(imageSize);
+            size = SimpleUtil.getScaledValue(imageSize);
         }
         LayoutParams lp0 = (LayoutParams) ivLeft.getLayoutParams();
         LayoutParams lp1 = (LayoutParams) ivRight.getLayoutParams();

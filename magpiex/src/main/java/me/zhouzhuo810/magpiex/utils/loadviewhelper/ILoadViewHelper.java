@@ -56,7 +56,7 @@ public interface ILoadViewHelper {
      * @param px 原始数据
      * @return 缩放数据
      */
-    int getScaledValue(int px);
+    int getScaledValue(int px, boolean isFontSize);
     
     /**
      * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
@@ -64,16 +64,7 @@ public interface ILoadViewHelper {
      * @param px 原始数据
      * @return 缩放数据
      */
-    float getScaledValue(float px);
-    
-    /**
-     * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
-     *
-     * @param px         原始数据
-     * @param horizontal 是否水平方向
-     * @return 缩放数据
-     */
-    int getScaledValue(int px, boolean horizontal);
+    float getScaledValue(float px, boolean isFontSize);
     
     /**
      * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
@@ -82,7 +73,16 @@ public interface ILoadViewHelper {
      * @param horizontal 是否水平方向
      * @return 缩放数据
      */
-    float getScaledValue(float px, boolean horizontal);
+    int getScaledValue(int px, boolean horizontal, boolean isFontSize);
+    
+    /**
+     * 动态计算数值大小(根据screen_adapt_type判断，auto或者width则按width，否则按height)
+     *
+     * @param px         原始数据
+     * @param horizontal 是否水平方向
+     * @return 缩放数据
+     */
+    float getScaledValue(float px, boolean horizontal, boolean isFontSize);
     
     /**
      * 动态计算数值大小(按宽度缩放)
@@ -90,7 +90,7 @@ public interface ILoadViewHelper {
      * @param px 原始数据
      * @return 缩放数据
      */
-    int getScaledValueByWidth(int px);
+    int getScaledValueByWidth(int px, boolean isFontSize);
     
     /**
      * 动态计算数值大小(按宽度缩放)
@@ -98,7 +98,7 @@ public interface ILoadViewHelper {
      * @param px 原始数据
      * @return 缩放数据
      */
-    float getScaledValueByWidth(float px);
+    float getScaledValueByWidth(float px, boolean isFontSize);
     
     /**
      * 动态计算数值大小(按高度缩放)
@@ -106,7 +106,7 @@ public interface ILoadViewHelper {
      * @param px 原始数据
      * @return 缩放数据
      */
-    int getScaledValueByHeight(int px);
+    int getScaledValueByHeight(int px, boolean isFontSize);
     
     /**
      * 动态计算数值大小(按高度缩放)
@@ -114,5 +114,5 @@ public interface ILoadViewHelper {
      * @param px 原始数据
      * @return 缩放数据
      */
-    float getScaledValueByHeight(float px);
+    float getScaledValueByHeight(float px, boolean isFontSize);
 }

@@ -3,7 +3,7 @@ package me.zhouzhuo810.magpiex.ui.widget.map.entity;
 import android.graphics.Rect;
 
 import me.zhouzhuo810.magpiex.ui.widget.map.view.MapTextView;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
@@ -25,9 +25,9 @@ public class MapTextRectEntity extends BaseMapEntity {
         this.rim = rim;
         this.shiningDuration = 1;
         if (borderWidthPx <= 0) {
-            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(2);
+            this.borderWidthPx = SimpleUtil.getScaledValue(2);
         } else {
-            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(borderWidthPx);
+            this.borderWidthPx = SimpleUtil.getScaledValue(borderWidthPx);
         }
         this.textSize = 24;
     }
@@ -41,9 +41,9 @@ public class MapTextRectEntity extends BaseMapEntity {
             this.textSize = textSizePx;
         }
         if (borderWidthPx <= 0) {
-            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(2);
+            this.borderWidthPx = SimpleUtil.getScaledValue(2);
         } else {
-            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(borderWidthPx);
+            this.borderWidthPx = SimpleUtil.getScaledValue(borderWidthPx);
         }
         this.shiningDuration = shiningDurationSecond;
         this.orientation = orientation;

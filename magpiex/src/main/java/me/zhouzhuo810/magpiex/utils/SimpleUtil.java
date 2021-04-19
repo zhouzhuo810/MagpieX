@@ -49,9 +49,31 @@ public class SimpleUtil {
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
     public static int getScaledValue(int px) {
-        return ScreenAdapterUtil.getInstance().getScaledValue(px);
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, false);
     }
     
+    /**
+     * 缩放值自动（默认）- int
+     *
+     * @param px 原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数          
+     * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
+     */
+    public static int getScaledValue(int px, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, isFontSize);
+    }
+    
+    
+    /**
+     * 缩放值自动（默认）- float
+     *
+     * @param px         原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
+     * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
+     */
+    public static float getScaledValue(float px, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, isFontSize);
+    }
     
     /**
      * 缩放值自动（默认）- float
@@ -60,7 +82,7 @@ public class SimpleUtil {
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
     public static float getScaledValue(float px) {
-        return ScreenAdapterUtil.getInstance().getScaledValue(px);
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, false);
     }
     
     /**
@@ -68,10 +90,11 @@ public class SimpleUtil {
      *
      * @param px         原来值
      * @param horizontal 是否水平方向
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数   
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
-    public static int getScaledValue(int px, boolean horizontal) {
-        return ScreenAdapterUtil.getInstance().getScaledValue(px, horizontal);
+    public static int getScaledValue(int px, boolean horizontal, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, horizontal, isFontSize);
     }
     
     
@@ -80,10 +103,11 @@ public class SimpleUtil {
      *
      * @param px         原来值
      * @param horizontal 是否水平方向
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数   
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
-    public static float getScaledValue(float px, boolean horizontal) {
-        return ScreenAdapterUtil.getInstance().getScaledValue(px, horizontal);
+    public static float getScaledValue(float px, boolean horizontal, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValue(px, horizontal, isFontSize);
     }
     
     /**
@@ -93,8 +117,31 @@ public class SimpleUtil {
      * @return 缩放后的值
      */
     public static int getScaledValueByWidth(int px) {
-        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px);
+        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px, false);
     }
+    
+    /**
+     * 缩放值 - int
+     *
+     * @param px 原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
+     * @return 缩放后的值
+     */
+    public static int getScaledValueByWidth(int px, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px, isFontSize);
+    }
+    
+    /**
+     * 缩放值 - float
+     *
+     * @param px 原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
+     * @return 缩放后的值
+     */
+    public static float getScaledValueByWidth(float px, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px, isFontSize);
+    }
+    
     
     /**
      * 缩放值 - float
@@ -103,17 +150,29 @@ public class SimpleUtil {
      * @return 缩放后的值
      */
     public static float getScaledValueByWidth(float px) {
-        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px);
+        return ScreenAdapterUtil.getInstance().getScaledValueByWidth(px, false);
     }
     
     /**
      * 缩放值按高度 - int
      *
      * @param px 原来值
+     *
      * @return 缩放后的值
      */
     public static int getScaledValueByHeight(int px) {
-        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px);
+        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, false);
+    }
+
+    /**
+     * 缩放值按高度 - int
+     *
+     * @param px 原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
+     * @return 缩放后的值
+     */
+    public static int getScaledValueByHeight(int px, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, isFontSize);
     }
     
     /**
@@ -123,7 +182,18 @@ public class SimpleUtil {
      * @return 缩放后的值
      */
     public static float getScaledValueByHeight(float px) {
-        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px);
+        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, false);
+    }
+
+    /**
+     * 缩放值按高度 - float
+     *
+     * @param px 原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
+     * @return 缩放后的值
+     */
+    public static float getScaledValueByHeight(float px, boolean isFontSize) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, isFontSize);
     }
     
     /**

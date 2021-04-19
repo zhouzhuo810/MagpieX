@@ -17,7 +17,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.RequiresApi;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.ColorUtil;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -311,7 +311,7 @@ public class TabBar extends LinearLayout {
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     
-        textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
+        textSize = SimpleUtil.getScaledValue(textSize);
     }
 
     public int getSelection() {
@@ -444,7 +444,7 @@ public class TabBar extends LinearLayout {
     }
 
     public TabBar setTextSize(int textSizePx) {
-        this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSizePx);
+        this.textSize = SimpleUtil.getScaledValue(textSizePx);
         return this;
     }
 
@@ -457,7 +457,7 @@ public class TabBar extends LinearLayout {
     private TabBar setTextTopMargin(int marginTop, boolean autoSize) {
         int size = marginTop;
         if (autoSize) {
-            size = ScreenAdapterUtil.getInstance().getScaledValue(marginTop);
+            size = SimpleUtil.getScaledValue(marginTop);
         }
         LayoutParams lp0 = (LayoutParams) tv0.getLayoutParams();
         LayoutParams lp1 = (LayoutParams) tv1.getLayoutParams();
@@ -488,7 +488,7 @@ public class TabBar extends LinearLayout {
     public TabBar setImageSize(int imageSize, boolean autoSize) {
         int size = imageSize;
         if (autoSize) {
-            size = ScreenAdapterUtil.getInstance().getScaledValue(imageSize);
+            size = SimpleUtil.getScaledValue(imageSize);
         }
         LayoutParams lp0 = (LayoutParams) iv0.getLayoutParams();
         LayoutParams lp1 = (LayoutParams) iv1.getLayoutParams();
