@@ -234,11 +234,11 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     
     private float calculateValueByWidth(float value, boolean isFontSize) {
         if ("px".equals(unit)) {
-            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
+            return (isFontSize ? fontSize : 1f) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         } else if ("dp".equals(unit)) {
             int dip = px2dip(actualDensity, value);
             value = ((float) designDpi / 160) * dip;
-            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
+            return (isFontSize ? fontSize : 1f) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         }
         return 0;
     }
@@ -249,11 +249,11 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     
     private float calculateValueByHeight(float value, boolean isFontSize) {
         if ("px".equals(unit)) {
-            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
+            return (isFontSize ? fontSize : 1f) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         } else if ("dp".equals(unit)) {
             int dip = px2dip(actualDensity, value);
             value = ((float) designDpi / 160) * dip;
-            return (isFontSize ? 1 : fontSize) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
+            return (isFontSize ? fontSize : 1f) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         }
         return 0;
     }
