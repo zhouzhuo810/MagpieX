@@ -12,6 +12,9 @@ import java.util.List;
 import androidx.appcompat.widget.AppCompatSpinner;
 import me.zhouzhuo810.magpiex.ui.adapter.LvBaseAdapter;
 
+/**
+ * @author zhouzhuo810
+ */
 public class SimpleStringSpinner extends AppCompatSpinner {
     
     private int mLayoutId;
@@ -19,7 +22,7 @@ public class SimpleStringSpinner extends AppCompatSpinner {
     private int mTextViewId;
     
     private List<String> items;
-    private OnSimpleStringSpinnerItemSelectedListener mOnSimpleSpinnerItemSelectedListener;
+    private OnSimpleStringSpinnerItemSelectedListener<String> mOnSimpleSpinnerItemSelectedListener;
     
     public SimpleStringSpinner(Context context) {
         super(context);

@@ -184,7 +184,7 @@ public class MarkView extends View {
         }
         if (!isInEditMode()) {
             strokeWidth = SimpleUtil.getScaledValue(strokeWidth);
-            textSize = SimpleUtil.getScaledValue(textSize);
+            textSize = SimpleUtil.getScaledValue(textSize, true);
             pointSize = SimpleUtil.getScaledValue(pointSize);
         }
     }
@@ -303,7 +303,7 @@ public class MarkView extends View {
     }
     
     public MarkView setTextSizeInPx(int pxSize) {
-        this.textSize = SimpleUtil.getScaledValue(pxSize);
+        this.textSize = SimpleUtil.getScaledValue(pxSize, true);
         textPaint.setTextSize(textSize);
         return this;
     }

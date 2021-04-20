@@ -159,9 +159,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                 selectPointSize = SimpleUtil.getScaledValue(selectPointSize);
                 unSelectPointSize = SimpleUtil.getScaledValue(unSelectPointSize);
                 spacing = SimpleUtil.getScaledValue(spacing);
-                tabTextSizeSelect = SimpleUtil.getScaledValue(tabTextSizeSelect);
+                tabTextSizeSelect = SimpleUtil.getScaledValue(tabTextSizeSelect, true);
                 tabIconTextMargin = SimpleUtil.getScaledValue(tabIconTextMargin);
-                tabTextSizeUnSelect = SimpleUtil.getScaledValue(tabTextSizeUnSelect);
+                tabTextSizeUnSelect = SimpleUtil.getScaledValue(tabTextSizeUnSelect, true);
                 underlineHeight = SimpleUtil.getScaledValue(underlineHeight);
                 underlinePadding = SimpleUtil.getScaledValue(underlinePadding);
                 tabPadding = SimpleUtil.getScaledValue(tabPadding);

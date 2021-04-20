@@ -311,7 +311,7 @@ public class TabBar extends LinearLayout {
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     
-        textSize = SimpleUtil.getScaledValue(textSize);
+        textSize = SimpleUtil.getScaledValue(textSize, true);
     }
 
     public int getSelection() {
@@ -444,7 +444,7 @@ public class TabBar extends LinearLayout {
     }
 
     public TabBar setTextSize(int textSizePx) {
-        this.textSize = SimpleUtil.getScaledValue(textSizePx);
+        this.textSize = SimpleUtil.getScaledValue(textSizePx, true);
         return this;
     }
 

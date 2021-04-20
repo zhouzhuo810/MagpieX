@@ -54,7 +54,7 @@ public class MapTextView extends ViewGroup {
         mTextView = new ShineTextView(getContext(), null);
         mTextView.setTextColor(Color.WHITE);
         mTextView.setDurationWithSeconds(shiningDuration);
-        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SimpleUtil.getScaledValue(textSize));
+        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SimpleUtil.getScaledValue(textSize, true));
         mTextView.setGravity(Gravity.CENTER);
         //// FIXME: 2017/6/13 by zz 文字居中问题
         mTextView.measure(MeasureSpec.makeMeasureSpec(mWidth, MeasureSpec.EXACTLY),
@@ -66,7 +66,7 @@ public class MapTextView extends ViewGroup {
         mTextView = new ShineTextView(getContext(), null);
         mTextView.setTextColor(Color.WHITE);
         mTextView.setDurationWithSeconds(shiningDuration);
-        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SimpleUtil.getScaledValue(textSize));
+        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SimpleUtil.getScaledValue(textSize, true));
         mTextView.setGravity(Gravity.CENTER);
         //// FIXME: 2017/6/13 by zz 文字居中问题
         mTextView.measure(MeasureSpec.makeMeasureSpec(mWidth, MeasureSpec.EXACTLY),

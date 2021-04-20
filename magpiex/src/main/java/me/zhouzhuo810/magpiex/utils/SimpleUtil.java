@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.ArrayRes;
 import androidx.annotation.ColorRes;
@@ -194,6 +196,17 @@ public class SimpleUtil {
      */
     public static float getScaledValueByHeight(float px, boolean isFontSize) {
         return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, isFontSize);
+    }
+    
+    /**
+     * 设置文字字体大小
+     * @param tv TextView
+     * @param textSizePx 设计图的px值。
+     */
+    public static void setTextSizeInPx(TextView tv, float textSizePx) {
+        if (tv != null) {
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getScaledValue(textSizePx, true));
+        }
     }
     
     /**

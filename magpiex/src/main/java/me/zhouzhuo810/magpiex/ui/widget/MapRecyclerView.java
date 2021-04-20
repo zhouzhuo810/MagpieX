@@ -20,6 +20,7 @@ import me.zhouzhuo810.magpiex.ui.widget.map.utils.RectUtil;
 
 /**
  * 画格子和文字,且支持背景色闪烁、动态文字大小，动态格子线条颜色的RecyclerFView
+ * @author zhouzhuo810
  */
 public class MapRecyclerView extends RecyclerView {
     
