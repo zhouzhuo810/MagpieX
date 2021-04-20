@@ -132,6 +132,9 @@ public class LanguageUtil {
                 return mSupportLanguages.containsKey(language);
             }
         }
+        if (mApp.getSupportLanguages() == null) {
+            return false;
+        }
         return mApp.getSupportLanguages().containsKey(language);
     }
     
