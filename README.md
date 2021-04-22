@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.7.5'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.7.6'
 ```
 
 If you use this. That means you added dependencies below:
@@ -300,6 +300,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.7.6
+> - 修复TwoBtnTextDialog文字超过屏幕时，按钮不显示的问题；
 
 > 1.7.5
 > - 修改LanguageUtil#isSupportLanguage()方法,没有配置`public Map<Integer, Locale> getSupportLanguages()`时，直接返回false；

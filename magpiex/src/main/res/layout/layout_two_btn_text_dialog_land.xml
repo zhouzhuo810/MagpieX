@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,15 +29,23 @@
         android:layout_height="1px"
         android:background="@color/colorBlack10" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_msg"
+    <me.zhouzhuo810.magpiex.ui.widget.MaxHeightScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="30px"
-        android:textColor="?attr/x_dialog_content_text_color"
-        android:textSize="@dimen/base_dialog_title_text_size_land"
-        tools:text="消息" />
+        android:scrollbars="none"
+        app:mhs_percent_height="0.7">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="30px"
+            android:textColor="?attr/x_dialog_content_text_color"
+            android:textSize="@dimen/base_dialog_title_text_size_land"
+            tools:text="消息" />
+
+    </me.zhouzhuo810.magpiex.ui.widget.MaxHeightScrollView>
 
     <View
         android:layout_width="match_parent"
