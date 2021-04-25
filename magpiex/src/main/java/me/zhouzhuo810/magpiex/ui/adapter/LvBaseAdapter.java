@@ -7,13 +7,11 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Checkable;
 import android.widget.ImageView;
@@ -27,7 +25,7 @@ import java.util.List;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * base adapter for ListView
@@ -99,7 +97,9 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(getLayoutId(), viewGroup, false);
-            ScreenAdapterUtil.getInstance().loadView(convertView);
+            if (!disableScale()) {
+                SimpleUtil.scaleView(convertView);
+            }
             holder = new ViewHolder(context, convertView, viewGroup, position);
             holder.mLayoutId = getLayoutId();
         } else {
@@ -126,6 +126,16 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         return convertView;
     }
     
+    
+    /**
+     * 是否禁用缩放
+     *
+     * @return 是否，默认false
+     */
+    protected boolean disableScale() {
+        return false;
+    }
+    
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup viewGroup) {
         if (mDropdownLayoutId == 0) {
@@ -134,7 +144,9 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
             ViewHolder holder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(getLayoutId(), viewGroup, false);
-                ScreenAdapterUtil.getInstance().loadView(convertView);
+                if (!disableScale()) {
+                    SimpleUtil.scaleView(convertView);
+                }
                 holder = new ViewHolder(context, convertView, viewGroup, position);
                 holder.mLayoutId = getLayoutId();
             } else {

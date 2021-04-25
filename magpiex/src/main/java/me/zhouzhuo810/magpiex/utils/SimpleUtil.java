@@ -36,15 +36,6 @@ public class SimpleUtil {
     }
     
     /**
-     * 缩放View
-     *
-     * @param v 要缩放的View
-     */
-    public static void scaleViewByWidthHeight(View v) {
-        ScreenAdapterUtil.getInstance().loadView(v);
-    }
-    
-    /**
      * 缩放值自动（默认）- int
      *
      * @param px 原来值

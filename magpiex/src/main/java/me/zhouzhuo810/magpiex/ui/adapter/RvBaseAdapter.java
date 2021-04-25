@@ -7,13 +7,11 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -28,7 +26,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.utils.ColorUtil;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * RvBaseAdapter
@@ -71,8 +69,19 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(getLayoutId(viewType), parent, false);
-        ScreenAdapterUtil.getInstance().loadView(view);
+        if (!disableScale()) {
+            SimpleUtil.scaleView(view);
+        }
         return new ViewHolder(context, view);
+    }
+    
+    /**
+     * 是否禁用缩放
+     *
+     * @return 是否，默认false
+     */
+    protected boolean disableScale() {
+        return false;
     }
     
     protected abstract int getLayoutId(int viewType);

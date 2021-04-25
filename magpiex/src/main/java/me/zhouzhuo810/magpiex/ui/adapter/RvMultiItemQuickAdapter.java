@@ -13,6 +13,7 @@ import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * 解除BaseMultiItemQuickAdapter的布局屏幕适配顾虑，继承这个不用考虑屏幕适配问题
+ * @author zhouzhuo810
  */
 public abstract class RvMultiItemQuickAdapter<T extends MultiItemEntity, K extends BaseViewHolder> extends BaseMultiItemQuickAdapter<T, K> {
     /**
@@ -44,8 +45,18 @@ public abstract class RvMultiItemQuickAdapter<T extends MultiItemEntity, K exten
     @Override
     protected K createBaseViewHolder(View view) {
         K baseViewHolder = super.createBaseViewHolder(view);
-        SimpleUtil.scaleView(baseViewHolder.itemView);
+        if (!disableScale()) {
+            SimpleUtil.scaleView(baseViewHolder.itemView);
+        }
         return baseViewHolder;
     }
     
+    /**
+     * 是否禁用缩放
+     *
+     * @return 是否，默认false
+     */
+    protected boolean disableScale() {
+        return false;
+    }
 }
