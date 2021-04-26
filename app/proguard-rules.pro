@@ -1,6 +1,6 @@
 
 ##---------------Begin: proguard configuration for BaseRecyclerViewAdapterHelper  ----------
--keep class com.chad.library.adapter.** {
+-keep class com.chad.library.adapter** {
 *;
 }
 -keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
@@ -48,23 +48,18 @@
 
 ##---------------Begin: proguard configuration for Retrofit  ----------
 -dontwarn retrofit2.**
--keep class retrofit2.** { *; }
+-keep class retrofit2** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
 ##---------------End: proguard configuration for Retrofit  ----------
 
 
 ##---------------Begin: proguard configuration for RxJava+RxAndroid  ----------
+-dontwarn java.util.concurrent.Flow*
 -dontwarn sun.misc.**
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
     long producerIndex;
     long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
 ##---------------End: proguard configuration for RxJava+RxAndroid  ----------
@@ -83,7 +78,7 @@
 #-keep class com.google.gson.stream.** { *; }
 
 # Application classes that will be serialized/deserialized over Gson
--keep class com.google.gson.examples.android.model.** { *; }
+-keep class com.google.gson.examples.android.model** { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
@@ -101,12 +96,12 @@
 
 
 ##---------------Begin: proguard configuration for ProgressManager  ----------
- -keep class me.jessyan.progressmanager.** { *; }
- -keep interface me.jessyan.progressmanager.** { *; }
+ -keep class me.jessyan.progressmanager** { *; }
+ -keep interface me.jessyan.progressmanager** { *; }
 ##---------------End: proguard configuration for ProgressManager  ----------
 
 ##---------------Begin: proguard configuration for ToastUtils  ----------
--keep class com.hjq.toast.** {*;}
+-keep class com.hjq.toast** {*;}
 ##---------------End: proguard configuration for ToastUtils  ----------
 
 -keepnames class * extends androidx.fragment.app.Fragment {

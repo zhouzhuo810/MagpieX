@@ -238,6 +238,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
+                if (!isResumed()) {
+                    return;
+                }
                 if (mCombineViewPager) {
                     if (mVisibleToUser && isVisibleInner()) {
                         viewVisibleToUser(true);
@@ -249,6 +252,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             
             @Override
             public void onViewDetachedFromWindow(View v) {
+                if (!isResumed()) {
+                    return;
+                }
                 v.removeOnAttachStateChangeListener(this);
                 viewVisibleToUser(false);
             }
