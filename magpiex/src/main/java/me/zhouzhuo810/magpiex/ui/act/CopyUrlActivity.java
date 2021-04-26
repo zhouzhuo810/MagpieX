@@ -14,6 +14,7 @@ import me.zhouzhuo810.magpiex.utils.ToastUtil;
 
 /**
  * 复制通知栏Url
+ * @author zhouzhuo810
  */
 public class CopyUrlActivity extends BaseActivity {
     

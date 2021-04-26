@@ -372,7 +372,11 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
             }
             return this;
         }
-        
+    
+        public Context getContext() {
+            return mContext;
+        }
+    
         /**
          * 关于事件的
          */

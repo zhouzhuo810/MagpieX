@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +33,9 @@ import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * RvBaseAdapter
- * Created by admin on 2017/8/10.
+ *
+ * @author admin
+ * @date 2017/8/10
  */
 public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapter.ViewHolder> {
     
@@ -329,7 +334,11 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             }
             return this;
         }
-        
+    
+        public Context getContext() {
+            return mContext;
+        }
+    
         /**
          * 关于事件的
          */

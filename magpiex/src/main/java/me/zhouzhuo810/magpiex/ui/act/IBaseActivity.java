@@ -23,6 +23,9 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpiex.ui.fgm.BaseFragment;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 
+/**
+ * @author zhouzhuo810
+ */
 public interface IBaseActivity {
     
     /**

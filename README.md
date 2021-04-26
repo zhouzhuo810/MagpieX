@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.8.1'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -300,6 +300,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.8.2
+> - RvBaseAdapter的ViewHolder添加getContext()方法；
 
 > 1.8.1
 > - BaseFragment兼容ViewPager2；
