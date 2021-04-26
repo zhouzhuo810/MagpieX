@@ -2,7 +2,7 @@ package me.zhouzhuo810.magpiexdemo.api;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import me.zhouzhuo810.magpiex.utils.ApiUtil;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiexdemo.R;

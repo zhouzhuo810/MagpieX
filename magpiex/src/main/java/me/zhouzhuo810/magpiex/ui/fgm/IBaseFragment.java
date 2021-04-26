@@ -14,7 +14,7 @@ import java.util.List;
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import me.zhouzhuo810.magpiex.ui.act.IBaseActivity;
 import me.zhouzhuo810.magpiex.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;

@@ -13,8 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.Nullable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;
 import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;

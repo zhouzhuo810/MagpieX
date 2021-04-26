@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-     implementation 'com.github.zhouzhuo810:MagpieX:1.7.6'
+     implementation 'com.github.zhouzhuo810:MagpieX:1.8.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -38,26 +38,26 @@ If you use this. That means you added dependencies below:
     //EventBus
     api 'org.greenrobot:eventbus:3.2.0'
     //Glide
-    api 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    api 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.10"
+    api 'io.reactivex.rxjava3:rxjava:3.0.9'
     //RxAndroid2
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava3:rxandroid:3.0.0'
     //Retrofit2
-    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
     //Retrofit2+RxJava2
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     //Retrofit2+Gson
-    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
     //OkHttp打印请求数据
-    api 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.12.12'
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
-    api 'com.hjq:toast:8.6'
+    api 'com.hjq:toast:8.8'
     //ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
 ```
@@ -300,6 +300,11 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.8.0
+> - 升级RxJava到版本3；
+> - 升级Retrofit到2.9.0;
+> - 升级Glide到4.12.0;
 
 > 1.7.6
 > - 修复TwoBtnTextDialog文字超过屏幕时，按钮不显示的问题；
