@@ -66,10 +66,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         super.onCreate(savedInstanceState);
         
         mContext = this;
-        
+    
+        int layoutId = getLayoutId();
+        if (layoutId == 0) {
+            return;
+        }
+    
         EventBus.getDefault().register(this);
         
-        setContentView(getLayoutId());
+        setContentView(layoutId);
         
         SimpleUtil.resetScale(this);
         
