@@ -7,6 +7,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
+import me.zhouzhuo810.magpiex.cons.Cons;
+
 /**
  * 基础工具类
  */
@@ -112,5 +114,23 @@ public class BaseUtil {
             }
         }
         return true;
+    }
+    
+    /**
+     * 设置屏幕适配是否开启
+     *
+     * @param enable 是否
+     */
+    public static void setScreenAdaptEnable(boolean enable) {
+        SpUtil.putBoolean(Cons.SP_KEY_OF_SCREEN_ADAPT_ENABLE, enable);
+    }
+    
+    /**
+     * 屏幕适配是否开启
+     *
+     * @return 是否，默认开启
+     */
+    public static boolean isScreenAdaptEnable() {
+        return SpUtil.getBoolean(Cons.SP_KEY_OF_SCREEN_ADAPT_ENABLE, true);
     }
 }

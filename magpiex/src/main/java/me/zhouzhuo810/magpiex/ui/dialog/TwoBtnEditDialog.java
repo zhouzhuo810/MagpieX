@@ -21,7 +21,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.KeyboardUtil;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * 两个按钮输入对话框
@@ -185,7 +185,7 @@ public class TwoBtnEditDialog extends DialogFragment {
             dismiss();
             return rootView;
         }
-        ScreenAdapterUtil.getInstance().loadView(rootView);
+        SimpleUtil.scaleView(rootView);
         final TextView tvLeft = rootView.findViewById(R.id.tv_left);
         final TextView tvRight = rootView.findViewById(R.id.tv_right);
         tvLeft.setText(leftText);

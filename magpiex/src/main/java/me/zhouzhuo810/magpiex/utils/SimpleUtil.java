@@ -16,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 /**
  * 常用方法简化
+ * @author zhouzhuo810
  */
 public class SimpleUtil {
     
@@ -25,6 +26,9 @@ public class SimpleUtil {
      * @param v 要缩放的View
      */
     public static void scaleView(View v) {
+        if (!BaseUtil.isScreenAdaptEnable()) {
+            return;
+        }
         ScreenAdapterUtil.getInstance().loadView(v);
     }
     

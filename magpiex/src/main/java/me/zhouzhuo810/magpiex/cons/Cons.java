@@ -22,8 +22,7 @@ public final class Cons {
     public @interface Unit {
     }
     
-    public static final String SP_KEY_OF_CHOOSED_LANGUAGE = "sp_key_of_choosed_language";
-    
+  
     public static final String SP_KEY_OF_TAKE_PHOTO_CAMERA_PIC_PATH = "sp_key_of_take_photo_camera_pic_path";
     
     public static final String SP_NAME = "magpie_sp";
@@ -34,5 +33,18 @@ public final class Cons {
     
     public static final String NOTICE_TARGET_APP_PACKAGE_NAME = "notice_target_app_package_name";
     
+    /**
+     * SharedPreferences的Key，用于获取当前选择语言
+     */
+    public static final String SP_KEY_OF_CHOOSED_LANGUAGE = "sp_key_of_choosed_language";
+    
+    /**
+     * SharedPreferences的Key，用于获取当前显示Activity或Fragment的类名
+     */
     public static final String SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME = "sp_key_of_current_activity_or_fragment_name";
+    
+    /**
+     * SharedPreferences的Key，用于启用和关闭屏幕适配功能
+     */
+    public static final String SP_KEY_OF_SCREEN_ADAPT_ENABLE = "sp_key_of_screen_adapt_enable";
 }

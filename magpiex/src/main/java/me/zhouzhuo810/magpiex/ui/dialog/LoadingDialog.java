@@ -18,7 +18,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
@@ -158,7 +158,7 @@ public class LoadingDialog extends DialogFragment {
             dismiss();
             return mRootView;
         }
-        ScreenAdapterUtil.getInstance().loadView(mRootView);
+        SimpleUtil.scaleView(mRootView);
         ProgressBar pb = mRootView.findViewById(R.id.pb_loading);
         if (iosStyle) {
             if (Build.VERSION.SDK_INT >= 21) {

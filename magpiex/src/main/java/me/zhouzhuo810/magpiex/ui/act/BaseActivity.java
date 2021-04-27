@@ -43,6 +43,9 @@ import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
 
+/**
+ * @author zhouzhuo810
+ */
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
     
     private ListDialog listDialog;

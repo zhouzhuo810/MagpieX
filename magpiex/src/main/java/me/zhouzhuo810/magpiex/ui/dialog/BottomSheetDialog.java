@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.dialog.adapter.ListDialogAdapter;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 public class BottomSheetDialog extends DialogFragment {
@@ -156,7 +156,7 @@ public class BottomSheetDialog extends DialogFragment {
             dismiss();
             return rootView;
         }
-        ScreenAdapterUtil.getInstance().loadView(rootView);
+        SimpleUtil.scaleView(rootView);
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         View line = rootView.findViewById(R.id.line_item);
         RecyclerView rv = rootView.findViewById(R.id.rv);

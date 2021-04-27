@@ -1,10 +1,10 @@
 package me.zhouzhuo810.magpiex.utils.loadviewhelper;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.conversion.IConversion;
 import me.zhouzhuo810.magpiex.utils.conversion.SimpleConversion;
 
@@ -54,8 +54,16 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper {
         }
     }
     
-    // if subclass has owner conversion，you need override this method and provide your conversion
+    /**
+     * 不建议使用此方法，推荐使用{@link me.zhouzhuo810.magpiex.utils.SimpleUtil#scaleView(View)}方法。
+     *
+     * @param view 要缩放的View
+     */
+    @Deprecated
     public void loadView(View view) {
+        if (!BaseUtil.isScreenAdaptEnable()) {
+            return;
+        }
         loadView(view, new SimpleConversion());
     }
     

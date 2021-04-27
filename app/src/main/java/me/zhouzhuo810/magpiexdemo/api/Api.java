@@ -13,6 +13,9 @@ import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
+/**
+ * @author zhouzhuo810
+ */
 public class Api {
     
     public static final String URL_RETROFIT = "http://wthrcdn.etouch.cn/";

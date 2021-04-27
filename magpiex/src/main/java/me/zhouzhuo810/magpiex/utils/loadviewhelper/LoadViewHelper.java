@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
+import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
@@ -233,6 +234,9 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float calculateValueByWidth(float value, boolean isFontSize) {
+        if (!BaseUtil.isScreenAdaptEnable()) {
+            return value;
+        }
         if ("px".equals(unit)) {
             return (isFontSize ? fontSize : 1f) * value * ((isLandscape() ? actualHeight : actualWidth) / (float) designWidth);
         } else if ("dp".equals(unit)) {
@@ -248,6 +252,9 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float calculateValueByHeight(float value, boolean isFontSize) {
+        if (!BaseUtil.isScreenAdaptEnable()) {
+            return value;
+        }
         if ("px".equals(unit)) {
             return (isFontSize ? fontSize : 1f) * value * ((isLandscape() ? actualWidth : actualHeight) / (float) designHeight);
         } else if ("dp".equals(unit)) {

@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import me.zhouzhuo810.magpiex.R;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.WebUtil;
 
 /**
@@ -158,7 +158,7 @@ public class OneBtnProgressDialog extends DialogFragment {
             dismiss();
             return rootView;
         }
-        ScreenAdapterUtil.getInstance().loadView(rootView);
+        SimpleUtil.scaleView(rootView);
         ProgressBar pb = rootView.findViewById(R.id.pb);
         final TextView tvOk = rootView.findViewById(R.id.tv_right);
         tvOk.setText(btnText);

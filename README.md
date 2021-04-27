@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.2'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -300,6 +300,28 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.8.3
+> - 屏幕适配支持开关，详见BaseUtil；
+```
+ /**
+     * 设置屏幕适配是否开启
+     *
+     * @param enable 是否
+     */
+    public static void setScreenAdaptEnable(boolean enable) {
+        SpUtil.putBoolean(Cons.SP_KEY_OF_SCREEN_ADAPT_ENABLE, enable);
+    }
+
+    /**
+     * 屏幕适配是否开启
+     *
+     * @return 是否，默认开启
+     */
+    public static boolean isScreenAdaptEnable() {
+        return SpUtil.getBoolean(Cons.SP_KEY_OF_SCREEN_ADAPT_ENABLE, true);
+    }
+```
 
 > 1.8.2
 > - RvBaseAdapter的ViewHolder添加getContext()方法；
