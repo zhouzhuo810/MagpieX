@@ -3,8 +3,6 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        tools:replace="android:appComponentFactory"
-        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         tools:targetApi="p">
         <activity
             android:name=".ui.act.CopyUrlActivity"
