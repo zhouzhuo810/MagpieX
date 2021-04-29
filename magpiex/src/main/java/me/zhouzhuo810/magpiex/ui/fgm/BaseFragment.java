@@ -226,8 +226,10 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
         rootView.setOnTouchListener(this);
-        // 屏幕适配
-        SimpleUtil.scaleView(rootView);
+        if (!shouldNotScreenAdapt()) {
+            // 屏幕适配
+            SimpleUtil.scaleView(rootView);
+        }
         return rootView;
     }
     
@@ -310,6 +312,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     
     @Override
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
+        return false;
+    }
+    
+    @Override
+    public boolean shouldNotScreenAdapt() {
         return false;
     }
     

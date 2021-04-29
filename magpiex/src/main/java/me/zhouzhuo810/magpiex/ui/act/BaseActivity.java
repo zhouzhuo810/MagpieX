@@ -77,8 +77,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         setContentView(layoutId);
         
         SimpleUtil.resetScale(this);
-        
-        SimpleUtil.scaleView(getDecorView());
+    
+        if (!shouldNotScreenAdapt()) {
+            SimpleUtil.scaleView(getDecorView());
+        }
         
         if (!shouldNotInvokeInitMethods(savedInstanceState)) {
             initView(savedInstanceState);
@@ -89,6 +91,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
+        return false;
+    }
+    
+    @Override
+    public boolean shouldNotScreenAdapt() {
         return false;
     }
     

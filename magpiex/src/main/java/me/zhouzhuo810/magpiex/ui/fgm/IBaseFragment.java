@@ -65,6 +65,14 @@ public interface IBaseFragment {
      */
     boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
     
+    
+    /**
+     * 是否不屏幕适配当前界面，注意，仅对ContentView生效，不包括RV，LV等
+     *
+     * @return 是否
+     */
+    boolean shouldNotScreenAdapt();
+    
     IBaseActivity getBaseAct();
     
     void startAct(Class<? extends Activity> clazz);

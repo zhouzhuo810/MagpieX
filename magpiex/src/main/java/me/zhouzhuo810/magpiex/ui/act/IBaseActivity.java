@@ -56,7 +56,6 @@ public interface IBaseActivity {
     void initEvent();
     
     
-    
     /**
      * 是否支持多语言
      *
@@ -296,13 +295,23 @@ public interface IBaseActivity {
     
     /**
      * 返回对话框确定文字
+     *
      * @return String
      */
     String getOkText();
     
     /**
      * 返回对话框取消文字
+     *
      * @return String
      */
     String getCancelText();
+    
+    
+    /**
+     * 是否不屏幕适配当前界面，注意，仅对ContentView生效，不包括RV，LV，FGM等
+     *
+     * @return 是否
+     */
+    boolean shouldNotScreenAdapt();
 }
