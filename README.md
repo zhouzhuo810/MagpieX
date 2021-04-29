@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.3'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -322,6 +322,12 @@ it supports:
         return SpUtil.getBoolean(Cons.SP_KEY_OF_SCREEN_ADAPT_ENABLE, true);
     }
 ```
+
+> 1.8.4
+> - BaseAct和BaseFgm中添加shouldNotScreenAdapt方法，支持单个页面控制是否适配；
+
+> 1.8.3
+> - 屏幕适配支持开关`BaseUtil#setScreenAdaptEnable(bool)`和`BaseUtil#isScreenAdaptEnable()`方法；
 
 > 1.8.2
 > - RvBaseAdapter的ViewHolder添加getContext()方法；
