@@ -18,7 +18,6 @@ import java.lang.annotation.RetentionPolicy;
 
 import androidx.annotation.IntDef;
 import me.zhouzhuo810.magpiex.R;
-import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
@@ -48,6 +47,8 @@ public class TitleBar extends RelativeLayout {
     
     private OnTitleClick titleClick;
     private OnLeftClickListener onLeftClickListener;
+    private OnMiddleClickListener onMiddleClickListener;
+    private OnRightClickListener onRightClickListener;
     private MarkView mvLeft;
     private MarkView mvRight;
     
@@ -61,6 +62,14 @@ public class TitleBar extends RelativeLayout {
     
     public interface OnLeftClickListener {
         void onClick(ImageView ivLeft, MarkView mv, TextView tvLeft);
+    }
+    
+    public interface OnMiddleClickListener {
+        void onClick(TextView tvTitle);
+    }
+    
+    public interface OnRightClickListener {
+        void onClick(ImageView ivRight, MarkView mv, TextView tvRight);
     }
     
     /**
@@ -88,6 +97,46 @@ public class TitleBar extends RelativeLayout {
                 }
                 if (TitleBar.this.onLeftClickListener != null) {
                     TitleBar.this.onLeftClickListener.onClick(ivLeft, mvLeft, tvLeft);
+                }
+            }
+        });
+    }
+
+    /**
+     * 只设置右边按钮点击事件
+     *
+     * @param onRightClickListener onRightClickListener
+     */
+    public void setOnRightClickListener(OnRightClickListener onRightClickListener) {
+        this.onRightClickListener = onRightClickListener;
+        llRight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (titleClick != null) {
+                    titleClick.onRightClick(ivRight, mvRight, tvRight);
+                }
+                if (TitleBar.this.onRightClickListener != null) {
+                    TitleBar.this.onRightClickListener.onClick(ivRight, mvRight, tvRight);
+                }
+            }
+        });
+    }
+    
+    /**
+     * 只设置中间标题文字点击事件
+     *
+     * @param onMiddleClickListener OnMiddleClickListener
+     */
+    public void setOnMiddleClickListener(OnMiddleClickListener onMiddleClickListener) {
+        this.onMiddleClickListener = onMiddleClickListener;
+        tvTitle.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (titleClick != null) {
+                    titleClick.onTitleClick(tvTitle);
+                }
+                if (TitleBar.this.onMiddleClickListener != null) {
+                    TitleBar.this.onMiddleClickListener.onClick(tvTitle);
                 }
             }
         });
