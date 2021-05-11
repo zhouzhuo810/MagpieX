@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.5'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.6'
 ```
 
 If you use this. That means you added dependencies below:
@@ -300,6 +300,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.8.6
+> - BaseApplication 添加`isScreenAdaptDisable`方法；
 
 > 1.8.5
 > - TitleBar添加`setOnRightClickListener`和`setOnMiddleClickListener`方法；

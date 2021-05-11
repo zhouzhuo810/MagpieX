@@ -30,8 +30,10 @@ public abstract class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        
+    
         BaseUtil.init(this);
+        
+        BaseUtil.setScreenAdaptEnable(!isScreenAdaptDisable());
         
         LanguageUtil.init(this);
         
@@ -122,4 +124,10 @@ public abstract class BaseApplication extends Application {
      */
     public abstract Map<Integer, Locale> getSupportLanguages();
     
+    /**
+     * 是否关闭屏幕适配
+     *
+     * @return 是否
+     */
+    public abstract boolean isScreenAdaptDisable();
 }

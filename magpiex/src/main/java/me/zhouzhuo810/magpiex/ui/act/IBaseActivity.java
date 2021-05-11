@@ -314,4 +314,5 @@ public interface IBaseActivity {
      * @return 是否
      */
     boolean shouldNotScreenAdapt();
+    
 }

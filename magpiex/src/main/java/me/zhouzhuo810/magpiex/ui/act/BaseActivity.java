@@ -868,4 +868,5 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public boolean isLandscapeDialog() {
         return false;
     }
+    
 }
