@@ -1,6 +1,5 @@
 package me.zhouzhuo810.magpiex.utils;
 
-import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -17,6 +16,12 @@ import androidx.core.app.NotificationManagerCompat;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.ui.act.CopyUrlActivity;
 
+/**
+ * 发送通知工具类
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 2:23 PM
+ */
 public class NoticeUtil {
     private NoticeUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");

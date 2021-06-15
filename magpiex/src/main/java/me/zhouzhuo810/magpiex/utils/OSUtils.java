@@ -8,6 +8,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * 系统工具类，判断当前手机系统
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 2:23 PM
+ */
 public class OSUtils {
     
     public static final String ROM_MIUI = "MIUI";

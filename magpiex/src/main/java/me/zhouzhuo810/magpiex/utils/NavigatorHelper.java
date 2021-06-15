@@ -9,6 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 /**
  * 方便扩展IPagerNavigator的帮助类，将ViewPager的3个回调方法转换成
  * onSelected、onDeselected、onEnter等回调，方便扩展
+ *
+ * @author zhouzhuo810
  */
 public class NavigatorHelper {
     private SparseBooleanArray mDeselectedItems = new SparseBooleanArray();

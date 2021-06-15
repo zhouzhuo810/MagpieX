@@ -50,16 +50,34 @@ public class SimpleStringSpinner extends AppCompatSpinner {
         super(context, attrs, defStyleAttr, mode, popupTheme);
     }
     
+    /**
+     * 选完之后的布局id
+     *
+     * @param mLayoutId 布局id
+     * @return SimpleStringSpinner
+     */
     public SimpleStringSpinner setLayoutId(int mLayoutId) {
         this.mLayoutId = mLayoutId;
         return this;
     }
     
+    /**
+     * 下拉弹窗的布局id
+     *
+     * @param mDropdownLayoutId 布局id
+     * @return SimpleStringSpinner
+     */
     public SimpleStringSpinner setDropdownLayoutId(int mDropdownLayoutId) {
         this.mDropdownLayoutId = mDropdownLayoutId;
         return this;
     }
     
+    /**
+     * 用来显示下拉内容的TextView的id，注意：setLayoutId 和 setDropdownLayoutId 中的TextView的id必须一致
+     *
+     * @param mTextViewId TextView的id
+     * @return SimpleStringSpinner
+     */
     public SimpleStringSpinner setTextViewId(int mTextViewId) {
         this.mTextViewId = mTextViewId;
         return this;
@@ -90,8 +108,14 @@ public class SimpleStringSpinner extends AppCompatSpinner {
     
     public interface OnSimpleStringSpinnerItemSelectedListener<T> {
         
+        /**
+         * 选中回调
+         */
         void onItemSelected(AdapterView<?> parent, View view, int position, long id, T data);
         
+        /**
+         * 啥也没选
+         */
         void onNothingSelected(AdapterView<?> parent);
     }
     
