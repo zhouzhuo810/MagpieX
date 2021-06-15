@@ -165,31 +165,31 @@ public class MyApplication extends BaseApplication {
 
 #### 工具类简介
 
-- BaseUtil
+- [BaseUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/BaseUtil.java)
 > 核心工具类，持有 application 对象。
 
-- SimpleUtil
+- [SimpleUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/SimpleUtil.java)
 > 常用工具类，包括了屏幕适配和资源获取等相关方法。
 
-- ApiUtil
+- [ApiUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ApiUtil.java)
 > RxJava2+Retrofit2+OkHttp3 Api对象初始化工具.
 
-- LanguageUtil
+- [LanguageUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/LanguageUtil.java)
 > 多语言切换工具.
 
 - KeyboardUtil
 > 键盘操作工具.
 
-- ApkUtil
+- [ApkUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ApkUtil.java)
 > 安装 APK 工具.
 
 - BarUtils
 > 状态栏操作工具类。
 
-- SpUtil
+- [SpUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/SpUtil.java)
 > SharedPreferences 操作工具类。
 
-- StrUtil
+- [StrUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/StrUtil.java)
 > 字符串操作工具类。
 
 - FileUtil
@@ -198,7 +198,7 @@ public class MyApplication extends BaseApplication {
 - DateUtil
 > 日期转换工具类。
 
-- RxHelper
+- [RxHelper](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/RxHelper.java)
 > RxJava 倒计时，轮训，异步任务工具类。
 
 - CrashUtil
@@ -210,7 +210,7 @@ public class MyApplication extends BaseApplication {
 - ImageUtil
 > 图片操作工具类。
 
-- ToastUtil
+- [ToastUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ToastUtil.java)
 > 吐司工具类。
 
 - NoticeUtil
