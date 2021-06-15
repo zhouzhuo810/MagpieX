@@ -26,9 +26,6 @@ public class SimpleUtil {
      * @param v 要缩放的View
      */
     public static void scaleView(View v) {
-        if (!BaseUtil.isScreenAdaptEnable()) {
-            return;
-        }
         ScreenAdapterUtil.getInstance().loadView(v);
     }
     

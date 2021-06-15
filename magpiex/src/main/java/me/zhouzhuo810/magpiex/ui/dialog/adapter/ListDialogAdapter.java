@@ -9,16 +9,21 @@ import java.util.List;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
 
-
+/**
+ * 列表对话框适配器
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:53 PM
+ */
 public class ListDialogAdapter extends RvBaseAdapter<String> {
-
+    
     private boolean alignLeft;
     private boolean landscape;
-
+    
     public boolean isAlignLeft() {
         return alignLeft;
     }
-
+    
     public void setAlignLeft(boolean alignLeft) {
         this.alignLeft = alignLeft;
     }
@@ -35,12 +40,12 @@ public class ListDialogAdapter extends RvBaseAdapter<String> {
         super(context, data);
         this.landscape = landscape;
     }
-
+    
     @Override
     protected int getLayoutId(int viewType) {
         return landscape ? R.layout.item_lv_dialog_land : R.layout.item_lv_dialog;
     }
-
+    
     @Override
     protected void fillData(ViewHolder holder, String item, int position) {
         TextView view = holder.getView(R.id.tv_name);

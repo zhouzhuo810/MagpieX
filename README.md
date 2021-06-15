@@ -22,7 +22,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.6'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -300,6 +300,9 @@ it supports:
 > Drawable相关工具类.
 
 ### Update Logs
+
+> 1.8.7
+> - 优化屏幕适配判断是否缩放的逻辑，避免过于频繁访问 SharedPreferences；
 
 > 1.8.6
 > - BaseApplication 添加`isScreenAdaptDisable`方法；

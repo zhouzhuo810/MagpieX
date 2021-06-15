@@ -25,6 +25,9 @@ import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * 两个按钮输入对话框
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:54 PM
  */
 public class TwoBtnEditDialog extends DialogFragment {
     

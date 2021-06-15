@@ -24,7 +24,12 @@ import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.dialog.adapter.ListDialogAdapter;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
-
+/**
+ * 底部弹出对话框
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:54 PM
+ */
 public class BottomSheetDialog extends DialogFragment {
     
     private List<String> items;

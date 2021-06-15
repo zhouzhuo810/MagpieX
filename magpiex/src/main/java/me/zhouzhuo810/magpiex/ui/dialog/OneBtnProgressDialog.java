@@ -23,6 +23,9 @@ import me.zhouzhuo810.magpiex.utils.WebUtil;
 
 /**
  * 单个按钮进度对话框
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:54 PM
  */
 public class OneBtnProgressDialog extends DialogFragment {
     

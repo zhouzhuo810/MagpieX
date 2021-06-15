@@ -9,6 +9,12 @@ import android.view.View;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 
+/**
+ * ActivityUtil
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:48 PM
+ */
 public class ActivityUtil {
     
     public static Bundle getOptionsBundle(final Context context,

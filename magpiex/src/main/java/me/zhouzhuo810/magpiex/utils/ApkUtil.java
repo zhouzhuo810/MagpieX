@@ -11,6 +11,9 @@ import androidx.core.content.FileProvider;
 
 /**
  * Apk安装工具类
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:48 PM
  */
 public class ApkUtil {
 

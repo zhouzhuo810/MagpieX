@@ -23,6 +23,9 @@ import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
  * 加载对话框
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:54 PM
  */
 public class LoadingDialog extends DialogFragment {
     

@@ -16,6 +16,9 @@ import me.zhouzhuo810.magpiex.utils.RxHelper;
 
 /**
  * 定时闪烁背景颜色的TextView
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:56 PM
  */
 public class ShineTextView extends AppCompatTextView {
     public static final boolean DEBUG = true;

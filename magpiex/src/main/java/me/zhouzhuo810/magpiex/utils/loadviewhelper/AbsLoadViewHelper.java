@@ -10,11 +10,17 @@ import me.zhouzhuo810.magpiex.utils.conversion.SimpleConversion;
 
 
 /**
- * Created by yosemite on 2018/3/21.
+ * 屏幕适配工具抽象类
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:43 PM
  */
-
 public abstract class AbsLoadViewHelper implements ILoadViewHelper {
     
+    /**
+     * 是否禁用屏幕适配，避免频繁调用 BaseUtil.isScreenAdaptEnable 方法。
+     */
+    protected boolean disableAdapt;
     protected int screenOrientation;
     protected float actualDensity;
     protected float actualDensityDpi;
@@ -36,6 +42,7 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper {
         this.designDpi = designDpi;
         this.fontSize = fontSize;
         this.unit = unit;
+        this.disableAdapt = !BaseUtil.isScreenAdaptEnable();
         setActualParams(context);
     }
     
@@ -52,6 +59,7 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper {
             actualDensity = actualScreenInfo[3];
             actualDensityDpi = actualScreenInfo[4];
         }
+        this.disableAdapt = !BaseUtil.isScreenAdaptEnable();
     }
     
     /**
@@ -61,7 +69,7 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper {
      */
     @Deprecated
     public void loadView(View view) {
-        if (!BaseUtil.isScreenAdaptEnable()) {
+        if (disableAdapt) {
             return;
         }
         loadView(view, new SimpleConversion());

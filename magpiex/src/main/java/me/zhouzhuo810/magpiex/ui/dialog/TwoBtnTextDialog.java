@@ -23,6 +23,9 @@ import me.zhouzhuo810.magpiex.utils.WebUtil;
 
 /**
  * 两个按钮普通对话框
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:54 PM
  */
 public class TwoBtnTextDialog extends DialogFragment {
     
@@ -237,7 +240,7 @@ public class TwoBtnTextDialog extends DialogFragment {
                 tvMsg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
-    
+        
         View line = rootView.findViewById(R.id.line_item);
         if (TextUtils.isEmpty(title)) {
             line.setVisibility(View.GONE);

@@ -12,14 +12,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
-import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
 /**
- * Created by yatoooon on 2018/2/6.
+ * 屏幕适配工具类
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:44 PM
  */
-
 public class LoadViewHelper extends AbsLoadViewHelper {
     
     public LoadViewHelper(Context context, String adaptType, int designWidth, int designHeight, int designDpi,
@@ -234,7 +235,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float calculateValueByWidth(float value, boolean isFontSize) {
-        if (!BaseUtil.isScreenAdaptEnable()) {
+        if (disableAdapt) {
             return value;
         }
         if ("px".equals(unit)) {
@@ -252,7 +253,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float calculateValueByHeight(float value, boolean isFontSize) {
-        if (!BaseUtil.isScreenAdaptEnable()) {
+        if (disableAdapt) {
             return value;
         }
         if ("px".equals(unit)) {

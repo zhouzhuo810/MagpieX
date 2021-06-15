@@ -24,6 +24,12 @@ import me.zhouzhuo810.magpiex.ui.dialog.adapter.ListDialogAdapter;
 import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
+/**
+ * 列表对话框
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:54 PM
+ */
 public class ListDialog extends DialogFragment {
     
     private List<String> items;

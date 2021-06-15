@@ -13,6 +13,8 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import me.zhouzhuo810.magpiex.ui.adapter.LvBaseAdapter;
 
 /**
+ * Spinner控件封装，数据类型必须是字符串
+ *
  * @author zhouzhuo810
  */
 public class SimpleStringSpinner extends AppCompatSpinner {

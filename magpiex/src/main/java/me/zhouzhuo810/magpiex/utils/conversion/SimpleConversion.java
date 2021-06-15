@@ -6,11 +6,18 @@ import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.loadviewhelper.AbsLoadViewHelper;
 
 
+/**
+ * 屏幕适配转换
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:45 PM
+ */
 public class SimpleConversion implements IConversion {
 
     @Override
     public void transform(View view, AbsLoadViewHelper loadViewHelper) {
         if (view.getLayoutParams() != null) {
+            //防止重复缩放
             Object tag = view.getTag(R.id.view_scale_tag);
             if (tag instanceof Boolean && (Boolean) tag) {
                 return;

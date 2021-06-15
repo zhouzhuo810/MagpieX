@@ -6,8 +6,14 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 
+/**
+ * 字符串工具类
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:59 PM
+ */
 public class StrUtil {
-
+    
     /**
      * 是否为空或长度为0
      *
@@ -17,7 +23,7 @@ public class StrUtil {
     public static boolean isEmpty(String text) {
         return text == null || text.length() == 0;
     }
-
+    
     /**
      * 是否为空
      *
@@ -27,7 +33,7 @@ public class StrUtil {
     public static boolean isNull(String text) {
         return text == null;
     }
-
+    
     /**
      * 是否长度为0
      *
@@ -37,7 +43,7 @@ public class StrUtil {
     public static boolean isSpace(@NonNull String text) {
         return text.equals("");
     }
-
+    
     /**
      * 比较方法（短的在前，长的在后，相同长度的比较ASCII码）
      * <p>
@@ -64,6 +70,6 @@ public class StrUtil {
             return -1;
         }
     }
-
-
+    
+    
 }

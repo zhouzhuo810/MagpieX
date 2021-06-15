@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import static android.content.Context.WINDOW_SERVICE;
 
 /**
+ * 屏幕实际参数
+ *
  * @author zhouzhuo810
  */
 public class ActualScreen {

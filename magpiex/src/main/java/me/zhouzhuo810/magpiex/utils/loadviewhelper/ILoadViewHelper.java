@@ -3,9 +3,11 @@ package me.zhouzhuo810.magpiex.utils.loadviewhelper;
 import android.view.View;
 
 /**
- * Created by yatoooon on 2018/5/24.
+ * 屏幕适配工具接口
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:44 PM
  */
-
 public interface ILoadViewHelper {
     
     /**

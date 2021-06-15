@@ -14,6 +14,12 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import me.zhouzhuo810.magpiex.ui.adapter.LvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.intef.ISpinnerData;
 
+/**
+ * Spinner控件封装，数据模型必须实现ISpinnerData接口
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:55 PM
+ */
 public class SimpleSpinner<T extends ISpinnerData> extends AppCompatSpinner {
     
     private int mLayoutId;

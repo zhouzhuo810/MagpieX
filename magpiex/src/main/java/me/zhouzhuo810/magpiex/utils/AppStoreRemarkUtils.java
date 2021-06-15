@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
-/***
+/**
  * 跳转应用市场评分
+ *
+ * @author zhouzhuo810
+ * @date 6/15/21 1:48 PM
  */
 public class AppStoreRemarkUtils {
     
