@@ -177,13 +177,13 @@ public class MyApplication extends BaseApplication {
 - [LanguageUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/LanguageUtil.java)
 > 多语言切换工具.
 
-- KeyboardUtil
+- [KeyboardUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/KeyboardUtil.java)
 > 键盘操作工具.
 
 - [ApkUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ApkUtil.java)
 > 安装 APK 工具.
 
-- BarUtils
+- [BarUtils](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/BarUtils.java)
 > 状态栏操作工具类。
 
 - [SpUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/SpUtil.java)
@@ -192,87 +192,96 @@ public class MyApplication extends BaseApplication {
 - [StrUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/StrUtil.java)
 > 字符串操作工具类。
 
-- FileUtil
+- [FileUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/FileUtil.java)
 > 文件操作工具类。
 
-- DateUtil
+- [DateUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/DateUtil.java)
 > 日期转换工具类。
 
 - [RxHelper](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/RxHelper.java)
 > RxJava 倒计时，轮训，异步任务工具类。
 
-- CrashUtil
+- [CrashUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/CrashUtil.java)
 > UncaughtExceptionHandler 异常捕获工具类。
 
-- CopyUtil
+- [CopyUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/CopyUtil.java)
 > 剪切板工具类。
 
-- ImageUtil
+- [ImageUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ImageUtil.java)
 > 图片操作工具类。
 
 - [ToastUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ToastUtil.java)
 > 吐司工具类。
 
-- NoticeUtil
+- [NoticeUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/NoticeUtil.java)
 > 通知工具类。
 
-- NumberUtil
+- [NumberUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/NumberUtil.java)
 > 数字转换工具类。
+
+- [ColorUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ColorUtil.java)
+> 颜色处理工具类.
+
+- [EditUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/EditUtil.java)
+> 输入框相关操作工具类.
+
+- [FontUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/FontUtil.java)
+> 设置定义字体.
+
+- [AssetsUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/AssetsUtil.java)
+> Assets 内容转 String 工具.
+
+- [ShellUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ShellUtil.java)
+> Shell 操作工具.
+
+- [NetworkUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/NetworkUtil.java)
+> 网络状态工具.
+
+- [CRC16](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/CRC16.java)
+> CRC16 校验工具类.
+
+- [CollectionUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/CollectionUtil.java)
+> 集合操作工具类。
+
+- [ByteUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ByteUtil.java)
+> 字节操作工具类.
+
+- [RandomUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/RandomUtil.java)
+> 随机数生成工具.
+
+- [PackageUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/PackageUtil.java)
+> 检查 app 是否安装，获取 app 版本号等。
+
+- [ShareUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/ShareUtil.java)
+> 分享文本和文件的工具类。
+
+- [DrawableUtil](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/utils/DrawableUtil.java)
+> Drawable相关工具类.
 
 #### 框架包含的控件
 
-- Indicator
+- [Indicator](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/Indicator.java)
 > ViewPager 顶部导航控件.
 
-- TabBar
+- [TabBar](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/TabBar.java)
 > 底部导航控件.
 
-- TitleBar
+- [TitleBar](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/TitleBar.java)
 > 标题栏控件.
 
-- MarkView
+- [MarkView](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/MarkView.java)
 > 自定义角标控件.
 
-- ColorUtil
-> 颜色处理工具类.
-
-- EditUtil
-> 输入框相关操作工具类.
-
-- SimpleSpinner
+- [SimpleSpinner](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/SimpleSpinner.java)
 > 下拉操作控件。
 
-- FontUtil
-> 设置定义字体.
+- [ShineTextView](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/ShineTextView.java)
+> 多种颜色闪烁的TextView。
 
-- AssetsUtil
-> Assets 内容转 String 工具.
+- [ScrollListRecyclerView](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/ScrollListRecyclerView.java)
+> 自动滚动的 RecyclerView。
 
-- ShellUtil
-> Shell 操作工具.
-
-- NetworkUtil
-> 网络状态工具.
-
-- CRC16
-> CRC16 校验工具类.
-
-- ByteUtil
-> 字节操作工具类.
-
-- RandomUtil
-> 随机数生成工具.
-
-- PackageUtil
-> 检查 app 是否安装，获取 app 版本号等。
-
-- ShareUtil
-> 分享文本和文件的工具类。
-
-- DrawableUtil
-> Drawable相关工具类.
-
-### Update Logs
+### 更新日志
 
 > 1.8.7
 > - 优化屏幕适配判断是否缩放的逻辑，避免过于频繁访问 SharedPreferences；
