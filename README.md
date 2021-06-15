@@ -4,10 +4,10 @@
 
 # MagpieX
 
- A powerful Android Develop Framework.
+一个 Android 快速开发框架。
 
 
-### How to use
+### 怎么用
 
 
 ```
@@ -19,13 +19,14 @@ allprojects {
 }
 ```
 
-> For Phone And Pad (Support) .
 
 ```
     implementation 'com.github.zhouzhuo810:MagpieX:1.8.7'
 ```
 
-If you use this. That means you added dependencies below:
+
+主要第三方库依赖及版本说明:
+
 ```
     //v7
     api 'androidx.appcompat:appcompat:1.2.0'
@@ -62,9 +63,9 @@ If you use this. That means you added dependencies below:
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
 ```
 
-#### Screen Adapter
+#### 屏幕适配配置
 
-- Add UI Design size in your AndroidManifest.xml.
+- 在你的 AndroidManifest.xml 文件中的 application 标签中添加如下配置.
 
 ```xml
         <!--设计图的宽, 单位是像素(必须配置)，注意：如果是电视，一体机，Pad则是设计图的高，比如1920x1080的电视，应该配置1080-->
@@ -104,7 +105,7 @@ If you use this. That means you added dependencies below:
             android:value="px" />
 ```
 
-- init Magpie Context in your custom Application.
+- 在你的自定义 Application 继承 BaseApplication ，并在 onCreate 方法中添加如下代码.
 
 ```java
 
@@ -140,7 +141,7 @@ public class MyApplication extends BaseApplication {
 
 }
 
-- You must use The `MagpieTheme` Or `MagpieTheme.NoActionBar` Theme.
+- 注意 styles 文件中 AppTheme 必须继承 `MagpieTheme` 或者 `MagpieTheme.NoActionBar`.
 
 ```xml
 <style name="AppTheme" parent="MagpieTheme.NoActionBar">
@@ -148,153 +149,125 @@ public class MyApplication extends BaseApplication {
 </style>    
 ```
 
-- ok, Just use `px` unit in your layout.
+- 最后注意所有布局中使用 px 作为尺寸单位，包括字体大小.
 
-- If you do not use BaseActivity, Then you should invoke the method
- `SimpleUtil.resetScale(this);` and `SimpleUtil.scaleView(getWindow().getDecorView());` in `Activity#onCreate()` method after `setContentView()`.
+- 如果你的 Activity 不继承 BaseActivity, 那你必须在 Activity 的 onCreate 方法的 setContentView 后面调用
+ `SimpleUtil.resetScale(this);` and `SimpleUtil.scaleView(getWindow().getDecorView());`。
 
-- If you do not use BaseFragment, Then you should invoke the method
- `   SimpleUtil.scaleView(view);` in `Fragment#onCreateView()` method after `inflate()`.
+- 如果你的 Fragment 不继承 BaseFragment, 那你必须在 Fragment 的 onViewCreated 方法的 inflate 后面调用
+ `SimpleUtil.scaleView(view);`。
 
-- If you do not use LvBaseAdapter or RvBaseAdapter, Then you should invoke the method
- `SimpleUtil.scaleView(view);` when you create ViewHolder.
+- 如果你的列表适配器不继承 LvBaseAdapter or RvBaseAdapter, 那么你必须在创建完 ViewHolder 后，对 ViewHolder的view进行缩放。
+ `SimpleUtil.scaleView(view);`.
 
-- If you want to use in custom View, you should invoke the method
-`SimpleUtil.getScaledValue(int);` when you what to scale the dynamic value.
+- 如果你使用自定义View，涉及到尺寸计算的时候，可以调用如下方法计算缩放后的值。
+`SimpleUtil.getScaledValue(int);`。
 
-#### BaseApplication
-
-it supports:
-- Multi-Language.
-
-#### BaseActivity
-
-it supports:
-- Multi-Style Dialog.
-- Multi-Language support.
-- Replace Fragment easily.
-
-
-#### BaseFragment
-
-it supports:
-- Multi-Style Dialog.
-- Load data lazily.
-
-#### Utils
+#### 工具类简介
 
 - BaseUtil
-> This is the key util.
-
-- ScreenAdapterUtil
-> It's use for screen Adapter.
-
-- ApiUtil
-> It's for RxJava2+Retrofit2+OkHttp3 Api Creation.
-
-- LanguageUtil
-> It's for Language Setting.
-
-- KeyboardUtil
-> It's for Software Keyboard operating.
-
-- ApkUtil
-> It's for Apk Installation.
-
-- BarUtils
-> It's for StatusBar Setting.
-
-- SpUtil
-> It's use for SharedPreferences.
-
-- StrUtil
-> It's use for String operating.
-
-- FileUtil
-> It's use for File operating.
-
-- DateUtil
-> It's use for Date operating.
-
-- RxHelper
-> It's use for RxJava.
-
-- CrashUtil
-> It's for UncaughtExceptionHandler.
-
-- CopyUtil
-> It's for ClipboardManager.
-
-- ImageUtil
-> It's for bitmap operating.
-
-- ToastUtil
-> It's for simple Toast.
-
-- NoticeUtil
-> It's for Notification.
-
-
-- NumberUtil
-> It's for digital conversion.
-
-#### Widgets
-
-- Indicator
-> It's for viewpager indicator.
-
-- TabBar
-> It's for bottom navigation.
-
-- TitleBar
-> It's same as ToolBar.
-
-- MarkView
-> It's for bandage.
-
-- SimpleSpinner
-> It's for using Spinner simply.
-
-( These utils is added in v1.0.1.)
-
-- ColorUtil
-> It's for color operating.
-
-- EditUtil
-> It's for EditText operating.
-
-- SimpleSpinner
-> It's for Spinner operating.
-
-- FontUtil
-> It's for setting custom typeface in TextView.
-
-- AssetsUtil
-> It's for converting file's content to String in Assets.
+> 核心工具类，持有 application 对象。
 
 - SimpleUtil
-> It's for converting file's content to String in Assets.
+> 常用工具类，包括了屏幕适配和资源获取等相关方法。
+
+- ApiUtil
+> RxJava2+Retrofit2+OkHttp3 Api对象初始化工具.
+
+- LanguageUtil
+> 多语言切换工具.
+
+- KeyboardUtil
+> 键盘操作工具.
+
+- ApkUtil
+> 安装 APK 工具.
+
+- BarUtils
+> 状态栏操作工具类。
+
+- SpUtil
+> SharedPreferences 操作工具类。
+
+- StrUtil
+> 字符串操作工具类。
+
+- FileUtil
+> 文件操作工具类。
+
+- DateUtil
+> 日期转换工具类。
+
+- RxHelper
+> RxJava 倒计时，轮训，异步任务工具类。
+
+- CrashUtil
+> UncaughtExceptionHandler 异常捕获工具类。
+
+- CopyUtil
+> 剪切板工具类。
+
+- ImageUtil
+> 图片操作工具类。
+
+- ToastUtil
+> 吐司工具类。
+
+- NoticeUtil
+> 通知工具类。
+
+- NumberUtil
+> 数字转换工具类。
+
+#### 框架包含的控件
+
+- Indicator
+> ViewPager 顶部导航控件.
+
+- TabBar
+> 底部导航控件.
+
+- TitleBar
+> 标题栏控件.
+
+- MarkView
+> 自定义角标控件.
+
+- ColorUtil
+> 颜色处理工具类.
+
+- EditUtil
+> 输入框相关操作工具类.
+
+- SimpleSpinner
+> 下拉操作控件。
+
+- FontUtil
+> 设置定义字体.
+
+- AssetsUtil
+> Assets 内容转 String 工具.
 
 - ShellUtil
-> It's for running shell command.
+> Shell 操作工具.
 
 - NetworkUtil
-> It's for network status monitoring.
+> 网络状态工具.
 
 - CRC16
-> It's for CRC16 encryption.
+> CRC16 校验工具类.
 
 - ByteUtil
-> It's for Byte operating.
+> 字节操作工具类.
 
 - RandomUtil
-> It's for generate a random number.
+> 随机数生成工具.
 
 - PackageUtil
-> It's for checking if app is installed.
+> 检查 app 是否安装，获取 app 版本号等。
 
 - ShareUtil
-> It's for sharing Text or File to other app.
+> 分享文本和文件的工具类。
 
 - DrawableUtil
 > Drawable相关工具类.
