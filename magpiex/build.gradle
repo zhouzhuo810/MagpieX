@@ -59,7 +59,7 @@ artifacts {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //v7
+    //appcompat
     api 'androidx.appcompat:appcompat:1.2.0'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.1.0'
@@ -84,7 +84,7 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     //OkHttp打印请求数据
     api 'com.squareup.okhttp3:logging-interceptor:3.12.12'
-    //OkHttp进度监听progressmanager
+    //OkHttp进度监听 ProgressManager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'

@@ -25,10 +25,10 @@ allprojects {
 ```
 
 
-主要第三方库依赖及版本说明:
+如果添加上述依赖，则会自动依赖如下第三方库:
 
 ```
-    //v7
+    //appcompat
     api 'androidx.appcompat:appcompat:1.2.0'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.1.0'
@@ -53,7 +53,7 @@ allprojects {
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     //OkHttp打印请求数据
     api 'com.squareup.okhttp3:logging-interceptor:3.12.12'
-    //OkHttp进度监听progressmanager
+    //OkHttp进度监听 ProgressManager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.3'
