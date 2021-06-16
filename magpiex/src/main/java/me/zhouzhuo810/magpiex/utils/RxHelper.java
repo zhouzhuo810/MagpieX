@@ -1,9 +1,15 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import android.widget.EditText;
+
+import com.jakewharton.rxbinding4.widget.RxTextView;
+import com.jakewharton.rxbinding4.widget.TextViewTextChangeEvent;
+
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableTransformer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -230,4 +236,34 @@ public class RxHelper {
             .compose(RxHelper.<T>io_main())
             .subscribe(onNext, onError);
     }
+    
+    
+    /**
+     * 输入框回调频繁触发 onTextChanged 方法
+     *
+     * @param editText EditText
+     * @param consumer Consumer<TextViewTextChangeEvent>
+     * @return Disposable
+     */
+    public static Disposable debounce(EditText editText, Consumer<TextViewTextChangeEvent> consumer) {
+        return debounce(editText, 200, consumer, throwable -> {});
+    }
+    
+    /**
+     * 输入框回调频繁触发 onTextChanged 方法
+     *
+     * @param editText  EditText
+     * @param timeMills 间隔时间
+     * @param consumer  Consumer<TextViewTextChangeEvent>
+     * @param error     Consumer<Throwable>
+     * @return Disposable
+     */
+    public static Disposable debounce(EditText editText, long timeMills, Consumer<TextViewTextChangeEvent> consumer, Consumer<Throwable> error) {
+        return RxTextView.textChangeEvents(editText)
+            .debounce(timeMills, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .toFlowable(BackpressureStrategy.BUFFER)
+            .subscribe(consumer, error);
+    }
+    
 }

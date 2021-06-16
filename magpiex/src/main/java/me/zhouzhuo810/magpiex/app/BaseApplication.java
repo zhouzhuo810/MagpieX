@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
+import me.zhouzhuo810.magpiex.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
 
@@ -30,10 +31,14 @@ public abstract class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-    
+        
         BaseUtil.init(this);
         
+        //是否启用屏幕适配
         BaseUtil.setScreenAdaptEnable(!isScreenAdaptDisable());
+        
+        //顺便初始化屏幕适配工具类
+        ScreenAdapterUtil.init(this);
         
         LanguageUtil.init(this);
         

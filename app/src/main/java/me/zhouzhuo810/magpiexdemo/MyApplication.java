@@ -25,16 +25,12 @@ public class MyApplication extends BaseApplication {
     private static final String CRASH_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()
         + File.separator + "Magpie" + File.separator + "Log";
     
-    private Map<Integer, Locale> mMap;
-    
     public static Map<Integer, Locale> mSupportLanguages = new HashMap<Integer, Locale>(4) {{
         put(MyCons.LANGUAGE_CH_SIMPLE, Locale.SIMPLIFIED_CHINESE);
         put(MyCons.LANGUAGE_CH_COMPLEX, Locale.TRADITIONAL_CHINESE);
         put(MyCons.LANGUAGE_EN, Locale.ENGLISH);
         put(MyCons.LANGUAGE_VI, new Locale("vi"));
     }};
-    
-    
     
     @Override
     public void onCreate() {
@@ -69,6 +65,11 @@ public class MyApplication extends BaseApplication {
 //        }
 //        return mMap;
         return mSupportLanguages;
+    }
+    
+    @Override
+    public boolean isScreenAdaptDisable() {
+        return false;
     }
     
     private void initCrash() {

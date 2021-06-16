@@ -145,6 +145,6 @@
     <attr name="x_dialog_title_text_color" format="color" />
     <attr name="x_dialog_content_text_color" format="color" />
     <attr name="x_dialog_btn_text_color" format="color" />
-    <attr name="x_dialog_btn_bg_color" format="color" />
+    <attr name="x_dialog_btn_bg_drawable" format="reference" />
 
 </resources>

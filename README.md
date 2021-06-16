@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.7'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.8'
 ```
 
 
@@ -282,6 +282,12 @@ public class MyApplication extends BaseApplication {
 > 自动滚动的 RecyclerView。
 
 ### 更新日志
+
+> 1.8.8
+> - 修复 BaseApplication 中 isScreenAdaptDisable 方法无效问题；
+> - 添加 x_dialog_btn_bg_drawable 自定义属性；
+> - RxHelper 支持 debounce 方法；
+> - 添加 RxBinding 库依赖；
 
 > 1.8.7
 > - 优化屏幕适配判断是否缩放的逻辑，避免过于频繁访问 SharedPreferences；

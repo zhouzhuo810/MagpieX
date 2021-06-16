@@ -74,7 +74,7 @@ public class LanguageUtil {
         } else {
             config.setLocale(locale);
         }
-        BaseUtil.init(BaseUtil.getApp().createConfigurationContext(config), true);
+        BaseUtil.init(BaseUtil.getApp().createConfigurationContext(config));
     }
     
     public static Context attachBaseContext(Context context, Integer language, Map<Integer, Locale> supportLanguages) {

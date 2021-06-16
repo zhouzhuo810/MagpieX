@@ -76,6 +76,8 @@ dependencies {
     api 'io.reactivex.rxjava3:rxjava:3.0.9'
     //RxAndroid2
     api 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    //RxBinding
+    api 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
     //Retrofit2
     api 'com.squareup.retrofit2:retrofit:2.9.0'
     //Retrofit2+RxJava2
