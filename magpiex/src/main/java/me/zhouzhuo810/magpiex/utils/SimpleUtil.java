@@ -13,9 +13,11 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.core.content.res.ResourcesCompat;
+import me.zhouzhuo810.magpiex.R;
 
 /**
  * 常用方法简化
+ *
  * @author zhouzhuo810
  */
 public class SimpleUtil {
@@ -49,8 +51,8 @@ public class SimpleUtil {
     /**
      * 缩放值自动（默认）- int
      *
-     * @param px 原来值
-     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数          
+     * @param px         原来值
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
     public static int getScaledValue(int px, boolean isFontSize) {
@@ -84,7 +86,7 @@ public class SimpleUtil {
      *
      * @param px         原来值
      * @param horizontal 是否水平方向
-     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数   
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
     public static int getScaledValue(int px, boolean horizontal, boolean isFontSize) {
@@ -97,7 +99,7 @@ public class SimpleUtil {
      *
      * @param px         原来值
      * @param horizontal 是否水平方向
-     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数   
+     * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值，根据screen_adapt_type决定按宽度还是高度
      */
     public static float getScaledValue(float px, boolean horizontal, boolean isFontSize) {
@@ -117,7 +119,7 @@ public class SimpleUtil {
     /**
      * 缩放值 - int
      *
-     * @param px 原来值
+     * @param px         原来值
      * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值
      */
@@ -128,7 +130,7 @@ public class SimpleUtil {
     /**
      * 缩放值 - float
      *
-     * @param px 原来值
+     * @param px         原来值
      * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值
      */
@@ -151,17 +153,16 @@ public class SimpleUtil {
      * 缩放值按高度 - int
      *
      * @param px 原来值
-     *
      * @return 缩放后的值
      */
     public static int getScaledValueByHeight(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, false);
     }
-
+    
     /**
      * 缩放值按高度 - int
      *
-     * @param px 原来值
+     * @param px         原来值
      * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值
      */
@@ -178,11 +179,11 @@ public class SimpleUtil {
     public static float getScaledValueByHeight(float px) {
         return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px, false);
     }
-
+    
     /**
      * 缩放值按高度 - float
      *
-     * @param px 原来值
+     * @param px         原来值
      * @param isFontSize 是否是字体，如果是，会x配置里的字体缩放倍数
      * @return 缩放后的值
      */
@@ -192,13 +193,40 @@ public class SimpleUtil {
     
     /**
      * 设置文字字体大小
-     * @param tv TextView
+     *
+     * @param tv         TextView
      * @param textSizePx 设计图的px值。
      */
     public static void setTextSizeInPx(TextView tv, float textSizePx) {
         if (tv != null) {
             tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getScaledValue(textSizePx, true));
         }
+    }
+    
+    /**
+     * 设置缩放Tag，如果true，则说明此View已经被缩放过了，则不会再次缩放。
+     *
+     * @param view     View
+     * @param hasScale 是否已经缩放
+     */
+    public static void setScaleTag(View view, boolean hasScale) {
+        if (view == null) {
+            return;
+        }
+        view.setTag(R.id.view_scale_tag, hasScale);
+    }
+    
+    /**
+     * 判断View是否被缩放过
+     *
+     * @param view View
+     */
+    public static boolean hasScaled(View view) {
+        if (view == null) {
+            return false;
+        }
+        Object tag = view.getTag(R.id.view_scale_tag);
+        return tag instanceof Boolean && (Boolean) tag;
     }
     
     /**

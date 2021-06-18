@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.8'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.8.9'
 ```
 
 
@@ -282,6 +282,9 @@ public class MyApplication extends BaseApplication {
 > 自动滚动的 RecyclerView。
 
 ### 更新日志
+
+> 1.8.9
+> - SimpleUtil 支持 setScaleTag 和 hasScaled 方法。
 
 > 1.8.8
 > - 修复 BaseApplication 中 isScreenAdaptDisable 方法无效问题；
