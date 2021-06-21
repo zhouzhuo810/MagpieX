@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private View btnTitle;
     private Button btnDownload;
     private Button btnPager;
+    private Button btnPager2;
     private Button btnTab;
     private Button tvMap;
     private Button tvScrollList;
@@ -64,6 +65,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnTitle = findViewById(R.id.btn_title);
         btnDownload = findViewById(R.id.btn_download);
         btnPager = findViewById(R.id.btn_pager);
+        btnPager2 = findViewById(R.id.btn_pager2);
         btnTab = findViewById(R.id.btn_tab);
         etCity = findViewById(R.id.et_city);
         btnGo = findViewById(R.id.btn_go);
@@ -106,6 +108,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnGo.setOnClickListener(this);
         
         btnPager.setOnClickListener(this);
+        
+        btnPager2.setOnClickListener(this);
         
         btnTab.setOnClickListener(this);
         
@@ -197,6 +201,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_pager:
                 startAct(PagerActivity.class);
+                break;
+            case R.id.btn_pager2:
+                startAct(Pager2Activity.class);
                 break;
             case R.id.btn_tab:
                 startAct(TabActivity.class);

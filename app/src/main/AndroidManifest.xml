@@ -90,6 +90,10 @@
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:screenOrientation="unspecified" />
         <activity
+            android:name=".Pager2Activity"
+            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
+            android:screenOrientation="unspecified" />
+        <activity
             android:name=".ToolsActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:screenOrientation="unspecified" />

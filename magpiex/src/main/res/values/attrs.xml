@@ -120,6 +120,54 @@
 
     </declare-styleable>
 
+    <declare-styleable name="Indicator2">
+        <attr name="i2_indicator_type" format="enum">
+            <enum name="round_point" value="0" />
+            <enum name="tab_with_text" value="1" />
+            <enum name="tab_with_icon" value="2" />
+            <enum name="tab_with_icon_and_text" value="3" />
+        </attr>
+
+        <!--for tab-->
+        <attr name="i2_selectTabTextSize" format="dimension|reference" />
+        <attr name="i2_selectTabTextColor" format="color|reference" />
+        <attr name="i2_normalTabTextSize" format="dimension|reference" />
+        <attr name="i2_normalTabTextColor" format="color|reference" />
+        <attr name="i2_normalTabBg" format="reference" />
+        <attr name="i2_selectTabBg" format="reference" />
+        <attr name="i2_showGapLine" format="boolean" />
+        <attr name="i2_gapLineWidth" format="dimension|reference" />
+        <attr name="i2_gapLineColor" format="color|reference" />
+        <attr name="i2_gapLinePadding" format="dimension|reference" />
+        <attr name="i2_shouldTabExpand" format="boolean" />
+        <attr name="i2_showUnderline" format="boolean" />
+        <attr name="i2_underlineColor" format="color|reference" />
+        <attr name="i2_underlineHeight" format="dimension|reference" />
+        <attr name="i2_underlinePadding" format="dimension|reference" />
+        <attr name="i2_showRoundBg" format="boolean" />
+        <attr name="i2_roundBgColor" format="color|reference" />
+        <attr name="i2_tabPadding" format="dimension|reference" />
+        <attr name="i2_tabIconSize" format="dimension|reference" />
+
+        <!--for tab with text and icon-->
+        <attr name="i2_tabOrientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
+        <attr name="i2_tabIconTextMargin" format="dimension|reference" />
+        <attr name="i2_tabIsHorizontalHideIcon" format="boolean" />
+
+        <!--for point-->
+        <attr name="i2_selectPointSize" format="dimension|reference" />
+        <attr name="i2_normalPointSize" format="dimension|reference" />
+        <attr name="i2_selectPointColor" format="color|reference" />
+        <attr name="i2_normalPointColor" format="color|reference" />
+        <attr name="i2_pointSpacing" format="dimension|reference" />
+
+        <attr name="i2_isNeedScaleInPx" format="boolean" />
+
+    </declare-styleable>
+
     <declare-styleable name="ScrollGridRecyclerView">
         <attr name="sgr_scrollEnable" format="boolean" />
         <attr name="sgr_spanCount" format="integer" />

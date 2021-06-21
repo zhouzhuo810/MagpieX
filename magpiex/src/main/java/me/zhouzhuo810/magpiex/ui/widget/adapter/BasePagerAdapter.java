@@ -69,6 +69,11 @@ public abstract class BasePagerAdapter<V extends View, M> extends PagerAdapter i
         return getTabText(data.get(position), position);
     }
     
+    @Override
+    public CharSequence getTitle(int position) {
+        return getTabText(data.get(position), position);
+    }
+    
     /**
      * 获取Tab的文字
      *

@@ -24,6 +24,7 @@
     <string name="dowload_start_text">开始下载</string>
     <string name="download_text">文件下载</string>
     <string name="pager_text">Pager指示器</string>
+    <string name="pager_text2">Pager2指示器</string>
     <string name="tab_text">底部导航</string>
     <string name="notice_tools">通知工具</string>
     <string name="tools_text">工具</string>

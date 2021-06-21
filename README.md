@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.8.9'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.0'
 ```
 
 
@@ -263,6 +263,9 @@ public class MyApplication extends BaseApplication {
 - [Indicator](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/Indicator.java)
 > ViewPager 顶部导航控件.
 
+- [Indicator2](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/Indicator2.java)
+> ViewPager2 顶部导航控件.
+
 - [TabBar](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/TabBar.java)
 > 底部导航控件.
 
@@ -282,6 +285,9 @@ public class MyApplication extends BaseApplication {
 > 自动滚动的 RecyclerView。
 
 ### 更新日志
+
+> 1.9.0
+> - 新增 ViewPager2 指示器 Indicator2。
 
 > 1.8.9
 > - SimpleUtil 支持 setScaleTag 和 hasScaled 方法。

@@ -6,34 +6,42 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.intef.IResProvider;
 
 
 /**
  * Fragment+ViewPager适配器
+ *
  * @author zz
  * @date 2016/8/22
  */
-public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter implements IResProvider {
+public abstract class BaseFragmentPager2Adapter extends FragmentStateAdapter implements IResProvider {
     
     private List<String> titles;
     
-    public BaseFragmentPagerAdapter(FragmentManager manager, String[] titles) {
-        super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+    public BaseFragmentPager2Adapter(FragmentActivity activity, String[] titles) {
+        super(activity);
         if (titles != null) {
             this.titles = Arrays.asList(titles);
         }
     }
     
-    public BaseFragmentPagerAdapter(FragmentManager manager, List<String> titles) {
-        super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+    public BaseFragmentPager2Adapter(FragmentActivity activity, List<String> titles) {
+        super(activity);
         this.titles = titles;
     }
     
-    public BaseFragmentPagerAdapter(@NonNull FragmentManager fm, int behavior, List<String> titles) {
-        super(fm, behavior);
+    public BaseFragmentPager2Adapter(Fragment fragment, String[] titles) {
+        super(fragment);
+        if (titles != null) {
+            this.titles = Arrays.asList(titles);
+        }
+    }
+    
+    public BaseFragmentPager2Adapter(Fragment fragment, List<String> titles) {
+        super(fragment);
         this.titles = titles;
     }
     
@@ -54,11 +62,10 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter impl
     }
     
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return titles == null ? 0 : titles.size();
     }
     
-    @Override
     public CharSequence getPageTitle(int position) {
         if (titles == null) {
             return null;
@@ -82,6 +89,7 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter impl
     
     /**
      * 获取Fragment
+     *
      * @param position ViewPager页码
      * @return Fragment
      */
@@ -89,9 +97,7 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter impl
     
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         return getFragment(position);
     }
-    
-    
 }

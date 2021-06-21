@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator2
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:i2_indicator_type="tab_with_icon_and_text"
+        app:i2_isNeedScaleInPx="true"
+        app:i2_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i2_selectTabTextColor="@color/colorPrimary"
+        app:i2_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i2_shouldTabExpand="false"
+        app:i2_showUnderline="true"
+        app:i2_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i2_showGapLine="true"
+        app:i2_gapLineColor="@color/colorBlack40"
+        app:i2_gapLineWidth="2px"
+        app:i2_gapLinePadding="10px"
+        app:i2_underlinePadding="0px"
+        app:i2_underlineColor="@color/colorPrimary"
+        app:i2_underlineHeight="@dimen/base_indicator_underline_height" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator2
+        android:id="@+id/indicator2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i2_indicator_type="tab_with_icon"
+        app:i2_isNeedScaleInPx="true"
+        app:i2_shouldTabExpand="false"
+        app:i2_showUnderline="true"
+        app:i2_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i2_underlineColor="@color/colorPrimary"
+        app:i2_underlineHeight="@dimen/base_indicator_underline_height" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator2
+        android:id="@+id/indicator3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i2_indicator_type="tab_with_text"
+        app:i2_isNeedScaleInPx="true"
+        app:i2_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i2_selectTabTextColor="@color/colorPrimary"
+        app:i2_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i2_shouldTabExpand="false"
+        app:i2_showUnderline="true"
+        app:i2_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i2_underlineColor="@color/colorPrimary"
+        app:i2_underlineHeight="@dimen/base_indicator_underline_height" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator2
+        android:id="@+id/indicator4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i2_indicator_type="tab_with_text"
+        app:i2_isNeedScaleInPx="true"
+        app:i2_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        app:i2_selectTabTextColor="@color/colorWhite"
+        app:i2_selectTabTextSize="@dimen/base_indicator_text_size_select"
+        app:i2_showRoundBg="true"
+        app:i2_roundBgColor="@color/colorPrimary"
+        app:i2_shouldTabExpand="false"
+        app:i2_showUnderline="false" />
+
+    <me.zhouzhuo810.magpiex.ui.widget.Indicator2
+        android:id="@+id/indicator5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_indicator_height"
+        app:i2_indicator_type="tab_with_text"
+        app:i2_isNeedScaleInPx="true"
+        app:i2_normalTabTextSize="@dimen/base_indicator_text_size_normal"
+        android:layout_marginStart="40px"
+        android:layout_marginEnd="40px"
+        app:i2_selectTabTextColor="@color/colorWhite"
+        app:i2_selectTabTextSize="70px"
+        app:i2_showRoundBg="true"
+        app:i2_roundBgColor="@color/colorPrimary"
+        app:i2_shouldTabExpand="false"
+        app:i2_showUnderline="false" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -2,7 +2,6 @@ package me.zhouzhuo810.magpiex.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -18,11 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 import me.zhouzhuo810.magpiex.R;
+import me.zhouzhuo810.magpiex.ui.widget.adapter.BaseFragmentPager2Adapter;
 import me.zhouzhuo810.magpiex.ui.widget.en.IndicatorType;
-import me.zhouzhuo810.magpiex.ui.widget.intef.IPagerIndicator;
+import me.zhouzhuo810.magpiex.ui.widget.intef.IPagerIndicator2;
 import me.zhouzhuo810.magpiex.ui.widget.intef.IResProvider;
 import me.zhouzhuo810.magpiex.utils.ColorUtil;
 import me.zhouzhuo810.magpiex.utils.NavigatorHelper;
@@ -30,15 +30,16 @@ import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
 /**
- * ViewPager 指示器
+ * ViewPager2 指示器
  *
- * Created by zz on 2016/8/22.
+ * @author zhouzhuo810
+ * @date 6/21/21 3:18 PM
  */
-public class Indicator extends HorizontalScrollView implements IPagerIndicator, NavigatorHelper.OnNavigatorScrollListener {
+public class Indicator2 extends HorizontalScrollView implements IPagerIndicator2, NavigatorHelper.OnNavigatorScrollListener {
     
     private IndicatorType indicatorType = IndicatorType.RoundPoint;
     
-    private ViewPager mViewPager;
+    private ViewPager2 mViewPager2;
     
     private LinearLayout mIndicatorContainer;
     private boolean shouldExpand = false;
@@ -85,8 +86,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     private int lastScrollX = 0;
     
     private boolean horizontalHideIconMode = false;
-    private ViewPager.OnPageChangeListener mOnPageChangeListener;
-    private DataSetObserver mDataSetObserver;
+    private ViewPager2.OnPageChangeCallback mOnPageChangeListener;
+    private RecyclerView.AdapterDataObserver mDataSetObserver;
     
     private NavigatorHelper mNavigatorHelper;
     
@@ -95,18 +96,18 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         VERTICAL, HORIZONTAL
     }
     
-    public Indicator(Context context) {
+    public Indicator2(Context context) {
         super(context);
         init(context, null);
     }
     
-    public Indicator(Context context, AttributeSet attrs) {
+    public Indicator2(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
         
     }
     
-    public Indicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public Indicator2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
         
@@ -123,38 +124,38 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         
         //init attrs
         if (attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Indicator);
-            boolean isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_isNeedScaleInPx, true);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Indicator2);
+            boolean isNeedScaleInPx = a.getBoolean(R.styleable.Indicator2_i2_isNeedScaleInPx, true);
             
-            shouldExpand = a.getBoolean(R.styleable.Indicator_i_shouldTabExpand, false);
-            int indicatorInt = a.getInt(R.styleable.Indicator_i_indicator_type, 0);
-            int tabOriInt = a.getInt(R.styleable.Indicator_i_tabOrientation, 0);
-            colorSelectPoint = a.getColor(R.styleable.Indicator_i_selectPointColor, 0xff438cff);
-            colorUnSelectPoint = a.getColor(R.styleable.Indicator_i_normalPointColor, 0xff000000);
-            selectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_selectPointSize, 100);
-            unSelectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_normalPointSize, 90);
-            spacing = a.getDimensionPixelSize(R.styleable.Indicator_i_pointSpacing, 8);
-            tabBgNormalId = a.getResourceId(R.styleable.Indicator_i_normalTabBg, -1);
-            tabBgSelectId = a.getResourceId(R.styleable.Indicator_i_selectTabBg, -1);
+            shouldExpand = a.getBoolean(R.styleable.Indicator2_i2_shouldTabExpand, false);
+            int indicatorInt = a.getInt(R.styleable.Indicator2_i2_indicator_type, 0);
+            int tabOriInt = a.getInt(R.styleable.Indicator2_i2_tabOrientation, 0);
+            colorSelectPoint = a.getColor(R.styleable.Indicator2_i2_selectPointColor, 0xff438cff);
+            colorUnSelectPoint = a.getColor(R.styleable.Indicator2_i2_normalPointColor, 0xff000000);
+            selectPointSize = a.getDimensionPixelSize(R.styleable.Indicator2_i2_selectPointSize, 100);
+            unSelectPointSize = a.getDimensionPixelSize(R.styleable.Indicator2_i2_normalPointSize, 90);
+            spacing = a.getDimensionPixelSize(R.styleable.Indicator2_i2_pointSpacing, 8);
+            tabBgNormalId = a.getResourceId(R.styleable.Indicator2_i2_normalTabBg, -1);
+            tabBgSelectId = a.getResourceId(R.styleable.Indicator2_i2_selectTabBg, -1);
             
-            tabTextColorSelect = a.getColor(R.styleable.Indicator_i_selectTabTextColor, 0xff438cff);
-            tabTextColorUnSelect = a.getColor(R.styleable.Indicator_i_normalTabTextColor, 0xff000000);
-            tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_selectTabTextSize, 40);
-            tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_normalTabTextSize, 40);
-            tabIconTextMargin = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconTextMargin, 10);
-            showGapLine = a.getBoolean(R.styleable.Indicator_i_showGapLine, false);
-            gapLineWidth = a.getDimensionPixelSize(R.styleable.Indicator_i_gapLineWidth, 1);
-            gapLinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_gapLinePadding, 0);
-            gapLineColor = a.getColor(R.styleable.Indicator_i_gapLineColor, 0xff000000);
-            showUnderline = a.getBoolean(R.styleable.Indicator_i_showUnderline, true);
-            underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator_i_underlineHeight, 10);
-            underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_underlinePadding, 20);
-            showRoundBg = a.getBoolean(R.styleable.Indicator_i_showRoundBg, false);
-            tabPadding = a.getDimensionPixelSize(R.styleable.Indicator_i_tabPadding, 24);
-            tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconSize, 80);
-            underlineColor = a.getColor(R.styleable.Indicator_i_underlineColor, 0xff438cff);
-            tabRoundBgColor = a.getColor(R.styleable.Indicator_i_roundBgColor, 0xff438cff);
-            horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tabIsHorizontalHideIcon, false);
+            tabTextColorSelect = a.getColor(R.styleable.Indicator2_i2_selectTabTextColor, 0xff438cff);
+            tabTextColorUnSelect = a.getColor(R.styleable.Indicator2_i2_normalTabTextColor, 0xff000000);
+            tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator2_i2_selectTabTextSize, 40);
+            tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.Indicator2_i2_normalTabTextSize, 40);
+            tabIconTextMargin = a.getDimensionPixelSize(R.styleable.Indicator2_i2_tabIconTextMargin, 10);
+            showGapLine = a.getBoolean(R.styleable.Indicator2_i2_showGapLine, false);
+            gapLineWidth = a.getDimensionPixelSize(R.styleable.Indicator2_i2_gapLineWidth, 1);
+            gapLinePadding = a.getDimensionPixelSize(R.styleable.Indicator2_i2_gapLinePadding, 0);
+            gapLineColor = a.getColor(R.styleable.Indicator2_i2_gapLineColor, 0xff000000);
+            showUnderline = a.getBoolean(R.styleable.Indicator2_i2_showUnderline, true);
+            underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator2_i2_underlineHeight, 10);
+            underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator2_i2_underlinePadding, 20);
+            showRoundBg = a.getBoolean(R.styleable.Indicator2_i2_showRoundBg, false);
+            tabPadding = a.getDimensionPixelSize(R.styleable.Indicator2_i2_tabPadding, 24);
+            tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator2_i2_tabIconSize, 80);
+            underlineColor = a.getColor(R.styleable.Indicator2_i2_underlineColor, 0xff438cff);
+            tabRoundBgColor = a.getColor(R.styleable.Indicator2_i2_roundBgColor, 0xff438cff);
+            horizontalHideIconMode = a.getBoolean(R.styleable.Indicator2_i2_tabIsHorizontalHideIcon, false);
             
             if (isNeedScaleInPx && !isInEditMode()) {
                 selectPointSize = SimpleUtil.getScaledValue(selectPointSize);
@@ -268,7 +269,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void drawGapLine(Canvas canvas) {
-        if (mViewPager != null) {
+        if (mViewPager2 != null) {
             for (int i = 0; i < mIndicatorContainer.getChildCount() - 1; i++) {
                 View item = getItem(i);
                 if (item != null) {
@@ -282,7 +283,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void drawUnderline(Canvas canvas) {
-        if (mViewPager != null) {
+        if (mViewPager2 != null) {
             View currentTab = getItem(currentPosition);
             if (currentTab != null) {
                 float lineLeft = currentTab.getLeft() + underlinePadding;
@@ -303,7 +304,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void drawRoundBg(Canvas canvas) {
-        if (mViewPager != null) {
+        if (mViewPager2 != null) {
             View currentTab = getItem(currentPosition);
             if (currentTab != null) {
                 float lineLeft = currentTab.getLeft();
@@ -327,9 +328,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void drawPoints(Canvas canvas) {
-        if (mViewPager != null && mViewPager.getAdapter() != null) {
-            int count = mViewPager.getAdapter().getCount();
-            int index = mViewPager.getCurrentItem();
+        if (mViewPager2 != null && mViewPager2.getAdapter() != null) {
+            int count = mViewPager2.getAdapter().getItemCount();
+            int index = mViewPager2.getCurrentItem();
             int uLeft = (getWidth() - unSelectPointSize * count - spacing * (count - 1)) / 2;
             int y = getHeight() / 2;
             int sR = selectPointSize / 2;
@@ -344,9 +345,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     @Override
-    public Indicator setCurrentItem(int position, boolean animate) {
-        if (mViewPager != null) {
-            mViewPager.setCurrentItem(position, animate);
+    public Indicator2 setCurrentItem(int position, boolean animate) {
+        if (mViewPager2 != null) {
+            mViewPager2.setCurrentItem(position, animate);
         } else {
             select(position);
         }
@@ -354,42 +355,44 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     @Override
-    public Indicator updateText(int position, String title) {
-        if (mViewPager == null) {
+    public Indicator2 updateText(int position, String title) {
+        if (mViewPager2 == null) {
             return this;
         }
-        PagerAdapter adapter = mViewPager.getAdapter();
+        RecyclerView.Adapter adapter = mViewPager2.getAdapter();
         if (adapter != null) {
-            if (adapter instanceof IResProvider) {
+            if (adapter instanceof BaseFragmentPager2Adapter) {
+                BaseFragmentPager2Adapter pager2Adapter = (BaseFragmentPager2Adapter) adapter;
+                pager2Adapter.setPageTitle(position, title);
                 TextView tv = (TextView) getItem(position);
-                tv.setText(((IResProvider) adapter).getTitle(position));
+                tv.setText(pager2Adapter.getPageTitle(position));
             }
         }
         return this;
     }
     
     @Override
-    public Indicator setViewPager(final ViewPager viewPager) {
-        final PagerAdapter adapter = viewPager.getAdapter();
+    public Indicator2 setViewPager2(final ViewPager2 viewPager2) {
+        RecyclerView.Adapter adapter = viewPager2.getAdapter();
         if (adapter == null) {
             throw new IllegalStateException("ViewPager does not have adapter instance.");
         }
-        this.mViewPager = viewPager;
-        mDataSetObserver = new DataSetObserver() {
+        this.mViewPager2 = viewPager2;
+        mDataSetObserver = new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
                 initIndicator();
             }
         };
-        adapter.registerDataSetObserver(mDataSetObserver);
+        adapter.registerAdapterDataObserver(mDataSetObserver);
         initIndicator();
         addPageChangeListener();
         return this;
     }
     
     @Override
-    public Indicator select(int position) {
+    public Indicator2 select(int position) {
         currentPosition = position;
         switch (indicatorType) {
             case TabWithIcon:
@@ -408,26 +411,26 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     @Override
-    public Indicator setTabTextColorSelect(int tabTextColorSelect) {
+    public Indicator2 setTabTextColorSelect(int tabTextColorSelect) {
         this.tabTextColorSelect = tabTextColorSelect;
         return this;
     }
     
     @Override
-    public Indicator setTabTextColorUnSelect(int tabTextColorUnSelect) {
+    public Indicator2 setTabTextColorUnSelect(int tabTextColorUnSelect) {
         this.tabTextColorUnSelect = tabTextColorUnSelect;
         return this;
     }
     
     @Override
-    public Indicator setUnderlineColor(int underlineColor) {
+    public Indicator2 setUnderlineColor(int underlineColor) {
         this.underlineColor = underlineColor;
         underlinePaint.setColor(this.underlineColor);
         return this;
     }
     
     @Override
-    public Indicator update() {
+    public Indicator2 update() {
         switch (indicatorType) {
             case TabWithIcon:
                 selectIcon(currentPosition);
@@ -446,15 +449,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     @Override
-    public Indicator setTabTextIconOrientation(TabOrientation orientation) {
+    public Indicator2 setTabTextIconOrientation(TabOrientation orientation) {
         if (indicatorType != IndicatorType.TabWithIconAndText) {
             return this;
         }
         this.tabTextIconOrientation = orientation;
         switch (orientation) {
             case VERTICAL:
-                if (mViewPager.getAdapter() != null) {
-                    for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                if (mViewPager2.getAdapter() != null) {
+                    for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                         LinearLayout ll = (LinearLayout) getItem(i);
                         ll.setOrientation(LinearLayout.VERTICAL);
                         ImageView iv = (ImageView) ll.getChildAt(0);
@@ -471,8 +474,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                 }
                 break;
             case HORIZONTAL:
-                if (mViewPager.getAdapter() != null) {
-                    for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+                if (mViewPager2.getAdapter() != null) {
+                    for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                         LinearLayout ll = (LinearLayout) getItem(i);
                         ll.setOrientation(LinearLayout.HORIZONTAL);
                         ImageView iv = (ImageView) ll.getChildAt(0);
@@ -566,24 +569,24 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void selectIcon(int position) {
-        if (mViewPager == null) {
+        if (mViewPager2 == null) {
             return;
         }
-        if (mViewPager.getAdapter() != null) {
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+        if (mViewPager2.getAdapter() != null) {
+            for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                 LinearLayout ll = (LinearLayout) getItem(i);
                 ImageView iv = (ImageView) ll.getChildAt(0);
                 if (i == position) {
                     if (tabBgSelectId != -1) {
                         ll.setBackgroundResource(tabBgSelectId);
                     }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
+                    int icon = ((IResProvider) mViewPager2.getAdapter()).getSelectedIcon(i);
                     iv.setImageResource(icon);
                 } else {
                     if (tabBgNormalId != -1) {
                         ll.setBackgroundResource(tabBgNormalId);
                     }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    int icon = ((IResProvider) mViewPager2.getAdapter()).getUnselectedIcon(i);
                     iv.setImageResource(icon);
                 }
             }
@@ -591,14 +594,14 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void selectIconAndText(int position) {
-        if (mViewPager == null) {
+        if (mViewPager2 == null) {
             return;
         }
-        if (mViewPager.getAdapter() != null) {
-            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+        if (mViewPager2.getAdapter() != null) {
+            if (!(mViewPager2.getAdapter() instanceof IResProvider)) {
                 throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
             }
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+            for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                 LinearLayout ll = (LinearLayout) getItem(i);
                 ImageView iv = (ImageView) ll.getChildAt(0);
                 TextView tv = (TextView) ll.getChildAt(1);
@@ -609,7 +612,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                     if (tabBgSelectId != -1) {
                         ll.setBackgroundResource(tabBgSelectId);
                     }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
+                    int icon = ((IResProvider) mViewPager2.getAdapter()).getSelectedIcon(i);
                     iv.setImageResource(icon);
                 } else {
                     if (horizontalHideIconMode && tabTextIconOrientation == TabOrientation.HORIZONTAL) {
@@ -622,7 +625,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                     if (tabBgNormalId != -1) {
                         ll.setBackgroundResource(tabBgNormalId);
                     }
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    int icon = ((IResProvider) mViewPager2.getAdapter()).getUnselectedIcon(i);
                     iv.setImageResource(icon);
                 }
             }
@@ -630,11 +633,11 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void selectText(final int position) {
-        if (mViewPager == null) {
+        if (mViewPager2 == null) {
             return;
         }
-        if (mViewPager.getAdapter() != null) {
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+        if (mViewPager2.getAdapter() != null) {
+            for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                 final TextView tv = (TextView) getItem(i);
                 if (i == position) {
                     tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeSelect);
@@ -661,7 +664,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         return mIndicatorContainer.getChildAt(position);
     }
     
-    public DataSetObserver getDataSetObserver() {
+    public RecyclerView.AdapterDataObserver getDataSetObserver() {
         return mDataSetObserver;
     }
     
@@ -670,10 +673,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         super.onDetachedFromWindow();
         try {
             if (mDataSetObserver != null) {
-                if (mViewPager != null) {
-                    PagerAdapter adapter = mViewPager.getAdapter();
+                if (mViewPager2 != null) {
+                    RecyclerView.Adapter adapter = mViewPager2.getAdapter();
                     if (adapter != null) {
-                        adapter.unregisterDataSetObserver(mDataSetObserver);
+                        adapter.unregisterAdapterDataObserver(mDataSetObserver);
                     }
                 }
             }
@@ -683,13 +686,13 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     }
     
     private void initIndicator() {
-        if (mViewPager.getAdapter() == null) {
+        if (mViewPager2.getAdapter() == null) {
             if (mNavigatorHelper != null) {
                 mNavigatorHelper.setTotalCount(0);
             }
             return;
         }
-        tabCount = mViewPager.getAdapter().getCount();
+        tabCount = mViewPager2.getAdapter().getItemCount();
         if (mNavigatorHelper != null) {
             mNavigatorHelper.setTotalCount(tabCount);
         }
@@ -699,15 +702,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                 break;
             case TabWithText:
                 setUpText();
-                selectText(this.mViewPager.getCurrentItem());
+                selectText(this.mViewPager2.getCurrentItem());
                 break;
             case TabWithIcon:
                 setUpIcons();
-                selectIcon(this.mViewPager.getCurrentItem());
+                selectIcon(this.mViewPager2.getCurrentItem());
                 break;
             case TabWithIconAndText:
                 setUpIconsAndText();
-                selectIconAndText(this.mViewPager.getCurrentItem());
+                selectIconAndText(this.mViewPager2.getCurrentItem());
                 break;
         }
     }
@@ -726,16 +729,16 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
             tvParams.leftMargin = tabIconTextMargin;
         }
         
-        if (mViewPager == null) {
+        if (mViewPager2 == null) {
             return;
         }
-        if (mViewPager.getAdapter() != null) {
-            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+        if (mViewPager2.getAdapter() != null) {
+            if (!(mViewPager2.getAdapter() instanceof IResProvider)) {
                 throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
             }
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+            for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                 ImageView iv = new ImageView(getContext());
-                int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                int icon = ((IResProvider) mViewPager2.getAdapter()).getUnselectedIcon(i);
                 iv.setImageResource(icon);
                 
                 TextView tv = new TextView(getContext());
@@ -743,7 +746,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                 tv.setSingleLine();
                 tv.setTextColor(tabTextColorUnSelect);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
-                tv.setText(mViewPager.getAdapter().getPageTitle(i));
+                tv.setText(((IResProvider) mViewPager2.getAdapter()).getTitle(i));
                 
                 LinearLayout ll = new LinearLayout(getContext());
                 ll.setGravity(Gravity.CENTER);
@@ -769,17 +772,17 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     
     private void setUpIcons() {
         mIndicatorContainer.removeAllViews();
-        if (mViewPager == null) {
+        if (mViewPager2 == null) {
             return;
         }
-        if (mViewPager.getAdapter() != null) {
-            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+        if (mViewPager2.getAdapter() != null) {
+            if (!(mViewPager2.getAdapter() instanceof IResProvider)) {
                 throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
             }
             LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(tabIconSize, tabIconSize);
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+            for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                 ImageView iv = new ImageView(getContext());
-                int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                int icon = ((IResProvider) mViewPager2.getAdapter()).getUnselectedIcon(i);
                 iv.setImageResource(icon);
                 
                 LinearLayout ll = new LinearLayout(getContext());
@@ -805,17 +808,17 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     
     private void setUpText() {
         mIndicatorContainer.removeAllViews();
-        if (mViewPager == null) {
+        if (mViewPager2 == null) {
             return;
         }
-        if (mViewPager.getAdapter() != null) {
-            for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
+        if (mViewPager2.getAdapter() != null) {
+            for (int i = 0; i < mViewPager2.getAdapter().getItemCount(); i++) {
                 TextView tv = new TextView(getContext());
                 tv.setFocusable(true);
                 tv.setClickable(true);
                 tv.setSingleLine();
                 tv.setGravity(Gravity.CENTER);
-                tv.setText(mViewPager.getAdapter().getPageTitle(i));
+                tv.setText(((IResProvider) mViewPager2.getAdapter()).getTitle(i));
                 final int finalI = i;
                 tv.setOnClickListener(new OnClickListener() {
                     @Override
@@ -832,7 +835,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     
     private void addPageChangeListener() {
         if (mOnPageChangeListener == null) {
-            mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+            mOnPageChangeListener = new ViewPager2.OnPageChangeCallback() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                     currentPosition = position;
@@ -871,13 +874,13 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                     }
                 }
             };
-            mViewPager.addOnPageChangeListener(mOnPageChangeListener);
+            mViewPager2.registerOnPageChangeCallback(mOnPageChangeListener);
         }
     }
     
     @Override
     public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
-        if (mViewPager != null) {
+        if (mViewPager2 != null) {
             View nextTab = getItem(index);
             if (indicatorType == IndicatorType.TabWithText || indicatorType == IndicatorType.TabWithIconAndText) {
                 if (tabTextSizeSelect > 0 && tabTextSizeUnSelect > 0 && tabTextSizeSelect != tabTextSizeUnSelect) {
@@ -910,7 +913,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     
     @Override
     public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
-        if (mViewPager != null) {
+        if (mViewPager2 != null) {
             View currentTab = getItem(index);
             if (indicatorType == IndicatorType.TabWithText || indicatorType == IndicatorType.TabWithIconAndText) {
                 if (tabTextSizeSelect > 0 && tabTextSizeUnSelect > 0 && tabTextSizeSelect != tabTextSizeUnSelect) {
@@ -955,6 +958,6 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
     
     @Override
     public void onDeselected(int index, int totalCount) {
-    
+        
     }
 }

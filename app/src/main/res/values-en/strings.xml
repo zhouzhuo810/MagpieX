@@ -25,6 +25,7 @@
     <string name="dowload_start_text">Start Download</string>
     <string name="download_text">File Download</string>
     <string name="pager_text">Pager Indicator</string>
+    <string name="pager_text2">Pager2 Indicator</string>
     <string name="tab_text">Bottom TabBar</string>
     <string name="notice_tools">Notice Utils</string>
     <string name="tools_text">Tools</string>
