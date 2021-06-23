@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.0'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.1'
 ```
 
 
@@ -35,7 +35,7 @@ allprojects {
     //Material Design
     api 'com.google.android.material:material:1.2.1'
     //BaseRecyclerViewAdapterHelper
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     //EventBus
     api 'org.greenrobot:eventbus:3.2.0'
     //Glide
@@ -285,6 +285,9 @@ public class MyApplication extends BaseApplication {
 > 自动滚动的 RecyclerView。
 
 ### 更新日志
+
+> 1.9.1
+> - 升级 BRVAH 到 3.x 版本。
 
 > 1.9.0
 > - 新增 ViewPager2 指示器 Indicator2。
