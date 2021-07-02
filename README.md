@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.2'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.3'
 ```
 
 
@@ -286,7 +286,7 @@ public class MyApplication extends BaseApplication {
 
 ### 更新日志
 
-> 1.9.2
+> 1.9.3
 > - 修复只有一个 TextView 的布局不缩放字体大小的问题。
 
 > 1.9.1
