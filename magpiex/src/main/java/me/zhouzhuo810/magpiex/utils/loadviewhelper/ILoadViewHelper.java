@@ -11,11 +11,18 @@ import android.view.View;
 public interface ILoadViewHelper {
     
     /**
-     * 缩放width，height，textSize
+     * 缩放width，height
      *
      * @param view View
      */
-    void loadWidthHeightFont(View view);
+    void loadWidthHeight(View view);
+    
+    /**
+     * 缩放textSize
+     *
+     * @param view
+     */
+    void loadFontSize(View view);
     
     /**
      * 缩放padding

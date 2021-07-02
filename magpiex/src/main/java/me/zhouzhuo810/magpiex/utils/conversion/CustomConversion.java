@@ -2,7 +2,6 @@ package me.zhouzhuo810.magpiex.utils.conversion;
 
 import android.view.View;
 
-import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.loadviewhelper.AbsLoadViewHelper;
 
@@ -17,19 +16,24 @@ public class CustomConversion implements IConversion {
     
     @Override
     public void transform(View view, AbsLoadViewHelper loadViewHelper) {
+        //防止重复缩放
+        if (SimpleUtil.hasScaled(view)) {
+            return;
+        }
         if (view.getLayoutParams() != null) {
-            //防止重复缩放
-            if (SimpleUtil.hasScaled(view)) {
-                return;
-            }
-            loadViewHelper.loadWidthHeightFont(view);
+            loadViewHelper.loadWidthHeight(view);
+            loadViewHelper.loadFontSize(view);
             loadViewHelper.loadPadding(view);
             loadViewHelper.loadLayoutMargin(view);
             loadViewHelper.loadMinWidthAndHeight(view);
             loadViewHelper.loadCustomAttrs(view);
             //比 SimpleConversion 多了 loadMaxWidthAndHeight 方法，通过反射实现，存在一定的性能影响
             loadViewHelper.loadMaxWidthAndHeight(view);
-            SimpleUtil.setScaleTag(view, true);
+            
+        } else {
+            loadViewHelper.loadFontSize(view);
+            loadViewHelper.loadPadding(view);
         }
+        SimpleUtil.setScaleTag(view, true);
     }
 }

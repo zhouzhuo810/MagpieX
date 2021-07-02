@@ -29,7 +29,7 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     @Override
-    public void loadWidthHeightFont(View view) {
+    public void loadWidthHeight(View view) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         int originalWidth = layoutParams.width;
         int originalHeight = layoutParams.height;
@@ -46,10 +46,10 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         } else if (originalHeight > 0) {
             layoutParams.height = setValue(originalHeight, false, false);
         }
-        loadViewFont(view);
     }
     
-    private void loadViewFont(View view) {
+    @Override
+    public void loadFontSize(View view) {
         if ((view instanceof TextView)) {
             TextView textView = (TextView) view;
             textView.setTextSize(0, setFontSize(textView));

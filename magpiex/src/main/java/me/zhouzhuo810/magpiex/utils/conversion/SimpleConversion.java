@@ -16,17 +16,21 @@ public class SimpleConversion implements IConversion {
     
     @Override
     public void transform(View view, AbsLoadViewHelper loadViewHelper) {
+        //防止重复缩放
+        if (SimpleUtil.hasScaled(view)) {
+            return;
+        }
         if (view.getLayoutParams() != null) {
-            //防止重复缩放
-            if (SimpleUtil.hasScaled(view)) {
-                return;
-            }
-            loadViewHelper.loadWidthHeightFont(view);
+            loadViewHelper.loadWidthHeight(view);
+            loadViewHelper.loadFontSize(view);
             loadViewHelper.loadPadding(view);
             loadViewHelper.loadLayoutMargin(view);
             loadViewHelper.loadMinWidthAndHeight(view);
             loadViewHelper.loadCustomAttrs(view);
-            SimpleUtil.setScaleTag(view, true);
+        } else {
+            loadViewHelper.loadPadding(view);
+            loadViewHelper.loadFontSize(view);
         }
+        SimpleUtil.setScaleTag(view, true);
     }
 }

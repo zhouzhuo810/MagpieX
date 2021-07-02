@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.1'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.2'
 ```
 
 
@@ -285,6 +285,9 @@ public class MyApplication extends BaseApplication {
 > 自动滚动的 RecyclerView。
 
 ### 更新日志
+
+> 1.9.2
+> - 修复只有一个 TextView 的布局不缩放字体大小的问题。
 
 > 1.9.1
 > - 升级 BRVAH 到 3.x 版本。
