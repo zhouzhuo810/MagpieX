@@ -30,11 +30,23 @@ public class PhotoUtil {
      * @return 是否支持选择图片
      */
     public static boolean chooseImage(FileChooser fileChooser) {
-        return fileChooser.showFileChooser("image/*", "选择图片", false, true);
+        return chooseImage(fileChooser, false);
     }
     
     /**
-     * 获取选图结果
+     * 选择图片
+     * 注意使用前先判断存储权限
+     *
+     * @param fileChooser FileChooser
+     * @return 是否支持选择图片
+     */
+    
+    public static boolean chooseImage(FileChooser fileChooser, boolean allowMultiple) {
+        return fileChooser.showFileChooser("image/*", "选择图片", allowMultiple, true);
+    }
+    
+    /**
+     * 获取选图结果 - 单选模式
      * {@link Activity#onActivityResult(int, int, Intent)}中调用此方法获取选择的图片文件
      *
      * <br>
@@ -56,6 +68,34 @@ public class PhotoUtil {
             File[] chosenFiles = fileChooser.getChosenFiles();
             if (chosenFiles != null && chosenFiles.length > 0) {
                 return chosenFiles[0];
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * 获取选图结果 - 多选模式
+     * {@link Activity#onActivityResult(int, int, Intent)}中调用此方法获取选择的图片文件
+     *
+     * <br>
+     * {@code
+     * PhotoUtil.onActivityResultPhoto(fileChooser, requestCode, resultCode, data);
+     * }
+     *
+     * @param requestCode 请求码
+     * @param resultCode  返回码
+     * @param data        Intent
+     * @return 图片文件
+     */
+    public static File[] onActivityResultPhotoMulti(FileChooser fileChooser, final int requestCode, final int resultCode, final Intent data) {
+        if (fileChooser == null) {
+            return null;
+        }
+        boolean b = fileChooser.onActivityResult(requestCode, resultCode, data);
+        if (b) {
+            File[] chosenFiles = fileChooser.getChosenFiles();
+            if (chosenFiles != null && chosenFiles.length > 0) {
+                return chosenFiles;
             }
         }
         return null;
