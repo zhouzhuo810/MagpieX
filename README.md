@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.3'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.4'
 ```
 
 
@@ -285,6 +285,9 @@ public class MyApplication extends BaseApplication {
 > 自动滚动的 RecyclerView。
 
 ### 更新日志
+
+> 1.9.4
+> - 修复 FileChooser 不弹出选择界面问题。
 
 > 1.9.3
 > - 修复只有一个 TextView 的布局不缩放字体大小的问题。

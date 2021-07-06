@@ -7,7 +7,6 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -17,7 +16,6 @@ import android.provider.MediaStore;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 文件选择器
@@ -290,6 +288,16 @@ public class FileChooser {
      * @return 傳回絕對路徑
      */
     public static String queryAbsolutePath(final Context context, final Uri uri) {
+        if (isQQMediaDocument(uri)) {
+            String path = uri.getPath();
+            if (path == null) {
+                return null;
+            }
+            File fileDir = Environment.getExternalStorageDirectory();
+            File file = new File(fileDir, path.substring("/QQBrowser".length()));
+            return file.exists() ? file.toString() : null;
+        }
+        
         final String[] projection = {MediaStore.MediaColumns.DATA};
         Cursor cursor = null;
         try {
@@ -305,6 +313,14 @@ public class FileChooser {
             }
         }
         return null;
+    }
+    
+    
+    /**
+     * 使用第三方qq文件管理器打开
+     */
+    public static boolean isQQMediaDocument(Uri uri) {
+        return "com.tencent.mtt.fileprovider".equals(uri.getAuthority());
     }
     
     // TODO -----物件方法-----
@@ -367,23 +383,17 @@ public class FileChooser {
             return false;
         }
         choosing = true;
-        // 檢查是否有可用的Activity
-        final PackageManager packageManager = activity.getPackageManager();
-        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType(mimeType);
-        final List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        if (list.size() > 0) {
-            this.mustCanRead = mustCanRead;
-            // 如果有可用的Activity
+        this.mustCanRead = mustCanRead;
+        try {
             final Intent picker = new Intent(Intent.ACTION_GET_CONTENT);
             picker.setType(mimeType);
             picker.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultiple);
             picker.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-            // 使用Intent Chooser
             final Intent destIntent = Intent.createChooser(picker, chooserTitle);
             activity.startActivityForResult(destIntent, ACTIVITY_FILE_CHOOSER);
             return true;
-        } else {
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

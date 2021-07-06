@@ -4,6 +4,9 @@ import android.graphics.Color;
 
 /**
  * 随机数生成工具
+ *
+ * @author zhouzhuo810
+ * @date 7/6/21 3:53 PM
  */
 public class RandomUtil {
     

@@ -16,13 +16,25 @@ import androidx.core.content.FileProvider;
 public class ShareUtil {
     
     /**
-     * 分享文件到微信
+     * 分享文件到微信 - File方式
      *
-     * @param context   上下午呢
+     * @param context   Context
      * @param authority FileProvider
      * @param file      要分享的文件
      */
     public static void shareFileToWeChat(Context context, String title, String authority, @Nullable String noInstallHintString, @NonNull File file) throws Exception {
+        shareFileToWeChat(context, title, authority, "image/*", noInstallHintString, file);
+    }
+    
+    
+    /**
+     * 分享文件到微信 - File方式
+     *
+     * @param context   Context
+     * @param authority FileProvider
+     * @param file      要分享的文件
+     */
+    public static void shareFileToWeChat(Context context, String title, String authority, String mimeType, @Nullable String noInstallHintString, @NonNull File file) throws Exception {
         if (PackageUtil.isAppNotInstalled(BaseUtil.getApp(), "com.tencent.mm")) {
             Toast.makeText(BaseUtil.getApp(), noInstallHintString == null ? "未安装微信无法分享到微信" : noInstallHintString, Toast.LENGTH_SHORT).show();
             return;
@@ -37,7 +49,7 @@ public class ShareUtil {
             uri = Uri.fromFile(file);
         }
         intent.setAction(Intent.ACTION_SEND);
-        intent.setType("image/*");
+        intent.setType(mimeType);
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
@@ -46,12 +58,23 @@ public class ShareUtil {
     
     
     /**
-     * 分享文件到微信
+     * 分享文件到微信 - Uri方式
      *
-     * @param context 上下午呢
+     * @param context Context
      * @param uri     要分享的Uri
      */
     public static void shareFileToWeChat(Context context, String title, @Nullable String noInstallHintString, @NonNull Uri uri) throws Exception {
+        shareFileToWeChat(context, title, "image/*", noInstallHintString, uri);
+    }
+    
+    
+    /**
+     * 分享文件到微信 - Uri方式
+     *
+     * @param context Context
+     * @param uri     要分享的Uri
+     */
+    public static void shareFileToWeChat(Context context, String title, String mimeType, @Nullable String noInstallHintString, @NonNull Uri uri) throws Exception {
         if (PackageUtil.isAppNotInstalled(BaseUtil.getApp(), "com.tencent.mm")) {
             Toast.makeText(BaseUtil.getApp(), noInstallHintString == null ? "未安装微信无法分享到微信" : noInstallHintString, Toast.LENGTH_SHORT).show();
             return;
@@ -60,7 +83,7 @@ public class ShareUtil {
         ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
         intent.setComponent(comp);
         intent.setAction(Intent.ACTION_SEND);
-        intent.setType("image/*");
+        intent.setType(mimeType);
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
@@ -70,11 +93,23 @@ public class ShareUtil {
     /**
      * 分享文件到其他
      *
-     * @param context   上下午呢
+     * @param context   Context
      * @param authority FileProvider
      * @param file      要分享的文件
      */
     public static void shareFileToOther(Context context, String title, String authority, @NonNull File file) throws Exception {
+        shareFileToOther(context, title, "image/*", authority, file);
+    }
+    
+    
+    /**
+     * 分享文件到其他
+     *
+     * @param context   Context
+     * @param authority FileProvider
+     * @param file      要分享的文件
+     */
+    public static void shareFileToOther(Context context, String title, String mimeType, String authority, @NonNull File file) throws Exception {
         Intent intent = new Intent();
         Uri uri = null;
         if (Build.VERSION.SDK_INT > 23) {
@@ -83,7 +118,7 @@ public class ShareUtil {
             uri = Uri.fromFile(file);
         }
         intent.setAction(Intent.ACTION_SEND);
-        intent.setType("image/*");
+        intent.setType(mimeType);
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
@@ -93,13 +128,24 @@ public class ShareUtil {
     /**
      * 分享文件到其他
      *
-     * @param context 上下午呢
+     * @param context Context
      * @param uri     要分享的Uri
      */
     public static void shareFileToOther(Context context, String title, @NonNull Uri uri) throws Exception {
+        shareFileToOther(context, title, "image/*", uri);
+    }
+    
+    
+    /**
+     * 分享文件到其他
+     *
+     * @param context Context
+     * @param uri     要分享的Uri
+     */
+    public static void shareFileToOther(Context context, String title, String mimeType, @NonNull Uri uri) throws Exception {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
-        intent.setType("image/*");
+        intent.setType(mimeType);
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra(Intent.EXTRA_TEXT, title);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
@@ -109,12 +155,24 @@ public class ShareUtil {
     /**
      * 分享文件到QQ
      *
-     * @param context             上下午呢
+     * @param context             Context
      * @param authority           FileProvider
      * @param noInstallHintString 未安装TIM的提示文字
      * @param file                要分享的文件
      */
     public static void shareFileToQQ(Context context, String authority, @Nullable String noInstallHintString, @NonNull File file) throws Exception {
+        shareFileToQQ(context, authority, "image/*", noInstallHintString, file);
+    }
+    
+    /**
+     * 分享文件到QQ
+     *
+     * @param context             Context
+     * @param authority           FileProvider
+     * @param noInstallHintString 未安装TIM的提示文字
+     * @param file                要分享的文件
+     */
+    public static void shareFileToQQ(Context context, String authority, String mimeType, @Nullable String noInstallHintString, @NonNull File file) throws Exception {
         if (PackageUtil.isAppNotInstalled(BaseUtil.getApp(), "com.tencent.mobileqq")) {
             Toast.makeText(BaseUtil.getApp(), noInstallHintString == null ? "未安装QQ无法分享到QQ" : noInstallHintString, Toast.LENGTH_SHORT).show();
             return;
@@ -130,7 +188,7 @@ public class ShareUtil {
         }
         share.putExtra(Intent.EXTRA_STREAM, uri);
         share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        share.setType("image/*");
+        share.setType(mimeType);
         context.startActivity(Intent.createChooser(share, "发送"));
     }
     
@@ -138,11 +196,22 @@ public class ShareUtil {
     /**
      * 分享文件到QQ
      *
-     * @param context             上下午呢
+     * @param context             Context
      * @param noInstallHintString 未安装TIM的提示文字
      * @param uri                 要分享的Uri
      */
     public static void shareFileToQQ(Context context, @Nullable String noInstallHintString, @NonNull Uri uri) throws Exception {
+        shareFileToQQ(context, "image/*", noInstallHintString, uri);
+    }
+    
+    /**
+     * 分享文件到QQ
+     *
+     * @param context             Context
+     * @param noInstallHintString 未安装TIM的提示文字
+     * @param uri                 要分享的Uri
+     */
+    public static void shareFileToQQ(Context context, String mimeType, @Nullable String noInstallHintString, @NonNull Uri uri) throws Exception {
         if (PackageUtil.isAppNotInstalled(BaseUtil.getApp(), "com.tencent.mobileqq")) {
             Toast.makeText(BaseUtil.getApp(), noInstallHintString == null ? "未安装QQ无法分享到QQ" : noInstallHintString, Toast.LENGTH_SHORT).show();
             return;
@@ -152,14 +221,14 @@ public class ShareUtil {
         share.setComponent(component);
         share.putExtra(Intent.EXTRA_STREAM, uri);
         share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        share.setType("image/*");
+        share.setType(mimeType);
         context.startActivity(Intent.createChooser(share, "发送"));
     }
     
     /**
      * 分享文件到TIM
      *
-     * @param context             上下午呢
+     * @param context             Context
      * @param authority           FileProvider
      * @param noInstallHintString 未安装TIM的提示文字
      * @param file                要分享的文件
@@ -187,7 +256,7 @@ public class ShareUtil {
     /**
      * 分享文件到TIM
      *
-     * @param context             上下午呢
+     * @param context             Context
      * @param noInstallHintString 未安装TIM的提示文字
      * @param uri                 要分享的Uri
      */
