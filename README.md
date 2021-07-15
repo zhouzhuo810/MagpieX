@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.4'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.5'
 ```
 
 
@@ -34,8 +34,6 @@ allprojects {
     api 'androidx.recyclerview:recyclerview:1.1.0'
     //Material Design
     api 'com.google.android.material:material:1.2.1'
-    //BaseRecyclerViewAdapterHelper
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     //EventBus
     api 'org.greenrobot:eventbus:3.2.0'
     //Glide
@@ -284,7 +282,39 @@ public class MyApplication extends BaseApplication {
 - [ScrollListRecyclerView](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/ScrollListRecyclerView.java)
 > 自动滚动的 RecyclerView。
 
+
+### 全局属性配置说明
+
+```
+    <!--  列表对话框列表文字颜色  -->
+    <attr name="x_item_text_color" format="color" />
+    <!--  列表对话框列表点击后的背景颜色 v21- -->
+    <attr name="x_item_bg_color" format="color" />
+    <!--  列表对话框列表点击后的背景颜色 v21+ -->
+    <attr name="x_item_bg_color_21" format="color" />
+    <!--  对话框标题背景颜色 -->
+    <attr name="x_dialog_title_bg_color" format="color" />
+    <!--  对话框内容背景颜色 -->
+    <attr name="x_dialog_content_bg_color" format="color" />
+    <!--  对话框标题文字颜色 -->
+    <attr name="x_dialog_title_text_color" format="color" />
+    <!--  对话框内容文字颜色 -->
+    <attr name="x_dialog_content_text_color" format="color" />
+    <!--  对话框按钮文字颜色 -->
+    <attr name="x_dialog_btn_text_color" format="color" />
+    <!--  对话框按钮背景资源 -->
+    <attr name="x_dialog_btn_bg_drawable" format="reference" />
+    <!-- loading 对话框 ios 样式的菊花图标 -->
+    <attr name="x_dialog_ios_loading_drawable" format="reference" />
+    <!-- loading 对话框 ios 样式的文字颜色 -->
+    <attr name="x_dialog_ios_loading_text_color" format="reference" />
+
+```
+
 ### 更新日志
+
+> 1.9.5
+> - 移除 BaseRecyclerViewAdapterHelper 库。
 
 > 1.9.4
 > - 修复 FileChooser 不弹出选择界面问题。

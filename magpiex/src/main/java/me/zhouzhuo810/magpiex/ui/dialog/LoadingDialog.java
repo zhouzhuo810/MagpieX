@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpiex.ui.dialog;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
@@ -132,6 +134,15 @@ public class LoadingDialog extends DialogFragment {
         }
     }
     
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        if (iosStyle) {
+            return new Dialog(getContext(), R.style.LoadingDialog);
+        }
+        return super.onCreateDialog(savedInstanceState);
+    }
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -142,9 +153,9 @@ public class LoadingDialog extends DialogFragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         if (getDialog() != null && getDialog().getWindow() != null) {
             if (landscape) {
-                getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
+                getDialog().getWindow().setLayout(iosStyle ? dm.widthPixels / 5 : dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
             } else {
-                getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+                getDialog().getWindow().setLayout(iosStyle ? dm.widthPixels * 5 / 12 : dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
             }
         }
     }
@@ -156,7 +167,11 @@ public class LoadingDialog extends DialogFragment {
         if (getDialog() != null) {
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
-        mRootView = inflater.inflate(landscape ? R.layout.layout_loading_dialog_land : R.layout.layout_loading_dialog, container, false);
+        if (iosStyle) {
+            mRootView = inflater.inflate(landscape ? R.layout.layout_loading_dialog_land_ios : R.layout.layout_loading_dialog_ios, container, false);
+        } else {
+            mRootView = inflater.inflate(landscape ? R.layout.layout_loading_dialog_land : R.layout.layout_loading_dialog, container, false);
+        }
         if (savedInstanceState != null) {
             dismiss();
             return mRootView;
@@ -183,8 +198,10 @@ public class LoadingDialog extends DialogFragment {
             tvTitle.setVisibility(View.GONE);
             tvTitle.setText("");
         } else {
-            line.setVisibility(View.VISIBLE);
-            tvTitle.setVisibility(View.VISIBLE);
+            if (iosStyle) {
+                line.setVisibility(View.VISIBLE);
+                tvTitle.setVisibility(View.VISIBLE);
+            }
             tvTitle.setText(title);
         }
         return mRootView;

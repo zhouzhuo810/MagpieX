@@ -38,8 +38,6 @@ dependencies {
     api 'androidx.recyclerview:recyclerview:1.1.0'
     //Material Design
     api 'com.google.android.material:material:1.2.1'
-    //BaseRecyclerViewAdapterHelper
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     //EventBus
     api 'org.greenrobot:eventbus:3.2.0'
     //Glide

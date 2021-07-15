@@ -1,51 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TitleBar">
+        <!-- 是否显示左边的布局 -->
         <attr name="ttb_showLeftLayout" format="boolean" />
+        <!-- 是否显示标题 -->
         <attr name="ttb_showTitle" format="boolean" />
+        <!-- 是否显示右边的布局 -->
         <attr name="ttb_showRightLayout" format="boolean" />
+        <!-- 是否显示左边的图标 -->
         <attr name="ttb_showLeftImg" format="boolean" />
+        <!-- 是否显示左边的文字 -->
         <attr name="ttb_showLeftText" format="boolean" />
+        <!-- 是否显示左边的角标 -->
         <attr name="ttb_showLeftMarkView" format="boolean" />
+        <!-- 是否显示右边的图标 -->
         <attr name="ttb_showRightImg" format="boolean" />
+        <!-- 是否显示右边的文字 -->
         <attr name="ttb_showRightText" format="boolean" />
+        <!-- 是否显示右边的角标 -->
         <attr name="ttb_showRightMarkView" format="boolean" />
+        <!-- 左边的图标 -->
         <attr name="ttb_leftImg" format="reference" />
+        <!-- 左边的文字 -->
         <attr name="ttb_leftText" format="string|reference" />
+        <!-- 标题文字 -->
         <attr name="ttb_titleText" format="string|reference" />
+        <!-- 右边的图标 -->
         <attr name="ttb_rightImg" format="reference" />
+        <!-- 右边的文字 -->
         <attr name="ttb_rightText" format="string|reference" />
+        <!-- 图标的尺寸 -->
         <attr name="ttb_iconSize" format="dimension|reference" />
+        <!-- 标题的尺寸 -->
         <attr name="ttb_textSizeTitle" format="dimension|reference" />
+        <!-- 两边文字的尺寸 -->
         <attr name="ttb_textSizeTwoSide" format="dimension|reference" />
+        <!-- 文字的颜色 -->
         <attr name="ttb_textColorAll" format="color|reference" />
+        <!-- 标题的对齐方式 -->
         <attr name="ttb_titleGravity" format="enum">
+            <!-- 居中 -->
             <enum name="center" value="0" />
+            <!-- 居左 -->
             <enum name="left" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="MarkView">
+        <!-- 文字大小 -->
         <attr name="mv_textSize" format="dimension|reference" />
+        <!-- 边框宽度 -->
         <attr name="mv_strokeWidth" format="dimension|reference" />
+        <!-- 文字颜色 -->
         <attr name="mv_textColor" format="color|reference" />
+        <!-- 值 -->
         <attr name="mv_markNumber" format="integer" />
+        <!-- 最大值 -->
         <attr name="mv_maxMarkNumber" format="integer" />
+        <!-- 背景的形状 -->
         <attr name="mv_bgShape" format="enum">
+            <!-- 椭圆 -->
             <enum name="oval" value="0" />
+            <!-- 方形 -->
             <enum name="rect" value="1" />
+            <!-- 圆点 -->
             <enum name="point" value="2" />
         </attr>
+        <!-- 填充方式 -->
         <attr name="mv_paintStyle" format="enum">
+            <!-- 填充 -->
             <enum name="fill" value="0" />
+            <!-- 边框 -->
             <enum name="stroke" value="1" />
         </attr>
+        <!-- 背景颜色 -->
         <attr name="mv_bgColor" format="color|reference" />
+        <!-- 圆点尺寸 -->
         <attr name="mv_point_size" format="dimension|reference" />
     </declare-styleable>
 
     <declare-styleable name="TabBar">
         <attr name="tb_showMarkView" format="boolean" />
+        <!-- Tab的数量 -->
         <attr name="tb_tabCount" format="enum">
             <enum name="ONE" value="1" />
             <enum name="TWO" value="2" />
@@ -54,145 +90,238 @@
             <enum name="FIVE" value="5" />
             <enum name="SIX" value="6" />
         </attr>
+        <!-- Tab的名字数组 -->
         <attr name="tb_tabNames" format="reference" />
+        <!-- Tab是否显示图标 -->
         <attr name="tb_showImg" format="boolean" />
+        <!-- Tab是否显示文字 -->
         <attr name="tb_showText" format="boolean" />
+        <!-- Tab是否显示下划线 -->
         <attr name="tb_showUnderline" format="boolean" />
+        <!-- Tab是否自动 tint 图标颜色 -->
         <attr name="tb_autoIconColor" format="boolean" />
+        <!-- Tab文字大小 -->
         <attr name="tb_textSize" format="dimension|reference" />
+        <!-- Tab图标大小 -->
         <attr name="tb_imageSize" format="dimension|reference" />
+        <!-- Tab文字与图标的间距 -->
         <attr name="tb_textTopMargin" format="dimension|reference" />
+        <!-- Tab角标的文字大小 -->
         <attr name="tb_markTextSize" format="dimension|reference" />
+        <!-- Tab角标的圆点大小 -->
         <attr name="tb_markPointSize" format="dimension|reference" />
+        <!-- Tab角标的文字颜色 -->
         <attr name="tb_markTextColor" format="color|reference" />
+        <!-- Tab角标的背景大小 -->
         <attr name="tb_markBgColor" format="color|reference" />
+        <!-- Tab角标的默认文字颜色 -->
         <attr name="tb_textColorNormal" format="color|reference" />
+        <!-- Tab角标的选中文字颜色 -->
         <attr name="tb_textColorPress" format="color|reference" />
 
     </declare-styleable>
 
 
     <declare-styleable name="Indicator">
+        <!-- 指示器的类型 -->
         <attr name="i_indicator_type" format="enum">
+            <!-- 圆点 -->
             <enum name="round_point" value="0" />
+            <!-- 文字 -->
             <enum name="tab_with_text" value="1" />
+            <!-- 图标 -->
             <enum name="tab_with_icon" value="2" />
+            <!-- 文字+图标 -->
             <enum name="tab_with_icon_and_text" value="3" />
         </attr>
 
-        <!--for tab-->
+        <!-- 选中时的文字大小 -->
         <attr name="i_selectTabTextSize" format="dimension|reference" />
+        <!-- 选中时的文字颜色 -->
         <attr name="i_selectTabTextColor" format="color|reference" />
+        <!-- 未选中时的文字大小 -->
         <attr name="i_normalTabTextSize" format="dimension|reference" />
+        <!-- 未选中时的文字颜色 -->
         <attr name="i_normalTabTextColor" format="color|reference" />
+        <!-- 未选中时的背景图片 -->
         <attr name="i_normalTabBg" format="reference" />
+        <!-- 选中时的背景图片 -->
         <attr name="i_selectTabBg" format="reference" />
+        <!-- 垂直分割线是否显示 -->
         <attr name="i_showGapLine" format="boolean" />
+        <!-- 垂直分割线宽度 -->
         <attr name="i_gapLineWidth" format="dimension|reference" />
+        <!-- 垂直分割线颜色 -->
         <attr name="i_gapLineColor" format="color|reference" />
+        <!-- 垂直分割线垂直padding -->
         <attr name="i_gapLinePadding" format="dimension|reference" />
+        <!-- 是否均分 -->
         <attr name="i_shouldTabExpand" format="boolean" />
+        <!-- 下划线是否显示 -->
         <attr name="i_showUnderline" format="boolean" />
+        <!-- 下划线的颜色 -->
         <attr name="i_underlineColor" format="color|reference" />
+        <!-- 下划线的高度 -->
         <attr name="i_underlineHeight" format="dimension|reference" />
+        <!-- 下划线左右的padding -->
         <attr name="i_underlinePadding" format="dimension|reference" />
+        <!-- 是否使用圆形背景 -->
         <attr name="i_showRoundBg" format="boolean" />
+        <!-- 圆形背景颜色 -->
         <attr name="i_roundBgColor" format="color|reference" />
+        <!-- 内边距 -->
         <attr name="i_tabPadding" format="dimension|reference" />
+        <!-- 图标大小 -->
         <attr name="i_tabIconSize" format="dimension|reference" />
 
-        <!--for tab with text and icon-->
+        <!-- 当  indicator_type == TabWithIconAndText，图标和文字的显示方向 -->
         <attr name="i_tabOrientation" format="enum">
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>
+        <!-- 当  indicator_type == TabWithIconAndText，图标和文字之间的间距 -->
         <attr name="i_tabIconTextMargin" format="dimension|reference" />
+        <!-- 当  indicator_type == TabWithIconAndText 且 i2_tabOrientation == horizontal 时，是否隐藏图标 -->
         <attr name="i_tabIsHorizontalHideIcon" format="boolean" />
 
-        <!--for point-->
+        <!-- 当  indicator_type == RoundPoint 时，圆点的选中宽高 -->
         <attr name="i_selectPointSize" format="dimension|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的默认宽高 -->
         <attr name="i_normalPointSize" format="dimension|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的选中颜色 -->
         <attr name="i_selectPointColor" format="color|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的默认颜色 -->
         <attr name="i_normalPointColor" format="color|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的间距 -->
         <attr name="i_pointSpacing" format="dimension|reference" />
-
+        <!-- 是否需要根据屏幕缩放，默认：true -->
         <attr name="i_isNeedScaleInPx" format="boolean" />
 
     </declare-styleable>
 
     <declare-styleable name="Indicator2">
+        <!-- 指示器的类型 -->
         <attr name="i2_indicator_type" format="enum">
+            <!-- 圆点 -->
             <enum name="round_point" value="0" />
+            <!-- 文字 -->
             <enum name="tab_with_text" value="1" />
+            <!-- 图标 -->
             <enum name="tab_with_icon" value="2" />
+            <!-- 文字+图标 -->
             <enum name="tab_with_icon_and_text" value="3" />
         </attr>
 
-        <!--for tab-->
+        <!-- 选中时的文字大小 -->
         <attr name="i2_selectTabTextSize" format="dimension|reference" />
+        <!-- 选中时的文字颜色 -->
         <attr name="i2_selectTabTextColor" format="color|reference" />
+        <!-- 未选中时的文字大小 -->
         <attr name="i2_normalTabTextSize" format="dimension|reference" />
+        <!-- 未选中时的文字颜色 -->
         <attr name="i2_normalTabTextColor" format="color|reference" />
+        <!-- 未选中时的背景图片 -->
         <attr name="i2_normalTabBg" format="reference" />
+        <!-- 选中时的背景图片 -->
         <attr name="i2_selectTabBg" format="reference" />
+        <!-- 垂直分割线是否显示 -->
         <attr name="i2_showGapLine" format="boolean" />
+        <!-- 垂直分割线宽度 -->
         <attr name="i2_gapLineWidth" format="dimension|reference" />
+        <!-- 垂直分割线颜色 -->
         <attr name="i2_gapLineColor" format="color|reference" />
+        <!-- 垂直分割线垂直padding -->
         <attr name="i2_gapLinePadding" format="dimension|reference" />
+        <!-- 是否均分 -->
         <attr name="i2_shouldTabExpand" format="boolean" />
+        <!-- 下划线是否显示 -->
         <attr name="i2_showUnderline" format="boolean" />
+        <!-- 下划线的颜色 -->
         <attr name="i2_underlineColor" format="color|reference" />
+        <!-- 下划线的高度 -->
         <attr name="i2_underlineHeight" format="dimension|reference" />
+        <!-- 下划线左右的padding -->
         <attr name="i2_underlinePadding" format="dimension|reference" />
+        <!-- 是否使用圆形背景 -->
         <attr name="i2_showRoundBg" format="boolean" />
+        <!-- 圆形背景颜色 -->
         <attr name="i2_roundBgColor" format="color|reference" />
+        <!-- 内边距 -->
         <attr name="i2_tabPadding" format="dimension|reference" />
+        <!-- 图标大小 -->
         <attr name="i2_tabIconSize" format="dimension|reference" />
 
-        <!--for tab with text and icon-->
+        <!-- 当  indicator_type == TabWithIconAndText，图标和文字的显示方向 -->
         <attr name="i2_tabOrientation" format="enum">
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>
+        <!-- 当  indicator_type == TabWithIconAndText，图标和文字之间的间距 -->
         <attr name="i2_tabIconTextMargin" format="dimension|reference" />
+        <!-- 当  indicator_type == TabWithIconAndText 且 i2_tabOrientation == horizontal 时，是否隐藏图标 -->
         <attr name="i2_tabIsHorizontalHideIcon" format="boolean" />
 
-        <!--for point-->
+        <!-- 当  indicator_type == RoundPoint 时，圆点的选中宽高 -->
         <attr name="i2_selectPointSize" format="dimension|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的默认宽高 -->
         <attr name="i2_normalPointSize" format="dimension|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的选中颜色 -->
         <attr name="i2_selectPointColor" format="color|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的默认颜色 -->
         <attr name="i2_normalPointColor" format="color|reference" />
+        <!-- 当  indicator_type == RoundPoint 时，圆点的间距 -->
         <attr name="i2_pointSpacing" format="dimension|reference" />
-
+        <!-- 是否需要根据屏幕缩放，默认：true -->
         <attr name="i2_isNeedScaleInPx" format="boolean" />
 
     </declare-styleable>
 
     <declare-styleable name="ScrollGridRecyclerView">
+        <!-- 自动滚动开关，默认：开 -->
         <attr name="sgr_scrollEnable" format="boolean" />
+        <!-- 列的数量，默认：1 -->
         <attr name="sgr_spanCount" format="integer" />
+        <!-- 自动滚动速度，默认：20 -->
         <attr name="sgr_scrollSpeed" format="integer" />
+        <!-- 滚动到顶部延迟多久，单位：ms，默认：3000 -->
         <attr name="sgr_topBottomDelay" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="ScrollListRecyclerView">
+        <!-- 自动滚动开关，默认：开 -->
         <attr name="slr_scrollEnable" format="boolean" />
+        <!-- 自动滚动速度，默认：20 -->
         <attr name="slr_scrollSpeed" format="integer" />
+        <!-- 滚动到顶部延迟多久，单位：ms，默认：3000 -->
         <attr name="slr_topBottomDelay" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="MaxHeightScrollView">
-        <attr name="mhs_percent_height" format="float"/>
+        <!-- 最大高度百分比,范围 0-1.0，默认：0.7 -->
+        <attr name="mhs_percent_height" format="float" />
     </declare-styleable>
 
+    <!--  列表对话框列表文字颜色  -->
     <attr name="x_item_text_color" format="color" />
+    <!--  列表对话框列表点击后的背景颜色 v21- -->
     <attr name="x_item_bg_color" format="color" />
+    <!--  列表对话框列表点击后的背景颜色 v21+ -->
     <attr name="x_item_bg_color_21" format="color" />
+    <!--  对话框标题背景颜色 -->
     <attr name="x_dialog_title_bg_color" format="color" />
+    <!--  对话框内容背景颜色 -->
     <attr name="x_dialog_content_bg_color" format="color" />
+    <!--  对话框标题文字颜色 -->
     <attr name="x_dialog_title_text_color" format="color" />
+    <!--  对话框内容文字颜色 -->
     <attr name="x_dialog_content_text_color" format="color" />
+    <!--  对话框按钮文字颜色 -->
     <attr name="x_dialog_btn_text_color" format="color" />
+    <!--  对话框按钮背景资源 -->
     <attr name="x_dialog_btn_bg_drawable" format="reference" />
+    <!-- loading 对话框 ios 样式的菊花图标 -->
+    <attr name="x_dialog_ios_loading_drawable" format="reference" />
+    <!-- loading 对话框 ios 样式的文字颜色 -->
+    <attr name="x_dialog_ios_loading_text_color" format="reference" />
 
 </resources>

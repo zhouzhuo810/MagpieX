@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/loading_ios_dialog_bg"
+    tools:ignore="PxUsage">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dialog_title_height"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:visibility="gone"
+        android:paddingStart="60px"
+        android:paddingEnd="60px"
+        android:textColor="?attr/x_dialog_ios_loading_text_color"
+        android:textSize="@dimen/base_dialog_title_text_size"
+        android:textStyle="bold"
+        tools:text="标题" />
+
+    <View
+        android:id="@+id/line_item"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:visibility="gone"
+        android:background="@color/colorBlack10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="365px"
+        android:orientation="vertical"
+        android:paddingStart="60px"
+        android:paddingTop="60px"
+        android:paddingEnd="60px"
+        android:paddingBottom="60px">
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="104px"
+            android:layout_height="104px"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:gravity="center"
+            android:textColor="?attr/x_dialog_ios_loading_text_color"
+            android:textSize="@dimen/base_dialog_title_text_size"
+            tools:text="消息内容" />
+    </LinearLayout>
+</LinearLayout>

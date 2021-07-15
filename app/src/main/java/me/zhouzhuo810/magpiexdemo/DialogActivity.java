@@ -223,7 +223,7 @@ public class DialogActivity extends BaseActivity {
         RxHelper.countDown(5, new Consumer<Long>() {
             @Override
             public void accept(Long disposable) throws Exception {
-                showLoadingDialog("倒计时：" + (5 - disposable - 1) + "s");
+//                showLoadingDialog("倒计时：" + (5 - disposable - 1) + "s");
             }
         }, new Action() {
             @Override
