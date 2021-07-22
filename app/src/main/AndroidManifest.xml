@@ -72,7 +72,8 @@
         <activity
             android:name=".DialogActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="sensor"
+            />
         <activity
             android:name=".TitleActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"

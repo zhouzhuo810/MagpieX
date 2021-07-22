@@ -31,7 +31,8 @@
 
     <me.zhouzhuo810.magpiex.ui.widget.MaxHeightScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="none"
         app:mhs_percent_height="0.7">
 

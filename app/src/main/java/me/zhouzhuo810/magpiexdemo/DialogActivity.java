@@ -101,6 +101,20 @@ public class DialogActivity extends BaseActivity {
                 ToastUtil.showToast(v.getText().toString().trim());
             }
         });*/
+//        showTwoBtnTextDialog(getString(R.string.app_name), "1. 【报工录入】增加重量模式，录入重量转换为数量\n" +
+//            "2. 【次品记录】增加重量模式，录入重量转换为数量\n" +
+//            "3. 【首页-显示内容设置】增加“型号规格”字段\n" +
+//            "4. 【停机记录】选择故障类停机原因时，停机状态变为“故障", true, new TwoBtnTextDialog.OnTwoBtnTextClick() {
+//            @Override
+//            public void onLeftClick(TextView v) {
+//                ToastUtil.showToast(v.getText().toString().trim());
+//            }
+//
+//            @Override
+//            public void onRightClick(TextView v) {
+//                ToastUtil.showToast(v.getText().toString().trim());
+//            }
+//        });
         showTwoBtnTextDialog(getString(R.string.app_name), "1. 【报工录入】增加重量模式，录入重量转换为数量\n" +
             "2. 【次品记录】增加重量模式，录入重量转换为数量\n" +
             "3. 【首页-显示内容设置】增加“型号规格”字段\n" +
@@ -135,7 +149,7 @@ public class DialogActivity extends BaseActivity {
             public void onLeftClick(TextView v) {
                 ToastUtil.showToast(v.getText().toString().trim());
             }
-            
+
             @Override
             public void onRightClick(TextView v) {
                 ToastUtil.showToast(v.getText().toString().trim());
