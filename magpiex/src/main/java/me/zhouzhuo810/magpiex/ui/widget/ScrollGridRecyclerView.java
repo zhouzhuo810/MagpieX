@@ -191,6 +191,9 @@ public class ScrollGridRecyclerView<T> extends RecyclerView {
         if (adapter instanceof RvBaseAdapter) {
             mAdapter = (RvBaseAdapter<T>) adapter;
         } else {
+            if (isInEditMode()) {
+                return;
+            }
             throw new RuntimeException("your adapter must extends RvBaseAdapter.");
         }
     }
