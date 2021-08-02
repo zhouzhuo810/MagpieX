@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.6'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.7'
 ```
 
 
@@ -312,6 +312,9 @@ public class MyApplication extends BaseApplication {
 ```
 
 ### 更新日志
+
+> 1.9.7
+> - 修复 LvBaseAdapter#getDropDownView() 方法布局id弄错了的问题。
 
 > 1.9.6
 > - 修复 TwoBtnTextDialog 显示异常问题。

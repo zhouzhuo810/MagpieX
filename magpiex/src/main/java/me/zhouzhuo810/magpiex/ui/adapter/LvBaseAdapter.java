@@ -143,12 +143,12 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         } else {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = LayoutInflater.from(context).inflate(getLayoutId(), viewGroup, false);
+                convertView = LayoutInflater.from(context).inflate(mDropdownLayoutId, viewGroup, false);
                 if (!disableScale()) {
                     SimpleUtil.scaleView(convertView);
                 }
                 holder = new ViewHolder(context, convertView, viewGroup, position);
-                holder.mLayoutId = getLayoutId();
+                holder.mLayoutId = mDropdownLayoutId;
             } else {
                 holder = (ViewHolder) convertView.getTag();
                 holder.mPosition = position;
