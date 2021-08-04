@@ -28,12 +28,12 @@ allprojects {
 如果添加上述依赖，则会自动依赖如下第三方库:
 
 ```
-    //appcompat
+  //appcompat
     api 'androidx.appcompat:appcompat:1.2.0'
     //RecyclerView
-    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.2.0'
     //Material Design
-    api 'com.google.android.material:material:1.2.1'
+    api 'com.google.android.material:material:1.3.0'
     //EventBus
     api 'org.greenrobot:eventbus:3.2.0'
     //Glide
@@ -43,6 +43,8 @@ allprojects {
     api 'io.reactivex.rxjava3:rxjava:3.0.9'
     //RxAndroid2
     api 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    //RxBinding
+    api 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
     //Retrofit2
     api 'com.squareup.retrofit2:retrofit:2.9.0'
     //Retrofit2+RxJava2
