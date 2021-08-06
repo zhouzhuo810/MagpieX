@@ -284,6 +284,11 @@ public class MyApplication extends BaseApplication {
 - [ScrollListRecyclerView](https://github.com/zhouzhuo810/MagpieX/blob/master/magpiex/src/main/java/me/zhouzhuo810/magpiex/ui/widget/ScrollListRecyclerView.java)
 > 自动滚动的 RecyclerView。
 
+### 日志过滤标签说明
+
+- PrintAdapterName : Adapter 创建时打印类名
+- PrintActivityName : Activity 可见时打印类名
+- PrintFragmentName : Fragment 可见时打印类名
 
 ### 全局属性配置说明
 

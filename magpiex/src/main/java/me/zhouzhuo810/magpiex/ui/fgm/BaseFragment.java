@@ -860,7 +860,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
             mOnBackPressedCallback.setEnabled(true);
         }
         if (BuildConfig.DEBUG) {
-            Log.d("PrintFragmentName", getClass().getSimpleName());
+            Log.d("PrintFragmentName", "(" + getClass().getSimpleName() + ".java:1)");
         }
         onVisible();
     }

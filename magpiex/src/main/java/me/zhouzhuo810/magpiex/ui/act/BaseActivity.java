@@ -68,18 +68,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         super.onCreate(savedInstanceState);
         
         mContext = this;
-    
+        
         int layoutId = getLayoutId();
         if (layoutId == 0) {
             return;
         }
-    
+        
         EventBus.getDefault().register(this);
         
         setContentView(layoutId);
         
         SimpleUtil.resetScale(this);
-    
+        
         if (!shouldNotScreenAdapt()) {
             SimpleUtil.scaleView(getDecorView());
         }
@@ -120,9 +120,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
         String simpleName = getClass().getSimpleName();
         SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
-    
+        
         if (BuildConfig.DEBUG) {
-            Log.d("PrintActivityName", simpleName);
+            Log.d("PrintActivityName", "(" + simpleName + ".java:1)");
         }
     }
     

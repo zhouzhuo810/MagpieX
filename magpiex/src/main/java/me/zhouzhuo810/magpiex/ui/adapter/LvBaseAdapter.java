@@ -62,7 +62,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         this.context = context;
         this.data = data;
         if (BuildConfig.DEBUG) {
-            Log.d("PrintAdapterName", getClass().getSimpleName());
+            Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
         }
     }
     
@@ -70,7 +70,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         this.context = context;
         this.data = data == null ? null : Arrays.asList(data);
         if (BuildConfig.DEBUG) {
-            Log.d("PrintAdapterName", getClass().getSimpleName());
+            Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
         }
     }
     
