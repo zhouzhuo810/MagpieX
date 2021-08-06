@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.rxjava3.disposables.Disposable;
-import me.zhouzhuo810.magpiex.BuildConfig;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.ui.act.IBaseActivity;
@@ -39,6 +38,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
+import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 import me.zhouzhuo810.magpiex.utils.SpUtil;
@@ -859,7 +859,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
         if (mOnBackPressedCallback != null) {
             mOnBackPressedCallback.setEnabled(true);
         }
-        if (BuildConfig.DEBUG) {
+        if (BaseUtil.isLogEnable()) {
             Log.d("PrintFragmentName", "(" + getClass().getSimpleName() + ".java:1)");
         }
         onVisible();

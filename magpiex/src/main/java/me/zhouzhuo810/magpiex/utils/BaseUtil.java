@@ -122,4 +122,22 @@ public class BaseUtil {
     public static boolean isScreenAdaptEnable() {
         return SpUtil.getBoolean(Cons.SP_KEY_OF_SCREEN_ADAPT_ENABLE, true);
     }
+    
+    /**
+     * 设置日志是否打印
+     *
+     * @param enable 是否
+     */
+    public static void setLogEnable(boolean enable) {
+        Cons.DEBUG_ENABLE = enable;
+    }
+    
+    /**
+     * 日志是否打印
+     *
+     * @return 是否
+     */
+    public static boolean isLogEnable() {
+        return Cons.DEBUG_ENABLE;
+    }
 }

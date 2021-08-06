@@ -40,6 +40,7 @@ import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpiex.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpiex.ui.fgm.BaseFragment;
 import me.zhouzhuo810.magpiex.utils.ActivityUtil;
+import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
@@ -121,7 +122,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         String simpleName = getClass().getSimpleName();
         SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
         
-        if (BuildConfig.DEBUG) {
+        if (BaseUtil.isLogEnable()) {
             Log.d("PrintActivityName", "(" + simpleName + ".java:1)");
         }
     }

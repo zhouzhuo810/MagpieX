@@ -47,4 +47,9 @@ public final class Cons {
      * SharedPreferences的Key，用于启用和关闭屏幕适配功能
      */
     public static final String SP_KEY_OF_SCREEN_ADAPT_ENABLE = "sp_key_of_screen_adapt_enable";
+    
+    /**
+     * 全局日志打印开关
+     */
+    public static boolean DEBUG_ENABLE = false;
 }

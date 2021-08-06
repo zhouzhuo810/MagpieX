@@ -72,6 +72,11 @@ public class MyApplication extends BaseApplication {
         return false;
     }
     
+    @Override
+    public boolean isDebugEnable() {
+        return BuildConfig.DEBUG;
+    }
+    
     private void initCrash() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             CrashUtil.init(new CrashUtil.OnCrashListener() {

@@ -37,6 +37,9 @@ public abstract class BaseApplication extends Application {
         //是否启用屏幕适配
         BaseUtil.setScreenAdaptEnable(!isScreenAdaptDisable());
         
+        //是否打印日志
+        BaseUtil.setLogEnable(isDebugEnable());
+        
         //顺便初始化屏幕适配工具类
         ScreenAdapterUtil.init(this);
         
@@ -135,4 +138,11 @@ public abstract class BaseApplication extends Application {
      * @return 是否
      */
     public abstract boolean isScreenAdaptDisable();
+    
+    /**
+     * 是否打印日志
+     *
+     * @return 是否
+     */
+    public abstract boolean isDebugEnable();
 }

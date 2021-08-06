@@ -27,6 +27,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import me.zhouzhuo810.magpiex.BuildConfig;
+import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
@@ -61,7 +62,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
     public LvBaseAdapter(Context context, List<T> data) {
         this.context = context;
         this.data = data;
-        if (BuildConfig.DEBUG) {
+        if (BaseUtil.isLogEnable()) {
             Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
         }
     }
@@ -69,7 +70,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
     public LvBaseAdapter(Context context, T[] data) {
         this.context = context;
         this.data = data == null ? null : Arrays.asList(data);
-        if (BuildConfig.DEBUG) {
+        if (BaseUtil.isLogEnable()) {
             Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
         }
     }

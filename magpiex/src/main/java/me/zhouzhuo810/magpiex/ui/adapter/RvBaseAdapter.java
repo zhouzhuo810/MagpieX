@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.util.SparseArray;
@@ -20,8 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +26,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import me.zhouzhuo810.magpiex.BuildConfig;
+import me.zhouzhuo810.magpiex.utils.BaseUtil;
 import me.zhouzhuo810.magpiex.utils.ColorUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
@@ -65,7 +62,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     public RvBaseAdapter(Context context, List<T> data) {
         this.context = context;
         this.data = data;
-        if (BuildConfig.DEBUG) {
+        if (BaseUtil.isLogEnable()) {
             Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
         }
     }
@@ -73,7 +70,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     public RvBaseAdapter(Context context, T[] data) {
         this.context = context;
         this.data = data == null ? null : Arrays.asList(data);
-        if (BuildConfig.DEBUG) {
+        if (BaseUtil.isLogEnable()) {
             Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
         }
     }
