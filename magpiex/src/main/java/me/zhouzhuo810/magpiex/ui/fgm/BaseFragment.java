@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.rxjava3.disposables.Disposable;
+import me.zhouzhuo810.magpiex.BuildConfig;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.ui.act.IBaseActivity;
@@ -856,6 +858,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, Vi
     protected void visible() {
         if (mOnBackPressedCallback != null) {
             mOnBackPressedCallback.setEnabled(true);
+        }
+        if (BuildConfig.DEBUG) {
+            Log.d("PrintFragmentName", getClass().getSimpleName());
         }
         onVisible();
     }

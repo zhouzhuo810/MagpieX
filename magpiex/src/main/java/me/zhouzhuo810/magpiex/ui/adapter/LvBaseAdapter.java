@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.util.List;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
+import me.zhouzhuo810.magpiex.BuildConfig;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
@@ -59,11 +61,17 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
     public LvBaseAdapter(Context context, List<T> data) {
         this.context = context;
         this.data = data;
+        if (BuildConfig.DEBUG) {
+            Log.d("PrintAdapterName", getClass().getSimpleName());
+        }
     }
     
     public LvBaseAdapter(Context context, T[] data) {
         this.context = context;
         this.data = data == null ? null : Arrays.asList(data);
+        if (BuildConfig.DEBUG) {
+            Log.d("PrintAdapterName", getClass().getSimpleName());
+        }
     }
     
     public void updateAll(List<T> data) {

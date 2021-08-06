@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.rxjava3.disposables.Disposable;
+import me.zhouzhuo810.magpiex.BuildConfig;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.event.CloseAllActEvent;
@@ -118,6 +120,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
         String simpleName = getClass().getSimpleName();
         SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
+    
+        if (BuildConfig.DEBUG) {
+            Log.d("PrintActivityName", simpleName);
+        }
     }
     
     /**

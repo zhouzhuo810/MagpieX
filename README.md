@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.7'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.8'
 ```
 
 
@@ -315,6 +315,9 @@ public class MyApplication extends BaseApplication {
 
 ### 更新日志
 
+> 1.9.8
+> - RvBaseAdapter、BaseActivity、BaseFragment 分别添加DEBUG模式下类名打印，打印级别d。
+  
 > 1.9.7
 > - 修复 LvBaseAdapter#getDropDownView() 方法布局id弄错了的问题。
 
