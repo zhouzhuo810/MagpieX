@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="40px"
     android:orientation="vertical">
 
     <me.zhouzhuo810.magpiex.ui.widget.MarkView
@@ -33,4 +34,25 @@
         android:text="-"
         android:onClick="decMarkView"
         android:textSize="50px" />
+
+
+    <TextView
+        android:id="@+id/tv_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:padding="20px"
+        android:textColor="@color/colorWhite"
+        android:textSize="40px"
+        android:text="测试圆角"/>
+
+    <TextView
+        android:id="@+id/tv_gradient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:padding="20px"
+        android:textColor="@color/colorWhite"
+        android:textSize="40px"
+        android:text="测试渐变"/>
 </LinearLayout>
