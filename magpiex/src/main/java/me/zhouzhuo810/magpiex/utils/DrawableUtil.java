@@ -136,7 +136,7 @@ public class DrawableUtil {
     /**
      * 渐变背景
      *
-     * @param radius      圆角
+     * @param radius      圆角半径
      * @param fromColor   渐变开始颜色
      * @param toColor     渐变结束颜色
      * @param orientation 渐变方向
@@ -145,6 +145,18 @@ public class DrawableUtil {
         return gradientShape(radius, fromColor, toColor, orientation, 0, 0, 0, 0);
     }
     
+    /**
+     * 渐变背景
+     *
+     * @param radius      圆角半径
+     * @param fromColor   渐变开始颜色
+     * @param toColor     渐变结束颜色
+     * @param orientation 渐变方向
+     * @param strokeColor 边框颜色
+     * @param strokeWidth 边框宽度
+     * @param dashWidth   虚线长度
+     * @param dashGap     虚线间隙
+     */
     public static GradientDrawable gradientShape(int radius, int fromColor, int toColor, GradientDrawable.Orientation orientation, int strokeColor, int strokeWidth, int dashWidth, int dashGap) {
         return new ShapeBuilder()
             .shape(GradientDrawable.RECTANGLE)
