@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.8'
+    implementation 'com.github.zhouzhuo810:MagpieX:1.9.9'
 ```
 
 
@@ -319,6 +319,9 @@ public class MyApplication extends BaseApplication {
 ```
 
 ### 更新日志
+
+> 1.9.9
+> - BaseActivity 提供 getOriginalContext() 方法。
 
 > 1.9.8
 > - RvBaseAdapter、BaseActivity、BaseFragment 分别添加DEBUG模式下类名打印，打印级别d。

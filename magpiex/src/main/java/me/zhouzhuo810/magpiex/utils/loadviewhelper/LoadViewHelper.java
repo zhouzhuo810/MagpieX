@@ -178,7 +178,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         }
     }
     
-    
     private int setValue(int value, boolean horizontal, boolean isFontSize) {
         if (ScreenAdapterUtil.SCREEN_ADAPT_TYPE_AUTO.equals(adaptType)) {
             return isLandscape() ? setValueByHeight(value, isFontSize) : setValueByWidth(value, isFontSize);

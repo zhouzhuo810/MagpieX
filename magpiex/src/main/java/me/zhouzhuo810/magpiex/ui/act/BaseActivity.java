@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,11 +25,9 @@ import java.util.List;
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import io.reactivex.rxjava3.disposables.Disposable;
-import me.zhouzhuo810.magpiex.BuildConfig;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.cons.Cons;
 import me.zhouzhuo810.magpiex.event.CloseAllActEvent;
@@ -63,6 +62,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * 上下文对象
      */
     protected Context mContext;
+    
+    protected Context mOriginalContext;
     
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -652,8 +653,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         
     }
     
+    /**
+     * 多语言切换之前的Context，目前发现系统打印服务需要使用这个Context才能调用。
+     * @return Context
+     */
+    public Context getOriginalContext() {
+        return mOriginalContext;
+    }
+    
     @Override
     protected void attachBaseContext(Context newBase) {
+        mOriginalContext = newBase;
         //如果支持多语言，才给切换语言
         if (shouldSupportMultiLanguage()) {
             Integer language = SpUtil.getInt(newBase, Cons.SP_KEY_OF_CHOOSED_LANGUAGE, -1);
@@ -662,7 +672,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             // 此处的ContextThemeWrapper是androidx.appcompat.view包下的
             // 你也可以使用android.view.ContextThemeWrapper，但是使用该对象最低只兼容到API 17
             // 所以使用 androidx.appcompat.view.ContextThemeWrapper省心
-            final ContextThemeWrapper wrappedContext = new ContextThemeWrapper(context,
+            final android.view.ContextThemeWrapper wrappedContext = new ContextThemeWrapper(context,
                 R.style.MagpieTheme_NoActionBar) {
                 @Override
                 public void applyOverrideConfiguration(Configuration overrideConfiguration) {
@@ -691,17 +701,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public <T extends BaseFragment> T findFragmentByClazzAsTag(Class<T> clazz) {
-        if (getSupportFragmentManager() == null) {
-            return null;
-        }
         return (T) getSupportFragmentManager().findFragmentByTag(clazz.getSimpleName());
     }
     
     @Override
     public <T extends BaseFragment> T findFragmentByTag(String tag) {
-        if (getSupportFragmentManager() == null) {
-            return null;
-        }
         return (T) getSupportFragmentManager().findFragmentByTag(tag);
     }
     
@@ -711,11 +715,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             fragment = T.newInstance(clazz, bundle);
         }
         fragment.setArguments(bundle);
-        if (getSupportFragmentManager() != null) {
-            getSupportFragmentManager().beginTransaction()
-                .replace(containerId, fragment)
-                .commitNow();
-        }
+        getSupportFragmentManager();
+        getSupportFragmentManager().beginTransaction()
+            .replace(containerId, fragment)
+            .commitNow();
     }
     
     @Override
@@ -724,38 +727,32 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (fragment == null) {
             fragment = T.newInstance(clazz, bundle);
             fragment.setArguments(bundle);
-            if (getSupportFragmentManager() != null) {
-                List<Fragment> fragments = getSupportFragmentManager().getFragments();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                if (fragments != null) {
-                    for (Fragment fgm : fragments) {
-                        if (fgm != null) {
-                            if (fgm.isAdded() && !fgm.isHidden()) {
-                                transaction.hide(fgm);
-                            }
-                        }
+            getSupportFragmentManager();
+            List<androidx.fragment.app.Fragment> fragments = getSupportFragmentManager().getFragments();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment fgm : fragments) {
+                if (fgm != null) {
+                    if (fgm.isAdded() && !fgm.isHidden()) {
+                        transaction.hide(fgm);
                     }
                 }
-                transaction.add(containerId, fragment, clazz.getSimpleName())
-                    .show(fragment)
-                    .commitNow();
             }
+            transaction.add(containerId, fragment, clazz.getSimpleName())
+                .show(fragment)
+                .commitNow();
         } else {
-            if (getSupportFragmentManager() != null) {
-                List<Fragment> fragments = getSupportFragmentManager().getFragments();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                if (fragments != null) {
-                    for (Fragment fgm : fragments) {
-                        if (fgm != null) {
-                            if (fgm.isAdded() && !fgm.isHidden()) {
-                                transaction.hide(fgm);
-                            }
-                        }
+            getSupportFragmentManager();
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment fgm : fragments) {
+                if (fgm != null) {
+                    if (fgm.isAdded() && !fgm.isHidden()) {
+                        transaction.hide(fgm);
                     }
                 }
-                transaction.show(fragment)
-                    .commitNow();
             }
+            transaction.show(fragment)
+                .commitNow();
         }
         return fragment;
     }
@@ -766,38 +763,32 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (fragment == null) {
             fragment = T.newInstance(clazz, bundle);
             fragment.setArguments(bundle);
-            if (getSupportFragmentManager() != null) {
-                List<Fragment> fragments = getSupportFragmentManager().getFragments();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                if (fragments != null) {
-                    for (Fragment fgm : fragments) {
-                        if (fgm != null) {
-                            if (fgm.isAdded() && !fgm.isHidden()) {
-                                transaction.hide(fgm);
-                            }
-                        }
+            getSupportFragmentManager();
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment fgm : fragments) {
+                if (fgm != null) {
+                    if (fgm.isAdded() && !fgm.isHidden()) {
+                        transaction.hide(fgm);
                     }
                 }
-                transaction.add(containerId, fragment, tag)
-                    .show(fragment)
-                    .commitNow();
             }
+            transaction.add(containerId, fragment, tag)
+                .show(fragment)
+                .commitNow();
         } else {
-            if (getSupportFragmentManager() != null) {
-                List<Fragment> fragments = getSupportFragmentManager().getFragments();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                if (fragments != null) {
-                    for (Fragment fgm : fragments) {
-                        if (fgm != null) {
-                            if (fgm.isAdded() && !fgm.isHidden()) {
-                                transaction.hide(fgm);
-                            }
-                        }
+            getSupportFragmentManager();
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment fgm : fragments) {
+                if (fgm != null) {
+                    if (fgm.isAdded() && !fgm.isHidden()) {
+                        transaction.hide(fgm);
                     }
                 }
-                transaction.show(fragment)
-                    .commitNow();
             }
+            transaction.show(fragment)
+                .commitNow();
         }
         return fragment;
     }
@@ -805,11 +796,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     public <T extends BaseFragment> void hideFragment(T fragment) {
         if (fragment != null) {
-            if (getSupportFragmentManager() != null) {
-                getSupportFragmentManager().beginTransaction()
-                    .hide(fragment)
-                    .commitNow();
-            }
+            getSupportFragmentManager();
+            getSupportFragmentManager().beginTransaction()
+                .hide(fragment)
+                .commitNow();
         }
     }
     
@@ -817,11 +807,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public <T extends BaseFragment> void hideFragmentByClass(Class<T> clazz) {
         T fragment = findFragmentByClazzAsTag(clazz);
         if (fragment != null) {
-            if (getSupportFragmentManager() != null) {
-                getSupportFragmentManager().beginTransaction()
-                    .hide(fragment)
-                    .commitNow();
-            }
+            getSupportFragmentManager();
+            getSupportFragmentManager().beginTransaction()
+                .hide(fragment)
+                .commitNow();
         }
     }
     
@@ -829,11 +818,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public void hideFragmentByTag(String tag) {
         Fragment fgm = findFragmentByTag(tag);
         if (fgm != null) {
-            if (getSupportFragmentManager() != null) {
-                getSupportFragmentManager().beginTransaction()
-                    .hide(fgm)
-                    .commitNow();
-            }
+            getSupportFragmentManager();
+            getSupportFragmentManager().beginTransaction()
+                .hide(fgm)
+                .commitNow();
         }
     }
     
