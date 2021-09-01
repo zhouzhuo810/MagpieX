@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:1.9.9'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.0.0'
 ```
 
 
@@ -319,6 +319,9 @@ public class MyApplication extends BaseApplication {
 ```
 
 ### 更新日志
+
+> 2.0.0
+> - MarkView 兼容安卓系统的上下左右 padding 属性，且保证oval形状时个位数的情况下是个圆。
 
 > 1.9.9
 > - BaseActivity 提供 getOriginalContext() 方法。

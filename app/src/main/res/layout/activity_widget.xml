@@ -12,14 +12,17 @@
         android:layout_height="wrap_content"
         app:mv_bgColor="@color/colorRed"
         app:mv_markNumber="9"
+        android:paddingTop="5px"
+        android:paddingBottom="5px"
+        android:paddingStart="8px"
+        android:paddingEnd="8px"
         app:mv_maxMarkNumber="99"
         android:layout_marginTop="50px"
         android:layout_marginStart="50px"
-        app:mv_paintStyle="stroke"
+        app:mv_paintStyle="fill"
         app:mv_bgShape="oval"
-        app:mv_strokeWidth="4px"
-        app:mv_textColor="@color/colorRed"
-        app:mv_textSize="60px" />
+        app:mv_textColor="@color/colorWhite"
+        app:mv_textSize="21px" />
 
     <Button
         android:layout_width="wrap_content"

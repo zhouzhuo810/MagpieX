@@ -115,7 +115,9 @@ public class MarkView extends View {
                             wSize = (int) (textWidth + textHeight / 2);
                         }
                     }
-                    wSize += (paddingStart + paddingEnd);
+                    if (markNumber < 0 || markNumber >= 10) {
+                        wSize += (paddingStart + paddingEnd);
+                    }
                     wSize += strokeWidth;
                     break;
                 case 2:
@@ -135,6 +137,9 @@ public class MarkView extends View {
                     //oval or rect
                     float textHeight = textPaint.descent() - textPaint.ascent();
                     hSize = (int) textHeight + strokeWidth + paddingTop + paddingBottom;
+                    if (hSize > wSize) {
+                        wSize = hSize;
+                    }
                     break;
                 case 2:
                     //point
