@@ -64,7 +64,7 @@ public class ScrollListActivity extends BaseActivity {
             @Override
             public void accept(Long aLong) throws Exception {
                 List<TestListEntity> list = new ArrayList<>();
-                for (int i = 0; i < RandomUtil.getRandomIntFromTo(20, 50); i++) {
+                for (int i = 0; i < 1000; i++) {
                     list.add(new TestListEntity("姓名" + i, "男", "test@qq.com", RandomUtil.getRandomSixInt() + "", RandomUtil.getRandomColorBlackToWhite()));
                 }
                 mScrollListRecyclerView.setNewData(list, false);
@@ -87,5 +87,10 @@ public class ScrollListActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         cancelDisposable(mInterval);
+    }
+    
+    @Override
+    public boolean needAlwaysScreenOn() {
+        return true;
     }
 }

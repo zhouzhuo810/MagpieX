@@ -294,6 +294,13 @@ public interface IBaseActivity {
     boolean isLandscapeDialog();
     
     /**
+     * 是否屏幕常亮
+     *
+     * @return 是否，默认否
+     */
+    boolean needAlwaysScreenOn();
+    
+    /**
      * 返回对话框确定文字
      *
      * @return String

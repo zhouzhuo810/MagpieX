@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -65,11 +66,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     protected Context mOriginalContext;
     
-    private String clazzFileName;
-    private int getLayoutIdLineNumber;
-    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+    
+        if (needAlwaysScreenOn()) {
+            try {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    
         super.onCreate(savedInstanceState);
         
         mContext = this;
@@ -867,4 +874,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         return false;
     }
     
+    @Override
+    public boolean needAlwaysScreenOn() {
+        return false;
+    }
 }
