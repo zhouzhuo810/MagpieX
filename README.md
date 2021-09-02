@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:2.0.1'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.0.2'
 ```
 
 
@@ -319,6 +319,9 @@ public class MyApplication extends BaseApplication {
 ```
 
 ### 更新日志
+
+> 2.0.2
+> - 修复kt类名打印无效问题。
 
 > 2.0.1
 > - RvBaseAdapter、BaseActivity、BaseFragment 分别添加DEBUG模式下类名打印支持java或kt。

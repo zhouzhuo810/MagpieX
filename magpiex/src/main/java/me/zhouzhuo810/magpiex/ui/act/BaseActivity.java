@@ -134,7 +134,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
         
         if (BaseUtil.isLogEnable()) {
-            Log.d("PrintActivityName", "(" + simpleName + ".java:1)"+", (" + simpleName + ".kt:1)");
+            Log.d("PrintActivityName", "(" + simpleName + ".java:1)"+"\na.a(" + simpleName + ".kt:1)");
         }
     }
     
