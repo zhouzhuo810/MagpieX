@@ -63,7 +63,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         this.context = context;
         this.data = data;
         if (BaseUtil.isLogEnable()) {
-            Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)");
+            Log.d("PrintAdapterName", "(" + getClass().getSimpleName() + ".java:1)"+", (" + getClass().getSimpleName() + ".kt:1)");
         }
     }
     

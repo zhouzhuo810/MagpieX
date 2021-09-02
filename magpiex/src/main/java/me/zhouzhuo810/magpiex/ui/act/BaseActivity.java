@@ -65,6 +65,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     protected Context mOriginalContext;
     
+    private String clazzFileName;
+    private int getLayoutIdLineNumber;
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (layoutId == 0) {
             return;
         }
-        
+    
         EventBus.getDefault().register(this);
         
         setContentView(layoutId);
@@ -124,7 +127,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         SpUtil.putString(Cons.SP_KEY_OF_CURRENT_ACTIVITY_OR_FRAGMENT_NAME, simpleName);
         
         if (BaseUtil.isLogEnable()) {
-            Log.d("PrintActivityName", "(" + simpleName + ".java:1)");
+            Log.d("PrintActivityName", "(" + simpleName + ".java:1)"+", (" + simpleName + ".kt:1)");
         }
     }
     

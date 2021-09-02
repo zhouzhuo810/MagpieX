@@ -43,7 +43,7 @@ public class TitleActivity extends BaseActivity {
             }
         });
     }
-
+    
     @Override
     public void initData() {
 
