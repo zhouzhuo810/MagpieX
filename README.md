@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:2.0.2'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.0.3'
 ```
 
 
@@ -320,6 +320,9 @@ public class MyApplication extends BaseApplication {
 
 ### 更新日志
 
+> 2.0.3
+> - 修复对话框在TV上无法选中按钮问题。
+> 
 > 2.0.2
 > - 修复kt类名打印无效问题。
 

@@ -85,6 +85,7 @@
             android:layout_weight="1"
             android:background="?attr/x_dialog_btn_bg_drawable"
             android:gravity="center"
+            android:focusable="true"
             android:textColor="?attr/x_dialog_btn_text_color"
             android:textSize="@dimen/base_dialog_title_text_size_land"
             tools:text="确定" />
