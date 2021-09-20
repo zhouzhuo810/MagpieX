@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:2.0.3'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.0.4'
 ```
 
 
@@ -319,6 +319,9 @@ public class MyApplication extends BaseApplication {
 ```
 
 ### 更新日志
+
+> 2.0.4
+> - Indicator 解除单行限制。
 
 > 2.0.3
 > - 修复对话框在TV上无法选中按钮问题。
