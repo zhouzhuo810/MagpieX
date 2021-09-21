@@ -1,6 +1,9 @@
 package me.zhouzhuo810.magpiex.ui.dialog;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -21,7 +24,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
+import me.zhouzhuo810.magpiex.ui.dialog.adapter.BottomListDialogAdapter;
 import me.zhouzhuo810.magpiex.ui.dialog.adapter.ListDialogAdapter;
+import me.zhouzhuo810.magpiex.utils.DrawableUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
@@ -36,9 +41,8 @@ public class BottomSheetDialog extends DialogFragment {
     private OnItemClick onItemClick;
     private boolean alignLeft;
     private boolean landscape;
-    private CharSequence title;
     private DialogInterface.OnDismissListener dismissListener;
-    private ListDialogAdapter adapter;
+    private BottomListDialogAdapter adapter;
     
     public interface OnItemClick {
         void onItemClick(int position, String item);
@@ -64,17 +68,6 @@ public class BottomSheetDialog extends DialogFragment {
      */
     public BottomSheetDialog setOnItemClick(OnItemClick onItemClick) {
         this.onItemClick = onItemClick;
-        return this;
-    }
-    
-    /**
-     * 设置标题
-     *
-     * @param title 标题，为空则表示不需要标题
-     * @return 自己
-     */
-    public BottomSheetDialog setTitle(CharSequence title) {
-        this.title = title;
         return this;
     }
     
@@ -127,7 +120,7 @@ public class BottomSheetDialog extends DialogFragment {
     }
     
     
-    public ListDialogAdapter getAdapter() {
+    public BottomListDialogAdapter getAdapter() {
         return adapter;
     }
     
@@ -153,30 +146,24 @@ public class BottomSheetDialog extends DialogFragment {
         }
         //设置dialog的 进出 动画
         if (getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().setWindowAnimations(R.style.BottomSheetDialog);
             getDialog().getWindow().setGravity(Gravity.BOTTOM);
         }
         View rootView = inflater.inflate(landscape ? R.layout.layout_bottom_sheet_dialog_land : R.layout.layout_bottom_sheet_dialog, container, false);
         if (savedInstanceState != null) {
-            dismiss();
+            dismissDialog();
             return rootView;
         }
         SimpleUtil.scaleView(rootView);
-        TextView tvTitle = rootView.findViewById(R.id.tv_title);
-        View line = rootView.findViewById(R.id.line_item);
+        TextView tvCancel = rootView.findViewById(R.id.tv_cancel);
+        tvCancel.setOnClickListener(v -> {
+            dismissDialog();
+        });
         RecyclerView rv = rootView.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setHasFixedSize(true);
-        adapter = new ListDialogAdapter(getActivity(), items, landscape);
-        if (TextUtils.isEmpty(title)) {
-            line.setVisibility(View.GONE);
-            tvTitle.setVisibility(View.GONE);
-            tvTitle.setText("");
-        } else {
-            line.setVisibility(View.VISIBLE);
-            tvTitle.setVisibility(View.VISIBLE);
-            tvTitle.setText(title);
-        }
+        adapter = new BottomListDialogAdapter(getActivity(), items, landscape);
         adapter.setAlignLeft(alignLeft);
         adapter.setOnItemClickListener(new RvBaseAdapter.OnItemClickListener() {
             @Override

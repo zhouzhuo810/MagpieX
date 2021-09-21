@@ -170,17 +170,17 @@ public interface IBaseFragment {
     
     void hideListDialog();
     
-    void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
     
-    void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
     
-    void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
+    void showBottomSheet(List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
     
     void hideBottomSheet();
     

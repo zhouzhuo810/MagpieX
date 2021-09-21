@@ -111,7 +111,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClick(v, position);
+                    onItemClickListener.onItemClick(v, holder.getBindingAdapterPosition());
                 }
             });
         }
@@ -119,7 +119,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             holder.getConvertView().setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    return onItemLongClickListener.onItemLongClick(v, position);
+                    return onItemLongClickListener.onItemLongClick(v, holder.getBindingAdapterPosition());
                 }
             });
         }
@@ -212,6 +212,12 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         public ViewHolder setBackgroundColor(int viewId, int color) {
             View view = getView(viewId);
             view.setBackgroundColor(color);
+            return this;
+        }
+        
+        public ViewHolder setBackgroundDrawable(int viewId, Drawable drawable) {
+            View view = getView(viewId);
+            view.setBackground(drawable);
             return this;
         }
         

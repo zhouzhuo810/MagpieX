@@ -220,7 +220,7 @@ public class SpUtil {
      *
      * @param key 键
      */
-    public static void remoteKey(String key) {
+    public static void removeKey(String key) {
         getShared().edit().remove(key).apply();
     }
     

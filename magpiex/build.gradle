@@ -59,10 +59,10 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.12.12'
     //OkHttp进度监听 ProgressManager
     api 'me.jessyan:progressmanager:1.5.0'
-    //AndPermission
-    api 'com.yanzhenjie:permission:2.0.3'
     //ToastUtils
     api 'com.hjq:toast:8.8'
     //ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //XXPermissions
+    api 'com.github.getActivity:XXPermissions:12.2'
 }

@@ -3,30 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/x_bg_shape_20dp_top_left_right"
     android:gravity="center"
     android:orientation="vertical"
     tools:ignore="PxUsage">
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base_dialog_title_height"
-        android:background="?attr/x_dialog_title_bg_color"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:paddingStart="60px"
-        android:paddingEnd="60px"
-        android:textColor="?attr/x_dialog_title_text_color"
-        android:textSize="@dimen/base_dialog_title_text_size"
-        android:textStyle="bold"
-        tools:text="标题" />
-
-    <View
-        android:id="@+id/line_item"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/colorBlack10" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -36,4 +16,20 @@
         android:overScrollMode="never"
         tools:listitem="@layout/item_lv_dialog" />
 
+    <View
+        android:id="@+id/line_item_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="15px"
+        android:background="@color/colorBlack10" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dialog_item_height"
+        android:background="@drawable/x_bg_click_trans_to_gray_have_limit_rect"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/magpie_cancel_text"
+        android:textColor="?attr/x_dialog_btn_text_color"
+        android:textSize="@dimen/base_dialog_title_text_size" />
 </LinearLayout>

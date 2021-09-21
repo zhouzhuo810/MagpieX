@@ -1,9 +1,6 @@
 package me.zhouzhuo810.magpiex.ui.dialog.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.widget.TextView;
 
@@ -11,16 +8,14 @@ import java.util.List;
 
 import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
-import me.zhouzhuo810.magpiex.utils.DrawableUtil;
-import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 /**
- * 列表对话框适配器
+ * 底部Sheet对话框适配器
  *
  * @author zhouzhuo810
  * @date 6/15/21 1:53 PM
  */
-public class ListDialogAdapter extends RvBaseAdapter<String> {
+public class BottomListDialogAdapter extends RvBaseAdapter<String> {
     
     private boolean alignLeft;
     private boolean landscape;
@@ -41,7 +36,7 @@ public class ListDialogAdapter extends RvBaseAdapter<String> {
         this.landscape = landscape;
     }
     
-    public ListDialogAdapter(Context context, List<String> data, boolean landscape) {
+    public BottomListDialogAdapter(Context context, List<String> data, boolean landscape) {
         super(context, data);
         this.landscape = landscape;
     }
@@ -55,7 +50,11 @@ public class ListDialogAdapter extends RvBaseAdapter<String> {
     protected void fillData(ViewHolder holder, String item, int position) {
         TextView view = holder.getView(R.id.tv_name);
         view.setText(item);
-        holder.itemView.setBackgroundResource(R.drawable.item_bg_selector);
+        if (position == 0) {
+            holder.itemView.setBackgroundResource(R.drawable.x_bg_click_trans_to_gray_have_limit_20dp_top_left_right);
+        } else {
+            holder.itemView.setBackgroundResource(R.drawable.x_bg_click_trans_to_gray_have_limit_rect);
+        }
         holder.setVisible(R.id.line_item, position != 0);
         if (alignLeft) {
             view.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);

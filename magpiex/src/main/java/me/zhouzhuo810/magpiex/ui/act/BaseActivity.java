@@ -559,36 +559,35 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public void showBottomSheet(CharSequence title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, items, false, cancelable, onItemClick);
+    public void showBottomSheet(List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(items, false, cancelable, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(CharSequence title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), false, cancelable, onItemClick);
+    public void showBottomSheet(String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(CollectionUtil.stringToList(items), false, cancelable, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(CharSequence title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, items, alignLeft, cancelable, null, onItemClick);
+    public void showBottomSheet(List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(items, alignLeft, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(CharSequence title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
+    public void showBottomSheet(String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(CharSequence title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, onDismissListener, onItemClick);
+    public void showBottomSheet(String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(CollectionUtil.stringToList(items), alignLeft, cancelable, onDismissListener, onItemClick);
     }
     
     @Override
-    public void showBottomSheet(CharSequence title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
+    public void showBottomSheet(List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
         hideBottomSheet();
         bsDialog = new BottomSheetDialog();
         bsDialog
-            .setTitle(title)
             .setOnItemClick(onItemClick)
             .setOnDismissListener(onDismissListener)
             .setItems(items)

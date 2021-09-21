@@ -251,7 +251,7 @@ public class DialogActivity extends BaseActivity {
     
     public void bottomSheetDialog(View v) {
         String[] items = getResources().getStringArray(R.array.bottom_sheet_test_data);
-        showBottomSheet(getString(R.string.app_name), items, true, true,  new DialogInterface.OnDismissListener() {
+        showBottomSheet(items, true, true,  new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 ToastUtil.showToast("dialog canceled");
