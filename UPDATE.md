@@ -1,4 +1,7 @@
 
+> 2.0.6
+修复 getBindingAdapterPosition 导致的问题；
+
 > 2.0.5
 > - BottomSheet 对话框样式调整。
 > - 权限框架改成 XXPermissions 
