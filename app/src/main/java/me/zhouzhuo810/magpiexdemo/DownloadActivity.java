@@ -10,9 +10,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.yanzhenjie.permission.Action;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.runtime.Permission;
+import com.hjq.permissions.OnPermissionCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 
 import java.io.File;
 import java.io.InputStream;
@@ -49,23 +49,14 @@ public class DownloadActivity extends BaseActivity {
     }
     
     public void downloadStart(View v) {
-        AndPermission
-            .with(this)
-            .runtime()
-            .permission(Permission.WRITE_EXTERNAL_STORAGE)
-            .onDenied(new Action<List<String>>() {
+        XXPermissions.with(this)
+            .permission(Permission.MANAGE_EXTERNAL_STORAGE)
+            .request(new OnPermissionCallback() {
                 @Override
-                public void onAction(List<String> data) {
-                
-                }
-            })
-            .onGranted(new Action<List<String>>() {
-                @Override
-                public void onAction(List<String> data) {
+                public void onGranted(List<String> permissions, boolean all) {
                     startDownload();
                 }
-            })
-            .start();
+            });
     }
     
     private void startDownload() {

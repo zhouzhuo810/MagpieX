@@ -1,6 +1,9 @@
 
+> 2.0.7
+> - BottomSheet 对话框样式调整。
+
 > 2.0.6
-修复 getBindingAdapterPosition 导致的问题；
+> - 修复 getBindingAdapterPosition 导致的问题；
 
 > 2.0.5
 > - BottomSheet 对话框样式调整。

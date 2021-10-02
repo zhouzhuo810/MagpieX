@@ -50,11 +50,6 @@ public class BottomListDialogAdapter extends RvBaseAdapter<String> {
     protected void fillData(ViewHolder holder, String item, int position) {
         TextView view = holder.getView(R.id.tv_name);
         view.setText(item);
-        if (position == 0) {
-            holder.itemView.setBackgroundResource(R.drawable.x_bg_click_trans_to_gray_have_limit_20dp_top_left_right);
-        } else {
-            holder.itemView.setBackgroundResource(R.drawable.x_bg_click_trans_to_gray_have_limit_rect);
-        }
         holder.setVisible(R.id.line_item, position != 0);
         if (alignLeft) {
             view.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
