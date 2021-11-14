@@ -33,7 +33,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //appcompat
-    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.appcompat:appcompat:1.3.1'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.2.0'
     //Material Design
@@ -60,9 +60,9 @@ dependencies {
     //OkHttp进度监听 ProgressManager
     api 'me.jessyan:progressmanager:1.5.0'
     //ToastUtils
-    api 'com.hjq:toast:8.8'
+    api 'com.github.getActivity:ToastUtils:9.6'
     //ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
     //XXPermissions
-    api 'com.github.getActivity:XXPermissions:12.2'
+    api 'com.github.getActivity:XXPermissions:12.8'
 }
