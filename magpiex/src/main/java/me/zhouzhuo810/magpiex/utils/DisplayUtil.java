@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
@@ -21,12 +22,11 @@ public class DisplayUtil {
         if (wm == null) {
             return BaseUtil.getApp().getResources().getDisplayMetrics().widthPixels;
         }
-        Point point = new Point();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            wm.getDefaultDisplay().getRealSize(point);
-        } else {
-            wm.getDefaultDisplay().getSize(point);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return wm.getCurrentWindowMetrics().getBounds().width();
         }
+        Point point = new Point();
+        wm.getDefaultDisplay().getRealSize(point);
         return point.x;
     }
 
@@ -40,12 +40,11 @@ public class DisplayUtil {
         if (wm == null) {
             return BaseUtil.getApp().getResources().getDisplayMetrics().heightPixels;
         }
-        Point point = new Point();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            wm.getDefaultDisplay().getRealSize(point);
-        } else {
-            wm.getDefaultDisplay().getSize(point);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return wm.getCurrentWindowMetrics().getBounds().height();
         }
+        Point point = new Point();
+        wm.getDefaultDisplay().getRealSize(point);
         return point.y;
     }
 

@@ -13,7 +13,7 @@
         android:id="@+id/line_item"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorBlack10" />
+        android:background="@color/colorXLine" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name"

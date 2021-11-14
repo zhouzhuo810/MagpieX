@@ -26,7 +26,7 @@
         android:id="@+id/line_item"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorBlack10" />
+        android:background="@color/colorXLine" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_msg"
@@ -52,7 +52,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorBlack10" />
+        android:background="@color/colorXLine" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,7 +75,7 @@
         <View
             android:layout_width="1px"
             android:layout_height="@dimen/base_dialog_item_height"
-            android:background="@color/colorBlack10"
+            android:background="@color/colorXLine"
             android:visibility="gone" />
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +18,10 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import me.zhouzhuo810.magpiex.ui.act.BaseActivity;
 import me.zhouzhuo810.magpiex.ui.dialog.ListDialog;
+import me.zhouzhuo810.magpiex.ui.widget.MarkView;
+import me.zhouzhuo810.magpiex.ui.widget.TitleBar;
 import me.zhouzhuo810.magpiex.utils.CollectionUtil;
+import me.zhouzhuo810.magpiex.utils.DisplayUtil;
 import me.zhouzhuo810.magpiex.utils.LanguageUtil;
 import me.zhouzhuo810.magpiex.utils.RxHelper;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
@@ -46,6 +50,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button btnTools;
     private Button btnSpinner;
     private TextView mTvWidget;
+    private TitleBar mTitleBar;
     
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -60,6 +65,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
+        mTitleBar = findViewById(R.id.title_bar);
         btnLanguage = findViewById(R.id.btn_language);
         btnDialog = findViewById(R.id.btn_dialog);
         btnTitle = findViewById(R.id.btn_title);
@@ -96,6 +102,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     
     @Override
     public void initEvent() {
+        
+        mTitleBar.setOnTitleClickListener(new TitleBar.OnTitleClick() {
+            @Override
+            public void onLeftClick(ImageView ivLeft, MarkView mv, TextView tvLeft) {
+            
+            }
+            
+            @Override
+            public void onTitleClick(TextView tvTitle) {
+            
+            }
+            
+            @Override
+            public void onRightClick(ImageView ivRight, MarkView mv, TextView tvRight) {
+                ToastUtil.showToast("宽度：" + DisplayUtil.getScreenWidth() + ", 高度：" + DisplayUtil.getScreenHeight());
+            }
+        });
         
         btnLanguage.setOnClickListener(this);
         

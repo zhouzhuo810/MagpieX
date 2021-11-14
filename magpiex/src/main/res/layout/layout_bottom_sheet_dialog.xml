@@ -21,7 +21,7 @@
         android:id="@+id/line_item_bottom"
         android:layout_width="match_parent"
         android:layout_height="15px"
-        android:background="@color/colorBlack10" />
+        android:background="@color/colorXLine" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_cancel"

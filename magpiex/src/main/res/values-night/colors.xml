@@ -47,9 +47,10 @@
 
     <color name="colorExit">#cf1212</color>
     <color name="colorExitPress">#ce060a</color>
-    <color name="colorXItemXBg21">#3C4043</color>
+    <color name="colorXItemXBg21">#333</color>
     <color name="colorXItemXBg">#1fffffff</color>
-    <color name="colorXBaseDialogBgColor">#3C4043</color>
+    <color name="colorXLine">#222</color>
+    <color name="colorXBaseDialogBgColor">#333</color>
     <color name="colorXBaseDialogTextColor">#f7f7f7</color>
     <color name="colorXBaseDialogTitleTextColor">#fff</color>
 </resources>

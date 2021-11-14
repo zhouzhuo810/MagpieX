@@ -5,7 +5,7 @@
         <item name="x_item_text_color">@color/colorXBaseDialogTextColor</item>
         <item name="x_item_bg_color">@color/colorXItemXBg</item>
         <item name="x_item_bg_color_21">@color/colorXItemXBg21</item>
-        <item name="x_dialog_title_bg_color">@color/colorXItemXBg21</item>
+        <item name="x_dialog_title_bg_color">@color/colorXBaseDialogBgColor</item>
         <item name="x_dialog_title_text_color">@color/colorXBaseDialogTitleTextColor</item>
         <item name="x_dialog_content_bg_color">@color/colorXBaseDialogBgColor</item>
         <item name="x_dialog_content_text_color">@color/colorXBaseDialogTextColor</item>
@@ -19,7 +19,7 @@
         <item name="x_item_text_color">@color/colorXBaseDialogTextColor</item>
         <item name="x_item_bg_color">@color/colorXItemXBg</item>
         <item name="x_item_bg_color_21">@color/colorXItemXBg21</item>
-        <item name="x_dialog_title_bg_color">@color/colorXItemXBg21</item>
+        <item name="x_dialog_title_bg_color">@color/colorXBaseDialogBgColor</item>
         <item name="x_dialog_title_text_color">@color/colorXBaseDialogTitleTextColor</item>
         <item name="x_dialog_content_bg_color">@color/colorXBaseDialogBgColor</item>
         <item name="x_dialog_content_text_color">@color/colorXBaseDialogTextColor</item>
@@ -32,7 +32,7 @@
     <style name="BottomSheetDialog">
         <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/bottom_dialog_exit</item>
-        <item name="x_dialog_title_bg_color">@color/colorXItemXBg21</item>
+        <item name="x_dialog_title_bg_color">@color/colorXBaseDialogBgColor</item>
         <item name="x_dialog_title_text_color">@color/colorXBaseDialogTitleTextColor</item>
         <item name="x_dialog_btn_bg_drawable">@drawable/item_bg_selector</item>
     </style>
@@ -41,7 +41,7 @@
     <style name="LoadingDialog" parent="Theme.AppCompat.DayNight.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/colorTransparent</item>
-        <item name="x_dialog_title_bg_color">@color/colorXItemXBg21</item>
+        <item name="x_dialog_title_bg_color">@color/colorXBaseDialogBgColor</item>
         <item name="x_dialog_title_text_color">@color/colorXBaseDialogTitleTextColor</item>
         <item name="x_dialog_btn_bg_drawable">@drawable/item_bg_selector</item>
         <item name="x_dialog_ios_loading_drawable">@drawable/loading_ios</item>
