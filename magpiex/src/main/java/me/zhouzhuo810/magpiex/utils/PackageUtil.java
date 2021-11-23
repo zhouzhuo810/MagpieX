@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpiex.utils;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +15,7 @@ import java.util.List;
 public class PackageUtil {
     
     /**
-     * 检查手机上是否安装了指定的软件
+     * 检查手机上是否安装了指定的软件，注意在AndroidManifest.xml中添加<queries>标签
      *
      * @param context     上下文
      * @param packageName 包名
@@ -92,6 +93,13 @@ public class PackageUtil {
         return verName;
     }
     
+    /**
+     * 打开某个应用，注意在AndroidManifest.xml中添加<queries>标签
+     *
+     * @param context Context
+     * @param packageName 应用包名
+     * @throws PackageManager.NameNotFoundException
+     */
     public static void openApp(Context context, String packageName) throws PackageManager.NameNotFoundException {
         PackageManager pm = context.getPackageManager();
         PackageInfo pi = pm.getPackageInfo(packageName, 0);

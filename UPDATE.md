@@ -1,4 +1,10 @@
 
+> 2.0.9
+> - 添加`GlideUtil`和`EventBusUtil`两个工具类。
+> - `ApkUtil`支持直接传入apk全路径。
+> - XXPermissions 升级到13.2 版本。
+
+
 > 2.0.8
 > - 部分对话框默认颜色修改；
 > - 对话框分割线颜色独立出来;

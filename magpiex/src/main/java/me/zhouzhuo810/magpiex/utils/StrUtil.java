@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * 字符串工具类
@@ -69,6 +70,20 @@ public class StrUtil {
         } else {
             return -1;
         }
+    }
+    
+    /**
+     * 分割字符串
+     * @param content 字符串
+     * @param split 分割符
+     * @return 分割后的字符串数组，可能为null
+     */
+    @Nullable
+    public static String[] split(String content, String split) {
+        if (content == null || split == null) {
+            return null;
+        }
+        return content.split(split);
     }
     
     

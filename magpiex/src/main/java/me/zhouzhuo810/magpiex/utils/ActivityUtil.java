@@ -57,8 +57,7 @@ public class ActivityUtil {
         }
         if (context instanceof Activity) {
             Activity act = (Activity) context;
-            return act == null || act.isFinishing() ||
-                (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1 && act.isDestroyed());
+            return act.isFinishing() || Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1 && act.isDestroyed();
         }
         return false;
     }

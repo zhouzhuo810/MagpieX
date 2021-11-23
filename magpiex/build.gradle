@@ -64,5 +64,5 @@ dependencies {
     //ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
     //XXPermissions
-    api 'com.github.getActivity:XXPermissions:12.8'
+    api 'com.github.getActivity:XXPermissions:13.2'
 }
