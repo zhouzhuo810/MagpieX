@@ -21,15 +21,15 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:2.0.8'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.0.9'
 ```
 
 
 如果添加上述依赖，则会自动依赖如下第三方库:
 
 ```
-  //appcompat
-    api 'androidx.appcompat:appcompat:1.2.0'
+   //appcompat
+    api 'androidx.appcompat:appcompat:1.3.1'
     //RecyclerView
     api 'androidx.recyclerview:recyclerview:1.2.0'
     //Material Design
@@ -56,11 +56,11 @@ allprojects {
     //OkHttp进度监听 ProgressManager
     api 'me.jessyan:progressmanager:1.5.0'
     //ToastUtils
-    api 'com.hjq:toast:8.8'
+    api 'com.github.getActivity:ToastUtils:9.6'
     //ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
     //XXPermissions
-    api 'com.github.getActivity:XXPermissions:12.2'
+    api 'com.github.getActivity:XXPermissions:13.2'
 ```
 
 #### 屏幕适配配置
