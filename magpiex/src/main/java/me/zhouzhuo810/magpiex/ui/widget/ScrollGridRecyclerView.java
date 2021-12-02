@@ -15,6 +15,7 @@ import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.scroll.OnVerticalScrollListener;
 import me.zhouzhuo810.magpiex.ui.widget.scroll.ScrollGridLayoutManager;
+import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
 /**
  * 滚动格子列表
@@ -69,6 +70,7 @@ public class ScrollGridRecyclerView<T> extends RecyclerView {
             setLayoutManager(getScrollLayoutManager(context, spanCount));
             setScrollSpeed(20);
         }
+        ViewUtil.removeRecyclerViewItemAnimator(this);
         addOnScrollListener(new OnVerticalScrollListener() {
             @Override
             protected void onScrolledToTop() {

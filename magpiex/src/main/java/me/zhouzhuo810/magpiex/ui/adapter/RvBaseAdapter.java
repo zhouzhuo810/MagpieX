@@ -102,7 +102,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     
     public void updateAll(List<T> data) {
         this.data = data;
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, getItemCount());
     }
     
     @Override
@@ -111,7 +111,11 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClick(v, position);
+                    int bindingAdapterPosition = holder.getBindingAdapterPosition();
+                    if (bindingAdapterPosition == RecyclerView.NO_POSITION) {
+                        return;
+                    }
+                    onItemClickListener.onItemClick(v, bindingAdapterPosition);
                 }
             });
         }
@@ -119,11 +123,18 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             holder.getConvertView().setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    return onItemLongClickListener.onItemLongClick(v, position);
+                    int bindingAdapterPosition = holder.getBindingAdapterPosition();
+                    if (bindingAdapterPosition == RecyclerView.NO_POSITION) {
+                        return false;
+                    }
+                    return onItemLongClickListener.onItemLongClick(v, bindingAdapterPosition);
                 }
             });
         }
-        fillData(holder, data.get(position), position);
+        int bindingAdapterPosition = holder.getBindingAdapterPosition();
+        if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+            fillData(holder, data.get(bindingAdapterPosition), bindingAdapterPosition);
+        }
     }
     
     protected abstract void fillData(ViewHolder holder, T item, int position);

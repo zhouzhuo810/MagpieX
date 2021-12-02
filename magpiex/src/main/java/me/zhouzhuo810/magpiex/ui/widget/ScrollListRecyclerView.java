@@ -18,6 +18,7 @@ import me.zhouzhuo810.magpiex.R;
 import me.zhouzhuo810.magpiex.ui.adapter.RvBaseAdapter;
 import me.zhouzhuo810.magpiex.ui.widget.scroll.OnVerticalScrollListener;
 import me.zhouzhuo810.magpiex.ui.widget.scroll.ScrollLinearLayoutManager;
+import me.zhouzhuo810.magpiex.utils.ViewUtil;
 
 /**
  * 滚动列表
@@ -99,6 +100,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
     
     private void init(Context context, AttributeSet attrs) {
         setLayoutManager(getScrollLayoutManager(context));
+        ViewUtil.removeRecyclerViewItemAnimator(this);
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.ScrollListRecyclerView);
             mScrollEnable = t.getBoolean(R.styleable.ScrollListRecyclerView_slr_scrollEnable, true);

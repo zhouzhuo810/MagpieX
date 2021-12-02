@@ -745,6 +745,7 @@ public class Indicator2 extends HorizontalScrollView implements IPagerIndicator2
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(tabTextColorUnSelect);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
+                tv.setIncludeFontPadding(false);
                 tv.setText(((IResProvider) mViewPager2.getAdapter()).getTitle(i));
                 
                 LinearLayout ll = new LinearLayout(getContext());
@@ -816,6 +817,7 @@ public class Indicator2 extends HorizontalScrollView implements IPagerIndicator2
                 tv.setFocusable(true);
                 tv.setClickable(true);
                 tv.setGravity(Gravity.CENTER);
+                tv.setIncludeFontPadding(false);
                 tv.setText(((IResProvider) mViewPager2.getAdapter()).getTitle(i));
                 final int finalI = i;
                 tv.setOnClickListener(new OnClickListener() {

@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:2.0.9'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.1.0'
 ```
 
 

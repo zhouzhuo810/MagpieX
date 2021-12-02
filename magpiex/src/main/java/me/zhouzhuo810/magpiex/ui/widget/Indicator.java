@@ -741,6 +741,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                 TextView tv = new TextView(getContext());
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(tabTextColorUnSelect);
+                tv.setIncludeFontPadding(false);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
                 tv.setText(mViewPager.getAdapter().getPageTitle(i));
                 
@@ -813,6 +814,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
                 tv.setFocusable(true);
                 tv.setClickable(true);
                 tv.setGravity(Gravity.CENTER);
+                tv.setIncludeFontPadding(false);
                 tv.setText(mViewPager.getAdapter().getPageTitle(i));
                 final int finalI = i;
                 tv.setOnClickListener(new OnClickListener() {

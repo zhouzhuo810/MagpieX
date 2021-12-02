@@ -37,6 +37,8 @@
         <attr name="ttb_textSizeTwoSide" format="dimension|reference" />
         <!-- 文字的颜色 -->
         <attr name="ttb_textColorAll" format="color|reference" />
+        <!-- Tab是否自动 tint 图标颜色 -->
+        <attr name="ttb_autoIconColor" format="boolean" />
         <!-- 标题的对齐方式 -->
         <attr name="ttb_titleGravity" format="enum">
             <!-- 居中 -->

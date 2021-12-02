@@ -65,7 +65,7 @@ public class ScrollGridActivity extends BaseActivity {
                 for (int i = 0; i < RandomUtil.getRandomIntFromTo(60, 90); i++) {
                     list.add(new TestListEntity("姓名" + i, "男", "test@qq.com", RandomUtil.getRandomSixInt() + "", RandomUtil.getRandomColorBlackToWhite()));
                 }
-                mScrollGridRecyclerView.setNewData(list, false);
+                mScrollGridRecyclerView.setNewData(list);
             }
         });
     }

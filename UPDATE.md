@@ -1,4 +1,8 @@
 
+> 2.1.0
+> - TitleBar 支持`ttb_autoIconColor`属性，用于控制图标颜色是否跟随文字颜色。
+> - Indicator 的 TextView 改为 includingFontPadding 为 false。
+
 > 2.0.9
 > - 添加`GlideUtil`和`EventBusUtil`两个工具类。
 > - `ApkUtil`支持直接传入apk全路径。

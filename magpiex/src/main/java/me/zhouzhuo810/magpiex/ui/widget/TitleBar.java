@@ -18,6 +18,7 @@ import java.lang.annotation.RetentionPolicy;
 
 import androidx.annotation.IntDef;
 import me.zhouzhuo810.magpiex.R;
+import me.zhouzhuo810.magpiex.utils.ColorUtil;
 import me.zhouzhuo810.magpiex.utils.SimpleUtil;
 
 
@@ -186,6 +187,7 @@ public class TitleBar extends RelativeLayout {
             boolean showTitle = t.getBoolean(R.styleable.TitleBar_ttb_showTitle, true);
             boolean showRightImg = t.getBoolean(R.styleable.TitleBar_ttb_showRightImg, false);
             boolean showRightText = t.getBoolean(R.styleable.TitleBar_ttb_showRightText, true);
+            boolean autoIconColor = t.getBoolean(R.styleable.TitleBar_ttb_autoIconColor, false);
             setVisible(llLeft, showLeftLayout);
             setVisible(llRight, showRightLayout);
             setVisible(ivLeft, showLeftImg);
@@ -195,17 +197,6 @@ public class TitleBar extends RelativeLayout {
             setVisible(tvRight, showRightText);
             setVisible(mvLeft, showLeftMarkView);
             setVisible(mvRight, showRightMarkView);
-            /*img*/
-            int iconSize = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_iconSize, 60);
-            setImageSize(iconSize, false);
-            int leftDrawableId = t.getResourceId(R.styleable.TitleBar_ttb_leftImg, -1);
-            int rightDrawableId = t.getResourceId(R.styleable.TitleBar_ttb_rightImg, -1);
-            if (leftDrawableId != -1) {
-                ivLeft.setImageResource(leftDrawableId);
-            }
-            if (rightDrawableId != -1) {
-                ivRight.setImageResource(rightDrawableId);
-            }
             /*gravity*/
             int titleGravity = t.getInt(R.styleable.TitleBar_ttb_titleGravity, 0);
             setTitleGravity(titleGravity);
@@ -220,6 +211,23 @@ public class TitleBar extends RelativeLayout {
             tvTitle.setTextColor(color);
             tvLeft.setTextColor(color);
             tvRight.setTextColor(color);
+            /*img*/
+            int iconSize = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_iconSize, 60);
+            setImageSize(iconSize, false);
+            int leftDrawableId = t.getResourceId(R.styleable.TitleBar_ttb_leftImg, -1);
+            int rightDrawableId = t.getResourceId(R.styleable.TitleBar_ttb_rightImg, -1);
+            if (leftDrawableId != -1) {
+                ivLeft.setImageResource(leftDrawableId);
+                if (autoIconColor) {
+                    ColorUtil.setIconColor(ivLeft, color);
+                }
+            }
+            if (rightDrawableId != -1) {
+                ivRight.setImageResource(rightDrawableId);
+                if (autoIconColor) {
+                    ColorUtil.setIconColor(ivRight, color);
+                }
+            }
             /*text*/
             String leftText = t.getString(R.styleable.TitleBar_ttb_leftText);
             String rightText = t.getString(R.styleable.TitleBar_ttb_rightText);

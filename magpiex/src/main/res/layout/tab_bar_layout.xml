@@ -38,6 +38,7 @@
                 android:id="@+id/tv0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="#000"
                 tools:text="Tab0" />
         </LinearLayout>
@@ -98,6 +99,7 @@
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="#000"
                 tools:text="Tab1" />
         </LinearLayout>
@@ -159,6 +161,7 @@
                 android:id="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="#000"
                 tools:text="Tab2" />
         </LinearLayout>
@@ -220,6 +223,7 @@
                 android:id="@+id/tv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="#000"
                 tools:text="Tab3" />
         </LinearLayout>
@@ -281,6 +285,7 @@
                 android:id="@+id/tv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="#000"
                 tools:text="Tab4" />
         </LinearLayout>
@@ -341,6 +346,7 @@
                 android:id="@+id/tv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="#000"
                 tools:text="Tab5" />
         </LinearLayout>

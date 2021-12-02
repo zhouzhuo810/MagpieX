@@ -18,6 +18,8 @@ import java.lang.reflect.Method;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 public class ViewUtil {
     private static final String METHOD_GET_MAX_WIDTH = "getMaxWidth";
@@ -176,6 +178,23 @@ public class ViewUtil {
             setValueMethod.invoke(view, value);
         } catch (Exception e) {
             // do nothing
+        }
+    }
+    
+    /**
+     * 移除 RecyclerView 的 item 动画
+     * @param rv RecyclerView
+     */
+    public static void removeRecyclerViewItemAnimator(RecyclerView rv) {
+        if (rv != null) {
+            RecyclerView.ItemAnimator itemAnimator = rv.getItemAnimator();
+            if (itemAnimator != null) {
+                // 去除动画
+                itemAnimator.setChangeDuration(0);
+                itemAnimator.setAddDuration(0);
+                itemAnimator.setMoveDuration(0);
+                itemAnimator.setRemoveDuration(0);
+            }
         }
     }
 }

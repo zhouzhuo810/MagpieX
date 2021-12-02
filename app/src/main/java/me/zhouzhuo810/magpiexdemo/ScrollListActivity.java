@@ -67,7 +67,7 @@ public class ScrollListActivity extends BaseActivity {
                 for (int i = 0; i < 1000; i++) {
                     list.add(new TestListEntity("姓名" + i, "男", "test@qq.com", RandomUtil.getRandomSixInt() + "", RandomUtil.getRandomColorBlackToWhite()));
                 }
-                mScrollListRecyclerView.setNewData(list, false);
+                mScrollListRecyclerView.setNewData(list);
             }
         });
     }
