@@ -1,4 +1,8 @@
 
+> 2.1.1
+> - 修复TabBar在对话框中不适配问题；
+> - TabBar支持设置下划线高度、文字距离下划线距离、图片距离顶部距离；
+
 > 2.1.0
 > - TitleBar 支持`ttb_autoIconColor`属性，用于控制图标颜色是否跟随文字颜色。
 > - Indicator 的 TextView 改为 includingFontPadding 为 false。

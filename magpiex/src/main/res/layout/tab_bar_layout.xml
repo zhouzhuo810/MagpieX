@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/rl0"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
@@ -72,7 +72,7 @@
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
@@ -134,7 +134,7 @@
     <RelativeLayout
         android:id="@+id/rl2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
@@ -196,7 +196,7 @@
     <RelativeLayout
         android:id="@+id/rl3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
@@ -258,7 +258,7 @@
     <RelativeLayout
         android:id="@+id/rl4"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
@@ -319,7 +319,7 @@
     <RelativeLayout
         android:id="@+id/rl5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"

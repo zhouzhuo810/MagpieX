@@ -116,6 +116,7 @@ public class TabBar extends LinearLayout {
         if (isInEditMode()) {
             return;
         }
+        
         View root = LayoutInflater.from(context).inflate(R.layout.tab_bar_layout, this, false);
         ll0 = (RelativeLayout) root.findViewById(R.id.rl0);
         iv0 = (ImageView) root.findViewById(R.id.iv0);
@@ -149,16 +150,21 @@ public class TabBar extends LinearLayout {
         line5 = root.findViewById(R.id.line_5);
         initAttrs(context, attrs);
         initEvent();
+        SimpleUtil.setScaleTag(root, true);
         addView(root);
+    
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.TabBar);
             int imageSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_imageSize, 60);
-            setImageSize(imageSize, false);
+            setImageSize(imageSize, true);
             int textTopMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_textTopMargin, 5);
-            setTextTopMargin(textTopMargin, false);
+            int textBottomMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_textBottomMargin, 5);
+            setTextTopBottomMargin(textTopMargin, textBottomMargin, true);
+            int imgTopMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_imgTopMargin, 0);
+            setImgTopMargin(imgTopMargin, true);
             textSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_textSize, 40);
             int markPointSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_markPointSize, 24);
             setMarkPointSize(markPointSize);
@@ -168,6 +174,8 @@ public class TabBar extends LinearLayout {
             setMarkTextColor(markTextColor);
             int markBgColor = t.getColor(R.styleable.TabBar_tb_markBgColor, 0xffff0000);
             setMarkBgColor(markBgColor);
+            int underLineHeight = t.getDimensionPixelSize(R.styleable.TabBar_tb_underlineHeight, 4);
+            setUnderlineHeight(underLineHeight, true);
             showMarkView = t.getBoolean(R.styleable.TabBar_tb_showMarkView, false);
             showImg = t.getBoolean(R.styleable.TabBar_tb_showImg, true);
             showText = t.getBoolean(R.styleable.TabBar_tb_showText, true);
@@ -304,14 +312,15 @@ public class TabBar extends LinearLayout {
         } else {
             textSize = 40;
         }
+    
+        textSize = SimpleUtil.getScaledValue(textSize, true);
+        
         tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-    
-        textSize = SimpleUtil.getScaledValue(textSize, true);
     }
 
     public int getSelection() {
@@ -448,16 +457,12 @@ public class TabBar extends LinearLayout {
         return this;
     }
 
-
-    public TabBar setTextTopMargin(int marginTop) {
-        setTextTopMargin(marginTop, true);
-        return this;
-    }
-
-    private TabBar setTextTopMargin(int marginTop, boolean autoSize) {
-        int size = marginTop;
+    private TabBar setTextTopBottomMargin(int marginTop, int marginBottom, boolean autoSize) {
+        int topSize = marginTop;
+        int bottomSize = marginBottom;
         if (autoSize) {
-            size = SimpleUtil.getScaledValue(marginTop);
+            topSize = SimpleUtil.getScaledValue(marginTop);
+            bottomSize = SimpleUtil.getScaledValue(marginBottom);
         }
         LayoutParams lp0 = (LayoutParams) tv0.getLayoutParams();
         LayoutParams lp1 = (LayoutParams) tv1.getLayoutParams();
@@ -465,18 +470,76 @@ public class TabBar extends LinearLayout {
         LayoutParams lp3 = (LayoutParams) tv3.getLayoutParams();
         LayoutParams lp4 = (LayoutParams) tv4.getLayoutParams();
         LayoutParams lp5 = (LayoutParams) tv5.getLayoutParams();
-        lp0.topMargin = size;
-        lp1.topMargin = size;
-        lp2.topMargin = size;
-        lp3.topMargin = size;
-        lp4.topMargin = size;
-        lp5.topMargin = size;
+        lp0.topMargin = topSize;
+        lp1.topMargin = topSize;
+        lp2.topMargin = topSize;
+        lp3.topMargin = topSize;
+        lp4.topMargin = topSize;
+        lp5.topMargin = topSize;
+        lp0.bottomMargin = bottomSize;
+        lp1.bottomMargin = bottomSize;
+        lp2.bottomMargin = bottomSize;
+        lp3.bottomMargin = bottomSize;
+        lp4.bottomMargin = bottomSize;
+        lp5.bottomMargin = bottomSize;
         tv0.setLayoutParams(lp0);
         tv1.setLayoutParams(lp1);
         tv2.setLayoutParams(lp2);
         tv3.setLayoutParams(lp3);
         tv4.setLayoutParams(lp4);
         tv5.setLayoutParams(lp5);
+        return this;
+    }
+
+    private TabBar setImgTopMargin(int marginTop, boolean autoSize) {
+        int topSize = marginTop;
+        if (autoSize) {
+            topSize = SimpleUtil.getScaledValue(marginTop);
+        }
+        LayoutParams lp0 = (LayoutParams) iv0.getLayoutParams();
+        LayoutParams lp1 = (LayoutParams) iv1.getLayoutParams();
+        LayoutParams lp2 = (LayoutParams) iv2.getLayoutParams();
+        LayoutParams lp3 = (LayoutParams) iv3.getLayoutParams();
+        LayoutParams lp4 = (LayoutParams) iv4.getLayoutParams();
+        LayoutParams lp5 = (LayoutParams) iv5.getLayoutParams();
+        lp0.topMargin = topSize;
+        lp1.topMargin = topSize;
+        lp2.topMargin = topSize;
+        lp3.topMargin = topSize;
+        lp4.topMargin = topSize;
+        lp5.topMargin = topSize;
+        iv0.setLayoutParams(lp0);
+        iv1.setLayoutParams(lp1);
+        iv2.setLayoutParams(lp2);
+        iv3.setLayoutParams(lp3);
+        iv4.setLayoutParams(lp4);
+        iv5.setLayoutParams(lp5);
+        return this;
+    }
+
+    private TabBar setUnderlineHeight(int underlineHeight, boolean autoSize) {
+        int size = underlineHeight;
+        if (autoSize) {
+            size = SimpleUtil.getScaledValue(underlineHeight);
+        }
+        RelativeLayout.LayoutParams lp0 = (RelativeLayout.LayoutParams) line0.getLayoutParams();
+        RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) line1.getLayoutParams();
+        RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) line2.getLayoutParams();
+        RelativeLayout.LayoutParams lp3 = (RelativeLayout.LayoutParams) line3.getLayoutParams();
+        RelativeLayout.LayoutParams lp4 = (RelativeLayout.LayoutParams) line4.getLayoutParams();
+        RelativeLayout.LayoutParams lp5 = (RelativeLayout.LayoutParams) line5.getLayoutParams();
+        lp0.height = size;
+        lp1.height = size;
+        lp2.height = size;
+        lp3.height = size;
+        lp4.height = size;
+        lp5.height = size;
+        line0.setLayoutParams(lp0);
+        line1.setLayoutParams(lp1);
+        line2.setLayoutParams(lp2);
+        line3.setLayoutParams(lp3);
+        line4.setLayoutParams(lp4);
+        line5.setLayoutParams(lp5);
         return this;
     }
 

@@ -100,14 +100,20 @@
         <attr name="tb_showText" format="boolean" />
         <!-- Tab是否显示下划线 -->
         <attr name="tb_showUnderline" format="boolean" />
+        <!-- Tab下划线高度 -->
+        <attr name="tb_underlineHeight" format="dimension|reference" />
         <!-- Tab是否自动 tint 图标颜色 -->
         <attr name="tb_autoIconColor" format="boolean" />
         <!-- Tab文字大小 -->
         <attr name="tb_textSize" format="dimension|reference" />
         <!-- Tab图标大小 -->
         <attr name="tb_imageSize" format="dimension|reference" />
+        <!-- Tab图标与顶部的间距 -->
+        <attr name="tb_imgTopMargin" format="dimension|reference" />
         <!-- Tab文字与图标的间距 -->
         <attr name="tb_textTopMargin" format="dimension|reference" />
+        <!-- Tab文字与下划线的间距 -->
+        <attr name="tb_textBottomMargin" format="dimension|reference" />
         <!-- Tab角标的文字大小 -->
         <attr name="tb_markTextSize" format="dimension|reference" />
         <!-- Tab角标的圆点大小 -->

@@ -8,15 +8,15 @@
     <FrameLayout
         android:id="@+id/fgm_container"
         android:layout_width="match_parent"
-        android:background="@color/colorWhite"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@color/colorWhite" />
 
     <Button
         android:id="@+id/tv_change_names"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="改变Tab文字"/>
+        android:text="改变Tab文字" />
 
     <View
         android:layout_width="match_parent"
@@ -27,16 +27,19 @@
         android:id="@+id/tab_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tb_autoIconColor="true"
         app:tb_imageSize="@dimen/base_tab_icon_size"
         app:tb_showImg="true"
-        app:tb_showMarkView="false"
+        app:tb_showMarkView="true"
         app:tb_showText="true"
-        app:tb_showUnderline="false"
-        app:tb_autoIconColor="true"
+        app:tb_showUnderline="true"
         app:tb_tabCount="FIVE"
         app:tb_tabNames="@array/tab_names"
         app:tb_textColorNormal="@color/colorBlack30"
         app:tb_textColorPress="@color/colorPrimary"
         app:tb_textSize="@dimen/base_tab_text_size"
-        app:tb_textTopMargin="@dimen/base_tab_text_top_margin" />
+        app:tb_imgTopMargin="30px"
+        app:tb_textBottomMargin="30px"
+        app:tb_textTopMargin="30px"
+        app:tb_underlineHeight="10px" />
 </LinearLayout>
