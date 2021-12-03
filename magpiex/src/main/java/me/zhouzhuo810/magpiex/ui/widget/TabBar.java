@@ -61,7 +61,6 @@ public class TabBar extends LinearLayout {
 
     private int[] pressIcons;
     private int[] normalIcons;
-    private int textSize;
     private int textColorNormal;
     private int textColorPress;
     private MarkView mv0;
@@ -148,24 +147,24 @@ public class TabBar extends LinearLayout {
         tv5 = (TextView) root.findViewById(R.id.tv5);
         mv5 = (MarkView) root.findViewById(R.id.mv5);
         line5 = root.findViewById(R.id.line_5);
+        
         initAttrs(context, attrs);
         initEvent();
-        SimpleUtil.setScaleTag(root, true);
         addView(root);
-    
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.TabBar);
             int imageSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_imageSize, 60);
-            setImageSize(imageSize, true);
+            setImageSize(imageSize, false);
             int textTopMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_textTopMargin, 5);
             int textBottomMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_textBottomMargin, 5);
-            setTextTopBottomMargin(textTopMargin, textBottomMargin, true);
+            setTextTopBottomMargin(textTopMargin, textBottomMargin, false);
             int imgTopMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_imgTopMargin, 0);
-            setImgTopMargin(imgTopMargin, true);
-            textSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_textSize, 40);
+            setImgTopMargin(imgTopMargin, false);
+            int textSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_textSize, 40);
+            setTextSize(textSize, false);
             int markPointSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_markPointSize, 24);
             setMarkPointSize(markPointSize);
             int markTextSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_markTextSize, 34);
@@ -175,7 +174,7 @@ public class TabBar extends LinearLayout {
             int markBgColor = t.getColor(R.styleable.TabBar_tb_markBgColor, 0xffff0000);
             setMarkBgColor(markBgColor);
             int underLineHeight = t.getDimensionPixelSize(R.styleable.TabBar_tb_underlineHeight, 4);
-            setUnderlineHeight(underLineHeight, true);
+            setUnderlineHeight(underLineHeight, false);
             showMarkView = t.getBoolean(R.styleable.TabBar_tb_showMarkView, false);
             showImg = t.getBoolean(R.styleable.TabBar_tb_showImg, true);
             showText = t.getBoolean(R.styleable.TabBar_tb_showText, true);
@@ -310,23 +309,19 @@ public class TabBar extends LinearLayout {
             }
             t.recycle();
         } else {
-            textSize = 40;
+            setTextSize(40, false);
         }
-    
-        textSize = SimpleUtil.getScaledValue(textSize, true);
-        
-        tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
 
     public int getSelection() {
         return position;
     }
-
+    
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        update();
+    }
     
     public TabBar setTabNames(String... tabNames) {
         if (tabNames.length == 0) {
@@ -452,11 +447,21 @@ public class TabBar extends LinearLayout {
         return this;
     }
 
-    public TabBar setTextSize(int textSizePx) {
-        this.textSize = SimpleUtil.getScaledValue(textSizePx, true);
+    public TabBar setTextSize(int textSizePx, boolean autoSize) {
+        int textSize = textSizePx;
+        if (autoSize) {
+            textSize = SimpleUtil.getScaledValue(textSizePx, true);
+        }
+        tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         return this;
     }
 
+    
     private TabBar setTextTopBottomMargin(int marginTop, int marginBottom, boolean autoSize) {
         int topSize = marginTop;
         int bottomSize = marginBottom;
@@ -767,12 +772,6 @@ public class TabBar extends LinearLayout {
         mv3.update();
         mv4.update();
         mv5.update();
-        tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv5.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (showImg) {
             if (pressIcons != null && pressIcons.length > 0) {
                 for (int i = 0; i < pressIcons.length; i++) {
