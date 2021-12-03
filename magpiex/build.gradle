@@ -41,7 +41,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.github.zhouzhuo810'
                 artifactId = 'MagpieX'
-                version = '2.1.0'
+                version = '2.1.1'
             }
         }
     }
