@@ -102,7 +102,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     
     public void updateAll(List<T> data) {
         this.data = data;
-        notifyItemRangeChanged(0, getItemCount());
+        notifyDataSetChanged();
     }
     
     @Override
