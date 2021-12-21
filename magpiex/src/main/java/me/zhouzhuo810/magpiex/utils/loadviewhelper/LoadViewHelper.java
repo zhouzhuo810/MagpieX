@@ -219,6 +219,13 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float setValueByWidth(float value, boolean isFontSize) {
+        if (value == 0) {
+            return 0;
+        } else if (value == -1) {
+            return -1;
+        } else if (value == 1) {
+            return 1;
+        }
         return calculateValueByWidth(value, isFontSize);
     }
     
@@ -234,6 +241,13 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     private float setValueByHeight(float value, boolean isFontSize) {
+        if (value == 0) {
+            return 0;
+        } else if (value == -1) {
+            return -1;
+        } else if (value == 1) {
+            return 1;
+        }
         return calculateValueByHeight(value, isFontSize);
     }
     
