@@ -877,4 +877,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public boolean needAlwaysScreenOn() {
         return false;
     }
+    
+    
 }

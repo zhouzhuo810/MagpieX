@@ -210,6 +210,8 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     private int setValueByWidth(int value, boolean isFontSize) {
         if (value == 0) {
             return 0;
+        } else if (value == -1) {
+            return -1;
         } else if (value == 1) {
             return 1;
         }
@@ -223,6 +225,8 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     private int setValueByHeight(int value, boolean isFontSize) {
         if (value == 0) {
             return 0;
+        } else if (value == -1) {
+            return -1;
         } else if (value == 1) {
             return 1;
         }
