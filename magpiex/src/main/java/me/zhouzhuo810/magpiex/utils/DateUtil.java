@@ -1404,9 +1404,6 @@ public class DateUtil {
     
     /**
      *
-     * @param millis
-     * @param precision
-     * @return
      */
     public static String millis2FitTimeSpan(long millis, int precision) {
         if (precision <= 0) {
@@ -1698,4 +1695,99 @@ public class DateUtil {
         return new SimpleDateFormat(pattern, Locale.getDefault()).format(date);
     }
     
+    /**
+     * 获取今天0点的时间戳
+     *
+     * @return 时间戳
+     */
+    public static long getTodayInMills() {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取前x天的时间戳
+     *
+     * @param days 天数
+     * @return 时间戳
+     */
+    public static long getDayBeforeInMills(int days) {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_YEAR, -days);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取明天0点的时间戳
+     * @return 时间戳
+     */
+    public static long getTomorrowInMills() {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_YEAR, 1);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取某年第一天的时间戳
+     *
+     * @param y 年份
+     * @return 时间戳
+     */
+    public static long getYearFirstDayInMills(int y) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y);
+        c.set(Calendar.MONTH, 0);
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        return c.getTimeInMillis();
+    }
+    
+    
+    /**
+     * 获取某年的最后一天的时间戳
+     *
+     * @param y 年份
+     * @return 时间戳
+     */
+    public static long getYearLastDayInMills(int y) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y + 1);
+        c.set(Calendar.MONTH, 0);
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取年月日对应的时间戳
+     *
+     * @param y 年
+     * @param m 月
+     * @param d 日
+     * @return 时间戳
+     */
+    public static long getDateInMills(int y, int m, int d) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y);
+        c.set(Calendar.MONTH, m - 1);
+        c.set(Calendar.DAY_OF_MONTH, d);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTimeInMillis();
+    }
 }

@@ -1,11 +1,9 @@
 package me.zhouzhuo810.magpiex.utils;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +19,8 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.UUID;
+
+import androidx.annotation.NonNull;
 
 /**
  * 文件操作工具类
@@ -345,7 +344,7 @@ public class FileUtil {
             }
         }
     }
- 
+    
     /**
      * Return the bytes in file by stream.
      *
@@ -518,5 +517,48 @@ public class FileUtil {
         System.arraycopy(news, 0, bytes, old.length, news.length);
         return bytes;
     }
+    
+    /**
+     * 保存字节到目标目录
+     *
+     * @param bytes    字节数组
+     * @param path     文件夹路径
+     * @param fileName 文件名字
+     * @return 存储路径，保存失败时返回null
+     */
+    public static String saveBytes(@NonNull byte[] bytes, @NonNull String path, @NonNull String fileName) {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File targetFile = new File(path, fileName);
+        if (targetFile.exists()) {
+            targetFile.delete();
+        }
+        boolean ok = false;
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(targetFile);
+            fos.write(bytes, 0, bytes.length);
+            fos.flush();
+            ok = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (ok) {
+            return path + File.separator + fileName;
+        } else {
+            return null;
+        }
+    }
+    
     
 }

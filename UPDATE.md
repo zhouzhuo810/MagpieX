@@ -1,4 +1,10 @@
 
+> 2.1.2
+> - 屏幕适配值为-1时改成不缩放；
+> - 新增`AppWidgetUtil`工具类；
+> - `FileUtil`工具类支持`saveBytes`方法；
+> - `DisplayUtil`工具类支持`actionView`方法；
+
 > 2.1.1
 > - 修复TabBar在对话框中不适配问题；
 > - TabBar支持设置下划线高度、文字距离下划线距离、图片距离顶部距离；

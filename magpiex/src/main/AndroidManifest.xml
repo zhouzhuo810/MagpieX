@@ -12,7 +12,9 @@
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             />
 
-        <activity android:name="com.tencent.mm.ui.tools.ShareImgUI"/>
-        <activity android:name="com.tencent.mobileqq.activity.JumpActivity"/>
+        <activity android:name="com.tencent.mm.ui.tools.ShareImgUI"
+            tools:ignore="MissingClass" />
+        <activity android:name="com.tencent.mobileqq.activity.JumpActivity"
+            tools:ignore="MissingClass" />
     </application>
 </manifest>
