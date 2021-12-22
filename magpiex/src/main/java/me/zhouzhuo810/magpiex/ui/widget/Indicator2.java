@@ -360,13 +360,14 @@ public class Indicator2 extends HorizontalScrollView implements IPagerIndicator2
             return this;
         }
         RecyclerView.Adapter adapter = mViewPager2.getAdapter();
-        if (adapter != null) {
-            if (adapter instanceof BaseFragmentPager2Adapter) {
-                BaseFragmentPager2Adapter pager2Adapter = (BaseFragmentPager2Adapter) adapter;
-                pager2Adapter.setPageTitle(position, title);
-                TextView tv = (TextView) getItem(position);
-                tv.setText(pager2Adapter.getPageTitle(position));
-            }
+        if (adapter instanceof BaseFragmentPager2Adapter) {
+            BaseFragmentPager2Adapter pager2Adapter = (BaseFragmentPager2Adapter) adapter;
+            pager2Adapter.setPageTitle(position, title);
+            TextView tv = (TextView) getItem(position);
+            tv.setText(pager2Adapter.getPageTitle(position));
+        } else {
+            TextView tv = (TextView) getItem(position);
+            tv.setText(title);
         }
         return this;
     }

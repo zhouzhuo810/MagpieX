@@ -43,6 +43,13 @@ public interface IPagerIndicator {
     Indicator updateText(int position, String title);
     
     /**
+     * 动态更新文字
+     *
+     * @param position 位置
+     */
+    Indicator updateText(int position);
+    
+    /**
      * 设置选中的文字的颜色
      *
      * @param tabTextColorSelect 颜色值

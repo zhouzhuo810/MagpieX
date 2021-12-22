@@ -1,4 +1,7 @@
 
+> 2.1.4
+> - 修改Indicator的`updateText`方法
+
 > 2.1.3
 > - 屏幕适配值为-1时改成不缩放；
 > - 新增`AppWidgetUtil`工具类；

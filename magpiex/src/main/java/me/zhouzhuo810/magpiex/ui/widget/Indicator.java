@@ -358,12 +358,23 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator, 
         if (mViewPager == null) {
             return this;
         }
+        TextView tv = (TextView) getItem(position);
+        tv.setText(title);
+        return this;
+    }
+    
+    @Override
+    public Indicator updateText(int position) {
+        if (mViewPager == null) {
+            return this;
+        }
         PagerAdapter adapter = mViewPager.getAdapter();
-        if (adapter != null) {
-            if (adapter instanceof IResProvider) {
-                TextView tv = (TextView) getItem(position);
-                tv.setText(((IResProvider) adapter).getTitle(position));
-            }
+        if (adapter instanceof IResProvider) {
+            TextView tv = (TextView) getItem(position);
+            tv.setText(((IResProvider) adapter).getTitle(position));
+        } else if (adapter != null) {
+            TextView tv = (TextView) getItem(position);
+            tv.setText(adapter.getPageTitle(position));
         }
         return this;
     }
