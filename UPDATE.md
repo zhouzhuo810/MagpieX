@@ -1,4 +1,7 @@
 
+> 2.1.5
+> - 修复ScrollListRecyclerView存在的空指针问题；
+
 > 2.1.4
 > - 修改Indicator的`updateText`方法
 

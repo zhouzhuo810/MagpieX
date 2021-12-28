@@ -267,7 +267,9 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
                     post(new Runnable() {
                         @Override
                         public void run() {
-                            smoothScrollToPosition(mData.size());
+                            if (mData != null) {
+                                smoothScrollToPosition(mData.size());
+                            }
                         }
                     });
                 }
