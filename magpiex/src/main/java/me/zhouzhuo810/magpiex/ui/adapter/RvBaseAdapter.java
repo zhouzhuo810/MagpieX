@@ -115,6 +115,9 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
                     if (bindingAdapterPosition == RecyclerView.NO_POSITION) {
                         return;
                     }
+                    if (bindingAdapterPosition >= getItemCount()) {
+                        return;
+                    }
                     onItemClickListener.onItemClick(v, bindingAdapterPosition);
                 }
             });
@@ -127,12 +130,15 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
                     if (bindingAdapterPosition == RecyclerView.NO_POSITION) {
                         return false;
                     }
+                    if (bindingAdapterPosition >= getItemCount()) {
+                        return false;
+                    }
                     return onItemLongClickListener.onItemLongClick(v, bindingAdapterPosition);
                 }
             });
         }
         int bindingAdapterPosition = holder.getBindingAdapterPosition();
-        if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+        if (bindingAdapterPosition != RecyclerView.NO_POSITION && bindingAdapterPosition < getItemCount() && data != null) {
             fillData(holder, data.get(bindingAdapterPosition), bindingAdapterPosition);
         }
     }
