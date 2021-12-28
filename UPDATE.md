@@ -1,9 +1,7 @@
 
-> 2.1.5
-> - 修复ScrollListRecyclerView存在的空指针问题；
-
 > 2.1.4
 > - 修改Indicator的`updateText`方法
+> - 修复ScrollListRecyclerView存在的空指针问题；
 
 > 2.1.3
 > - 屏幕适配值为-1时改成不缩放；
