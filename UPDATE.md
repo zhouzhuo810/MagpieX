@@ -1,4 +1,8 @@
 
+> 2.1.6
+> - 修复ProgressManager是jcenter库问题；
+> - 新增MaxHeightRecyclerView控件；
+
 > 2.1.5
 > - 修复RvBaseAdapter数组越界问题； 
 

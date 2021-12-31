@@ -306,7 +306,16 @@
 
     <declare-styleable name="MaxHeightScrollView">
         <!-- 最大高度百分比,范围 0-1.0，默认：0.7 -->
-        <attr name="mhs_percent_height" format="float" />
+        <attr name="mhs_max_height_percent" format="float" />
+        <!-- 最大高度值, 如果设置了值则按值，否则按比例，默认：0 -->
+        <attr name="mhs_max_height_value" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MaxHeightRecyclerView">
+        <!-- 最大高度百分比,范围 0-1.0，默认：0.7 -->
+        <attr name="mhr_max_height_percent" format="float" />
+        <!-- 最大高度值, 如果设置了值则按值，否则按比例，默认：0 -->
+        <attr name="mhr_max_height_value" format="dimension" />
     </declare-styleable>
 
     <!--  列表对话框列表文字颜色  -->

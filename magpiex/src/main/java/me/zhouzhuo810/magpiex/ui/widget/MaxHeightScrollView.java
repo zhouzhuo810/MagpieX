@@ -44,8 +44,13 @@ public class MaxHeightScrollView extends ScrollView {
     private void initialize(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MaxHeightScrollView);
-            float percentHeight = ta.getFloat(R.styleable.MaxHeightScrollView_mhs_percent_height, 0.7f);
-            setPercentHeight(percentHeight);
+            float percentHeight = ta.getFloat(R.styleable.MaxHeightScrollView_mhs_max_height_percent, 0.7f);
+            int maxHeight = ta.getDimensionPixelSize(R.styleable.MaxHeightScrollView_mhs_max_height_value, 0);
+            if (maxHeight > 0) {
+                mMaxHeight = maxHeight;
+            } else {
+                setPercentHeight(percentHeight);
+            }
             ta.recycle();
         } else {
             setPercentHeight(0.7f);
@@ -59,6 +64,7 @@ public class MaxHeightScrollView extends ScrollView {
     
     public void setMaxHeight(int maxHeight) {
         mMaxHeight = maxHeight;
+        requestLayout();
     }
     
     @Override

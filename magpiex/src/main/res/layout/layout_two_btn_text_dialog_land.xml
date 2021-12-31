@@ -34,7 +34,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="none"
-        app:mhs_percent_height="0.7">
+        app:mhs_max_height_percent="0.7">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_msg"

@@ -21,7 +21,7 @@ allprojects {
 
 
 ```
-    implementation 'com.github.zhouzhuo810:MagpieX:2.1.5'
+    implementation 'com.github.zhouzhuo810:MagpieX:2.1.6'
 ```
 
 
@@ -54,7 +54,7 @@ allprojects {
     //OkHttp打印请求数据
     api 'com.squareup.okhttp3:logging-interceptor:3.12.12'
     //OkHttp进度监听 ProgressManager
-    api 'me.jessyan:progressmanager:1.5.0'
+    api 'com.github.JessYanCoding:ProgressManager:v1.5.0'
     //ToastUtils
     api 'com.github.getActivity:ToastUtils:10.0'
     //ConstraintLayout
