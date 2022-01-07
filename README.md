@@ -2,6 +2,10 @@
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![MinSdk](https://img.shields.io/badge/MinSDK-17-orange.svg)](https://android-arsenal.com/api?level=17)
 
+# 已转移到码云 gitee
+
+[https://gitee.com/zhouzhuo0810/MagpieX](https://gitee.com/zhouzhuo0810/MagpieX)
+
 # MagpieX
 
 一个 Android 快速开发框架。
